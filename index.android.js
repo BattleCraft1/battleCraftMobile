@@ -9,44 +9,47 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
 } from 'react-native';
+import Navbar from './App/Components/Navbar';
 
 export default class battleCraft extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
+		<View style={styles.mainStyle}>
+
+            <Navbar/>
+
+			<View style={styles.contentStyle}>
+				<Text style={styles.smallWhiteStyle}>Main</Text>
+			</View>			
+		</View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  mainStyle: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#000',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  contentStyle: {
+    flex: 0.9,
+	margin: 1,
+	padding: 5,
+	justifyContent: 'center',
+	borderColor: '#c1af6e',
+	borderWidth: 5,
+    backgroundColor: '#7f5136',
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  bigWhiteStyle: {
+	  color: '#fff',
+	  fontWeight: 'bold',
+	  fontSize: 26,
+  },
+  smallWhiteStyle: {
+	  color: '#fff',
+	  fontSize: 20,
   },
 });
 
