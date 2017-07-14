@@ -6,28 +6,45 @@
 
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
+    AppRegistry,
+    StyleSheet,
+    Text,
+    View,
 } from 'react-native';
 import Navbar from './App/Components/Navbar';
 
+
+
 export default class battleCraft extends Component {
 
-  render() {
-    return (
-		<View style={styles.mainStyle}>
+    constructor() {
+        super()
+        this.state = {
+            currentPage: 'SplashScreen'
+        }
+    }
 
-            <Navbar/>
+    updateText = (id) => {
+        Navbar.getValue()
+    }
 
-			<View style={styles.contentStyle}>
-				<Text style={styles.smallWhiteStyle}>Main</Text>
-			</View>			
-		</View>
-    );
-  }
+    render() {
+        return (
+            <View style={styles.mainStyle}>
+
+                <Navbar/>
+
+                <View style={styles.contentStyle}>
+                    <Text style={styles.smallWhiteStyle}>
+                        {this.state.currentPage}
+                    </Text>
+                </View>
+
+            </View>
+        );
+    }
 }
+
 
 const styles = StyleSheet.create({
   mainStyle: {

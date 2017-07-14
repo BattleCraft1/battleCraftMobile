@@ -9,8 +9,25 @@ import {
 import ModalDropdown from 'react-native-modal-dropdown';
 
 export default class Navbar extends Component {
+
+    constructor() {
+        super()
+        this.state = {
+			menuIndex: -1,
+            menuText: 'Menu'
+        }
+    }
+
+    updateText = (id,val) => {
+        this.setState({menuIndex: id})
+        this.setState({menuText: val})
+    }
+
+    menuWidth=Dimensions.get('window').width;
+
+
 	render() {
-        var menuWidth=Dimensions.get('window').width;
+
 		return (
 			<View style={styles.navbarStyle}>
 				<View>
@@ -20,14 +37,15 @@ export default class Navbar extends Component {
 				</View>
 
 				<View>
-					<Text style={styles.navbarTextStyle}>Menu</Text>
+					<Text style={styles.navbarTextStyle}>{this.state.menuText}</Text>
 				</View>
 
 				<View>
 					<ModalDropdown options={['Turnieje', 'Gry', 'Rankingi', 'Moje konto']}
-								   dropdownStyle={[styles.menuStyle, {width: menuWidth}]}
+								   dropdownStyle={[styles.menuStyle, {width: this.menuWidth}]}
 								   dropdownTextStyle={styles.menuTextStyle}
-								   dropdownTextHighlightStyle={[styles.menuTextStyle,{fontWeight:'bold'}]}>
+								   dropdownTextHighlightStyle={[styles.menuTextStyle,{fontWeight:'bold'}]}
+								   onSelect = {(index,value)=>{this.updateText(index,value)}}>
 						<Image
 							style={styles.iconStyle}
 							source={require('../../img/menuIcon.png')} />
@@ -38,6 +56,7 @@ export default class Navbar extends Component {
 		);
 	}
 }
+
 
 const styles = StyleSheet.create({
     navbarStyle: {
