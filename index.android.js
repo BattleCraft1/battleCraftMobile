@@ -24,10 +24,6 @@ export default class battleCraft extends Component {
         }
     }
 
-    updateText = (id) => {
-        Navbar.getValue()
-    }
-
     render() {
         return (
             <View style={styles.mainStyle}>

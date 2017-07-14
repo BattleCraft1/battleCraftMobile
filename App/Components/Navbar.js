@@ -19,11 +19,12 @@ export default class Navbar extends Component {
     }
 
     updateText = (id,val) => {
-        this.setState({menuIndex: id})
-        this.setState({menuText: val})
+        this.setState({menuIndex: id});
+        this.setState({menuText: val});
     }
 
-    menuWidth=Dimensions.get('window').width;
+
+	menuWidth=Dimensions.get('window').width;
 
 
 	render() {
