@@ -14,6 +14,7 @@ import {
 import Navbar from './App/Components/Navbar';
 
 export default class battleCraft extends Component {
+
   render() {
     return (
 		<View style={styles.mainStyle}>
@@ -30,17 +31,17 @@ export default class battleCraft extends Component {
 
 const styles = StyleSheet.create({
   mainStyle: {
-    flex: 1,
-    backgroundColor: '#000',
+      flex: 1,
+      backgroundColor: '#000',
   },
   contentStyle: {
-    flex: 0.9,
-	margin: 1,
-	padding: 5,
-	justifyContent: 'center',
-	borderColor: '#c1af6e',
-	borderWidth: 5,
-    backgroundColor: '#7f5136',
+      flex: 0.9,
+	  padding: 5,
+      marginTop: 1,
+	  justifyContent: 'center',
+	  borderColor: '#c1af6e',
+	  borderWidth: 5,
+      backgroundColor: '#7f5136',
   },
   bigWhiteStyle: {
 	  color: '#fff',
