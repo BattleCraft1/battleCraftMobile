@@ -10,36 +10,77 @@ import {
     StyleSheet,
     Text,
     View,
+    TouchableHighlight,
 } from 'react-native';
+import { Navigator } from 'react-native-deprecated-custom-components'
 import Navbar from './App/Components/Navbar';
-
-
+import SplashScreen from './App/SplashScreen';
+import ListScreen from './App/ListScreen';
 
 export default class battleCraft extends Component {
 
     constructor() {
         super()
         this.state = {
-            currentPage: 'SplashScreen'
+            currentScreen: 'Splash',
         }
+        this._setScreen = this._setScreen.bind(this);
+        this._getScreen = this._getScreen.bind(this);
+    }
+
+    _setScreen(screenValue){
+        switch(screenValue){
+            case '0':
+                this.setState({currentScreen: 'List'});
+                break;
+            case '1':
+                this.setState({currentScreen: 'List'});
+                break;
+            case '2':
+                this.setState({currentScreen: 'List'});
+                break;
+            case '3':
+                this.setState({currentScreen: 'List'});
+                break;
+            default:
+                this.setState({currentScreen: 'Splash'});
+        }
+    }
+
+    _getScreen(){
+        return this.state.currentScreen;
+    }
+
+    renderScene(route, navigator) {
+        if(route.name == 'Splash') {
+            return <SplashScreen navigator={navigator} screen={this.currentScreen}/>
+        }
+        if(route.name == 'List') {
+            return <ListScreen navigator={navigator} screen={this.currentScreen}/>
+        }
+    }
+
+    configureScene(route, routeStack){
+        return Navigator.SceneConfigs.VerticalDownSwipeJump
     }
 
     render() {
         return (
             <View style={styles.mainStyle}>
 
-                <Navbar/>
+                <Navbar onChangeScreen={this._setScreen}/>
 
-                <View style={styles.contentStyle}>
-                    <Text style={styles.smallWhiteStyle}>
-                        {this.state.currentPage}
-                    </Text>
-                </View>
+                <Navigator
+                    configureScene={ this.configureScene }
+                    style={{ flex:1 }}
+                    initialRoute={{ name: 'Splash' }}
+                    renderScene={ this.renderScene } />
 
             </View>
         );
     }
 }
+
 
 
 const styles = StyleSheet.create({

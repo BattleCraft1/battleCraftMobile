@@ -21,6 +21,7 @@ export default class Navbar extends Component {
     updateText = (id,val) => {
         this.setState({menuIndex: id});
         this.setState({menuText: val});
+        this.props.onChangeScreen(id);
     }
 
 
@@ -81,6 +82,7 @@ const styles = StyleSheet.create({
         borderColor: '#c1af6e',
         borderWidth: 2,
         backgroundColor: '#513321',
+
 	},
     menuTextStyle: {
         textAlign: 'center',
