@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Dimensions,
+    StyleSheet,
+    Text,
+    View,
+    Image,
+    Dimensions,
+	TouchableHighlight,
 } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 
@@ -14,7 +15,7 @@ export default class Navbar extends Component {
         super()
         this.state = {
 			menuIndex: -1,
-            menuText: 'Menu'
+            menuText: 'BattleCraft'
         }
     }
 

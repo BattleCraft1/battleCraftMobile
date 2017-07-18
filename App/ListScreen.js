@@ -18,7 +18,7 @@ export default class ListScreen extends Component {
     render() {
         return (
             <View style={styles.contentStyle}>
-                <Text>List</Text>
+                <Text style={styles.smallWhiteStyle}>List</Text>
             </View>
         );
     }

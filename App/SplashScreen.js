@@ -5,8 +5,9 @@
 import React, { Component } from 'react';
 import {
     StyleSheet,
-    Text,
+    Image,
     View,
+    Dimensions,
 } from 'react-native';
 
 export default class SplashScreen extends Component {
@@ -18,7 +19,9 @@ export default class SplashScreen extends Component {
     render() {
         return (
             <View style={styles.contentStyle}>
-                <Text>Splash</Text>
+                <Image
+                    style={{width: Dimensions.get('window').width}}
+                    source={require('../img/logoBig.png')} />
             </View>
         );
     }
