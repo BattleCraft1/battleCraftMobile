@@ -13,6 +13,7 @@ import {
 import Navbar from './App/Components/Navbar';
 import SplashScreen from './App/SplashScreen';
 import ListScreen from './App/ListScreen';
+import AccountScreen from './App/AccountScreen';
 
 export default class battleCraft extends Component {
 
@@ -31,13 +32,13 @@ export default class battleCraft extends Component {
     selectMainScreen() {
         switch(this.state.currentScreen) {
             case '0':
-                return <ListScreen/>;
+                return <ListScreen listType='tournament'/>;
             case '1':
-                return <ListScreen/>;
+                return <ListScreen listType='game'/>;
             case '2':
-                return <ListScreen/>;
+                return <ListScreen listType='ranking'/>;
             case '3':
-                return <ListScreen/>;
+                return <AccountScreen/>;
             default:
                 return <SplashScreen/>;
         }

@@ -1,16 +1,15 @@
 /**
- * Created by FBegiello on 17.07.2017.
+ * Created by FBegiello on 18.07.2017.
  */
 
 import React, { Component } from 'react';
 import {
     StyleSheet,
-    Image,
+    Text,
     View,
-    Dimensions,
 } from 'react-native';
 
-export default class SplashScreen extends Component {
+export default class AccountScreen extends Component {
 
     constructor() {
         super()
@@ -19,14 +18,11 @@ export default class SplashScreen extends Component {
     render() {
         return (
             <View style={[styles.contentStyle, styles.borderStyle]}>
-                <Image
-                    style={{width: Dimensions.get('window').width}}
-                    source={require('../img/logoBig.png')} />
+                <Text style={styles.smallWhiteStyle}>Account</Text>
             </View>
         );
     }
 }
-
 
 const styles = StyleSheet.create({
     textStyle:{
@@ -64,4 +60,4 @@ const styles = StyleSheet.create({
     },
 });
 
-module.export = SplashScreen;
+module.export = AccountScreen;

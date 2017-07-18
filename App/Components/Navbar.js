@@ -25,29 +25,31 @@ export default class Navbar extends Component {
         this.props.onChangeScreen(id);
     }
 
-
-	menuWidth=Dimensions.get('window').width;
-
+    onPressLogo = () => {
+		this.updateText(-1,'BattleCraft')
+	}
 
 	render() {
 
 		return (
-			<View style={styles.navbarStyle}>
+			<View style={[styles.navbarStyle, styles.borderStyle]}>
 				<View>
-					<Image
-						style={styles.logoStyle}
-						source={require('../../img/logoSmall.png')} />
+					<TouchableHighlight onPress={this.onPressLogo}>
+						<Image
+							style={styles.logoStyle}
+							source={require('../../img/logoSmall.png')} />
+					</TouchableHighlight>
 				</View>
 
 				<View>
-					<Text style={styles.navbarTextStyle}>{this.state.menuText}</Text>
+					<Text style={[styles.textStyle,styles.navbarTextStyle]}>{this.state.menuText}</Text>
 				</View>
 
 				<View>
 					<ModalDropdown options={['Turnieje', 'Gry', 'Rankingi', 'Moje konto']}
-								   dropdownStyle={[styles.menuStyle, {width: this.menuWidth}]}
-								   dropdownTextStyle={styles.menuTextStyle}
-								   dropdownTextHighlightStyle={[styles.menuTextStyle,{fontWeight:'bold'}]}
+								   dropdownStyle={[styles.menuStyle, {width: Dimensions.get('window').width}, styles.borderStyle]}
+								   dropdownTextStyle={[styles.textStyle, styles.menuTextStyle, styles.borderStyle]}
+								   dropdownTextHighlightStyle={[styles.textStyle, styles.menuTextStyle, styles.borderStyle, {fontWeight:'bold'}]}
 								   onSelect = {(index,value)=>{this.updateText(index,value)}}>
 						<Image
 							style={styles.iconStyle}
@@ -62,35 +64,45 @@ export default class Navbar extends Component {
 
 
 const styles = StyleSheet.create({
+    textStyle:{
+        fontFamily:'arial, helvetica, sans-serif',
+        textShadowColor: '#000000',
+        textShadowOffset: {width: -1, height: -1},
+        color: '#fff',
+    },
+
+    borderStyle:{
+        borderTopColor: '#e3ca86',
+        borderRightColor: '#4b371b',
+        borderBottomColor: '#E0BA51',
+        borderLeftColor: '#ecdbac',
+	},
+
     navbarStyle: {
 	    height: 60,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
         alignItems: 'center',
 		paddingRight: 5,
-	    borderColor: '#c1af6e',
 	    borderWidth: 5,
-	    backgroundColor: '#513321',
+	    backgroundColor: '#805D2C',
     },
     navbarTextStyle: {
-	    color: '#fff',
 	    fontWeight: 'bold',
 	    fontSize: 26,
     },
 	menuStyle: {
     	position: 'absolute',
 		left:0,
-        borderColor: '#c1af6e',
-        borderWidth: 2,
-        backgroundColor: '#513321',
+        borderWidth: 0,
+        backgroundColor: '#805D2C',
 
 	},
     menuTextStyle: {
         textAlign: 'center',
-        borderColor: '#c1af6e',
-        borderWidth: 1,
-        color: '#fff',
-        backgroundColor: '#513321',
+        borderWidth: 3,
+        backgroundColor: '#805D2C',
+
         fontSize: 18,
     },
     logoStyle: {
@@ -101,6 +113,7 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
     },
+
 
 });
 

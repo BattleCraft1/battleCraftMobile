@@ -11,14 +11,14 @@ import {
 
 export default class ListScreen extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
     }
 
     render() {
         return (
-            <View style={styles.contentStyle}>
-                <Text style={styles.smallWhiteStyle}>List</Text>
+            <View style={[styles.contentStyle, styles.borderStyle]}>
+                <Text style={styles.smallWhiteStyle}>List {this.props.listType}</Text>
             </View>
         );
     }
@@ -26,9 +26,18 @@ export default class ListScreen extends Component {
 
 
 const styles = StyleSheet.create({
-    mainStyle: {
-        flex: 1,
-        backgroundColor: '#000',
+    textStyle:{
+        fontFamily:'arial, helvetica, sans-serif',
+        textShadowColor: '#000000',
+        textShadowOffset: {width: -1, height: -1},
+        color: '#fff',
+    },
+
+    borderStyle:{
+        borderTopColor: '#e3ca86',
+        borderRightColor: '#4b371b',
+        borderBottomColor: '#E0BA51',
+        borderLeftColor: '#ecdbac',
     },
     contentStyle: {
         flex: 0.9,
@@ -37,14 +46,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderColor: '#c1af6e',
         borderWidth: 5,
-        backgroundColor: '#7f5136',
+        backgroundColor: '#805D2C',
     },
     bigWhiteStyle: {
+        fontFamily:'arial, helvetica, sans-serif',
         color: '#fff',
         fontWeight: 'bold',
         fontSize: 26,
     },
     smallWhiteStyle: {
+        fontFamily:'arial, helvetica, sans-serif',
         color: '#fff',
         fontSize: 20,
     },
