@@ -18,7 +18,7 @@ export default class SplashScreen extends Component {
 
     render() {
         return (
-            <View style={[styles.contentStyle, styles.borderStyle]}>
+            <View style={[styles.contentStyle]}>
                 <Image
                     style={{width: Dimensions.get('window').width}}
                     source={require('../img/logoBig.png')} />
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         padding: 5,
         marginTop: 1,
         justifyContent: 'center',
-        borderColor: '#c1af6e',
+        borderColor: '#4b371b',
         borderWidth: 5,
         backgroundColor: '#805D2C',
     },

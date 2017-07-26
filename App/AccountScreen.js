@@ -17,7 +17,7 @@ export default class AccountScreen extends Component {
 
     render() {
         return (
-            <View style={[styles.contentStyle, styles.borderStyle]}>
+            <View style={[styles.contentStyle]}>
                 <Text style={styles.smallWhiteStyle}>Account</Text>
             </View>
         );
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         padding: 5,
         marginTop: 1,
         justifyContent: 'center',
-        borderColor: '#c1af6e',
+        borderColor: '#4b371b',
         borderWidth: 5,
         backgroundColor: '#805D2C',
     },

@@ -95,8 +95,8 @@ const styles = StyleSheet.create({
     	position: 'absolute',
 		left:0,
         borderWidth: 0,
+        height: 205,
         backgroundColor: '#805D2C',
-
 	},
     menuTextStyle: {
         textAlign: 'center',
