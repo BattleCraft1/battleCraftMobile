@@ -8,6 +8,7 @@ import {
     Text,
     View,
 } from 'react-native';
+import FadeView from './Components/FadeView'
 
 export default class AccountScreen extends Component {
 
@@ -17,9 +18,11 @@ export default class AccountScreen extends Component {
 
     render() {
         return (
-            <View style={[styles.contentStyle]}>
-                <Text style={styles.smallWhiteStyle}>Account</Text>
-            </View>
+            <FadeView style={{flex:1}}>
+                <View style={[styles.contentStyle]}>
+                    <Text style={styles.smallWhiteStyle}>Account</Text>
+                </View>
+            </FadeView>
         );
     }
 }

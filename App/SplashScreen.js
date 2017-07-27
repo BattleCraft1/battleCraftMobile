@@ -9,6 +9,7 @@ import {
     View,
     Dimensions,
 } from 'react-native';
+import FadeView from './Components/FadeView'
 
 export default class SplashScreen extends Component {
 
@@ -18,11 +19,13 @@ export default class SplashScreen extends Component {
 
     render() {
         return (
-            <View style={[styles.contentStyle]}>
-                <Image
-                    style={{width: Dimensions.get('window').width}}
-                    source={require('../img/logoBig.png')} />
-            </View>
+            <FadeView style={{flex:1}}>
+                <View style={[styles.contentStyle]}>
+                    <Image
+                        style={{width: Dimensions.get('window').width}}
+                        source={require('../img/logoBig.png')} />
+                </View>
+            </FadeView>
         );
     }
 }

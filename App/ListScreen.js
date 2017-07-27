@@ -7,8 +7,10 @@ import {
     StyleSheet,
     Text,
     View,
+    ListView,
     Button
 } from 'react-native';
+import FadeView from './Components/FadeView'
 import Drawer from 'react-native-drawer'
 
 export default class ListScreen extends Component {
@@ -16,6 +18,11 @@ export default class ListScreen extends Component {
     constructor(props) {
         super(props)
         this.closeControlPanel = this.closeControlPanel.bind(this);
+
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        this.state = {
+            dataSource: ds.cloneWithRows(['row 1', 'row 2']),
+        };
     }
 
     closeControlPanel = () => {
@@ -28,28 +35,34 @@ export default class ListScreen extends Component {
     render() {
 
         return (
-        <Drawer
-            ref={(ref) => this._drawer = ref}
-            type="overlay"
-            tapToClose={true}
-            openDrawerOffset={0.3}
-            panCloseMask={0.2}
-            styles={drawerStyles}
-            closedDrawerOffset={0}
-            tweenHandler={(ratio) => ({main: { opacity:(2-ratio)/2 }})}
+            <FadeView style={{flex:1}}>
+                <Drawer
+                    ref={(ref) => this._drawer = ref}
+                    type="overlay"
+                    tapToClose={true}
+                    openDrawerOffset={0.3}
+                    panCloseMask={0.2}
+                    styles={drawerStyles}
+                    closedDrawerOffset={0}
+                    tweenHandler={(ratio) => ({main: { opacity:(2-ratio)/2 }})}
 
-            content={<DrawerContent onClosePanel={this.closeControlPanel}/>}
-        >
-            <View style={[styles.contentStyle]}>
-                <View>
-                    <Text style={styles.smallWhiteStyle}>List {this.props.listType}</Text>
-                </View>
-                <Button title="Open" color='#4b371b' onPress={this.openControlPanel}/>
-            </View>
-        </Drawer>
+                    content={<DrawerContent onClosePanel={this.closeControlPanel}/>}
+                >
+                    <View style={[styles.contentStyle, styles.centering]}>
+                        <View>
+                            <Text style={styles.smallWhiteStyle}>List {this.props.listType}</Text>
+                        </View>
+                        <Button title="Open" color='#4b371b' onPress={this.openControlPanel}/>
+
+                        <ListView styles={tableStyles.table} dataSource={this.state.dataSource} renderRow={(rowData) => <Text style={[tableStyles.row, styles.smallWhiteStyle]}>{rowData}</Text>} />
+                    </View>
+                </Drawer>
+            </FadeView>
         );
     }
 }
+
+
 
 class DrawerContent extends Component {
 
@@ -59,7 +72,7 @@ class DrawerContent extends Component {
 
     render() {
         return (
-            <View style={[styles.contentStyle]}>
+            <View style={[styles.contentStyle, styles.centering]}>
                 <View>
                     <Text style={[styles.textStyle, {fontSize: 26,}]}>Drawer</Text>
                 </View>
@@ -67,7 +80,7 @@ class DrawerContent extends Component {
                     <Text style={styles.smallWhiteStyle}>List of filters here</Text>
                 </View>
 
-                <Button title="Close" color='#4b371b' onPress={this.props.onClosePanel}/>
+                <Button title="Close"  color='#4b371b' onPress={this.props.onClosePanel}/>
             </View>
         );
     }
@@ -85,7 +98,24 @@ const drawerStyles = {
     },
 }
 
+const tableStyles = {
+    table:{
+        alignItems: 'stretch'
+    },
+    row:{
+        backgroundColor:'#4b371b',
+        borderColor:'#e3ca86',
+        borderWidth: 2,
+        borderTopWidth: 0,
+        padding: 2,
+    }
+}
+
 const styles = StyleSheet.create({
+    centering:{
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
     textStyle:{
         fontFamily:'arial, helvetica, sans-serif',
         textShadowColor: '#000000',
