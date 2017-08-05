@@ -16,21 +16,70 @@ import Drawer from 'react-native-drawer'
 export default class ListScreen extends Component {
 
     constructor(props) {
-        super(props)
+        super(props) //type of list needed in props
         this.closeControlPanel = this.closeControlPanel.bind(this);
 
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        var ds = new ListView.DataSource({
+            rowHasChanged: (r1, r2) => r1 !== r2,
+        });
         this.state = {
-            dataSource: ds.cloneWithRows(['row 1', 'row 2']),
+            dataSource: ds.cloneWithRows(['Placeholder']),
         };
     }
 
+    dataIncoming = [
+        {
+            name: "Tournament 1",
+            province: "Shithole 1",
+            city:"City 1",
+            game:"Game 1",
+            players:"123",
+            date: "Date 1"
+        },
+        {
+            name: "Tournament 2",
+            province: "Shithole 2",
+            city:"City 2",
+            game:"game 2",
+            players:"234",
+            date: "Date 2"
+        },
+    ];
+
+
+    convertData(){
+        var tempData=this.dataIncoming //get JSON from server here
+
+        this.setState({ dataSource: this.state.dataSource.cloneWithRows(tempData) });
+    }
+
+
+    renderRow(rowData){
+        return (
+            <View style={[tableStyles.row]}>
+                <Text style={[tableStyles.sectionHeader,styles.smallWhiteStyle]}>{rowData.name}</Text>
+                <Text style={[tableStyles.row,styles.smallWhiteStyle]}>{rowData.province}</Text>
+                <Text style={[tableStyles.row,styles.smallWhiteStyle]}>{rowData.city}</Text>
+                <Text style={[tableStyles.row,styles.smallWhiteStyle]}>{rowData.game}</Text>
+                <Text style={[tableStyles.row,styles.smallWhiteStyle]}>{rowData.players}</Text>
+                <Text style={[tableStyles.row,styles.smallWhiteStyle]}>{rowData.date}</Text>
+            </View>);
+    }
+
+
+
     closeControlPanel = () => {
         this._drawer.close()
-    };
+    }
     openControlPanel = () => {
         this._drawer.open()
-    };
+    }
+
+
+    componentDidMount(){
+
+        this.convertData();
+    }
 
     render() {
 
@@ -48,13 +97,13 @@ export default class ListScreen extends Component {
 
                     content={<DrawerContent onClosePanel={this.closeControlPanel}/>}
                 >
-                    <View style={[styles.contentStyle, styles.centering]}>
-                        <View>
-                            <Text style={styles.smallWhiteStyle}>List {this.props.listType}</Text>
-                        </View>
-                        <Button title="Open" color='#4b371b' onPress={this.openControlPanel}/>
+                    <View style={[styles.contentStyle, styles.centering, {flex: 1}]}>
+                        <Button title="Open filters tab" color='#4b371b' onPress={this.openControlPanel}/>
 
-                        <ListView styles={tableStyles.table} dataSource={this.state.dataSource} renderRow={(rowData) => <Text style={[tableStyles.row, styles.smallWhiteStyle]}>{rowData}</Text>} />
+                        <ListView styles={tableStyles.table}
+                                  dataSource={this.state.dataSource}
+                                  renderHeader={(headerData) => <Text style={[tableStyles.header, styles.bigWhiteStyle]}>List {this.props.listType}</Text>}
+                                  renderRow={this.renderRow}/>
                     </View>
                 </Drawer>
             </FadeView>
@@ -100,13 +149,24 @@ const drawerStyles = {
 
 const tableStyles = {
     table:{
-        alignItems: 'stretch'
+        alignSelf: "stretch"
     },
     row:{
-        backgroundColor:'#4b371b',
+        backgroundColor:'#a58e60',
         borderColor:'#e3ca86',
         borderWidth: 2,
         borderTopWidth: 0,
+    },
+    sectionHeader:{
+        backgroundColor:'#4b371b',
+        borderColor:'#e3ca86',
+        borderTopWidth: 2,
+        borderTopWidth: 0,
+    },
+    header:{
+        backgroundColor:'#4b371b',
+        borderColor:'#e3ca86',
+        borderWidth: 3,
         padding: 2,
     }
 }
@@ -114,7 +174,7 @@ const tableStyles = {
 const styles = StyleSheet.create({
     centering:{
         flexDirection: 'column',
-        alignItems: 'center',
+        alignItems: 'stretch',
     },
     textStyle:{
         fontFamily:'arial, helvetica, sans-serif',
