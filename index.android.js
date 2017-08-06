@@ -14,6 +14,7 @@ import Navbar from './App/Components/Navbar';
 import SplashScreen from './App/SplashScreen';
 import ListScreen from './App/ListScreen';
 import AccountScreen from './App/AccountScreen';
+import MainStyles from './App/Styles/MainStyles'
 
 export default class battleCraft extends Component {
 
@@ -46,7 +47,7 @@ export default class battleCraft extends Component {
 
     render() {
         return (
-            <View style={styles.mainStyle}>
+            <View style={MainStyles.background}>
 
                 <Navbar onChangeScreen={this._setScreen}/>
                 {this.selectMainScreen()}
@@ -55,14 +56,5 @@ export default class battleCraft extends Component {
         );
     }
 }
-
-
-
-const styles = StyleSheet.create({
-  mainStyle: {
-      flex: 1,
-      backgroundColor: '#000',
-  },
-});
 
 AppRegistry.registerComponent('battleCraft', () => battleCraft);

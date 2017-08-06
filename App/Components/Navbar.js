@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-    StyleSheet,
     Text,
     View,
     Image,
@@ -8,6 +7,8 @@ import {
 	TouchableHighlight,
 } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
+import MainStyles from '../Styles/MainStyles'
+import NavbarStyles from '../Styles/NavbarStyles'
 
 export default class Navbar extends Component {
 
@@ -32,27 +33,27 @@ export default class Navbar extends Component {
 	render() {
 
 		return (
-			<View style={[styles.navbarStyle, styles.borderStyle]}>
+			<View style={[NavbarStyles.navbarStyle, MainStyles.borderStyle]}>
 				<View>
 					<TouchableHighlight onPress={this.onPressLogo}>
 						<Image
-							style={styles.logoStyle}
+                            style={NavbarStyles.logoStyle}
 							source={require('../../img/logoSmall.png')} />
 					</TouchableHighlight>
 				</View>
 
 				<View>
-					<Text style={[styles.textStyle,styles.navbarTextStyle]}>{this.state.menuText}</Text>
+					<Text style={[MainStyles.textStyle,NavbarStyles.navbarTextStyle]}>{this.state.menuText}</Text>
 				</View>
 
 				<View>
 					<ModalDropdown options={['Turnieje', 'Gry', 'Rankingi', 'Moje konto']}
-								   dropdownStyle={[styles.menuStyle, {width: Dimensions.get('window').width}, styles.borderStyle]}
-								   dropdownTextStyle={[styles.textStyle, styles.menuTextStyle, styles.borderStyle]}
-								   dropdownTextHighlightStyle={[styles.textStyle, styles.menuTextStyle, styles.borderStyle, {fontWeight:'bold'}]}
+								   dropdownStyle={[NavbarStyles.menuStyle, {width: Dimensions.get('window').width}, MainStyles.borderStyle]}
+								   dropdownTextStyle={[MainStyles.textStyle, NavbarStyles.menuTextStyle, MainStyles.borderStyle]}
+								   dropdownTextHighlightStyle={[MainStyles.textStyle, NavbarStyles.menuTextStyle, MainStyles.borderStyle, {fontWeight:'bold'}]}
 								   onSelect = {(index,value)=>{this.updateText(index,value)}}>
 						<Image
-							style={styles.iconStyle}
+							style={NavbarStyles.iconStyle}
 							source={require('../../img/menuIcon.png')} />
 					</ModalDropdown>
 				</View>
@@ -61,60 +62,5 @@ export default class Navbar extends Component {
 		);
 	}
 }
-
-
-const styles = StyleSheet.create({
-    textStyle:{
-        fontFamily:'arial, helvetica, sans-serif',
-        textShadowColor: '#000000',
-        textShadowOffset: {width: -1, height: -1},
-        color: '#fff',
-    },
-
-    borderStyle:{
-        borderTopColor: '#e3ca86',
-        borderRightColor: '#4b371b',
-        borderBottomColor: '#E0BA51',
-        borderLeftColor: '#ecdbac',
-	},
-
-    navbarStyle: {
-	    height: 60,
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-        alignItems: 'center',
-		paddingRight: 5,
-	    borderWidth: 5,
-	    backgroundColor: '#805D2C',
-    },
-    navbarTextStyle: {
-	    fontWeight: 'bold',
-	    fontSize: 26,
-    },
-	menuStyle: {
-    	position: 'absolute',
-		left:0,
-        borderWidth: 0,
-        height: 205,
-        backgroundColor: '#805D2C',
-	},
-    menuTextStyle: {
-        textAlign: 'center',
-        borderWidth: 3,
-        backgroundColor: '#805D2C',
-
-        fontSize: 18,
-    },
-    logoStyle: {
-	    width: 50,
-	    height: 50,
-    },
-	iconStyle: {
-        width: 40,
-        height: 40,
-    },
-
-
-});
 
 module.export = Navbar;
