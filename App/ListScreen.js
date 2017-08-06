@@ -8,22 +8,32 @@ import {
     Text,
     View,
     ListView,
+    ScrollView,
     Button
 } from 'react-native';
 import FadeView from './Components/FadeView'
 import Drawer from 'react-native-drawer'
+import { Form,
+    Separator,
+    InputField,
+    DatePickerField,
+} from 'react-native-form-generator';
 
 export default class ListScreen extends Component {
 
     constructor(props) {
-        super(props) //type of list needed in props
+        super(props) //type of list needed in props listType
+
         this.closeControlPanel = this.closeControlPanel.bind(this);
+        this.renderRow = this.renderRow.bind(this);
 
         var ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2,
         });
+
         this.state = {
             dataSource: ds.cloneWithRows(['Placeholder']),
+            rowLabels: [],
         };
     }
 
@@ -44,29 +54,59 @@ export default class ListScreen extends Component {
             players:"234",
             date: "Date 2"
         },
+        {
+            name: "Tournament 3",
+            province: "Shithole 3",
+            city:"City 3",
+            game:"Game 3",
+            players:"123",
+            date: "Date 3"
+        },
+        {
+            name: "Tournament 4",
+            province: "Shithole 4",
+            city:"City 4",
+            game:"game 4",
+            players:"234",
+            date: "Date 4"
+        },
     ];
 
 
     convertData(){
         var tempData=this.dataIncoming //get JSON from server here
 
-        this.setState({ dataSource: this.state.dataSource.cloneWithRows(tempData) });
+        this.setState({rowLabels: Object.keys(tempData[0])})
+        this.setState({ dataSource: this.state.dataSource.cloneWithRows(tempData)});
     }
 
 
-    renderRow(rowData){
-        return (
-            <View style={[tableStyles.row]}>
-                <Text style={[tableStyles.sectionHeader,styles.smallWhiteStyle]}>{rowData.name}</Text>
-                <Text style={[tableStyles.row,styles.smallWhiteStyle]}>{rowData.province}</Text>
-                <Text style={[tableStyles.row,styles.smallWhiteStyle]}>{rowData.city}</Text>
-                <Text style={[tableStyles.row,styles.smallWhiteStyle]}>{rowData.game}</Text>
-                <Text style={[tableStyles.row,styles.smallWhiteStyle]}>{rowData.players}</Text>
-                <Text style={[tableStyles.row,styles.smallWhiteStyle]}>{rowData.date}</Text>
-            </View>);
+    renderRow(rowData) {
+
+        switch(this.props.listType) {
+
+            case 'tournament':
+                return (
+                    <View style={[tableStyles.row]}>
+                        <Text style={[tableStyles.sectionHeader, styles.smallWhiteStyle]}>{rowData.name}</Text>
+                        <Text style={[tableStyles.row, styles.smallWhiteStyle]}>{this.state.rowLabels[1]}: {rowData.province}</Text>
+                        <Text style={[tableStyles.row, styles.smallWhiteStyle]}>{this.state.rowLabels[2]}: {rowData.city}</Text>
+                        <Text style={[tableStyles.row, styles.smallWhiteStyle]}>{this.state.rowLabels[3]}: {rowData.game}</Text>
+                        <Text style={[tableStyles.row, styles.smallWhiteStyle]}>{this.state.rowLabels[4]}: {rowData.players}</Text>
+                        <Text style={[tableStyles.row, styles.smallWhiteStyle]}>{this.state.rowLabels[5]}: {rowData.date}</Text>
+                    </View>);
+            case 'game':
+                return (
+                    <View style={[tableStyles.row]}>
+                        <Text style={[tableStyles.row, styles.smallWhiteStyle]}>Game row here</Text>
+                    </View>);
+            case 'ranking':
+                return (
+                    <View style={[tableStyles.row]}>
+                        <Text style={[tableStyles.row, styles.smallWhiteStyle]}>Ranking row here</Text>
+                    </View>);
+        }
     }
-
-
 
     closeControlPanel = () => {
         this._drawer.close()
@@ -74,7 +114,6 @@ export default class ListScreen extends Component {
     openControlPanel = () => {
         this._drawer.open()
     }
-
 
     componentDidMount(){
 
@@ -95,14 +134,14 @@ export default class ListScreen extends Component {
                     closedDrawerOffset={0}
                     tweenHandler={(ratio) => ({main: { opacity:(2-ratio)/2 }})}
 
-                    content={<DrawerContent onClosePanel={this.closeControlPanel}/>}
+                    content={<DrawerContent formType={this.props.listType} onClosePanel={this.closeControlPanel}/>}
                 >
                     <View style={[styles.contentStyle, styles.centering, {flex: 1}]}>
                         <Button title="Open filters tab" color='#4b371b' onPress={this.openControlPanel}/>
 
                         <ListView styles={tableStyles.table}
                                   dataSource={this.state.dataSource}
-                                  renderHeader={(headerData) => <Text style={[tableStyles.header, styles.bigWhiteStyle]}>List {this.props.listType}</Text>}
+                                  renderHeader={(headerData) => <Text style={[tableStyles.header,styles.bigWhiteStyle]}>List {this.props.listType}</Text>}
                                   renderRow={this.renderRow}/>
                     </View>
                 </Drawer>
@@ -115,25 +154,117 @@ export default class ListScreen extends Component {
 
 class DrawerContent extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
     }
 
-    render() {
+    handleFormChange(formData){
+        this.setState({formData:formData})
+        this.props.onFormChange && this.props.onFormChange(formData);
+    }
+    handleFormFocus(e, component){
+    }
+
+
+    printTorunamentForm(){
         return (
             <View style={[styles.contentStyle, styles.centering]}>
                 <View>
-                    <Text style={[styles.textStyle, {fontSize: 26,}]}>Drawer</Text>
+                    <Text style={[styles.textStyle, {fontSize: 26,}]}>Torunament Form</Text>
                 </View>
-                <View>
-                    <Text style={styles.smallWhiteStyle}>List of filters here</Text>
-                </View>
+                <ScrollView keyboardShouldPersistTaps='always' style={{paddingLeft:10,paddingRight:10}}>
+                    <Form
+                        ref='filterTorunament'
+                        onFocus={this.handleFormFocus.bind(this)}
+                        onChange={this.handleFormChange.bind(this)}>
 
-                <Button title="Close"  color='#4b371b' onPress={this.props.onClosePanel}/>
+                        <InputField
+                            ref='name'
+                            label='Nazwa turnieju'
+                            placeholder='First Name'/>
+                        <InputField
+                            ref='province'
+                            label='Prowincja'
+                            placeholder='First Name'/>
+                        <InputField
+                            ref='city'
+                            label='Miasto'
+                            placeholder='First Name'/>
+                        <InputField
+                            ref='game'
+                            label='Typ gry'
+                            placeholder='First Name'/>
+                        <InputField
+                            ref='players'
+                            label='Liczba graczy'
+                            placeholder='First Name'/>
+                        <DatePickerField ref='date'
+                                         minimumDate={new Date('1/1/1900')}
+                                         maximumDate={new Date()}
+                                         placeholder='Date'/>
+
+                    </Form>
+                    <Button title="Close"  color='#4b371b' onPress={this.props.onClosePanel}/>
+                </ScrollView>
             </View>
         );
     }
+    printGamesForm(){
+        return (
+            <View style={[styles.contentStyle, styles.centering]}>
+                <View>
+                    <Text style={[styles.textStyle, {fontSize: 26,}]}>Games form</Text>
+                </View>
+                <ScrollView keyboardShouldPersistTaps='always' style={{paddingLeft:10,paddingRight:10}}>
+                    <Form
+                        ref='filterGames'
+                        onFocus={this.handleFormFocus.bind(this)}
+                        onChange={this.handleFormChange.bind(this)}>
+                    </Form>
+                    <Button title="Close"  color='#4b371b' onPress={this.props.onClosePanel}/>
+                </ScrollView>
+            </View>
+        );
+    }
+    printRankingtForm(){
+        return (
+            <View style={[styles.contentStyle, styles.centering]}>
+                <View>
+                    <Text style={[styles.textStyle, {fontSize: 26,}]}>Ranking form</Text>
+                </View>
+                <ScrollView keyboardShouldPersistTaps='always' style={{paddingLeft:10,paddingRight:10}}>
+                    <Form
+                        ref='filterRanking'
+                        onFocus={this.handleFormFocus.bind(this)}
+                        onChange={this.handleFormChange.bind(this)}>
+                    </Form>
+                    <Button title="Close"  color='#4b371b' onPress={this.props.onClosePanel}/>
+                </ScrollView>
+            </View>
+        );
+    }
+
+    render() {
+
+        switch (this.props.formType) {
+            case 'tournament':
+                return this.printTorunamentForm();
+            case 'game':
+                return this.printGamesForm();
+            case 'ranking':
+                return this.printRankingtForm();
+            default:
+                return (
+                    <View style={[styles.contentStyle, styles.centering]}>
+                        <View>
+                            <Text style={[styles.textStyle, {fontSize: 26,}]}>Error</Text>
+                        </View>
+                    </View>);
+        }
+    }
 }
+
+
 
 const drawerStyles = {
     drawer: {
