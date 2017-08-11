@@ -54,7 +54,7 @@ export default class Navbar extends Component {
 								   onSelect = {(index,value)=>{this.updateText(index,value)}}>
 						<Image
 							style={NavbarStyles.iconStyle}
-							source={require('../../img/menuIcon.png')} />
+							source={require('../../img/navbarMenuIcon.png')} />
 					</ModalDropdown>
 				</View>
 

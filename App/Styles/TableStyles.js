@@ -17,16 +17,20 @@ const styles = StyleSheet.create({
         borderTopWidth: 0,
     },
     sectionHeader:{
+        flexDirection: 'row',
+        justifyContent:'space-between',
         backgroundColor:'#4b371b',
         borderColor:'#e3ca86',
-        borderTopWidth: 2,
+        borderWidth: 2,
         borderTopWidth: 0,
     },
     header:{
+        flexDirection: 'row',
+        justifyContent:'center',
         backgroundColor:'#4b371b',
         borderColor:'#e3ca86',
         borderWidth: 3,
-        padding: 2,
+        padding: 3,
     },
 });
 
