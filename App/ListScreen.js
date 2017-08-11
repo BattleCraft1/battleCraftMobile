@@ -7,7 +7,6 @@ import {
     Text,
     View,
     ListView,
-    ScrollView,
     Button,
     TouchableHighlight,
     Image
@@ -15,12 +14,6 @@ import {
 import FadeView from './Components/FadeView'
 import Drawer from 'react-native-drawer'
 import FormDrawer from './Components/FormDrawer'
-import { Form,
-    Separator,
-    PickerField,
-    InputField,
-    DatePickerField,
-} from 'react-native-form-generator';
 import MainStyles from './Styles/MainStyles'
 import TableStyles from './Styles/TableStyles'
 import DrawerStyles from './Styles/DrawerStyles'
@@ -84,8 +77,10 @@ export default class ListScreen extends Component {
     convertData(){
         var tempData=this.dataIncoming //get JSON from server here
 
+
+        //stores incoming JSON in state
         this.setState({rowLabels: Object.keys(tempData[0])})
-        this.setState({ dataSource: this.state.dataSource.cloneWithRows(tempData)});
+        this.setState({dataSource: this.state.dataSource.cloneWithRows(tempData)});
     }
 
 
