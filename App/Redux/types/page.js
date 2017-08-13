@@ -1,0 +1,3 @@
+export const SET_PAGE = 'SET_PAGE';
+export const CHECK_ALL_ELEMENTS = 'CHECK_ALL_ELEMENTS';
+export const CHECK_ELEMENT = 'CHECK_ELEMENT';

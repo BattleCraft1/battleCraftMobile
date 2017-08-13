@@ -1,60 +1,55 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
-import React, { Component } from 'react';
+import React from 'react';
 import {
-    AppRegistry,
-    StyleSheet,
-    View,
+    AppRegistry
 } from 'react-native';
-import Navbar from './App/Components/Navbar';
-import SplashScreen from './App/SplashScreen';
-import ListScreen from './App/ListScreen';
-import AccountScreen from './App/AccountScreen';
-import MainStyles from './App/Styles/MainStyles'
 
-export default class battleCraft extends Component {
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware, compose } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import reducer from './App/Redux/reducers/index'
 
-    constructor() {
-        super()
-        this.state = {
-            currentScreen: '-1',
-        }
-        this._setScreen = this._setScreen.bind(this);
-    }
+import App from './App/Main/App'
 
-    _setScreen(screenValue){
-        this.setState({currentScreen: screenValue});
-    }
-
-    selectMainScreen() {
-        switch(this.state.currentScreen) {
-            case '0':
-                return <ListScreen listType='tournament'/>;
-            case '1':
-                return <ListScreen listType='game'/>;
-            case '2':
-                return <ListScreen listType='ranking'/>;
-            case '3':
-                return <AccountScreen/>;
-            default:
-                return <SplashScreen/>;
-        }
-    }
-
-    render() {
-        return (
-            <View style={MainStyles.background}>
-
-                <Navbar onChangeScreen={this._setScreen}/>
-                {this.selectMainScreen()}
-
-            </View>
-        );
-    }
+function configureStore( initialState ) {
+    const enhancer = compose(
+        applyMiddleware(
+            thunkMiddleware,
+        ),
+    );
+    return createStore( reducer, initialState, enhancer );
 }
 
-AppRegistry.registerComponent('battleCraft', () => battleCraft);
+const store = configureStore( {
+    confirmation: {
+        header:"",
+        message:"",
+        onConfirmFunction: function () {
+        },
+        isShown: false
+    },
+    message:{
+        isShown: false,
+        messageText: "",
+        messageType: ""
+    },
+    page: {
+        content: []
+    },
+    pageRequest: {pageRequest:{
+        size:10,
+        page:0,
+        direction: "ASC",
+        property: "name"
+    },
+        searchCriteria:[
+        ]
+    },
+} );
+
+const battleCraft = ( ) => (
+    <Provider store={ store }>
+        <App />
+    </Provider>
+);
+
+AppRegistry.registerComponent( 'battleCraft', () => battleCraft );

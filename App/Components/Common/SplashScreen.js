@@ -1,14 +1,10 @@
-/**
- * Created by FBegiello on 17.07.2017.
- */
-
 import React, { Component } from 'react';
 import {
     Image,
     View,
     Dimensions,
 } from 'react-native';
-import FadeView from './Components/FadeView'
+import FadeView from './FadeView'
 
 export default class SplashScreen extends Component {
 
@@ -22,7 +18,7 @@ export default class SplashScreen extends Component {
                 <View style={{flex: 1}}>
                     <Image
                         style={{flex:1, width: Dimensions.get('window').width}}
-                        source={require('../img/logoBig.png')} />
+                        source={require('../../../img/logoBig.png')} />
                 </View>
             </FadeView>
         );

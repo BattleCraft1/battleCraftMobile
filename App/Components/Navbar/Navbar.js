@@ -7,13 +7,13 @@ import {
 	TouchableHighlight,
 } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
-import MainStyles from '../Styles/MainStyles'
-import NavbarStyles from '../Styles/NavbarStyles'
+import MainStyles from '../../Styles/MainStyles'
+import NavbarStyles from '../../Styles/NavbarStyles'
 
 export default class Navbar extends Component {
 
     constructor() {
-        super()
+        super();
         this.state = {
 			menuIndex: -1,
             menuText: 'BattleCraft'
@@ -24,11 +24,11 @@ export default class Navbar extends Component {
         this.setState({menuIndex: id});
         this.setState({menuText: val});
         this.props.onChangeScreen(id);
-    }
+    };
 
     onPressLogo = () => {
 		this.updateText(-1,'BattleCraft')
-	}
+	};
 
 	render() {
 
@@ -38,7 +38,7 @@ export default class Navbar extends Component {
 					<TouchableHighlight onPress={this.onPressLogo}>
 						<Image
                             style={NavbarStyles.logoStyle}
-							source={require('../../img/logoSmall.png')} />
+							source={require('../../../img/logoSmall.png')} />
 					</TouchableHighlight>
 				</View>
 
@@ -54,7 +54,7 @@ export default class Navbar extends Component {
 								   onSelect = {(index,value)=>{this.updateText(index,value)}}>
 						<Image
 							style={NavbarStyles.iconStyle}
-							source={require('../../img/navbarMenuIcon.png')} />
+							source={require('../../../img/navbarMenuIcon.png')} />
 					</ModalDropdown>
 				</View>
 

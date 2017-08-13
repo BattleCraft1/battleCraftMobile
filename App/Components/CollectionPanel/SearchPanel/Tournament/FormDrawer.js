@@ -1,7 +1,3 @@
-/**
- * Created by FBegiello on 11.08.2017.
- */
-
 import React, { Component } from 'react';
 import {
     Text,
@@ -15,7 +11,7 @@ import { Form,
     InputField,
     DatePickerField,
 } from 'react-native-form-generator';
-import MainStyles from '../Styles/MainStyles'
+import MainStyles from '../../../../Styles/MainStyles'
 
 export default class FormDrawer extends Component {
 

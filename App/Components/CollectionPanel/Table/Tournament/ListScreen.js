@@ -1,7 +1,3 @@
-/**
- * Created by FBegiello on 17.07.2017.
- */
-
 import React, { Component } from 'react';
 import {
     Text,
@@ -11,17 +7,17 @@ import {
     TouchableHighlight,
     Image
 } from 'react-native';
-import FadeView from './Components/FadeView'
+import FadeView from '../../../Common/FadeView'
 import Drawer from 'react-native-drawer'
-import FormDrawer from './Components/FormDrawer'
-import MainStyles from './Styles/MainStyles'
-import TableStyles from './Styles/TableStyles'
-import DrawerStyles from './Styles/DrawerStyles'
+import FormDrawer from '../../SearchPanel/Tournament/FormDrawer'
+import MainStyles from '../../../../Styles/MainStyles'
+import TableStyles from '../../../../Styles/TableStyles'
+import DrawerStyles from '../../../../Styles/DrawerStyles'
 
 export default class ListScreen extends Component {
 
     constructor(props) {
-        super(props) //type of list needed in props listType
+        super(props); //type of list needed in props listType
 
         this.closeControlPanel = this.closeControlPanel.bind(this);
         this.openControlPanel = this.openControlPanel.bind(this);
@@ -75,11 +71,11 @@ export default class ListScreen extends Component {
 
 
     convertData(){
-        var tempData=this.dataIncoming //get JSON from server here
+        var tempData=this.dataIncoming; //get JSON from server here
 
 
         //stores incoming JSON in state
-        this.setState({rowLabels: Object.keys(tempData[0])})
+        this.setState({rowLabels: Object.keys(tempData[0])});
         this.setState({dataSource: this.state.dataSource.cloneWithRows(tempData)});
     }
 
@@ -96,7 +92,7 @@ export default class ListScreen extends Component {
                             <TouchableHighlight onPress={this.onPressLogo}>
                                 <Image
                                     style={{ width: 40, height: 40,}}
-                                    source={require('../img/expandIconH.png')} />
+                                    source={require('../../../../../img/expandIconH.png')} />
                             </TouchableHighlight>
                         </View>
                         <View style={[TableStyles.row]}><Text style={[MainStyles.smallWhiteStyle]}> {this.state.rowLabels[1]}: {rowData.province}</Text></View>
