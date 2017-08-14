@@ -14,13 +14,11 @@ export default class SplashScreen extends Component {
 
     render() {
         return (
-            <FadeView style={{flex:1}}>
                 <View style={{flex: 1}}>
                     <Image
                         style={{flex:1, width: Dimensions.get('window').width}}
                         source={require('../../../img/logoBig.png')} />
                 </View>
-            </FadeView>
         );
     }
 }

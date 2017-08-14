@@ -7,7 +7,6 @@ import {
     TouchableHighlight,
     Image
 } from 'react-native';
-import FadeView from '../../../Common/FadeView'
 import Drawer from 'react-native-drawer'
 import FormDrawer from '../../SearchPanel/Ranking/FormDrawer'
 import MainStyles from '../../../../Styles/MainStyles'
@@ -62,7 +61,6 @@ export default class ListScreen extends Component {
     render() {
 
         return (
-            <FadeView style={{flex:1}}>
                 <Drawer
                     ref={(ref) => this._drawer = ref}
                     type="overlay"
@@ -85,7 +83,6 @@ export default class ListScreen extends Component {
                         <Button title={"Ranking Options"} color='#4b371b' onPress={()=>this.openControlPanel()}/>
                     </View>
                 </Drawer>
-            </FadeView>
         );
     }
 }

@@ -4,15 +4,15 @@ import {
     View,
     ListView,
     Button,
-    TouchableHighlight,
-    Image,
 } from 'react-native';
-import FadeView from '../../../Common/FadeView'
 import Drawer from 'react-native-drawer'
 import FormDrawer from '../../SearchPanel/Game/FormDrawer'
 import MainStyles from '../../../../Styles/MainStyles'
 import TableStyles from '../../../../Styles/TableStyles'
 import DrawerStyles from '../../../../Styles/DrawerStyles'
+import Checkbox from '../../../Common/checkBox/Checkbox'
+import MultiCheckbox from '../../../Common/checkBox/MultiCheckbox'
+import PanelOptions from '../../PanelOptions/Tournaments/PanelOptions'
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -36,7 +36,8 @@ class ListScreen extends Component {
         });
 
         this.state = {
-            dataSource: ds.cloneWithRows(['Placeholder'])
+            dataSource: ds.cloneWithRows(['Placeholder']),
+            optionsVisible: false
         };
     }
 
@@ -57,11 +58,14 @@ class ListScreen extends Component {
             .then((responseJson) => {
                 console.log(responseJson);
                 this.props.setPage(responseJson);
-                this.setState({dataSource: this.state.dataSource.cloneWithRows(this.props.page.content)});
             })
             .catch(error => {
                 this.props.showNetworkErrorMessageBox(error);
             });
+    }
+
+    changeVisibilityOptionsModal(isVisible){
+        this.setState({optionsVisible:isVisible});
     }
 
     renderRow(rowData) {
@@ -69,11 +73,7 @@ class ListScreen extends Component {
             <View style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
                     <Text style={[MainStyles.smallWhiteStyle, {fontSize: 24}]}> {rowData.name}</Text>
-                    <TouchableHighlight onPress={this.onPressLogo}>
-                        <Image
-                            style={{ width: 40, height: 40,}}
-                            source={require('../../../../../img/expandIconH.png')} />
-                    </TouchableHighlight>
+                    <Checkbox name={rowData.name}/>
                 </View>
                 <View style={[TableStyles.row]}>
                     <Text style={[MainStyles.smallWhiteStyle]}> province: {rowData.province}</Text>
@@ -103,30 +103,37 @@ class ListScreen extends Component {
     render() {
 
         return (
-            <FadeView style={{flex:1}}>
-                <Drawer
-                    ref={(ref) => this._drawer = ref}
-                    type="overlay"
-                    tapToClose={true}
-                    openDrawerOffset={0.2}
-                    panCloseMask={0.2}
-                    styles={DrawerStyles}
-                    closedDrawerOffset={0}
-                    tweenHandler={(ratio) => ({main: { opacity:(2-ratio)/2 }})}
 
-                    content={<FormDrawer onClosePanel={this.closeControlPanel}/>}
-                >
-                    <View style={[MainStyles.contentStyle, MainStyles.centering, {flex: 1}]}>
-                        <Button title="Open filters tab" color='#4b371b' onPress={()=>this.openControlPanel()}/>
+            <Drawer
+                ref={(ref) => this._drawer = ref}
+                type="overlay"
+                tapToClose={true}
+                openDrawerOffset={0.2}
+                panCloseMask={0.2}
+                styles={DrawerStyles}
+                closedDrawerOffset={0}
+                tweenHandler={(ratio) => ({main: { opacity:(2-ratio)/2 }})}
 
-                        <ListView styles={TableStyles.table}
-                                  dataSource={this.state.dataSource}
-                                  renderHeader={(headerData) => <View style={TableStyles.header}><Text style={MainStyles.bigWhiteStyle}>Tournaments List</Text></View>}
-                                  renderRow={this.renderRow}/>
-                        <Button title={"Add tournament"} color='#4b371b' onPress={()=>this.openControlPanel()}/>
-                    </View>
-                </Drawer>
-            </FadeView>
+                content={<FormDrawer onClosePanel={this.closeControlPanel}/>}
+            >
+                <View style={[MainStyles.contentStyle, MainStyles.centering, {flex: 1}]}>
+                    <Button title="Open filters tab" color='#4b371b' onPress={()=>this.openControlPanel()}/>
+
+                    <ListView styles={TableStyles.table}
+                              dataSource={this.state.dataSource.cloneWithRows(this.props.page.content)}
+                              renderHeader={(headerData) => <View style={TableStyles.header}>
+                                  <Text style={MainStyles.bigWhiteStyle}>Tournaments List</Text>
+                                  <MultiCheckbox/>
+                              </View>}
+                              renderRow={this.renderRow}/>
+                    <Button title={"Options"} color='#4b371b' onPress={()=>this.setState({optionsVisible:true})}/>
+                </View>
+                <PanelOptions
+                    changeVisibility={this.changeVisibilityOptionsModal.bind(this)}
+                    isVisible={this.state.optionsVisible}
+                    getPage={this.getPageOfData()}
+                />
+            </Drawer>
         );
     }
 };

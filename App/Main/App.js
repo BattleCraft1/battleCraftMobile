@@ -13,6 +13,7 @@ import UsersList from '../Components/CollectionPanel/Table/User/ListScreen';
 import Ranking from '../Components/CollectionPanel/Table/Ranking/ListScreen';
 import AccountScreen from '../Components/Account/AccountScreen';
 import MainStyles from '../Styles/MainStyles'
+import FadeView from '../Components/Common/FadeView'
 
 class App extends Component {
 
@@ -50,8 +51,9 @@ class App extends Component {
             <View style={MainStyles.background}>
 
                 <Navbar onChangeScreen={this._setScreen}/>
+                <FadeView style={{flex:1}}>
                 {this.selectMainScreen()}
-
+                </FadeView>
             </View>
         );
     }

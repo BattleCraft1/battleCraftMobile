@@ -7,7 +7,6 @@ import {
     TouchableHighlight,
     Image
 } from 'react-native';
-import FadeView from '../../../Common/FadeView'
 import Drawer from 'react-native-drawer'
 import FormDrawer from '../../SearchPanel/Game/FormDrawer'
 import MainStyles from '../../../../Styles/MainStyles'
@@ -62,30 +61,28 @@ export default class ListScreen extends Component {
     render() {
 
         return (
-            <FadeView style={{flex:1}}>
-                <Drawer
-                    ref={(ref) => this._drawer = ref}
-                    type="overlay"
-                    tapToClose={true}
-                    openDrawerOffset={0.2}
-                    panCloseMask={0.2}
-                    styles={DrawerStyles}
-                    closedDrawerOffset={0}
-                    tweenHandler={(ratio) => ({main: { opacity:(2-ratio)/2 }})}
+            <Drawer
+                ref={(ref) => this._drawer = ref}
+                type="overlay"
+                tapToClose={true}
+                openDrawerOffset={0.2}
+                panCloseMask={0.2}
+                styles={DrawerStyles}
+                closedDrawerOffset={0}
+                tweenHandler={(ratio) => ({main: { opacity:(2-ratio)/2 }})}
 
-                    content={<FormDrawer onClosePanel={this.closeControlPanel}/>}
-                >
-                    <View style={[MainStyles.contentStyle, MainStyles.centering, {flex: 1}]}>
-                        <Button title="Open filters tab" color='#4b371b' onPress={()=>this.openControlPanel()}/>
+                content={<FormDrawer onClosePanel={this.closeControlPanel}/>}
+            >
+                <View style={[MainStyles.contentStyle, MainStyles.centering, {flex: 1}]}>
+                    <Button title="Open filters tab" color='#4b371b' onPress={()=>this.openControlPanel()}/>
 
-                        <ListView styles={TableStyles.table}
-                                  dataSource={this.state.dataSource}
-                                  renderHeader={(headerData) => <View style={TableStyles.header}><Text style={MainStyles.bigWhiteStyle}>Games list</Text></View>}
-                                  renderRow={this.renderRow}/>
-                        <Button title={"Add game"} color='#4b371b' onPress={()=>this.openControlPanel()}/>
-                    </View>
-                </Drawer>
-            </FadeView>
+                    <ListView styles={TableStyles.table}
+                              dataSource={this.state.dataSource}
+                              renderHeader={(headerData) => <View style={TableStyles.header}><Text style={MainStyles.bigWhiteStyle}>Games list</Text></View>}
+                              renderRow={this.renderRow}/>
+                    <Button title={"Add game"} color='#4b371b' onPress={()=>this.openControlPanel()}/>
+                </View>
+            </Drawer>
         );
     }
 }
