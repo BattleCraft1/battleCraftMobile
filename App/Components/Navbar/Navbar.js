@@ -15,19 +15,17 @@ export default class Navbar extends Component {
     constructor() {
         super();
         this.state = {
-			menuIndex: -1,
-            menuText: 'BattleCraft'
+            menuText: "BattleCraft"
         }
     }
 
     updateText = (id,val) => {
-        this.setState({menuIndex: id});
         this.setState({menuText: val});
-        this.props.onChangeScreen(id);
+        this.props.onChangeScreen(val);
     };
 
     onPressLogo = () => {
-		this.updateText(-1,'BattleCraft')
+        this.props.onChangeScreen("Main");
 	};
 
 	render() {
@@ -47,7 +45,7 @@ export default class Navbar extends Component {
 				</View>
 
 				<View>
-					<ModalDropdown options={['Turnieje', 'Gry', 'Rankingi', 'Moje konto']}
+					<ModalDropdown options={["Tournaments", "Games", "Rankings", "Users", "My account"]}
 								   dropdownStyle={[NavbarStyles.menuStyle, {width: Dimensions.get('window').width}, MainStyles.borderStyle]}
 								   dropdownTextStyle={[MainStyles.textStyle, NavbarStyles.menuTextStyle, MainStyles.borderStyle]}
 								   dropdownTextHighlightStyle={[MainStyles.textStyle, NavbarStyles.menuTextStyle, MainStyles.borderStyle, {fontWeight:'bold'}]}

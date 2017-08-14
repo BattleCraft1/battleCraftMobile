@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import FadeView from '../../../Common/FadeView'
 import Drawer from 'react-native-drawer'
-import FormDrawer from '../../SearchPanel/Tournament/FormDrawer'
+import FormDrawer from '../../SearchPanel/Game/FormDrawer'
 import MainStyles from '../../../../Styles/MainStyles'
 import TableStyles from '../../../../Styles/TableStyles'
 import DrawerStyles from '../../../../Styles/DrawerStyles'
@@ -17,7 +17,7 @@ import DrawerStyles from '../../../../Styles/DrawerStyles'
 export default class ListScreen extends Component {
 
     constructor(props) {
-        super(props); //type of list needed in props listType
+        super(props);
 
         this.closeControlPanel = this.closeControlPanel.bind(this);
         this.openControlPanel = this.openControlPanel.bind(this);
@@ -29,8 +29,7 @@ export default class ListScreen extends Component {
 
         this.state = {
             dataSource: ds.cloneWithRows(['Placeholder']),
-            rowLabels: [],
-            drawerForm: 'filter',
+            rowLabels: []
         };
     }
 
@@ -82,43 +81,28 @@ export default class ListScreen extends Component {
 
     renderRow(rowData) {
 
-        switch(this.props.listType) {
-
-            case 'tournament':
-                return (
-                    <View style={[TableStyles.row]}>
-                        <View style={[TableStyles.sectionHeader]}>
-                            <Text style={[MainStyles.smallWhiteStyle, {fontSize: 24}]}> {rowData.name}</Text>
-                            <TouchableHighlight onPress={this.onPressLogo}>
-                                <Image
-                                    style={{ width: 40, height: 40,}}
-                                    source={require('../../../../../img/expandIconH.png')} />
-                            </TouchableHighlight>
-                        </View>
-                        <View style={[TableStyles.row]}><Text style={[MainStyles.smallWhiteStyle]}> {this.state.rowLabels[1]}: {rowData.province}</Text></View>
-                        <View style={[TableStyles.row]}><Text style={[MainStyles.smallWhiteStyle]}> {this.state.rowLabels[2]}: {rowData.city}</Text></View>
-                        <View style={[TableStyles.row]}><Text style={[MainStyles.smallWhiteStyle]}> {this.state.rowLabels[3]}: {rowData.game}</Text></View>
-                        <View style={[TableStyles.row]}><Text style={[MainStyles.smallWhiteStyle]}> {this.state.rowLabels[4]}: {rowData.players}</Text></View>
-                        <View style={[TableStyles.row]}><Text style={[MainStyles.smallWhiteStyle]}> {this.state.rowLabels[5]}: {rowData.date}</Text></View>
-                    </View>);
-            case 'game':
-                return (
-                    <View style={[TableStyles.row]}>
-                        <Text style={[TableStyles.row, MainStyles.smallWhiteStyle]}>Game row here</Text>
-                    </View>);
-            case 'ranking':
-                return (
-                    <View style={[TableStyles.row]}>
-                        <Text style={[TableStyles.row, MainStyles.smallWhiteStyle]}>Ranking row here</Text>
-                    </View>);
-        }
+        return (
+            <View style={[TableStyles.row]}>
+                <View style={[TableStyles.sectionHeader]}>
+                    <Text style={[MainStyles.smallWhiteStyle, {fontSize: 24}]}> {rowData.name}</Text>
+                    <TouchableHighlight onPress={this.onPressLogo}>
+                        <Image
+                            style={{ width: 40, height: 40,}}
+                            source={require('../../../../../img/expandIconH.png')} />
+                    </TouchableHighlight>
+                </View>
+                <View style={[TableStyles.row]}><Text style={[MainStyles.smallWhiteStyle]}> {this.state.rowLabels[1]}: {rowData.province}</Text></View>
+                <View style={[TableStyles.row]}><Text style={[MainStyles.smallWhiteStyle]}> {this.state.rowLabels[2]}: {rowData.city}</Text></View>
+                <View style={[TableStyles.row]}><Text style={[MainStyles.smallWhiteStyle]}> {this.state.rowLabels[3]}: {rowData.game}</Text></View>
+                <View style={[TableStyles.row]}><Text style={[MainStyles.smallWhiteStyle]}> {this.state.rowLabels[4]}: {rowData.players}</Text></View>
+                <View style={[TableStyles.row]}><Text style={[MainStyles.smallWhiteStyle]}> {this.state.rowLabels[5]}: {rowData.date}</Text></View>
+            </View>);
     }
 
     closeControlPanel(){
         this._drawer.close()
     }
-    openControlPanel(drawerForm){
-        this.setState({drawerForm: drawerForm})
+    openControlPanel(){
         this._drawer.open()
     }
 
@@ -140,16 +124,16 @@ export default class ListScreen extends Component {
                     closedDrawerOffset={0}
                     tweenHandler={(ratio) => ({main: { opacity:(2-ratio)/2 }})}
 
-                    content={<FormDrawer panelType={this.state.drawerForm} formType={this.props.listType} onClosePanel={this.closeControlPanel}/>}
+                    content={<FormDrawer onClosePanel={this.closeControlPanel}/>}
                 >
                     <View style={[MainStyles.contentStyle, MainStyles.centering, {flex: 1}]}>
-                        <Button title="Open filters tab" color='#4b371b' onPress={()=>this.openControlPanel('filter')}/>
+                        <Button title="Open filters tab" color='#4b371b' onPress={()=>this.openControlPanel()}/>
 
                         <ListView styles={TableStyles.table}
                                   dataSource={this.state.dataSource}
-                                  renderHeader={(headerData) => <View style={TableStyles.header}><Text style={MainStyles.bigWhiteStyle}>List {this.props.listType}</Text></View>}
+                                  renderHeader={(headerData) => <View style={TableStyles.header}><Text style={MainStyles.bigWhiteStyle}>Tournaments List</Text></View>}
                                   renderRow={this.renderRow}/>
-                        <Button title={"Dodaj "+this.props.listType} color='#4b371b' onPress={()=>this.openControlPanel('add')}/>
+                        <Button title={"Add tournament"} color='#4b371b' onPress={()=>this.openControlPanel()}/>
                     </View>
                 </Drawer>
             </FadeView>

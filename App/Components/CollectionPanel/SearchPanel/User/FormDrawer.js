@@ -27,7 +27,7 @@ export default class FormDrawer extends Component {
         return (
             <View style={[MainStyles.contentStyle, MainStyles.centering]}>
                 <View>
-                    <Text style={[MainStyles.textStyle, {fontSize: 26,}]}>Tournament Form</Text>
+                    <Text style={[MainStyles.textStyle, {fontSize: 26,}]}>Torunament Form</Text>
                 </View>
                 <ScrollView keyboardShouldPersistTaps='always' style={{paddingLeft:10,paddingRight:10}}>
                     <Form
