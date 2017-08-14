@@ -31,7 +31,6 @@ class App extends Component {
     selectMainScreen() {
         switch(this.state.currentScreen) {
             case "Tournaments":
-                console.log(this.state.currentScreen);
                 return <TournamentList/>;
             case "Games":
                 return <GamesList/>;

@@ -5,7 +5,7 @@ import {
     ListView,
     Button,
     TouchableHighlight,
-    Image
+    Image,
 } from 'react-native';
 import FadeView from '../../../Common/FadeView'
 import Drawer from 'react-native-drawer'
@@ -14,7 +14,15 @@ import MainStyles from '../../../../Styles/MainStyles'
 import TableStyles from '../../../../Styles/TableStyles'
 import DrawerStyles from '../../../../Styles/DrawerStyles'
 
-export default class ListScreen extends Component {
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../../../../Redux/actions';
+
+import {serverName} from '../../../../Main/consts/serverName'
+
+import dateFormat from 'dateformat';
+
+class ListScreen extends Component {
 
     constructor(props) {
         super(props);
@@ -23,64 +31,40 @@ export default class ListScreen extends Component {
         this.openControlPanel = this.openControlPanel.bind(this);
         this.renderRow = this.renderRow.bind(this);
 
-        var ds = new ListView.DataSource({
+        let ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2,
         });
 
         this.state = {
-            dataSource: ds.cloneWithRows(['Placeholder']),
-            rowLabels: []
+            dataSource: ds.cloneWithRows(['Placeholder'])
         };
     }
 
-    dataIncoming = [
-        {
-            name: "Tournament 1",
-            province: "Shithole 1",
-            city:"City 1",
-            game:"Game 1",
-            players:"123",
-            date: "Date 1"
-        },
-        {
-            name: "Tournament 2",
-            province: "Shithole 2",
-            city:"City 2",
-            game:"game 2",
-            players:"234",
-            date: "Date 2"
-        },
-        {
-            name: "Tournament 3",
-            province: "Shithole 3",
-            city:"City 3",
-            game:"Game 3",
-            players:"123",
-            date: "Date 3"
-        },
-        {
-            name: "Tournament 4",
-            province: "Shithole 4",
-            city:"City 4",
-            game:"game 4",
-            players:"234",
-            date: "Date 4"
-        },
-    ];
-
-
-    convertData(){
-        var tempData=this.dataIncoming; //get JSON from server here
-
-
-        //stores incoming JSON in state
-        this.setState({rowLabels: Object.keys(tempData[0])});
-        this.setState({dataSource: this.state.dataSource.cloneWithRows(tempData)});
+    componentDidMount(){
+        this.getPageOfData();
     }
 
+    getPageOfData(){
+        fetch(serverName+`page/tournaments`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(this.props.pageRequest)
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                this.props.setPage(responseJson);
+                this.setState({dataSource: this.state.dataSource.cloneWithRows(this.props.page.content)});
+            })
+            .catch(error => {
+                this.props.showNetworkErrorMessageBox(error);
+            });
+    }
 
     renderRow(rowData) {
-
         return (
             <View style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
@@ -91,11 +75,21 @@ export default class ListScreen extends Component {
                             source={require('../../../../../img/expandIconH.png')} />
                     </TouchableHighlight>
                 </View>
-                <View style={[TableStyles.row]}><Text style={[MainStyles.smallWhiteStyle]}> {this.state.rowLabels[1]}: {rowData.province}</Text></View>
-                <View style={[TableStyles.row]}><Text style={[MainStyles.smallWhiteStyle]}> {this.state.rowLabels[2]}: {rowData.city}</Text></View>
-                <View style={[TableStyles.row]}><Text style={[MainStyles.smallWhiteStyle]}> {this.state.rowLabels[3]}: {rowData.game}</Text></View>
-                <View style={[TableStyles.row]}><Text style={[MainStyles.smallWhiteStyle]}> {this.state.rowLabels[4]}: {rowData.players}</Text></View>
-                <View style={[TableStyles.row]}><Text style={[MainStyles.smallWhiteStyle]}> {this.state.rowLabels[5]}: {rowData.date}</Text></View>
+                <View style={[TableStyles.row]}>
+                    <Text style={[MainStyles.smallWhiteStyle]}> province: {rowData.province}</Text>
+                </View>
+                <View style={[TableStyles.row]}>
+                    <Text style={[MainStyles.smallWhiteStyle]}> city: {rowData.city}</Text>
+                </View>
+                <View style={[TableStyles.row]}>
+                    <Text style={[MainStyles.smallWhiteStyle]}> game: {rowData.game}</Text>
+                </View>
+                <View style={[TableStyles.row]}>
+                    <Text style={[MainStyles.smallWhiteStyle]}> players: {rowData.playersNumber}/{rowData.maxPlayers}</Text>
+                </View>
+                <View style={[TableStyles.row]}>
+                    <Text style={[MainStyles.smallWhiteStyle]}> date: {dateFormat(rowData.dateOfStart,"dd-MM-yyyy hh:mm")}</Text>
+                </View>
             </View>);
     }
 
@@ -104,10 +98,6 @@ export default class ListScreen extends Component {
     }
     openControlPanel(){
         this._drawer.open()
-    }
-
-    componentDidMount(){
-        this.convertData();
     }
 
     render() {
@@ -139,7 +129,18 @@ export default class ListScreen extends Component {
             </FadeView>
         );
     }
+};
+
+function mapDispatchToProps( dispatch ) {
+    return bindActionCreators( ActionCreators, dispatch );
 }
 
+function mapStateToProps( state ) {
+    return {
+        page: state.page,
+        pageRequest: state.pageRequest,
+        message: state.message
+    };
+}
 
-module.export = ListScreen;
+export default connect( mapStateToProps, mapDispatchToProps )( ListScreen );
