@@ -7,16 +7,21 @@ import {
 
 import Navbar from '../Components/Navbar/Navbar';
 import SplashScreen from '../Components/Common/SplashScreen';
-import ListScreen from '../Components/CollectionPanel/Table/Tournament/ListScreen';
+import TournamentList from '../Components/CollectionPanel/Table/Tournament/ListScreen';
+import GamesList from '../Components/CollectionPanel/Table/Game/ListScreen';
+import UsersList from '../Components/CollectionPanel/Table/User/ListScreen';
+import Ranking from '../Components/CollectionPanel/Table/Ranking/ListScreen';
 import AccountScreen from '../Components/Account/AccountScreen';
 import MainStyles from '../Styles/MainStyles'
+import FadeView from '../Components/Common/FadeView'
+import ConfirmDialog from '../Components/Common/ConfirmationDialog/ConfirmDialog'
 
 class App extends Component {
 
     constructor() {
         super();
         this.state = {
-            currentScreen: '-1',
+            currentScreen: "Main",
         };
         this._setScreen = this._setScreen.bind(this);
     }
@@ -27,13 +32,15 @@ class App extends Component {
 
     selectMainScreen() {
         switch(this.state.currentScreen) {
-            case '0':
-                return <ListScreen listType='tournament'/>;
-            case '1':
-                return <ListScreen listType='game'/>;
-            case '2':
-                return <ListScreen listType='ranking'/>;
-            case '3':
+            case "Tournaments":
+                return <TournamentList/>;
+            case "Games":
+                return <GamesList/>;
+            case "Rankings":
+                return <Ranking/>;
+            case "Users":
+                return <UsersList/>;
+            case "My account":
                 return <AccountScreen/>;
             default:
                 return <SplashScreen/>;
@@ -45,8 +52,10 @@ class App extends Component {
             <View style={MainStyles.background}>
 
                 <Navbar onChangeScreen={this._setScreen}/>
+                <FadeView style={{flex:1}}>
                 {this.selectMainScreen()}
-
+                    <ConfirmDialog/>
+                </FadeView>
             </View>
         );
     }

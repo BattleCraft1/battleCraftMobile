@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
-    AppRegistry,
-    StyleSheet,
-    View,
+    AppRegistry
 } from 'react-native';
 
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import reducer from './App/Redux/reducers/index'
+
 import App from './App/Main/App'
 
 function configureStore( initialState ) {
@@ -47,15 +46,10 @@ const store = configureStore( {
     },
 } );
 
-export default class battleCraft extends Component {
+const battleCraft = ( ) => (
+    <Provider store={ store }>
+        <App />
+    </Provider>
+);
 
-    render() {
-        return (
-            <Provider store={ store }>
-                <App/>
-            </Provider>
-        );
-    }
-}
-
-AppRegistry.registerComponent('battleCraft', () => battleCraft);
+AppRegistry.registerComponent( 'battleCraft', () => battleCraft );

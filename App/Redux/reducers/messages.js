@@ -8,7 +8,8 @@ export const message = createReducer( {}, {
     },
     [types.SHOW_NETWORK_ERROR_MESSAGE_BOX]( state, action ) {
         let message;
-        if(action.error===undefined || action.error.message==='Network Error'){
+        console.log(action.error);
+        if(action.error===undefined || action.error.message==='Network request failed'){
             message={
                 isShown: true,
                 messageText: "You can not connect to server!",

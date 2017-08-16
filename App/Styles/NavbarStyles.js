@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left:0,
         borderWidth: 0,
-        height: 205,
+        height: 255,
         backgroundColor: '#805D2C',
     },
     menuTextStyle: {
