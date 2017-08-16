@@ -131,7 +131,7 @@ class ListScreen extends Component {
                 <PanelOptions
                     changeVisibility={this.changeVisibilityOptionsModal.bind(this)}
                     isVisible={this.state.optionsVisible}
-                    getPage={this.getPageOfData()}
+                    getPage={this.getPageOfData.bind(this)}
                 />
             </Drawer>
         );
@@ -146,7 +146,8 @@ function mapStateToProps( state ) {
     return {
         page: state.page,
         pageRequest: state.pageRequest,
-        message: state.message
+        message: state.message,
+        confirmation: state.confirmation
     };
 }
 

@@ -21,7 +21,8 @@ class PanelOptions extends Component {
         let showMessage = this.props.showMessageBox;
         if(elements.length>0) {
             let collectionType = 'tournaments';
-            let getPageRequest = this.props.getPageRequest;
+            let setPage = this.props.setPage;
+            let showNetworkErrorMessageBox = this.props.showNetworkErrorMessageBox;
             let haveFailure=false;
             if(failure.canBeFailed)
             {
@@ -30,12 +31,42 @@ class PanelOptions extends Component {
             let uniqueElementsNames = elements.map(function(item) {
                 return item['name'];
             });
+            let getPageAndModifyDataObjectsWrapper = {
+                namesOfObjectsToModify: uniqueElementsNames,
+                getPageObjectsWrapper: this.props.pageRequest
+            };
             this.props.showConfirmationDialog(
                 {
                     header: confirmation.header,
                     message: confirmation.message,
                     onConfirmFunction:function(){
-                        
+                        fetch(serverName+link+'/tournaments', {
+                            method: 'POST',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(getPageAndModifyDataObjectsWrapper)
+                        })
+                            .then((response) => response.json())
+                            .then((responseJson) => {
+                                setPage(responseJson);
+                                if(failure.canBeFailed)
+                                    if(haveFailure)
+                                    {
+                                        showMessage(failure.message);
+                                        return;
+                                    }
+                                    else
+                                    {
+                                        showMessage(successMessage);
+                                        return;
+                                    }
+                                showMessage(successMessage);
+                            })
+                            .catch(error => {
+                                this.props.showNetworkErrorMessageBox(error);
+                            });
                     }
                 });
         }
@@ -208,19 +239,28 @@ class PanelOptions extends Component {
             >
                 <View style={OptionsStyles.modal}>
                     <View style={OptionsStyles.iconsRow}>
-                        <TouchableHighlight onPress={() => this.addNewTournament()}>
+                        <TouchableHighlight onPress={() => {
+                            this.addNewTournament();
+                            this.props.changeVisibility(false);
+                        }}>
                             <View style={OptionsStyles.icon} >
                                 <Icon name="plus-circle" size={40} color="#4b371b"/>
                                 <Text style={OptionsStyles.iconText}>Add</Text>
                             </View>
                         </TouchableHighlight>
-                        <TouchableHighlight onPress={() => this.banCheckedElements()}>
+                        <TouchableHighlight onPress={() => {
+                            this.banCheckedElements();
+                            this.props.changeVisibility(false);
+                        }}>
                             <View style={OptionsStyles.icon} >
                                 <Icon name="lock" size={40} color="#4b371b"/>
                                 <Text style={OptionsStyles.iconText}>Ban</Text>
                             </View>
                         </TouchableHighlight>
-                        <TouchableHighlight onPress={() => this.unlockCheckedElements()}>
+                        <TouchableHighlight onPress={() => {
+                            this.unlockCheckedElements();
+                            this.props.changeVisibility(false);
+                        }}>
                             <View style={OptionsStyles.icon} >
                                 <Icon name="unlock" size={40} color="#4b371b"/>
                                 <Text style={OptionsStyles.iconText}>Unlock</Text>
@@ -228,19 +268,28 @@ class PanelOptions extends Component {
                         </TouchableHighlight>
                     </View>
                     <View style={OptionsStyles.iconsRow}>
-                        <TouchableHighlight onPress={() => this.deleteCheckedElements()}>
+                        <TouchableHighlight onPress={() => {
+                            this.deleteCheckedElements();
+                            this.props.changeVisibility(false);
+                        }}>
                             <View style={OptionsStyles.icon} >
                                 <Icon name="remove" size={40} color="#4b371b"/>
                                 <Text style={OptionsStyles.iconText}>Remove</Text>
                             </View>
                         </TouchableHighlight>
-                        <TouchableHighlight onPress={() => this.acceptCheckedElements()}>
+                        <TouchableHighlight onPress={() => {
+                            this.acceptCheckedElements();
+                            this.props.changeVisibility(false);
+                        }}>
                             <View style={OptionsStyles.icon} >
                                 <Icon name="check" size={40} color="#4b371b"/>
                                 <Text style={OptionsStyles.iconText}>Accept</Text>
                             </View>
                         </TouchableHighlight>
-                        <TouchableHighlight onPress={() => this.cancelAcceptCheckedElements()}>
+                        <TouchableHighlight onPress={() => {
+                            this.cancelAcceptCheckedElements();
+                            this.props.changeVisibility(false);
+                        }}>
                             <View style={OptionsStyles.icon} >
                                 <Icon name="window-close" size={40} color="#4b371b"/>
                                 <Text style={OptionsStyles.iconText}>No accept</Text>
@@ -268,7 +317,8 @@ function mapStateToProps( state ) {
     return {
         page: state.page,
         pageRequest: state.pageRequest,
-        message: state.message
+        message: state.message,
+        confirmation: state.confirmation
     };
 }
 
