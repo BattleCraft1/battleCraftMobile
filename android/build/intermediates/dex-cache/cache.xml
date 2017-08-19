@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="E:\Workspace\BattleCraft\battleCraftMobile\node_modules\react-native-vector-icons\android\build\intermediates\bundles\default\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f2cf527de8d0bd35d72088fafea02395ba4a9eec">
+        <dex dex="E:\Workspace\BattleCraft\battleCraftMobile\android\app\build\intermediates\pre-dexed\debug\classes_1854541d0206524104caf6d593fd59bf75d1f05f.jar" />
+    </item>
+
+</items>
