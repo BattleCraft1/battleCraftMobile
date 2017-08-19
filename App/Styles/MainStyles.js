@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
     },
     textStyle:{
-        fontFamily:'arial, helvetica, sans-serif',
+        fontFamily:'arial',
         textShadowColor: '#000000',
         textShadowOffset: {width: -1, height: -1},
         color: '#fff',
@@ -37,13 +37,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#805D2C',
     },
     bigWhiteStyle: {
-        fontFamily:'arial, helvetica, sans-serif',
+        fontFamily:'arial',
         color: '#fff',
         fontWeight: 'bold',
         fontSize: 26,
     },
     smallWhiteStyle: {
-        fontFamily:'arial, helvetica, sans-serif',
+        fontFamily:'arial',
         color: '#fff',
         fontSize: 20,
     },
