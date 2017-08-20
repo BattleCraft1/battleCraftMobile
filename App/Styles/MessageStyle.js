@@ -4,15 +4,15 @@ import {
 
 const styles = StyleSheet.create({
     modalContainer: {
-        width:250,
+        width:300,
         padding: 10,
-        height:200
+        height:300
     },
 
     modalHeader: {
         backgroundColor: '#4b371b',
         height: 50,
-        width:250,
+        width:300,
         padding: 10,
         alignItems: 'center',
         justifyContent: 'center'
@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
     },
 
     modalBody: {
-        height: 100,
-        width:250,
+        height: 200,
+        width:300,
         padding: 10,
         borderColor: '#4b371b',
         backgroundColor: '#E0BA51',
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         borderBottomWidth:2,
         padding: 10,
         height: 50,
-        width:250,
+        width:300,
         backgroundColor: '#E0BA51',
         borderColor: '#4b371b',
         alignItems: 'center',

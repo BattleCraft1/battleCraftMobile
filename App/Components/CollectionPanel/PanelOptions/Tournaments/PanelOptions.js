@@ -17,62 +17,70 @@ import {serverName} from '../../../../Main/consts/serverName'
 
 class PanelOptions extends Component {
 
-    makeOperation(elements, link, failure, confirmation, successMessage, operationImpossibleMessage){
+    makeOperation(elements, link, operationLoadingMessage, failure, confirmation, successMessage, operationImpossibleMessage){
+        let showSuccessMessage = this.props.showSuccessMessageBox;
+        let showFailMessage = this.props.showFailMessageBox;
+        let collectionType = 'tournaments';
+        let setPage = this.props.setPage;
+        let showErrorMessage = this.props.showErrorMessageBox;
+        let haveFailure=false;
+        let startLoading=this.props.startLoading;
+        let stopLoading=this.props.stopLoading;
+        if(failure.canBeFailed)
+        {
+            haveFailure = (failure.elements.length > 0);
+        }
+        let uniqueElementsNames = elements.map(function(item) {
+            return item['name'];
+        });
+        let getPageAndModifyDataObjectsWrapper = {
+            namesOfObjectsToModify: uniqueElementsNames,
+            getPageObjectsWrapper: this.props.pageRequest
+        };
+        let operation = function(){
+            startLoading(operationLoadingMessage);
+            fetch(serverName+link+'/tournaments', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(getPageAndModifyDataObjectsWrapper)
+            })
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    setPage(responseJson);
+                    if(failure.canBeFailed)
+                        if(haveFailure)
+                        {
+                            stopLoading();
+                            showFailMessage(failure.message);
+                            return;
+                        }
+                        else
+                        {
+                            stopLoading();
+                            showSuccessMessage(successMessage);
+                            return;
+                        }
+                    stopLoading();
+                    showSuccessMessage(successMessage);
+                })
+                .catch(error => {
+                    stopLoading();
+                    showErrorMessage(error,operation);
+                });
+        };
         if(elements.length>0) {
-            let showSuccessMessage = this.props.showSuccessMessageBox;
-            let showFailMessage = this.props.showFailMessageBox;
-            let collectionType = 'tournaments';
-            let setPage = this.props.setPage;
-            let showErrorMessage = this.props.showErrorMessageBox;
-            let haveFailure=false;
-            if(failure.canBeFailed)
-            {
-                haveFailure = (failure.elements.length > 0);
-            }
-            let uniqueElementsNames = elements.map(function(item) {
-                return item['name'];
-            });
-            let getPageAndModifyDataObjectsWrapper = {
-                namesOfObjectsToModify: uniqueElementsNames,
-                getPageObjectsWrapper: this.props.pageRequest
-            };
             this.props.showConfirmationDialog(
                 {
                     header: confirmation.header,
                     message: confirmation.message,
-                    onConfirmFunction:function(){
-                        fetch(serverName+link+'/tournaments', {
-                            method: 'POST',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(getPageAndModifyDataObjectsWrapper)
-                        })
-                            .then((response) => response.json())
-                            .then((responseJson) => {
-                                setPage(responseJson);
-                                if(failure.canBeFailed)
-                                    if(haveFailure)
-                                    {
-                                        showFailMessage(failure.message);
-                                        return;
-                                    }
-                                    else
-                                    {
-                                        showSuccessMessage(successMessage);
-                                        return;
-                                    }
-                                showSuccessMessage(successMessage);
-                            })
-                            .catch(error => {
-                                showErrorMessage(error);
-                            });
-                    }
+                    onConfirmFunction: operation
                 });
         }
         else{
-            this.props.showFailMessageBox(operationImpossibleMessage)
+            this.props.showFailMessageBox(operationImpossibleMessage,operation);
         }
     }
 
@@ -83,6 +91,7 @@ class PanelOptions extends Component {
             elementsToBan
             ,
             `ban`,
+            "Baning tournaments...",
             {
                 canBeFailed: false
             },
@@ -94,7 +103,7 @@ class PanelOptions extends Component {
                 messageText: "Elements "+elementsToBan.map(function(element){return element.name}).join(", ")+" are banned"
             },
             {
-                messageText: "Nothing to ban"
+                messageText: "Nothing to ban."
             }
         );
     }
@@ -106,6 +115,7 @@ class PanelOptions extends Component {
             elementsToUnlock
             ,
             `unlock`,
+            "Unlocking tournaments...",
             {
                 canBeFailed: false,
             },
@@ -131,6 +141,7 @@ class PanelOptions extends Component {
             elementsToDelete
             ,
             `delete`,
+            "Deleting tournaments...",
             {
                 canBeFailed: true,
                 elements: elementsWhichCannotBeDeleted,
@@ -163,6 +174,7 @@ class PanelOptions extends Component {
             elementsToAccept
             ,
             `accept`,
+            "Accepting tournaments...",
             {
                 canBeFailed: true,
                 elements: elementsWhichCannotBeAccept,
@@ -194,6 +206,7 @@ class PanelOptions extends Component {
             elementsToCancelAccept
             ,
             `cancel/accept`,
+            "Canceling acceptations for tournaments...",
             {
                 canBeFailed: true,
                 elements: elementsWithFailedCancellation,
@@ -307,7 +320,8 @@ function mapStateToProps( state ) {
         page: state.page,
         pageRequest: state.pageRequest,
         message: state.message,
-        confirmation: state.confirmation
+        confirmation: state.confirmation,
+        loading: state.loading
     };
 }
 

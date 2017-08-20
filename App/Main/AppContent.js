@@ -16,15 +16,33 @@ import MainStyles from '../Styles/MainStyles'
 import FadeView from '../Components/Common/FadeView'
 import ConfirmDialog from '../Components/Common/ConfirmationDialog/ConfirmDialog'
 import MessageDialog from '../Components/Common/MessageDialog/MessageDialog'
+import LoadingSpinner from '../Components/Common/Loading/LoadingSpinner'
+import { Font } from 'expo';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../Redux/actions';
 
 class App extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             currentScreen: "Main",
+            appReady:false
         };
         this._setScreen = this._setScreen.bind(this);
+    }
+
+    async componentDidMount() {
+        this.setState({appReady:false});
+        this.props.startLoading("Starting application...");
+        await Font.loadAsync({
+            'arial': require('./../../assets/Fonts/arial.ttf'),
+            'FontAwesome': require('./../../assets/Fonts/FontAwesome.ttf')
+        });
+        this.props.stopLoading();
+        this.setState({appReady:true});
     }
 
     _setScreen(screenValue){
@@ -48,16 +66,34 @@ class App extends Component {
         }
     }
 
+    createContent(){
+        let content;
+        if(this.state.appReady){
+            content=
+                <View style={{flex:1}}>
+                    <Navbar onChangeScreen={this._setScreen}/>
+                    <FadeView style={{flex:1}}>
+                        {this.selectMainScreen()}
+                        <ConfirmDialog/>
+                        <MessageDialog/>
+                        <LoadingSpinner/>
+                    </FadeView>
+                </View>
+        }
+        else{
+            content=
+                <View style={{flex:1}}>
+                    <SplashScreen/>
+                    <LoadingSpinner/>
+                </View>
+        }
+        return content;
+    }
+
     render(){
         return (
             <View style={MainStyles.background}>
-
-                <Navbar onChangeScreen={this._setScreen}/>
-                <FadeView style={{flex:1}}>
-                {this.selectMainScreen()}
-                    <ConfirmDialog/>
-                    <MessageDialog/>
-                </FadeView>
+                {this.createContent()}
             </View>
         );
     }
@@ -74,4 +110,14 @@ const resp = StyleSheet.create({
     }
 });
 
-export default App
+function mapDispatchToProps( dispatch ) {
+    return bindActionCreators( ActionCreators, dispatch );
+}
+
+function mapStateToProps( state ) {
+    return {
+        loading: state.loading
+    };
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( App );

@@ -10,6 +10,7 @@ import { bindActionCreators } from 'redux';
 
 import Modal from 'react-native-modal';
 import MessageStyles from '../../../Styles/MessageStyle'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class MessageDialog extends React.Component {
     constructor(props) {
@@ -23,6 +24,27 @@ class MessageDialog extends React.Component {
     }
 
     render(){
+        let operationButton;
+        if(this.props.message.messageType==="Network error"){
+            operationButton=
+                <TouchableHighlight
+                    onPress={() => {
+                        this.props.message.failedOperation();
+                        this.hideMessageDialog();
+                    }}>
+                    <Icon name="refresh" size={20} color="#ffffff"/>
+                </TouchableHighlight>
+
+        }
+        else{
+            operationButton=
+                <TouchableHighlight
+                    onPress={() => {
+                        this.hideMessageDialog();
+                    }}>
+                    <Text style={{color:'#ffffff'}}>Ok</Text>
+                </TouchableHighlight>
+        }
         return (
             <Modal
                 isVisible={this.props.message.isShown}
@@ -36,14 +58,8 @@ class MessageDialog extends React.Component {
                         <Text style={MessageStyles.modalBodyText }>{this.props.message.messageText}</Text>
                     </View>
                     <View style={MessageStyles.modalFooter} >
-
                         <View style={MessageStyles.modalFooterButton}>
-                            <TouchableHighlight
-                                onPress={() => {
-                                    this.hideMessageDialog();
-                                }}>
-                                <Text style={{color:'#ffffff'}}>Ok</Text>
-                            </TouchableHighlight>
+                            {operationButton}
                         </View>
                     </View>
                 </View>
@@ -58,7 +74,7 @@ function mapDispatchToProps( dispatch ) {
 
 function mapStateToProps( state ) {
     return {
-        message: state.message,
+        message: state.message
     };
 }
 

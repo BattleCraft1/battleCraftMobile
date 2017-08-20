@@ -46,21 +46,27 @@ class ListScreen extends Component {
     }
 
     getPageOfData(){
-        fetch(serverName+`page/tournaments`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(this.props.pageRequest)
-        })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                this.props.setPage(responseJson);
+        let getPageOfData=() => {
+            this.props.startLoading("Fetching tournaments data...");
+            fetch(serverName+`page/tournaments`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(this.props.pageRequest)
             })
-            .catch(error => {
-                this.props.showErrorMessageBox(error);
-            });
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    this.props.stopLoading();
+                    this.props.setPage(responseJson);
+                })
+                .catch(error => {
+                    this.props.stopLoading();
+                    this.props.showErrorMessageBox(error,getPageOfData);
+                });
+        };
+        getPageOfData();
     }
 
     changeVisibilityOptionsModal(isVisible){
@@ -89,6 +95,9 @@ class ListScreen extends Component {
                 <View style={[TableStyles.row]}>
                     <Text style={[MainStyles.smallWhiteStyle]}> date: {dateFormat(rowData.dateOfStart,"dd-MM-yyyy hh:mm")}</Text>
                 </View>
+                <View style={[TableStyles.row]}>
+                    <Text style={[MainStyles.smallWhiteStyle]}> status: {rowData.banned?"banned":rowData.tournamentStatus.toLowerCase()}</Text>
+                </View>
             </View>);
     }
 
@@ -100,7 +109,6 @@ class ListScreen extends Component {
     }
 
     render() {
-
         return (
 
             <Drawer
@@ -117,7 +125,6 @@ class ListScreen extends Component {
             >
                 <View style={[MainStyles.contentStyle, MainStyles.centering, {flex: 1}]}>
                     <Button title="Open filters tab" color='#4b371b' onPress={()=>this.openControlPanel()}/>
-
                     <ListView styles={TableStyles.table}
                               dataSource={this.state.dataSource.cloneWithRows(this.props.page.content)}
                               renderHeader={(headerData) => <View style={TableStyles.header}>
@@ -146,7 +153,8 @@ function mapStateToProps( state ) {
         page: state.page,
         pageRequest: state.pageRequest,
         message: state.message,
-        confirmation: state.confirmation
+        confirmation: state.confirmation,
+        loading: state.loading
     };
 }
 

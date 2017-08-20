@@ -1,5 +1,5 @@
 import createReducer from '../lib/createReducer'
-import * as types from '../types/messages'
+import * as types from '../types/message'
 
 export const message = createReducer( {}, {
     [types.SHOW_SUCCESS_MESSAGE_BOX]( state, action ) {
@@ -18,14 +18,16 @@ export const message = createReducer( {}, {
             message={
                 isShown: true,
                 messageText: "You can not connect to server!",
-                messageType: "Network error"
+                messageType: "Network error",
+                failedOperation: action.failedOperation
             };
         }
         else
             message={
                 isShown: true,
                 messageText: action.error.response.data,
-                messageType: "Fail"
+                messageType: "Fail",
+                failedOperation: action.failedOperation
             };
         return message;
     }

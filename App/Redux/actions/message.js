@@ -1,4 +1,4 @@
-import * as types from '../types/messages'
+import * as types from '../types/message'
 
 export function showSuccessMessageBox(message) {
     return {
@@ -14,9 +14,10 @@ export function showFailMessageBox(message) {
     }
 }
 
-export function showErrorMessageBox(error) {
+export function showErrorMessageBox(error, failedOperation) {
     return {
         type: types.SHOW_ERROR_MESSAGE_BOX,
-        error: error
+        error: error,
+        failedOperation: failedOperation
     }
 }
