@@ -65,10 +65,9 @@ export default class App extends React.Component {
     }
 
     render() {
-        console.log("aaa");
         let app;
         if(this.state.appReady){
-            app=<AppContent />
+            app=<AppContent/>
         }
         else
         {

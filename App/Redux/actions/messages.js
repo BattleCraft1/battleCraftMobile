@@ -1,15 +1,22 @@
 import * as types from '../types/messages'
 
-export function showMessageBox(message) {
+export function showSuccessMessageBox(message) {
     return {
-        type: types.SHOW_MESSAGE_BOX,
+        type: types.SHOW_SUCCESS_MESSAGE_BOX,
         message: message
     }
 }
 
-export function showNetworkErrorMessageBox(error) {
+export function showFailMessageBox(message) {
     return {
-        type: types.SHOW_NETWORK_ERROR_MESSAGE_BOX,
+        type: types.SHOW_FAIL_MESSAGE_BOX,
+        message: message
+    }
+}
+
+export function showErrorMessageBox(error) {
+    return {
+        type: types.SHOW_ERROR_MESSAGE_BOX,
         error: error
     }
 }

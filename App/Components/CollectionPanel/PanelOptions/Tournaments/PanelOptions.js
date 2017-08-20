@@ -18,11 +18,12 @@ import {serverName} from '../../../../Main/consts/serverName'
 class PanelOptions extends Component {
 
     makeOperation(elements, link, failure, confirmation, successMessage, operationImpossibleMessage){
-        let showMessage = this.props.showMessageBox;
         if(elements.length>0) {
+            let showSuccessMessage = this.props.showSuccessMessageBox;
+            let showFailMessage = this.props.showFailMessageBox;
             let collectionType = 'tournaments';
             let setPage = this.props.setPage;
-            let showNetworkErrorMessageBox = this.props.showNetworkErrorMessageBox;
+            let showErrorMessage = this.props.showErrorMessageBox;
             let haveFailure=false;
             if(failure.canBeFailed)
             {
@@ -54,24 +55,24 @@ class PanelOptions extends Component {
                                 if(failure.canBeFailed)
                                     if(haveFailure)
                                     {
-                                        showMessage(failure.message);
+                                        showFailMessage(failure.message);
                                         return;
                                     }
                                     else
                                     {
-                                        showMessage(successMessage);
+                                        showSuccessMessage(successMessage);
                                         return;
                                     }
-                                showMessage(successMessage);
+                                showSuccessMessage(successMessage);
                             })
                             .catch(error => {
-                                this.props.showNetworkErrorMessageBox(error);
+                                showErrorMessage(error);
                             });
                     }
                 });
         }
         else{
-            showMessage(operationImpossibleMessage)
+            this.props.showFailMessageBox(operationImpossibleMessage)
         }
     }
 
@@ -90,12 +91,10 @@ class PanelOptions extends Component {
                 message:"Are you sure?"
             },
             {
-                messageText: "Elements "+elementsToBan.map(function(element){return element.name}).join(", ")+" are banned",
-                messageType: "alert-success"
+                messageText: "Elements "+elementsToBan.map(function(element){return element.name}).join(", ")+" are banned"
             },
             {
-                messageText: "Nothing to ban",
-                messageType: "alert-danger"
+                messageText: "Nothing to ban"
             }
         );
     }
@@ -115,12 +114,10 @@ class PanelOptions extends Component {
                 message:"Are you sure?"
             },
             {
-                messageText: "Elements "+elementsToUnlock.map(function(element){return element.name}).join(", ")+" are unlock",
-                messageType: "alert-success"
+                messageText: "Elements "+elementsToUnlock.map(function(element){return element.name}).join(", ")+" are unlock"
             },
             {
-                messageText: "Nothing to unlock",
-                messageType: "alert-danger"
+                messageText: "Nothing to unlock"
             }
         );
     }
@@ -149,12 +146,10 @@ class PanelOptions extends Component {
                 message:"Are you sure?"
             },
             {
-                messageText: "Elements "+elementsToDelete.map(function(element){return element.name}).join(", ")+" are deleted",
-                messageType: "alert-success"
+                messageText: "Elements "+elementsToDelete.map(function(element){return element.name}).join(", ")+" are deleted"
             },
             {
-                messageText: "Nothing to delete",
-                messageType: "alert-danger"
+                messageText: "Nothing to delete"
             }
         );
     }
@@ -174,8 +169,7 @@ class PanelOptions extends Component {
                 message:{
                     messageText: "Elements "+elementsWhichCannotBeAccept
                         .map(function(element){return element.name}).join(", ")+" are not accepted " +
-                    "because you can accept only new elements and not banned",
-                    messageType: "alert-danger"
+                    "because you can accept only new elements and not banned"
                 }
             },
             {
@@ -183,12 +177,10 @@ class PanelOptions extends Component {
                 message:"Are you sure?"
             },
             {
-                messageText: "Elements "+elementsToAccept.map(function(element){return element.name}).join(", ")+" are accepted",
-                messageType: "alert-success"
+                messageText: "Elements "+elementsToAccept.map(function(element){return element.name}).join(", ")+" are accepted"
             },
             {
-                messageText: "Nothing to accept",
-                messageType: "alert-danger"
+                messageText: "Nothing to accept"
             }
         );
     }
@@ -208,8 +200,7 @@ class PanelOptions extends Component {
                 message:{
                     messageText: "Elements "+elementsWithFailedCancellation
                         .map(function(element){return element.name}).join(", ")+" are still accepted " +
-                    "because you can cancel accept only for accepted and not banned elements",
-                    messageType: "alert-danger"
+                    "because you can cancel accept only for accepted and not banned elements"
                 }
             },
             {
@@ -217,12 +208,10 @@ class PanelOptions extends Component {
                 message:"Are you sure?"
             },
             {
-                messageText: "Acceptations for "+elementsToCancelAccept.map(function(element){return element.name}).join(", ")+" are canceled",
-                messageType: "alert-success"
+                messageText: "Acceptations for "+elementsToCancelAccept.map(function(element){return element.name}).join(", ")+" are canceled"
             },
             {
-                messageText: "Nothing to cancel accept",
-                messageType: "alert-danger"
+                messageText: "Nothing to cancel accept"
             }
         );
     }

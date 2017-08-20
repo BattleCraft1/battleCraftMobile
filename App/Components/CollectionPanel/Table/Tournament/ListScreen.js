@@ -10,8 +10,8 @@ import FormDrawer from '../../SearchPanel/Game/FormDrawer'
 import MainStyles from '../../../../Styles/MainStyles'
 import TableStyles from '../../../../Styles/TableStyles'
 import DrawerStyles from '../../../../Styles/DrawerStyles'
-import Checkbox from '../../../Common/checkBox/Checkbox'
-import MultiCheckbox from '../../../Common/checkBox/MultiCheckbox'
+import Checkbox from '../../../Common/CheckBox/Checkbox'
+import MultiCheckbox from '../../../Common/CheckBox/MultiCheckbox'
 import PanelOptions from '../../PanelOptions/Tournaments/PanelOptions'
 
 import { connect } from 'react-redux';
@@ -56,11 +56,10 @@ class ListScreen extends Component {
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log(responseJson);
                 this.props.setPage(responseJson);
             })
             .catch(error => {
-                this.props.showNetworkErrorMessageBox(error);
+                this.props.showErrorMessageBox(error);
             });
     }
 

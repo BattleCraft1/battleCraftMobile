@@ -15,6 +15,7 @@ import AccountScreen from '../Components/Account/AccountScreen';
 import MainStyles from '../Styles/MainStyles'
 import FadeView from '../Components/Common/FadeView'
 import ConfirmDialog from '../Components/Common/ConfirmationDialog/ConfirmDialog'
+import MessageDialog from '../Components/Common/MessageDialog/MessageDialog'
 
 class App extends Component {
 
@@ -55,6 +56,7 @@ class App extends Component {
                 <FadeView style={{flex:1}}>
                 {this.selectMainScreen()}
                     <ConfirmDialog/>
+                    <MessageDialog/>
                 </FadeView>
             </View>
         );

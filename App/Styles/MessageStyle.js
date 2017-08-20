@@ -52,19 +52,18 @@ const styles = StyleSheet.create({
         width:250,
         backgroundColor: '#E0BA51',
         borderColor: '#4b371b',
-        flexDirection: "row"
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     modalFooterButton:{
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,
-        backgroundColor: '#4b371b',
-    },
-    spaceBetweenButtons:{
-        flex: 1,
         padding:5,
-        backgroundColor: '#E0BA51',
+        width:50,
+        backgroundColor: '#4b371b'
     }
 });
 
 export default styles;
+
