@@ -1,1 +1,1 @@
-export const serverName =`http://10.0.2.2:8080/`;
+export const serverName =`http://192.168.28.76:8080/`;

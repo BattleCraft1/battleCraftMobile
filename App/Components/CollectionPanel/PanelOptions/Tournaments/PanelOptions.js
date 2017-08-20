@@ -17,61 +17,70 @@ import {serverName} from '../../../../Main/consts/serverName'
 
 class PanelOptions extends Component {
 
-    makeOperation(elements, link, failure, confirmation, successMessage, operationImpossibleMessage){
-        let showMessage = this.props.showMessageBox;
+    makeOperation(elements, link, operationLoadingMessage, failure, confirmation, successMessage, operationImpossibleMessage){
+        let showSuccessMessage = this.props.showSuccessMessageBox;
+        let showFailMessage = this.props.showFailMessageBox;
+        let collectionType = 'tournaments';
+        let setPage = this.props.setPage;
+        let showErrorMessage = this.props.showErrorMessageBox;
+        let haveFailure=false;
+        let startLoading=this.props.startLoading;
+        let stopLoading=this.props.stopLoading;
+        if(failure.canBeFailed)
+        {
+            haveFailure = (failure.elements.length > 0);
+        }
+        let uniqueElementsNames = elements.map(function(item) {
+            return item['name'];
+        });
+        let getPageAndModifyDataObjectsWrapper = {
+            namesOfObjectsToModify: uniqueElementsNames,
+            getPageObjectsWrapper: this.props.pageRequest
+        };
+        let operation = function(){
+            startLoading(operationLoadingMessage);
+            fetch(serverName+link+'/tournaments', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(getPageAndModifyDataObjectsWrapper)
+            })
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    setPage(responseJson);
+                    if(failure.canBeFailed)
+                        if(haveFailure)
+                        {
+                            stopLoading();
+                            showFailMessage(failure.message);
+                            return;
+                        }
+                        else
+                        {
+                            stopLoading();
+                            showSuccessMessage(successMessage);
+                            return;
+                        }
+                    stopLoading();
+                    showSuccessMessage(successMessage);
+                })
+                .catch(error => {
+                    stopLoading();
+                    showErrorMessage(error,operation);
+                });
+        };
         if(elements.length>0) {
-            let collectionType = 'tournaments';
-            let setPage = this.props.setPage;
-            let showNetworkErrorMessageBox = this.props.showNetworkErrorMessageBox;
-            let haveFailure=false;
-            if(failure.canBeFailed)
-            {
-                haveFailure = (failure.elements.length > 0);
-            }
-            let uniqueElementsNames = elements.map(function(item) {
-                return item['name'];
-            });
-            let getPageAndModifyDataObjectsWrapper = {
-                namesOfObjectsToModify: uniqueElementsNames,
-                getPageObjectsWrapper: this.props.pageRequest
-            };
             this.props.showConfirmationDialog(
                 {
                     header: confirmation.header,
                     message: confirmation.message,
-                    onConfirmFunction:function(){
-                        fetch(serverName+link+'/tournaments', {
-                            method: 'POST',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(getPageAndModifyDataObjectsWrapper)
-                        })
-                            .then((response) => response.json())
-                            .then((responseJson) => {
-                                setPage(responseJson);
-                                if(failure.canBeFailed)
-                                    if(haveFailure)
-                                    {
-                                        showMessage(failure.message);
-                                        return;
-                                    }
-                                    else
-                                    {
-                                        showMessage(successMessage);
-                                        return;
-                                    }
-                                showMessage(successMessage);
-                            })
-                            .catch(error => {
-                                this.props.showNetworkErrorMessageBox(error);
-                            });
-                    }
+                    onConfirmFunction: operation
                 });
         }
         else{
-            showMessage(operationImpossibleMessage)
+            this.props.showFailMessageBox(operationImpossibleMessage,operation);
         }
     }
 
@@ -82,6 +91,7 @@ class PanelOptions extends Component {
             elementsToBan
             ,
             `ban`,
+            "Baning tournaments...",
             {
                 canBeFailed: false
             },
@@ -90,12 +100,10 @@ class PanelOptions extends Component {
                 message:"Are you sure?"
             },
             {
-                messageText: "Elements "+elementsToBan.map(function(element){return element.name}).join(", ")+" are banned",
-                messageType: "alert-success"
+                messageText: "Elements "+elementsToBan.map(function(element){return element.name}).join(", ")+" are banned"
             },
             {
-                messageText: "Nothing to ban",
-                messageType: "alert-danger"
+                messageText: "Nothing to ban."
             }
         );
     }
@@ -107,6 +115,7 @@ class PanelOptions extends Component {
             elementsToUnlock
             ,
             `unlock`,
+            "Unlocking tournaments...",
             {
                 canBeFailed: false,
             },
@@ -115,12 +124,10 @@ class PanelOptions extends Component {
                 message:"Are you sure?"
             },
             {
-                messageText: "Elements "+elementsToUnlock.map(function(element){return element.name}).join(", ")+" are unlock",
-                messageType: "alert-success"
+                messageText: "Elements "+elementsToUnlock.map(function(element){return element.name}).join(", ")+" are unlock"
             },
             {
-                messageText: "Nothing to unlock",
-                messageType: "alert-danger"
+                messageText: "Nothing to unlock"
             }
         );
     }
@@ -134,6 +141,7 @@ class PanelOptions extends Component {
             elementsToDelete
             ,
             `delete`,
+            "Deleting tournaments...",
             {
                 canBeFailed: true,
                 elements: elementsWhichCannotBeDeleted,
@@ -149,12 +157,10 @@ class PanelOptions extends Component {
                 message:"Are you sure?"
             },
             {
-                messageText: "Elements "+elementsToDelete.map(function(element){return element.name}).join(", ")+" are deleted",
-                messageType: "alert-success"
+                messageText: "Elements "+elementsToDelete.map(function(element){return element.name}).join(", ")+" are deleted"
             },
             {
-                messageText: "Nothing to delete",
-                messageType: "alert-danger"
+                messageText: "Nothing to delete"
             }
         );
     }
@@ -168,14 +174,14 @@ class PanelOptions extends Component {
             elementsToAccept
             ,
             `accept`,
+            "Accepting tournaments...",
             {
                 canBeFailed: true,
                 elements: elementsWhichCannotBeAccept,
                 message:{
                     messageText: "Elements "+elementsWhichCannotBeAccept
                         .map(function(element){return element.name}).join(", ")+" are not accepted " +
-                    "because you can accept only new elements and not banned",
-                    messageType: "alert-danger"
+                    "because you can accept only new elements and not banned"
                 }
             },
             {
@@ -183,12 +189,10 @@ class PanelOptions extends Component {
                 message:"Are you sure?"
             },
             {
-                messageText: "Elements "+elementsToAccept.map(function(element){return element.name}).join(", ")+" are accepted",
-                messageType: "alert-success"
+                messageText: "Elements "+elementsToAccept.map(function(element){return element.name}).join(", ")+" are accepted"
             },
             {
-                messageText: "Nothing to accept",
-                messageType: "alert-danger"
+                messageText: "Nothing to accept"
             }
         );
     }
@@ -202,14 +206,14 @@ class PanelOptions extends Component {
             elementsToCancelAccept
             ,
             `cancel/accept`,
+            "Canceling acceptations for tournaments...",
             {
                 canBeFailed: true,
                 elements: elementsWithFailedCancellation,
                 message:{
                     messageText: "Elements "+elementsWithFailedCancellation
                         .map(function(element){return element.name}).join(", ")+" are still accepted " +
-                    "because you can cancel accept only for accepted and not banned elements",
-                    messageType: "alert-danger"
+                    "because you can cancel accept only for accepted and not banned elements"
                 }
             },
             {
@@ -217,12 +221,10 @@ class PanelOptions extends Component {
                 message:"Are you sure?"
             },
             {
-                messageText: "Acceptations for "+elementsToCancelAccept.map(function(element){return element.name}).join(", ")+" are canceled",
-                messageType: "alert-success"
+                messageText: "Acceptations for "+elementsToCancelAccept.map(function(element){return element.name}).join(", ")+" are canceled"
             },
             {
-                messageText: "Nothing to cancel accept",
-                messageType: "alert-danger"
+                messageText: "Nothing to cancel accept"
             }
         );
     }
@@ -318,7 +320,8 @@ function mapStateToProps( state ) {
         page: state.page,
         pageRequest: state.pageRequest,
         message: state.message,
-        confirmation: state.confirmation
+        confirmation: state.confirmation,
+        loading: state.loading
     };
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import {
     Text,
     View,
-    Button
+    TouchableHighlight
 } from 'react-native';
 import { connect } from 'react-redux';
 import { ActionCreators } from '../../../Redux/actions/index';
@@ -23,42 +23,41 @@ class ConfirmDialog extends React.Component {
     }
 
     render(){
-            console.log(this.props.confirmation.isShown);
         return (
-            <View>
-                <Modal
-                    isVisible={this.props.confirmation.isShown}
-                    backdropOpacity={0.3}
-                    >
-                        <View style={ ConfirmationStyles.modalContainer }>
-                            <View style={ ConfirmationStyles.modalHeader }>
-                                <Text style={ConfirmationStyles.modalHeaderText }>{this.props.confirmation.header}</Text>
-                            </View>
-                            <View style={ConfirmationStyles.modalBody}>
-                                <Text style={ConfirmationStyles.modalBodyText }>{this.props.confirmation.message}</Text>
-                            </View>
-                            <View style={ConfirmationStyles.modalFooter} >
-                                <Button
-                                    style={ConfirmationStyles.modalFooterButton}
-                                    onPress={() => {
-                                        this.props.confirmation.onConfirmFunction();
-                                        this.hideConfirmationDialog();
-                                    }}
-                                    title="Ok"
-                                    color="#595959"
-                                />
-                                <Button
-                                    style={ConfirmationStyles.modalFooterButton}
-                                    onPress={() => {
-                                        this.hideConfirmationDialog();
-                                    }}
-                                    title="Cancel"
-                                    color="#595959"
-                                />
-                            </View>
+            <Modal
+                isVisible={this.props.confirmation.isShown}
+                backdropOpacity={0.3}
+            >
+                <View style={ ConfirmationStyles.modalContainer }>
+                    <View style={ ConfirmationStyles.modalHeader }>
+                        <Text style={ConfirmationStyles.modalHeaderText }>{this.props.confirmation.header}</Text>
+                    </View>
+                    <View style={ConfirmationStyles.modalBody}>
+                        <Text style={ConfirmationStyles.modalBodyText }>{this.props.confirmation.message}</Text>
+                    </View>
+                    <View style={ConfirmationStyles.modalFooter} >
+
+                        <View style={ConfirmationStyles.modalFooterButton}>
+                            <TouchableHighlight
+                                onPress={() => {
+                                    this.props.confirmation.onConfirmFunction();
+                                    this.hideConfirmationDialog();
+                                }}>
+                                    <Text style={{color:'#ffffff'}}>Confirm</Text>
+                            </TouchableHighlight>
                         </View>
-                </Modal>
-            </View>
+                        <View style={ConfirmationStyles.spaceBetweenButtons}/>
+                        <View style={ConfirmationStyles.modalFooterButton}>
+                            <TouchableHighlight
+                                onPress={() => {
+                                    this.hideConfirmationDialog();
+                                }}>
+                                    <Text style={{color:'#ffffff'}}>Cancel</Text>
+                            </TouchableHighlight>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
         )
     }
 }

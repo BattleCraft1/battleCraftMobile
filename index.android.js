@@ -8,7 +8,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import reducer from './App/Redux/reducers/index'
 
-import App from './App/Main/App'
+import App from './App/Main/AppContent'
 
 function configureStore( initialState ) {
     const enhancer = compose(
