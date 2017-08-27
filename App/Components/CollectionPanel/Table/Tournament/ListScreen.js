@@ -138,10 +138,6 @@ class ListScreen extends Component {
             formDrawer=
                 <PageDrawer getPageOfData={this.getPageOfData.bind(this)} onClosePanel={this.closeControlPanel.bind(this)}/>;
 
-        const config = {
-            velocityThreshold: 0.3,
-            directionalOffsetThreshold: 50
-        };
 
         return (
 
@@ -169,21 +165,25 @@ class ListScreen extends Component {
                         color='#4b371b'
                         onPress={() => {}}
                     />
-                    <View style={{flex:1}}>
-                        <GestureRecognizer
-                            onSwipeLeft={(event) => this.previousPage(event)}
-                            onSwipeRight={(event) => this.nextPage(event)}
-                            config={config}
-                        >
-                            <ListView styles={TableStyles.table}
-                                      dataSource={this.state.dataSource.cloneWithRows(this.props.page.content)}
-                                      renderHeader={(headerData) => <View style={TableStyles.header}>
-                                          <Text style={MainStyles.bigWhiteStyle}>Tournaments List</Text>
-                                          <MultiCheckbox/>
-                                      </View>}
-                                      renderRow={this.renderRow}/>
-                        </GestureRecognizer>
-                    </View>
+
+                <View style={{flex:1}}>
+                    <GestureRecognizer
+                        onSwipeLeft={(event) => this.previousPage(event)}
+                        onSwipeRight={(event) => this.nextPage(event)}
+                        config={{
+                            velocityThreshold: 0.1,
+                            directionalOffsetThreshold: 30
+                        }}
+                    >
+                        <ListView styles={TableStyles.table}
+                                  dataSource={this.state.dataSource.cloneWithRows(this.props.page.content)}
+                                  renderHeader={(headerData) => <View style={TableStyles.header}>
+                                      <Text style={MainStyles.bigWhiteStyle}>Tournaments List</Text>
+                                      <MultiCheckbox/>
+                                  </View>}
+                                  renderRow={this.renderRow}/>
+                    </GestureRecognizer>
+                </View>
                     <Button title={"Options"} color='#4b371b' onPress={()=>this.setState({optionsVisible:true})}/>
                 </View>
                 <PanelOptions
