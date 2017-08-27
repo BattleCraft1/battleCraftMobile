@@ -121,7 +121,7 @@ class ListScreen extends Component {
                 closedDrawerOffset={0}
                 tweenHandler={(ratio) => ({main: { opacity:(2-ratio)/2 }})}
 
-                content={<FormDrawer getPageRequest={this.getPageOfData.bind(this)} onClosePanel={this.closeControlPanel.bind(this)}/>}
+                content={<FormDrawer getPageOfData={this.getPageOfData.bind(this)} onClosePanel={this.closeControlPanel.bind(this)}/>}
             >
                 <View style={[MainStyles.contentStyle, MainStyles.centering, {flex: 1}]}>
                     <Button title="Open filters tab" color='#4b371b' onPress={()=>this.openControlPanel()}/>

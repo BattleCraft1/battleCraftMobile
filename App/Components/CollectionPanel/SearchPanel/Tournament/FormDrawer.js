@@ -3,13 +3,11 @@ import {
     Text,
     View,
     ScrollView,
-    Switch,
     Button,
 } from 'react-native';
 import { Form,
-    Separator,
-    PickerField,
     InputField,
+    PickerField,
     DatePickerField,
 } from 'react-native-form-generator';
 import MainStyles from '../../../../Styles/MainStyles'
@@ -25,41 +23,32 @@ class FormDrawer extends Component {
         super(props);
         this.state = {
             provincesNames:{},
-            tournamentsGames:{}
+            tournamentsGames:{},
+            tournamentStatus:{},
+            searchFormData:{}
         };
     }
 
     componentDidMount(){
-        this.getAllProvincesNames();
-        this.getAllTournamentGames();
+        this.getAllTournamentsEnums();
     }
 
     submitForm(){
+        console.log(this.state.searchFormData);
         this.searchTournaments();
         this.props.onClosePanel();
     }
 
-    getAllProvincesNames(){
-        this.props.startLoading("Fetching provinces data...");
-        fetch(serverName+`get/allProvinces/names`)
+    getAllTournamentsEnums(){
+        this.props.startLoading("Fetching tournaments data...");
+        fetch(serverName+`get/tournaments/enums`)
             .then((response) => response.json())
             .then((responseJson) => {
                 this.props.stopLoading();
-                this.setState({provincesNames:convertArrayToObject(responseJson)});
-            })
-            .catch(error => {
-                this.props.stopLoading();
-                this.props.showErrorMessageBox(error);
-            });
-    }
-
-    getAllTournamentGames(){
-        this.props.startLoading("Fetching games data...");
-        fetch(serverName+`get/allGames/names`)
-            .then((response) => response.json())
-            .then((responseJson) => {
-                this.props.stopLoading();
-                this.setState({tournamentsGames:convertArrayToObject(responseJson)});
+                this.setState({provincesNames:convertArrayToObject(responseJson.provincesNames)});
+                this.setState({tournamentsGames:convertArrayToObject(responseJson.gamesNames)});
+                responseJson.tournamentStatus.push("BANNED");
+                this.setState({tournamentStatus:convertArrayToObject(responseJson.tournamentStatus)});
             })
             .catch(error => {
                 this.props.stopLoading();
@@ -71,105 +60,98 @@ class FormDrawer extends Component {
         let pageRequest=this.props.pageRequest;
         pageRequest.searchCriteria=[];
 
-        console.log(this.name);
-
-        if(this.name.value!==""){
+        if(this.state.searchFormData.name!==undefined && this.state.searchFormData.name!==""){
             pageRequest.searchCriteria.push(
                 {
                     "keys":["name"],
                     "operation":":",
-                    "value":this.name.value
+                    "value":this.state.searchFormData.name
                 }
             )}
-        if(this.dateStart.value!==""){
+        if(this.state.searchFormData.dateStart!==undefined && this.state.searchFormData.dateStart!==""){
             pageRequest.searchCriteria.push(
                 {
                     "keys":["dateOfStart"],
                     "operation":">",
-                    "value":this.dateStart.value
+                    "value":this.state.searchFormData.dateStart
                 }
             )}
-        if(this.dateEnd.value!==""){
+        if(this.state.searchFormData.dateEnd!==undefined && this.state.searchFormData.dateEnd!==""){
             pageRequest.searchCriteria.push(
                 {
                     "keys":["dateOfStart"],
                     "operation":"<",
-                    "value":this.dateEnd.value
+                    "value":this.state.searchFormData.dateEnd
                 }
             )}
-        if(this.game.value!==""){
+        if(this.state.searchFormData.game!==undefined && this.state.searchFormData.game!==""){
             pageRequest.searchCriteria.push(
                 {
                     "keys":["game","name"],
                     "operation":":",
-                    "value":this.game.value
+                    "value":this.state.searchFormData.game
                 }
             )}
-        if(this.city.value!==""){
+        if(this.state.searchFormData.city!==undefined && this.state.searchFormData.city!==""){
             pageRequest.searchCriteria.push(
                 {
                     "keys":["address", "city"],
                     "operation":":",
-                    "value":this.city.value
+                    "value":this.state.searchFormData.city
                 }
             )}
-        if(this.province.value!==""){
+        if(this.state.searchFormData.province!==undefined && this.state.searchFormData.province!==""){
             pageRequest.searchCriteria.push(
                 {
                     "keys":["address", "province","location"],
                     "operation":":",
-                    "value":this.province.value
+                    "value":this.state.searchFormData.province
                 }
             )}
-        if(this.banned.value!==""){
-            pageRequest.searchCriteria.push(
-                {
-                    "keys":["banned"],
-                    "operation":":",
-                    "value":JSON.parse(this.banned.value)
-                }
-            )}
-        if(this.active.value!==""){
-            pageRequest.searchCriteria.push(
-                {
-                    "keys":["active"],
-                    "operation":":",
-                    "value":JSON.parse(this.active.value)
-                }
-            )}
-        if(this.accepted.value!==""){
-            pageRequest.searchCriteria.push(
-                {
-                    "keys":["accepted"],
-                    "operation":":",
-                    "value":JSON.parse(this.accepted.value)
-                }
-            )}
-        if(this.freeSlots.value!==""){
+
+        if(this.state.searchFormData.tournamentStatus!==""){
+            if(this.state.searchFormData.tournamentStatus==='BANNED')
+                pageRequest.searchCriteria.push(
+                    {
+                        "keys":["banned"],
+                        "operation":":",
+                        "value":true
+                    }
+                );
+            else
+                pageRequest.searchCriteria.push(
+                    {
+                        "keys":["tournamentStatus"],
+                        "operation":":",
+                        "value":this.state.searchFormData.tournamentStatus
+                    }
+                );
+        }
+        if(!isNaN(this.state.searchFormData.freeSlots) && this.state.searchFormData.freeSlots!==""){
             pageRequest.searchCriteria.push(
                 {
                     "keys":["freeSlots"],
                     "operation":">",
-                    "value":parseInt(this.freeSlots.value)
+                    "value":parseInt(this.state.searchFormData.freeSlots)
                 }
             )}
-        if(this.maxPlayers.value!==""){
+        if(!isNaN(this.state.searchFormData.maxPlayers) && this.state.searchFormData.maxPlayers!==""){
             pageRequest.searchCriteria.push(
                 {
                     "keys":["maxPlayers"],
                     "operation":"<",
-                    "value":parseInt(this.maxPlayers.value)
+                    "value":parseInt(this.state.searchFormData.maxPlayers)
                 }
             )}
-        if(this.playersNumber.value!==""){
+        if(!isNaN(this.state.searchFormData.playersNumber) && this.state.searchFormData.playersNumber!==""){
             pageRequest.searchCriteria.push(
                 {
                     "keys":["playersNumber"],
                     "operation":"<",
-                    "value":parseInt(this.playersNumber.value)
+                    "value":parseInt(this.state.searchFormData.playersNumber)
                 }
             )}
-
+        console.log(pageRequest);
         this.props.setPageRequest(pageRequest);
         this.props.getPageOfData();
     }
@@ -182,66 +164,56 @@ class FormDrawer extends Component {
                         <Text style={[MainStyles.textStyle, {fontSize: 26,}]}>Tournament Form</Text>
                     </View>
                     <Form
-                        ref='filterTorunament'>
+                        ref='searchTournamentsForm'
+                        onChange={(searchFormData) => this.setState({searchFormData:searchFormData})}>
                         <InputField
-                            ref={(control) => this.name = control}
+                            ref="name"
                             placeholder='Name'
                         />
                         <InputField
-                            ref={(control) => this.city = control}
+                            ref="city"
                             placeholder='City'
                         />
-                        <PickerField ref={(control) => this.province = control}
-                                     label='Province'
+                        <PickerField
+                            ref="province"
+                                    label='Province'
                                      options={this.state.provincesNames}/>
-                        <PickerField ref={(control) => this.game = control}
-                                     label='Game'
+                        <PickerField
+                            ref="game"
+                            label='Game'
                                      options={this.state.tournamentsGames}/>
-                        <DatePickerField ref={(control) => this.dateStart = control}
-                                         minimumDate={new Date('1/1/1900')}
+                        <DatePickerField
+                            ref="dateStart"
+                            minimumDate={new Date('1/1/1900')}
                                          maximumDate={new Date()}
-                                         label='Start date'
+                                         placeholder='Start date'
                                          style={{backgroundColor:'#a58e60',}}/>
-                        <DatePickerField ref={(control) => this.dateEnd = control}
-                                         minimumDate={new Date('1/1/1900')}
+                        <DatePickerField
+                            ref="dateEnd"
+                            minimumDate={new Date('1/1/1900')}
                                          maximumDate={new Date()}
-                                         label='End date'
+                            placeholder='End date'
                                          style={{backgroundColor:'#a58e60',}}/>
                         <InputField
-                            ref={(control) => this.maxPlayers = control}
+                            ref="maxPlayers"
+                            keyboardType = 'numeric'
                             placeholder='Max players'
                         />
                         <InputField
-                            ref={(control) => this.playersNumber = control}
+                            ref="playersNumber"
+                            keyboardType = 'numeric'
                             placeholder='Players number'
                         />
                         <InputField
-                            ref={(control) => this.freeSlots = control}
+                            ref="freeSlots"
+                            keyboardType = 'numeric'
                             placeholder='Free slots'
                         />
-                        <PickerField ref={(control) => this.banned = control}
-                                     label='Banned'
-                                     options={{
-                                         "":'',
-                                         "yes":'true',
-                                         "no":'false'
-                                     }}/>
-                        <PickerField ref={(control) => this.active = control}
-                                     label='Active'
-                                     options={{
-                                         "":'',
-                                         "yes":'true',
-                                         "no":'false'
-                                     }}/>
-                        <PickerField ref={(control) => this.accepted = control}
-                                     label='Accepted'
-                                     options={{
-                                         "":'',
-                                         "yes":'true',
-                                         "no":'false'
-                                     }}/>
+                        <PickerField
+                            ref="tournamentStatus"
+                            label='Tournament status'
+                                     options={this.state.tournamentStatus}/>
                         <Button title="Search"  color='#4b371b' onPress={this.submitForm.bind(this)}/>
-                        <Separator/>
                     </Form>
                 </ScrollView>
             </View>
@@ -257,6 +229,7 @@ function mapDispatchToProps( dispatch ) {
 function mapStateToProps( state ) {
     return {
         page: state.page,
+        message: state.message,
         pageRequest: state.pageRequest,
         loading: state.loading
     };
