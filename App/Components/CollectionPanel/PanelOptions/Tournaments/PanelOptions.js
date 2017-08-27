@@ -148,8 +148,7 @@ class PanelOptions extends Component {
                 message:{
                     messageText: "Elements "+elementsWhichCannotBeDeleted
                         .map(function(element){return element.name}).join(", ")+" are not deleted " +
-                    "because if you want delete element you must ban it firstly",
-                    messageType: "alert-danger"
+                    "because if you want delete element you must ban it firstly"
                 }
             },
             {
