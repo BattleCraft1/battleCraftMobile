@@ -14,7 +14,7 @@ export const message = createReducer( {}, {
     },
     [types.SHOW_ERROR_MESSAGE_BOX]( state, action ) {
         let message;
-        console.log(action.error);
+        console.log(action.error.message);
         if(action.error===undefined || action.error.message==='Network request failed'){
             message={
                 isShown: true,
@@ -23,13 +23,22 @@ export const message = createReducer( {}, {
                 failedOperation: action.failedOperation
             };
         }
-        else
+        else if(action.error.response.data!==undefined)
+        {
             message={
                 isShown: true,
                 messageText: action.error.response.data,
-                messageType: "Fail",
-                failedOperation: action.failedOperation
+                messageType: "Fail"
             };
+        }
+        else{
+            message={
+                isShown: true,
+                messageText: "There are not recognized problems on the server side. Please contact with administrator.",
+                messageType: "Fail"
+            };
+        }
+
         return message;
     }
 } );

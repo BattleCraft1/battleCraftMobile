@@ -34,7 +34,6 @@ class FormDrawer extends Component {
     }
 
     submitForm(){
-        console.log(this.state.searchFormData);
         this.searchTournaments();
         this.props.onClosePanel();
     }
@@ -42,7 +41,11 @@ class FormDrawer extends Component {
     getAllTournamentsEnums(){
         this.props.startLoading("Fetching tournaments data...");
         fetch(serverName+`get/tournaments/enums`)
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    throw Error(response);
+                }
+            return response.json()})
             .then((responseJson) => {
                 this.props.stopLoading();
                 this.setState({provincesNames:convertArrayToObject(responseJson.provincesNames)});
@@ -79,7 +82,7 @@ class FormDrawer extends Component {
         if(this.state.searchFormData.dateEnd!==undefined && this.state.searchFormData.dateEnd!==""){
             pageRequest.searchCriteria.push(
                 {
-                    "keys":["dateOfStart"],
+                    "keys":["dateOfEnd"],
                     "operation":"<",
                     "value":this.state.searchFormData.dateEnd
                 }
@@ -103,13 +106,12 @@ class FormDrawer extends Component {
         if(this.state.searchFormData.province!==undefined && this.state.searchFormData.province!==""){
             pageRequest.searchCriteria.push(
                 {
-                    "keys":["address", "province","location"],
+                    "keys":["address","province","location"],
                     "operation":":",
                     "value":this.state.searchFormData.province
                 }
             )}
-
-        if(this.state.searchFormData.tournamentStatus!==""){
+        if(this.state.searchFormData.tournamentStatus!==undefined && this.state.searchFormData.tournamentStatus!==""){
             if(this.state.searchFormData.tournamentStatus==='BANNED')
                 pageRequest.searchCriteria.push(
                     {
@@ -151,6 +153,7 @@ class FormDrawer extends Component {
                     "value":parseInt(this.state.searchFormData.playersNumber)
                 }
             )}
+            console.log(pageRequest);
         this.props.setPageRequest(pageRequest);
         this.props.getPageOfData();
     }

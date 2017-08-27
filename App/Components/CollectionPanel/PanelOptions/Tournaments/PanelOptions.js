@@ -47,7 +47,11 @@ class PanelOptions extends Component {
                 },
                 body: JSON.stringify(getPageAndModifyDataObjectsWrapper)
             })
-                .then((response) => response.json())
+                .then((response) => {
+                    if (!response.ok) {
+                        throw Error(response.statusText);
+                    }
+                return response.json()})
                 .then((responseJson) => {
                     setPage(responseJson);
                     if(failure.canBeFailed)

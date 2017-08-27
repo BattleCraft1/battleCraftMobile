@@ -38,13 +38,9 @@ class FormDrawer extends Component {
 
     submitForm(){
         let pageNumber = parseInt(this.state.pageFormData.pageNumber)-1;
-        console.log(pageNumber);
         let pageSize = parseInt(this.state.pageFormData.pageSize);
-        console.log(pageSize);
         let sortField = this.state.pageFormData.sortField;
-        console.log(sortField);
         let sortType = this.state.pageFormData.sortType;
-        console.log(sortType);
 
         let validationErrors = [];
 

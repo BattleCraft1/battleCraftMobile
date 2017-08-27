@@ -50,7 +50,7 @@ class ListScreen extends Component {
     }
 
     getPageOfData(){
-        let getPageOfData=() => {
+        let getPageOfDataOperation=() => {
             this.props.startLoading("Fetching tournaments data...");
             fetch(serverName+`page/tournaments`, {
                 method: 'POST',
@@ -60,17 +60,21 @@ class ListScreen extends Component {
                 },
                 body: JSON.stringify(this.props.pageRequest)
             })
-                .then((response) => response.json())
+                .then((response) => {
+                    if (!response.ok) {
+                        throw Error(response);
+                    }
+                    return response.json()})
                 .then((responseJson) => {
                     this.props.stopLoading();
                     this.props.setPage(responseJson);
                 })
                 .catch(error => {
                     this.props.stopLoading();
-                    this.props.showErrorMessageBox(error,getPageOfData);
+                    this.props.showErrorMessageBox(error,getPageOfDataOperation);
                 });
         };
-        getPageOfData();
+        getPageOfDataOperation();
     }
 
     changeVisibilityOptionsModal(isVisible){
@@ -97,10 +101,15 @@ class ListScreen extends Component {
                     <Text style={[MainStyles.smallWhiteStyle]}> players: {rowData.playersNumber}/{rowData.maxPlayers}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> date: {dateFormat(rowData.dateOfStart,"dd-MM-yyyy hh:mm")}</Text>
+                    <Text style={[MainStyles.smallWhiteStyle]}> date start: {dateFormat(rowData.dateOfStart,"dd-MM-yyyy hh:mm")}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> status: {rowData.banned?"banned":rowData.tournamentStatus.toLowerCase()}</Text>
+                    <Text style={[MainStyles.smallWhiteStyle]}> date end: {dateFormat(rowData.dateOfEnd,"dd-MM-yyyy hh:mm")}</Text>
+                </View>
+                <View style={[TableStyles.row]}>
+                    <Text style={[MainStyles.smallWhiteStyle]}> status: {
+                        rowData.banned?"banned":
+                            rowData.tournamentStatus.toLowerCase().split('_').join(' ')}</Text>
                 </View>
             </View>);
     }
@@ -161,7 +170,8 @@ class ListScreen extends Component {
                         this.setState({formDrawer:'page'});
                         this.openControlPanel()}}/>
                     <Button
-                        title={(this.props.pageRequest.pageRequest.page+1)+"/"+this.props.page.totalPages}
+                        title={(this.props.pageRequest.pageRequest.page+1) +"/"+
+                        (this.props.page.totalPages===undefined?0:this.props.page.totalPages)}
                         color='#4b371b'
                         onPress={() => {}}
                     />
