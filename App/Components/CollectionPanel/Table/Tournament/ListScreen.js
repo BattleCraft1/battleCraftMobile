@@ -6,7 +6,7 @@ import {
     Button,
 } from 'react-native';
 import Drawer from 'react-native-drawer'
-import FormDrawer from '../../SearchPanel/Game/FormDrawer'
+import FormDrawer from '../../SearchPanel/Tournament/FormDrawer'
 import MainStyles from '../../../../Styles/MainStyles'
 import TableStyles from '../../../../Styles/TableStyles'
 import DrawerStyles from '../../../../Styles/DrawerStyles'
@@ -121,7 +121,7 @@ class ListScreen extends Component {
                 closedDrawerOffset={0}
                 tweenHandler={(ratio) => ({main: { opacity:(2-ratio)/2 }})}
 
-                content={<FormDrawer onClosePanel={this.closeControlPanel}/>}
+                content={<FormDrawer getPageOfData={this.getPageOfData.bind(this)} onClosePanel={this.closeControlPanel.bind(this)}/>}
             >
                 <View style={[MainStyles.contentStyle, MainStyles.centering, {flex: 1}]}>
                     <Button title="Open filters tab" color='#4b371b' onPress={()=>this.openControlPanel()}/>

@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         borderLeftColor: '#ecdbac',
     },
     contentStyle: {
-        flex: 0.9,
+        flex: 1,
         padding: 5,
         marginTop: 1,
         justifyContent: 'center',
