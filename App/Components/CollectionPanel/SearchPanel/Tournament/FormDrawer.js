@@ -151,7 +151,6 @@ class FormDrawer extends Component {
                     "value":parseInt(this.state.searchFormData.playersNumber)
                 }
             )}
-        console.log(pageRequest);
         this.props.setPageRequest(pageRequest);
         this.props.getPageOfData();
     }
@@ -161,10 +160,10 @@ class FormDrawer extends Component {
             <View style={[MainStyles.contentStyle, MainStyles.centering]}>
                 <ScrollView keyboardShouldPersistTaps='always' style={{paddingLeft:10,paddingRight:10}}>
                     <View>
-                        <Text style={[MainStyles.textStyle, {fontSize: 26,}]}>Tournament Form</Text>
+                        <Text style={[MainStyles.textStyle, {fontSize: 26,}]}>Search Tournaments</Text>
                     </View>
                     <Form
-                        ref='searchTournamentsForm'
+                        ref='searchFormData'
                         onChange={(searchFormData) => this.setState({searchFormData:searchFormData})}>
                         <InputField
                             ref="name"

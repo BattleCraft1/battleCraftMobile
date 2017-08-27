@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         borderColor:'#e3ca86',
         borderWidth: 3,
         padding: 3,
-    },
+    }
 });
 
 
