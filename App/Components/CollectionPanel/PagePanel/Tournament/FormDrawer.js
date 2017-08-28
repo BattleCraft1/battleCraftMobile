@@ -26,6 +26,17 @@ class FormDrawer extends Component {
         }
     }
 
+    componentDidMount(){
+        let pageFormData = this.state.pageFormData;
+
+        pageFormData.pageNumber = this.props.pageRequest.pageRequest.page+1;
+        pageFormData.pageSize = this.props.pageRequest.pageRequest.size;
+        pageFormData.sortField = this.props.pageRequest.pageRequest.property;
+        pageFormData.sortType = this.props.pageRequest.pageRequest.direction;
+
+        this.setState({pageFormData:pageFormData});
+    }
+
     handlePageFormChanges(pageFormData){
 
         pageFormData.pageNumber = pageFormData.pageNumber===undefined?this.props.pageRequest.pageRequest.page+1:pageFormData.pageNumber;
@@ -33,7 +44,7 @@ class FormDrawer extends Component {
         pageFormData.sortField = pageFormData.sortField===undefined?this.props.pageRequest.pageRequest.property:pageFormData.sortField;
         pageFormData.sortType = pageFormData.sortType===undefined?this.props.pageRequest.pageRequest.direction:pageFormData.sortType;
 
-        this.setState({pageFormData:pageFormData})
+        this.setState({pageFormData:pageFormData});
     }
 
     submitForm(){

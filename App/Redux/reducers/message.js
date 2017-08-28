@@ -14,8 +14,7 @@ export const message = createReducer( {}, {
     },
     [types.SHOW_ERROR_MESSAGE_BOX]( state, action ) {
         let message;
-        console.log(action.error.message);
-        if(action.error===undefined || action.error.message==='Network request failed'){
+        if(action.error===undefined || action.error.message==='Network Error'){
             message={
                 isShown: true,
                 messageText: "You can not connect to server!",
@@ -23,7 +22,7 @@ export const message = createReducer( {}, {
                 failedOperation: action.failedOperation
             };
         }
-        else if(action.error.response.data!==undefined)
+        else if(action.error.message.indexOf('Request failed with status code ') !== -1 && action.error.response.data!==undefined)
         {
             message={
                 isShown: true,

@@ -13,6 +13,7 @@ import { Form,
 import MainStyles from '../../../../Styles/MainStyles'
 import {serverName} from '../../../../Main/consts/serverName'
 import convertArrayToObject from '../../../../Main/functions/convertArrayToObject'
+import axios from 'axios';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -40,18 +41,14 @@ class FormDrawer extends Component {
 
     getAllTournamentsEnums(){
         this.props.startLoading("Fetching tournaments data...");
-        fetch(serverName+`get/tournaments/enums`)
-            .then((response) => {
-                if (!response.ok) {
-                    throw Error(response);
-                }
-            return response.json()})
-            .then((responseJson) => {
+
+        axios.get(serverName+`get/tournaments/enums`)
+            .then(res => {
                 this.props.stopLoading();
-                this.setState({provincesNames:convertArrayToObject(responseJson.provincesNames)});
-                this.setState({tournamentsGames:convertArrayToObject(responseJson.gamesNames)});
-                responseJson.tournamentStatus.push("BANNED");
-                this.setState({tournamentStatus:convertArrayToObject(responseJson.tournamentStatus)});
+                this.setState({provincesNames:convertArrayToObject(res.data.provincesNames)});
+                this.setState({tournamentsGames:convertArrayToObject(res.data.gamesNames)});
+                res.data.tournamentStatus.push("BANNED");
+                this.setState({tournamentStatus:convertArrayToObject(res.data.tournamentStatus)});
             })
             .catch(error => {
                 this.props.stopLoading();

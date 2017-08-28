@@ -16,6 +16,7 @@ import Checkbox from '../../../Common/CheckBox/Checkbox'
 import MultiCheckbox from '../../../Common/CheckBox/MultiCheckbox'
 import PanelOptions from '../../PanelOptions/Tournaments/PanelOptions'
 import GestureRecognizer from 'react-native-swipe-gestures';
+import axios from 'axios';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -40,7 +41,7 @@ class ListScreen extends Component {
 
         this.state = {
             dataSource: ds.cloneWithRows(['Placeholder']),
-            formDrawer: "search",
+            formDrawer: "",
             optionsVisible: false
         };
     }
@@ -52,22 +53,11 @@ class ListScreen extends Component {
     getPageOfData(){
         let getPageOfDataOperation=() => {
             this.props.startLoading("Fetching tournaments data...");
-            fetch(serverName+`page/tournaments`, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(this.props.pageRequest)
-            })
-                .then((response) => {
-                    if (!response.ok) {
-                        throw Error(response);
-                    }
-                    return response.json()})
-                .then((responseJson) => {
+            axios.post(serverName+`page/tournaments`,this.props.pageRequest)
+                .then(res => {
                     this.props.stopLoading();
-                    this.props.setPage(responseJson);
+                    console.log(res.data);
+                    this.props.setPage(res.data);
                 })
                 .catch(error => {
                     this.props.stopLoading();
@@ -122,7 +112,6 @@ class ListScreen extends Component {
     }
 
     previousPage(event){
-        console.log("left");
         let pageRequest=this.props.pageRequest;
         if(pageRequest.pageRequest.page-1>=0){
             pageRequest.pageRequest.page-=1;
@@ -132,7 +121,6 @@ class ListScreen extends Component {
     }
 
     nextPage(event){
-        console.log("right");
         let pageRequest=this.props.pageRequest;
         if(pageRequest.pageRequest.page+1<this.props.page.totalPages){
             pageRequest.pageRequest.page+=1;
@@ -142,11 +130,13 @@ class ListScreen extends Component {
     }
 
     render() {
-        let formDrawer=<SearchDrawer getPageOfData={this.getPageOfData.bind(this)} onClosePanel={this.closeControlPanel.bind(this)}/>;
+        let formDrawer=<PageDrawer getPageOfData={this.getPageOfData.bind(this)} onClosePanel={this.closeControlPanel.bind(this)}/>;
         if(this.state.formDrawer==='page')
             formDrawer=
                 <PageDrawer getPageOfData={this.getPageOfData.bind(this)} onClosePanel={this.closeControlPanel.bind(this)}/>;
-
+                else if(this.state.formDrawer==='search')
+            formDrawer=
+                <SearchDrawer getPageOfData={this.getPageOfData.bind(this)} onClosePanel={this.closeControlPanel.bind(this)}/>;
 
         return (
 
