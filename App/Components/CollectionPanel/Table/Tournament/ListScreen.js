@@ -51,12 +51,12 @@ class ListScreen extends Component {
     }
 
     getPageOfData(){
+        this.setState({formDrawer: ""});
         let getPageOfDataOperation=() => {
             this.props.startLoading("Fetching tournaments data...");
             axios.post(serverName+`page/tournaments`,this.props.pageRequest)
                 .then(res => {
                     this.props.stopLoading();
-                    console.log(res.data);
                     this.props.setPage(res.data);
                 })
                 .catch(error => {

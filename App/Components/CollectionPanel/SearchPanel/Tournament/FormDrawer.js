@@ -14,6 +14,7 @@ import MainStyles from '../../../../Styles/MainStyles'
 import {serverName} from '../../../../Main/consts/serverName'
 import convertArrayToObject from '../../../../Main/functions/convertArrayToObject'
 import axios from 'axios';
+import {checkIfNotNull} from '../../../../Main/functions/checkIfNotNull'
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -28,6 +29,15 @@ class FormDrawer extends Component {
             tournamentStatus:{},
             searchFormData:{}
         };
+    }
+
+    componentWillMount(){
+        if(this.props.pageRequest.searchCriteria.length>0){
+            let searchFormData=this.state.searchFormData;
+            //searchFormData.name = this.props.pageRequest.searchCriteria.find(searchCriteria => {return (searchCriteria["keys"]).contains("name")});
+            console.log(((this.props.pageRequest.searchCriteria[0])['keys']).includes("name"));
+            this.setState({searchFormData:searchFormData});
+        }
     }
 
     componentDidMount(){
@@ -168,6 +178,7 @@ class FormDrawer extends Component {
                         <InputField
                             ref="name"
                             placeholder='Name'
+                            value={this.state.searchFormData.name}
                         />
                         <InputField
                             ref="city"
@@ -175,24 +186,24 @@ class FormDrawer extends Component {
                         />
                         <PickerField
                             ref="province"
-                                    label='Province'
-                                     options={this.state.provincesNames}/>
+                            label='Province'
+                            options={this.state.provincesNames}/>
                         <PickerField
                             ref="game"
                             label='Game'
-                                     options={this.state.tournamentsGames}/>
+                            options={this.state.tournamentsGames}/>
                         <DatePickerField
                             ref="dateStart"
                             minimumDate={new Date('1/1/1900')}
-                                         maximumDate={new Date()}
-                                         placeholder='Start date'
-                                         style={{backgroundColor:'#a58e60',}}/>
+                            maximumDate={new Date()}
+                            placeholder='Start date'
+                            style={{backgroundColor:'#a58e60',}}/>
                         <DatePickerField
                             ref="dateEnd"
                             minimumDate={new Date('1/1/1900')}
-                                         maximumDate={new Date()}
+                            maximumDate={new Date()}
                             placeholder='End date'
-                                         style={{backgroundColor:'#a58e60',}}/>
+                            style={{backgroundColor:'#a58e60',}}/>
                         <InputField
                             ref="maxPlayers"
                             keyboardType = 'numeric'
@@ -211,7 +222,7 @@ class FormDrawer extends Component {
                         <PickerField
                             ref="tournamentStatus"
                             label='Tournament status'
-                                     options={this.state.tournamentStatus}/>
+                            options={this.state.tournamentStatus}/>
                         <Button title="Search"  color='#4b371b' onPress={this.submitForm.bind(this)}/>
                     </Form>
                 </ScrollView>

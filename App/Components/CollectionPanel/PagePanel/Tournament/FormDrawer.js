@@ -26,7 +26,7 @@ class FormDrawer extends Component {
         }
     }
 
-    componentDidMount(){
+    componentWillMount(){
         let pageFormData = this.state.pageFormData;
 
         pageFormData.pageNumber = this.props.pageRequest.pageRequest.page+1;
@@ -115,24 +115,24 @@ class FormDrawer extends Component {
                         onChange={(pageFormData) => {this.handlePageFormChanges(pageFormData)}}>
                         <InputField
                             ref="pageNumber"
-                            value={(this.props.pageRequest.pageRequest.page+1).toString()}
+                            value={this.state.pageFormData.pageNumber.toString()}
                             keyboardType = 'numeric'
                             placeholder='Page number'
                         />
                         <InputField
                             ref="pageSize"
-                            value={this.props.pageRequest.pageRequest.size.toString()}
+                            value={this.state.pageFormData.pageSize.toString()}
                             keyboardType = 'numeric'
                             placeholder='Page size'
                         />
                         <PickerField
                             ref="sortField"
-                            value={this.props.pageRequest.pageRequest.property}
+                            value={this.state.pageFormData.sortField}
                             label='Sort by field'
                             options={tournamentFields}/>
                         <PickerField
                             ref="sortType"
-                            value={this.props.pageRequest.pageRequest.direction}
+                            value={this.state.pageFormData.sortType}
                             label='Sort type'
                             options={kindOfSort}/>
                         <Button title="Get page"  color='#4b371b' onPress={this.submitForm.bind(this)}/>
