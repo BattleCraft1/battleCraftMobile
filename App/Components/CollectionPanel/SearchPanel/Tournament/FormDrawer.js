@@ -26,22 +26,37 @@ class FormDrawer extends Component {
         this.state = {
             provincesNames:{},
             tournamentsGames:{},
-            tournamentStatus:{},
-            searchFormData:{}
+            tournamentStatus:{}
         };
     }
 
-    componentWillMount(){
-        if(this.props.pageRequest.searchCriteria.length>0){
-            let searchFormData=this.state.searchFormData;
-            //searchFormData.name = this.props.pageRequest.searchCriteria.find(searchCriteria => {return (searchCriteria["keys"]).contains("name")});
-            console.log(((this.props.pageRequest.searchCriteria[0])['keys']).includes("name"));
-            this.setState({searchFormData:searchFormData});
-        }
+    async componentDidMount() {
+        await this.getAllTournamentsEnums();
+        this.refs.searchFormData.refs.name.setValue(this.props.formData.name);
+        this.refs.searchFormData.refs.city.setValue(this.props.formData.city);
+        this.refs.searchFormData.refs.province.setValue(this.props.formData.province);
+        this.refs.searchFormData.refs.game.setValue(this.props.formData.game);
+        this.refs.searchFormData.refs.maxPlayers.setValue(this.props.formData.maxPlayers.toString());
+        this.refs.searchFormData.refs.playersNumber.setValue(this.props.formData.playersNumber.toString());
+        this.refs.searchFormData.refs.freeSlots.setValue(this.props.formData.freeSlots.toString());
+        this.refs.searchFormData.refs.tournamentStatus.setValue(this.props.formData.tournamentStatus);
+        this.refs.searchFormData.refs.dateStart.setValue(this.props.formData.dateStart);
+        this.refs.searchFormData.refs.dateEnd.setValue(this.props.formData.dateEnd);
     }
 
-    componentDidMount(){
-        this.getAllTournamentsEnums();
+    handleSearchFormChanges(searchFormData){
+        this.props.setFormData({
+            name: searchFormData.name,
+            city: searchFormData.city,
+            province: searchFormData.province,
+            game: searchFormData.game,
+            dateStart: searchFormData.dateStart,
+            dateEnd: searchFormData.dateEnd,
+            maxPlayers: parseInt(searchFormData.maxPlayers),
+            playersNumber: parseInt(searchFormData.playersNumber),
+            freeSlots: parseInt(searchFormData.freeSlots),
+            tournamentStatus: searchFormData.tournamentStatus,
+        });
     }
 
     submitForm(){
@@ -49,16 +64,16 @@ class FormDrawer extends Component {
         this.props.onClosePanel();
     }
 
-    getAllTournamentsEnums(){
+    async getAllTournamentsEnums() {
         this.props.startLoading("Fetching tournaments data...");
 
-        axios.get(serverName+`get/tournaments/enums`)
+        await axios.get(serverName + `get/tournaments/enums`)
             .then(res => {
                 this.props.stopLoading();
-                this.setState({provincesNames:convertArrayToObject(res.data.provincesNames)});
-                this.setState({tournamentsGames:convertArrayToObject(res.data.gamesNames)});
+                this.setState({provincesNames: convertArrayToObject(res.data.provincesNames)});
+                this.setState({tournamentsGames: convertArrayToObject(res.data.gamesNames)});
                 res.data.tournamentStatus.push("BANNED");
-                this.setState({tournamentStatus:convertArrayToObject(res.data.tournamentStatus)});
+                this.setState({tournamentStatus: convertArrayToObject(res.data.tournamentStatus)});
             })
             .catch(error => {
                 this.props.stopLoading();
@@ -70,56 +85,56 @@ class FormDrawer extends Component {
         let pageRequest=this.props.pageRequest;
         pageRequest.searchCriteria=[];
 
-        if(this.state.searchFormData.name!==undefined && this.state.searchFormData.name!==""){
+        if(this.props.formData.name!==undefined && this.props.formData.name!==""){
             pageRequest.searchCriteria.push(
                 {
                     "keys":["name"],
                     "operation":":",
-                    "value":this.state.searchFormData.name
+                    "value":this.props.formData.name
                 }
             )}
-        if(this.state.searchFormData.dateStart!==undefined && this.state.searchFormData.dateStart!==""){
+        if(this.props.formData.dateStart!==undefined && this.props.formData.dateStart!==""){
             pageRequest.searchCriteria.push(
                 {
                     "keys":["dateOfStart"],
                     "operation":">",
-                    "value":this.state.searchFormData.dateStart
+                    "value":this.props.formData.dateStart
                 }
             )}
-        if(this.state.searchFormData.dateEnd!==undefined && this.state.searchFormData.dateEnd!==""){
+        if(this.props.formData.dateEnd!==undefined && this.props.formData.dateEnd!==""){
             pageRequest.searchCriteria.push(
                 {
                     "keys":["dateOfEnd"],
                     "operation":"<",
-                    "value":this.state.searchFormData.dateEnd
+                    "value":this.props.formData.dateEnd
                 }
             )}
-        if(this.state.searchFormData.game!==undefined && this.state.searchFormData.game!==""){
+        if(this.props.formData.game!==undefined && this.props.formData.game!==""){
             pageRequest.searchCriteria.push(
                 {
                     "keys":["game","name"],
                     "operation":":",
-                    "value":this.state.searchFormData.game
+                    "value":this.props.formData.game
                 }
             )}
-        if(this.state.searchFormData.city!==undefined && this.state.searchFormData.city!==""){
+        if(this.props.formData.city!==undefined && this.props.formData.city!==""){
             pageRequest.searchCriteria.push(
                 {
                     "keys":["address", "city"],
                     "operation":":",
-                    "value":this.state.searchFormData.city
+                    "value":this.props.formData.city
                 }
             )}
-        if(this.state.searchFormData.province!==undefined && this.state.searchFormData.province!==""){
+        if(this.props.formData.province!==undefined && this.props.formData.province!==""){
             pageRequest.searchCriteria.push(
                 {
                     "keys":["address","province","location"],
                     "operation":":",
-                    "value":this.state.searchFormData.province
+                    "value":this.props.formData.province
                 }
             )}
-        if(this.state.searchFormData.tournamentStatus!==undefined && this.state.searchFormData.tournamentStatus!==""){
-            if(this.state.searchFormData.tournamentStatus==='BANNED')
+        if(this.props.formData.tournamentStatus!==undefined && this.props.formData.tournamentStatus!==""){
+            if(this.props.formData.tournamentStatus==='BANNED')
                 pageRequest.searchCriteria.push(
                     {
                         "keys":["banned"],
@@ -132,32 +147,32 @@ class FormDrawer extends Component {
                     {
                         "keys":["tournamentStatus"],
                         "operation":":",
-                        "value":this.state.searchFormData.tournamentStatus
+                        "value":this.props.formData.tournamentStatus
                     }
                 );
         }
-        if(!isNaN(this.state.searchFormData.freeSlots) && this.state.searchFormData.freeSlots!==""){
+        if(!isNaN(this.props.formData.freeSlots) && this.props.formData.freeSlots!==""){
             pageRequest.searchCriteria.push(
                 {
                     "keys":["freeSlots"],
                     "operation":">",
-                    "value":parseInt(this.state.searchFormData.freeSlots)
+                    "value":parseInt(this.props.formData.freeSlots)
                 }
             )}
-        if(!isNaN(this.state.searchFormData.maxPlayers) && this.state.searchFormData.maxPlayers!==""){
+        if(!isNaN(this.props.formData.maxPlayers) && this.props.formData.maxPlayers!==""){
             pageRequest.searchCriteria.push(
                 {
                     "keys":["maxPlayers"],
                     "operation":"<",
-                    "value":parseInt(this.state.searchFormData.maxPlayers)
+                    "value":parseInt(this.props.formData.maxPlayers)
                 }
             )}
-        if(!isNaN(this.state.searchFormData.playersNumber) && this.state.searchFormData.playersNumber!==""){
+        if(!isNaN(this.props.formData.playersNumber) && this.props.formData.playersNumber!==""){
             pageRequest.searchCriteria.push(
                 {
                     "keys":["playersNumber"],
                     "operation":"<",
-                    "value":parseInt(this.state.searchFormData.playersNumber)
+                    "value":parseInt(this.props.formData.playersNumber)
                 }
             )}
             console.log(pageRequest);
@@ -174,11 +189,10 @@ class FormDrawer extends Component {
                     </View>
                     <Form
                         ref='searchFormData'
-                        onChange={(searchFormData) => this.setState({searchFormData:searchFormData})}>
+                        onChange={(searchFormData) => this.handleSearchFormChanges(searchFormData)}>
                         <InputField
                             ref="name"
                             placeholder='Name'
-                            value={this.state.searchFormData.name}
                         />
                         <InputField
                             ref="city"

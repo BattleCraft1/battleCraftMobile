@@ -42,7 +42,8 @@ class ListScreen extends Component {
         this.state = {
             dataSource: ds.cloneWithRows(['Placeholder']),
             formDrawer: "",
-            optionsVisible: false
+            optionsVisible: false,
+            formDrawerData: {}
         };
     }
 
@@ -129,14 +130,27 @@ class ListScreen extends Component {
         }
     }
 
+    setFormDrawerData(formDrawerData){
+        this.setState({formDrawerData: formDrawerData});
+    }
+
     render() {
-        let formDrawer=<PageDrawer getPageOfData={this.getPageOfData.bind(this)} onClosePanel={this.closeControlPanel.bind(this)}/>;
+        let formDrawer=<PageDrawer getPageOfData={this.getPageOfData.bind(this)}
+                                   onClosePanel={this.closeControlPanel.bind(this)}
+                                   formData={this.state.formDrawerData}
+                                   setFormData={this.setFormDrawerData.bind(this)}/>;
         if(this.state.formDrawer==='page')
             formDrawer=
-                <PageDrawer getPageOfData={this.getPageOfData.bind(this)} onClosePanel={this.closeControlPanel.bind(this)}/>;
+                <PageDrawer getPageOfData={this.getPageOfData.bind(this)}
+                            onClosePanel={this.closeControlPanel.bind(this)}
+                            formData={this.state.formDrawerData}
+                            setFormData={this.setFormDrawerData.bind(this)}/>;
                 else if(this.state.formDrawer==='search')
             formDrawer=
-                <SearchDrawer getPageOfData={this.getPageOfData.bind(this)} onClosePanel={this.closeControlPanel.bind(this)}/>;
+                <SearchDrawer getPageOfData={this.getPageOfData.bind(this)}
+                              onClosePanel={this.closeControlPanel.bind(this)}
+                              formData={this.state.formDrawerData}
+                              setFormData={this.setFormDrawerData.bind(this)}/>;
 
         return (
 
