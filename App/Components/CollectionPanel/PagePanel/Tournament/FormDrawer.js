@@ -20,65 +20,69 @@ import { ActionCreators } from '../../../../Redux/actions';
 class FormDrawer extends Component {
     constructor(props) {
         super(props);
+
+        this.state={
+            pageFormData:{
+            page:(this.props.page.number+1).toString(),
+            size:(this.props.page.size).toString(),
+            property:this.props.pageRequest.pageRequest.property,
+            direction:this.props.pageRequest.pageRequest.direction
+            }
+        }
     }
 
     componentDidMount(){
-        this.refs.pageFormData.refs.pageNumber.setValue((this.props.page.number+1).toString());
-        this.refs.pageFormData.refs.pageSize.setValue((this.props.pageRequest.pageRequest.size).toString());
-        this.refs.pageFormData.refs.sortField.setValue(this.props.pageRequest.pageRequest.property);
-        this.refs.pageFormData.refs.sortType.setValue(this.props.pageRequest.pageRequest.direction);
+        this.refs.pageForm.refs.page.setValue((this.props.page.number+1).toString());
+        this.refs.pageForm.refs.size.setValue((this.props.page.size).toString());
+        this.refs.pageForm.refs.property.setValue(this.props.pageRequest.pageRequest.property);
+        this.refs.pageForm.refs.direction.setValue(this.props.pageRequest.pageRequest.direction);
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.pageRequest!==undefined &&
+        if (nextProps.page !== undefined &&
+            nextProps.page !== this.props.page &&
+            nextProps.pageRequest !== undefined &&
             nextProps.pageRequest !== this.props.pageRequest) {
-            this.refs.pageFormData.refs.pageNumber.setValue((nextProps.pageRequest.pageRequest.page+1).toString());
-            this.refs.pageFormData.refs.pageSize.setValue((nextProps.pageRequest.pageRequest.size).toString());
-            this.refs.pageFormData.refs.sortField.setValue(nextProps.pageRequest.pageRequest.property);
-            this.refs.pageFormData.refs.sortType.setValue(nextProps.pageRequest.pageRequest.direction);
+            this.refs.pageForm.refs.page.setValue((nextProps.page.number+1).toString());
+            this.refs.pageForm.refs.size.setValue((nextProps.page.size).toString());
+            this.refs.pageForm.refs.property.setValue(nextProps.pageRequest.pageRequest.property);
+            this.refs.pageForm.refs.direction.setValue(nextProps.pageRequest.pageRequest.direction);
         }
     }
 
-    handlePageFormChanges(pageFormData){
-        this.props.setFormData({
-        pageNumber:pageFormData.pageNumber===undefined?this.props.pageRequest.pageRequest.page+1:pageFormData.pageNumber,
-        pageSize:pageFormData.pageSize===undefined?this.props.pageRequest.pageRequest.size:pageFormData.pageSize,
-        sortField:pageFormData.sortField===undefined?this.props.pageRequest.pageRequest.property:pageFormData.sortField,
-        sortType:pageFormData.sortType===undefined?this.props.pageRequest.pageRequest.direction:pageFormData.sortType,
-    });
-        this.setState({pageFormData:pageFormData});
+    handlePageFormChanges(pageForm){
+        console.log(pageForm);
+        this.setState( {
+            pageFormData :pageForm
+        });
     }
 
     submitForm(){
-        let pageNumber = parseInt(this.props.formData.pageNumber)-1;
-        let pageSize = parseInt(this.props.formData.pageSize);
-        let sortField = this.props.formData.sortField;
-        let sortType = this.props.formData.sortType;
+        let number = parseInt(this.state.pageFormData.page)-1;
+        let size = parseInt(this.state.pageFormData.size);
+        let property = this.state.pageFormData.property;
+        let direction = this.state.pageFormData.direction;
 
         let validationErrors = [];
 
-        if(isNaN(pageNumber)){
+        if(isNaN(number)){
             validationErrors.push("Page number must be numeric value");
         }
-        else if(!(pageNumber<this.props.page.totalPages && pageNumber>=0))
-        {
-            validationErrors.push("Page "+this.state.pageFormData.pageNumber+" don't exist");
-        }
 
-        if(isNaN(pageSize)){
+        if(isNaN(size)){
             validationErrors.push("Page size must be numeric value");
         }
-        else if(!(pageSize<=10 && pageSize>=1))
+        else if(!(size<=10 && size>=1))
         {
             validationErrors.push("Page size must be between 1 and 10");
         }
 
-        if(!tournamentFields.hasOwnProperty(sortField))
+        if(!tournamentFields.hasOwnProperty(property))
         {
             validationErrors.push("Sort field has not valid value");
         }
 
-        if(!kindOfSort.hasOwnProperty(sortType))
+        if(!kindOfSort.hasOwnProperty(direction))
         {
             validationErrors.push("Sort type has not valid value");
         }
@@ -93,10 +97,10 @@ class FormDrawer extends Component {
         else
         {
             let pageRequest=this.props.pageRequest;
-            pageRequest.pageRequest.size=pageSize;
-            pageRequest.pageRequest.page=pageNumber;
-            pageRequest.pageRequest.property=sortField;
-            pageRequest.pageRequest.direction=sortType;
+            pageRequest.pageRequest.size=size;
+            pageRequest.pageRequest.page=number;
+            pageRequest.pageRequest.property=property;
+            pageRequest.pageRequest.direction=direction;
             this.props.setPageRequest(pageRequest);
 
             this.props.getPageOfData();
@@ -113,26 +117,29 @@ class FormDrawer extends Component {
                         <Text style={[MainStyles.textStyle, {fontSize: 26,}]}>Get Tournaments Page</Text>
                     </View>
                     <Form
-                        ref='pageFormData'
-                        onChange={(pageFormData) => {this.handlePageFormChanges(pageFormData)}}>
+                        ref='pageForm'
+                        onChange={this.handlePageFormChanges.bind(this)}
+                    >
                         <InputField
-                            ref="pageNumber"
+                            ref="page"
                             keyboardType = 'numeric'
                             placeholder='Page number'
                         />
                         <InputField
-                            ref="pageSize"
+                            ref="size"
                             keyboardType = 'numeric'
                             placeholder='Page size'
                         />
                         <PickerField
-                            ref="sortField"
+                            ref="property"
                             label='Sort by field'
-                            options={tournamentFields}/>
+                            options={tournamentFields}
+                        />
                         <PickerField
-                            ref="sortType"
+                            ref="direction"
                             label='Sort type'
-                            options={kindOfSort}/>
+                            options={kindOfSort}
+                        />
                         <Button title="Get page"  color='#4b371b' onPress={this.submitForm.bind(this)}/>
                     </Form>
                 </ScrollView>

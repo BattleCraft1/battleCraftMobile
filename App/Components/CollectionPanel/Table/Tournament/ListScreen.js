@@ -43,29 +43,53 @@ class ListScreen extends Component {
             dataSource: ds.cloneWithRows(['Placeholder']),
             formDrawer: "",
             optionsVisible: false,
-            formDrawerData: {}
+            formDrawerData: {},
+            tournamentsEnums: []
         };
     }
 
-    componentDidMount(){
-        this.getPageOfData();
+    async componentDidMount(){
+        await this.getPageOfData();
     }
 
-    getPageOfData(){
-        this.setState({formDrawer: ""});
-        let getPageOfDataOperation=() => {
+    async getPageOfData(){
+        console.log(this.props.pageRequest);
+        let getPageOfDataOperation=async () => {
             this.props.startLoading("Fetching tournaments data...");
-            axios.post(serverName+`page/tournaments`,this.props.pageRequest)
-                .then(res => {
+            await axios.post(serverName+`page/tournaments`,this.props.pageRequest)
+                .then(async (res) => {
                     this.props.stopLoading();
+
                     this.props.setPage(res.data);
+
+                    let pageRequest = this.props.pageRequest;
+                    pageRequest.pageRequest.page=this.props.page.number;
+                    pageRequest.pageRequest.size=this.props.page.size;
+                    this.props.setPageRequest(pageRequest);
+
+                    if(this.state.tournamentsEnums.length===0)
+                    await this.getAllTournamentsEnums();
                 })
-                .catch(error => {
+                .catch(async (error) => {
                     this.props.stopLoading();
-                    this.props.showErrorMessageBox(error,getPageOfDataOperation);
+                    await this.props.showErrorMessageBox(error,getPageOfDataOperation);
                 });
         };
-        getPageOfDataOperation();
+        await getPageOfDataOperation();
+        this.forceUpdate();
+    }
+
+    async getAllTournamentsEnums() {
+        this.props.startLoading("Fetching tournaments data...");
+        await axios.get(serverName + `get/tournaments/enums`)
+            .then(res => {
+                this.props.stopLoading();
+                this.setState({tournamentsEnums: res.data});
+            })
+            .catch(error => {
+                this.props.stopLoading();
+                this.props.showErrorMessageBox(error);
+            });
     }
 
     changeVisibilityOptionsModal(isVisible){
@@ -135,22 +159,16 @@ class ListScreen extends Component {
     }
 
     render() {
-        let formDrawer=<PageDrawer getPageOfData={this.getPageOfData.bind(this)}
-                                   onClosePanel={this.closeControlPanel.bind(this)}
-                                   formData={this.state.formDrawerData}
-                                   setFormData={this.setFormDrawerData.bind(this)}/>;
+        let formDrawer;
         if(this.state.formDrawer==='page')
-            formDrawer=
-                <PageDrawer getPageOfData={this.getPageOfData.bind(this)}
-                            onClosePanel={this.closeControlPanel.bind(this)}
-                            formData={this.state.formDrawerData}
-                            setFormData={this.setFormDrawerData.bind(this)}/>;
-                else if(this.state.formDrawer==='search')
-            formDrawer=
-                <SearchDrawer getPageOfData={this.getPageOfData.bind(this)}
-                              onClosePanel={this.closeControlPanel.bind(this)}
-                              formData={this.state.formDrawerData}
-                              setFormData={this.setFormDrawerData.bind(this)}/>;
+            formDrawer = <PageDrawer getPageOfData={this.getPageOfData.bind(this)}
+                                     onClosePanel={this.closeControlPanel.bind(this)}/>;
+        else if(this.state.formDrawer==='search')
+            formDrawer= <SearchDrawer getPageOfData={this.getPageOfData.bind(this)}
+                                      onClosePanel={this.closeControlPanel.bind(this)}
+                                      formData={this.state.formDrawerData}
+                                      setFormData={this.setFormDrawerData.bind(this)}
+                                        tournamentsEnums={this.state.tournamentsEnums}/>;
 
         return (
 

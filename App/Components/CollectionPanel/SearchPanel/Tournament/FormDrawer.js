@@ -11,9 +11,7 @@ import { Form,
     DatePickerField,
 } from 'react-native-form-generator';
 import MainStyles from '../../../../Styles/MainStyles'
-import {serverName} from '../../../../Main/consts/serverName'
 import convertArrayToObject from '../../../../Main/functions/convertArrayToObject'
-import axios from 'axios';
 import {checkIfNotNull} from '../../../../Main/functions/checkIfNotNull'
 
 import { connect } from 'react-redux';
@@ -30,55 +28,49 @@ class FormDrawer extends Component {
         };
     }
 
-    async componentDidMount() {
-        await this.getAllTournamentsEnums();
-        this.refs.searchFormData.refs.name.setValue(this.props.formData.name);
-        this.refs.searchFormData.refs.city.setValue(this.props.formData.city);
-        this.refs.searchFormData.refs.province.setValue(this.props.formData.province);
-        this.refs.searchFormData.refs.game.setValue(this.props.formData.game);
-        this.refs.searchFormData.refs.maxPlayers.setValue(this.props.formData.maxPlayers.toString());
-        this.refs.searchFormData.refs.playersNumber.setValue(this.props.formData.playersNumber.toString());
-        this.refs.searchFormData.refs.freeSlots.setValue(this.props.formData.freeSlots.toString());
-        this.refs.searchFormData.refs.tournamentStatus.setValue(this.props.formData.tournamentStatus);
-        this.refs.searchFormData.refs.dateStart.setValue(this.props.formData.dateStart);
-        this.refs.searchFormData.refs.dateEnd.setValue(this.props.formData.dateEnd);
+    componentDidMount() {
+        this.setInitialFormData();
+        this.setLastTypedData();
     }
 
-    handleSearchFormChanges(searchFormData){
-        this.props.setFormData({
-            name: searchFormData.name,
-            city: searchFormData.city,
-            province: searchFormData.province,
-            game: searchFormData.game,
-            dateStart: searchFormData.dateStart,
-            dateEnd: searchFormData.dateEnd,
-            maxPlayers: parseInt(searchFormData.maxPlayers),
-            playersNumber: parseInt(searchFormData.playersNumber),
-            freeSlots: parseInt(searchFormData.freeSlots),
-            tournamentStatus: searchFormData.tournamentStatus,
-        });
+    setInitialFormData(){
+        this.setState({provincesNames: convertArrayToObject(this.props.tournamentsEnums.provincesNames)});
+        this.setState({tournamentsGames: convertArrayToObject(this.props.tournamentsEnums.gamesNames)});
+        let tournamentStatus = this.props.tournamentsEnums.tournamentStatus;
+        tournamentStatus.push("BANNED");
+        this.setState({tournamentStatus: convertArrayToObject(tournamentStatus)});
+    }
+
+    setLastTypedData(){
+        this.props.formData.name?
+            this.refs.searchForm.refs.name.setValue(this.props.formData.name):undefined;
+        this.props.formData.city?
+            this.refs.searchForm.refs.city.setValue(this.props.formData.city):undefined;
+        this.props.formData.province?
+            this.refs.searchForm.refs.province.setValue(this.props.formData.province):undefined;
+        this.props.formData.game?
+            this.refs.searchForm.refs.game.setValue(this.props.formData.game):undefined;
+        this.props.formData.maxPlayers?
+            this.refs.searchForm.refs.maxPlayers.setValue(this.props.formData.maxPlayers.toString()):undefined;
+        this.props.formData.playersNumber?
+            this.refs.searchForm.refs.playersNumber.setValue(this.props.formData.playersNumber.toString()):undefined;
+        this.props.formData.freeSlots?
+            this.refs.searchForm.refs.freeSlots.setValue(this.props.formData.freeSlots.toString()):undefined;
+        this.props.formData.tournamentStatus?
+            this.refs.searchForm.refs.tournamentStatus.setValue(this.props.formData.tournamentStatus):undefined;
+        this.props.formData.dateStart?
+            this.refs.searchForm.refs.dateStart.setValue(this.props.formData.dateStart):undefined;
+        this.props.formData.dateEnd?
+            this.refs.searchForm.refs.dateEnd.setValue(this.props.formData.dateEnd):undefined;
+    }
+
+    handleSearchFormChanges(searchForm){
+        this.props.setFormData(searchForm);
     }
 
     submitForm(){
         this.searchTournaments();
         this.props.onClosePanel();
-    }
-
-    async getAllTournamentsEnums() {
-        this.props.startLoading("Fetching tournaments data...");
-
-        await axios.get(serverName + `get/tournaments/enums`)
-            .then(res => {
-                this.props.stopLoading();
-                this.setState({provincesNames: convertArrayToObject(res.data.provincesNames)});
-                this.setState({tournamentsGames: convertArrayToObject(res.data.gamesNames)});
-                res.data.tournamentStatus.push("BANNED");
-                this.setState({tournamentStatus: convertArrayToObject(res.data.tournamentStatus)});
-            })
-            .catch(error => {
-                this.props.stopLoading();
-                this.props.showErrorMessageBox(error);
-            });
     }
 
     searchTournaments(){
@@ -175,7 +167,6 @@ class FormDrawer extends Component {
                     "value":parseInt(this.props.formData.playersNumber)
                 }
             )}
-            console.log(pageRequest);
         this.props.setPageRequest(pageRequest);
         this.props.getPageOfData();
     }
@@ -188,8 +179,8 @@ class FormDrawer extends Component {
                         <Text style={[MainStyles.textStyle, {fontSize: 26,}]}>Search Tournaments</Text>
                     </View>
                     <Form
-                        ref='searchFormData'
-                        onChange={(searchFormData) => this.handleSearchFormChanges(searchFormData)}>
+                        ref='searchForm'
+                        onChange={this.handleSearchFormChanges.bind(this)}>
                         <InputField
                             ref="name"
                             placeholder='Name'
