@@ -4,5 +4,6 @@ export const tournamentFields={
     "address.city":'city',
     "game.name":'game',
     "freeSlots":'free slots',
-    "dateOfStart":'start date'
+    "dateOfStart":'start date',
+    "dateOfEnd":'end date'
 };

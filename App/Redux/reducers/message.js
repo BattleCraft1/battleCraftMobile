@@ -14,8 +14,7 @@ export const message = createReducer( {}, {
     },
     [types.SHOW_ERROR_MESSAGE_BOX]( state, action ) {
         let message;
-        console.log(action.error);
-        if(action.error===undefined || action.error.message==='Network request failed'){
+        if(action.error===undefined || action.error.message==='Network Error'){
             message={
                 isShown: true,
                 messageText: "You can not connect to server!",
@@ -23,13 +22,22 @@ export const message = createReducer( {}, {
                 failedOperation: action.failedOperation
             };
         }
-        else
+        else if(action.error.message.indexOf('Request failed with status code ') !== -1 && action.error.response.data!==undefined)
+        {
             message={
                 isShown: true,
                 messageText: action.error.response.data,
-                messageType: "Fail",
-                failedOperation: action.failedOperation
+                messageType: "Fail"
             };
+        }
+        else{
+            message={
+                isShown: true,
+                messageText: "There are not recognized problems on the server side. Please contact with administrator.",
+                messageType: "Fail"
+            };
+        }
+
         return message;
     }
 } );

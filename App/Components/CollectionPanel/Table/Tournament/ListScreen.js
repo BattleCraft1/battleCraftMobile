@@ -16,6 +16,7 @@ import Checkbox from '../../../Common/CheckBox/Checkbox'
 import MultiCheckbox from '../../../Common/CheckBox/MultiCheckbox'
 import PanelOptions from '../../PanelOptions/Tournaments/PanelOptions'
 import GestureRecognizer from 'react-native-swipe-gestures';
+import axios from 'axios';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -40,37 +41,55 @@ class ListScreen extends Component {
 
         this.state = {
             dataSource: ds.cloneWithRows(['Placeholder']),
-            formDrawer: "search",
-            optionsVisible: false
+            formDrawer: "",
+            optionsVisible: false,
+            formDrawerData: {},
+            tournamentsEnums: []
         };
     }
 
-    componentDidMount(){
-        this.getPageOfData();
+    async componentDidMount(){
+        await this.getPageOfData();
     }
 
-    getPageOfData(){
-        let getPageOfData=() => {
+    async getPageOfData(){
+        console.log(this.props.pageRequest);
+        let getPageOfDataOperation=async () => {
             this.props.startLoading("Fetching tournaments data...");
-            fetch(serverName+`page/tournaments`, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(this.props.pageRequest)
-            })
-                .then((response) => response.json())
-                .then((responseJson) => {
+            await axios.post(serverName+`page/tournaments`,this.props.pageRequest)
+                .then(async (res) => {
                     this.props.stopLoading();
-                    this.props.setPage(responseJson);
+
+                    this.props.setPage(res.data);
+
+                    let pageRequest = this.props.pageRequest;
+                    pageRequest.pageRequest.page=this.props.page.number;
+                    pageRequest.pageRequest.size=this.props.page.size;
+                    this.props.setPageRequest(pageRequest);
+
+                    if(this.state.tournamentsEnums.length===0)
+                    await this.getAllTournamentsEnums();
                 })
-                .catch(error => {
+                .catch(async (error) => {
                     this.props.stopLoading();
-                    this.props.showErrorMessageBox(error,getPageOfData);
+                    await this.props.showErrorMessageBox(error,getPageOfDataOperation);
                 });
         };
-        getPageOfData();
+        await getPageOfDataOperation();
+        this.forceUpdate();
+    }
+
+    async getAllTournamentsEnums() {
+        this.props.startLoading("Fetching tournaments data...");
+        await axios.get(serverName + `get/tournaments/enums`)
+            .then(res => {
+                this.props.stopLoading();
+                this.setState({tournamentsEnums: res.data});
+            })
+            .catch(error => {
+                this.props.stopLoading();
+                this.props.showErrorMessageBox(error);
+            });
     }
 
     changeVisibilityOptionsModal(isVisible){
@@ -97,10 +116,15 @@ class ListScreen extends Component {
                     <Text style={[MainStyles.smallWhiteStyle]}> players: {rowData.playersNumber}/{rowData.maxPlayers}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> date: {dateFormat(rowData.dateOfStart,"dd-MM-yyyy hh:mm")}</Text>
+                    <Text style={[MainStyles.smallWhiteStyle]}> date start: {dateFormat(rowData.dateOfStart,"dd-MM-yyyy hh:mm")}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> status: {rowData.banned?"banned":rowData.tournamentStatus.toLowerCase()}</Text>
+                    <Text style={[MainStyles.smallWhiteStyle]}> date end: {dateFormat(rowData.dateOfEnd,"dd-MM-yyyy hh:mm")}</Text>
+                </View>
+                <View style={[TableStyles.row]}>
+                    <Text style={[MainStyles.smallWhiteStyle]}> status: {
+                        rowData.banned?"banned":
+                            rowData.tournamentStatus.toLowerCase().split('_').join(' ')}</Text>
                 </View>
             </View>);
     }
@@ -113,7 +137,6 @@ class ListScreen extends Component {
     }
 
     previousPage(event){
-        console.log("left");
         let pageRequest=this.props.pageRequest;
         if(pageRequest.pageRequest.page-1>=0){
             pageRequest.pageRequest.page-=1;
@@ -123,7 +146,6 @@ class ListScreen extends Component {
     }
 
     nextPage(event){
-        console.log("right");
         let pageRequest=this.props.pageRequest;
         if(pageRequest.pageRequest.page+1<this.props.page.totalPages){
             pageRequest.pageRequest.page+=1;
@@ -132,16 +154,21 @@ class ListScreen extends Component {
         }
     }
 
-    render() {
-        let formDrawer=<SearchDrawer getPageOfData={this.getPageOfData.bind(this)} onClosePanel={this.closeControlPanel.bind(this)}/>;
-        if(this.state.formDrawer==='page')
-            formDrawer=
-                <PageDrawer getPageOfData={this.getPageOfData.bind(this)} onClosePanel={this.closeControlPanel.bind(this)}/>;
+    setFormDrawerData(formDrawerData){
+        this.setState({formDrawerData: formDrawerData});
+    }
 
-        const config = {
-            velocityThreshold: 0.3,
-            directionalOffsetThreshold: 50
-        };
+    render() {
+        let formDrawer;
+        if(this.state.formDrawer==='page')
+            formDrawer = <PageDrawer getPageOfData={this.getPageOfData.bind(this)}
+                                     onClosePanel={this.closeControlPanel.bind(this)}/>;
+        else if(this.state.formDrawer==='search')
+            formDrawer= <SearchDrawer getPageOfData={this.getPageOfData.bind(this)}
+                                      onClosePanel={this.closeControlPanel.bind(this)}
+                                      formData={this.state.formDrawerData}
+                                      setFormData={this.setFormDrawerData.bind(this)}
+                                        tournamentsEnums={this.state.tournamentsEnums}/>;
 
         return (
 
@@ -165,25 +192,30 @@ class ListScreen extends Component {
                         this.setState({formDrawer:'page'});
                         this.openControlPanel()}}/>
                     <Button
-                        title={(this.props.pageRequest.pageRequest.page+1)+"/"+this.props.page.totalPages}
+                        title={(this.props.pageRequest.pageRequest.page+1) +"/"+
+                        (this.props.page.totalPages===undefined?0:this.props.page.totalPages)}
                         color='#4b371b'
                         onPress={() => {}}
                     />
-                    <View style={{flex:1}}>
-                        <GestureRecognizer
-                            onSwipeLeft={(event) => this.previousPage(event)}
-                            onSwipeRight={(event) => this.nextPage(event)}
-                            config={config}
-                        >
-                            <ListView styles={TableStyles.table}
-                                      dataSource={this.state.dataSource.cloneWithRows(this.props.page.content)}
-                                      renderHeader={(headerData) => <View style={TableStyles.header}>
-                                          <Text style={MainStyles.bigWhiteStyle}>Tournaments List</Text>
-                                          <MultiCheckbox/>
-                                      </View>}
-                                      renderRow={this.renderRow}/>
-                        </GestureRecognizer>
-                    </View>
+
+                <View style={{flex:1}}>
+                    <GestureRecognizer
+                        onSwipeLeft={(event) => this.previousPage(event)}
+                        onSwipeRight={(event) => this.nextPage(event)}
+                        config={{
+                            velocityThreshold: 0.1,
+                            directionalOffsetThreshold: 30
+                        }}
+                    >
+                        <ListView styles={TableStyles.table}
+                                  dataSource={this.state.dataSource.cloneWithRows(this.props.page.content)}
+                                  renderHeader={(headerData) => <View style={TableStyles.header}>
+                                      <Text style={MainStyles.bigWhiteStyle}>Tournaments List</Text>
+                                      <MultiCheckbox/>
+                                  </View>}
+                                  renderRow={this.renderRow}/>
+                    </GestureRecognizer>
+                </View>
                     <Button title={"Options"} color='#4b371b' onPress={()=>this.setState({optionsVisible:true})}/>
                 </View>
                 <PanelOptions

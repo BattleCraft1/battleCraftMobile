@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Modal from 'react-native-modal';
+import axios from 'axios';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -39,17 +40,11 @@ class PanelOptions extends Component {
         };
         let operation = function(){
             startLoading(operationLoadingMessage);
-            fetch(serverName+link+'/tournaments', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(getPageAndModifyDataObjectsWrapper)
-            })
-                .then((response) => response.json())
-                .then((responseJson) => {
-                    setPage(responseJson);
+
+            axios.post(serverName+link+'/tournaments',
+                getPageAndModifyDataObjectsWrapper)
+                .then(res => {
+                    setPage(res.data);
                     if(failure.canBeFailed)
                         if(haveFailure)
                         {
