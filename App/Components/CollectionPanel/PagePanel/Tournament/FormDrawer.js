@@ -24,7 +24,7 @@ class FormDrawer extends Component {
         this.state={
             pageFormData:{
             page:(this.props.page.number+1).toString(),
-            size:(this.props.page.size).toString(),
+            size:(this.props.page.numberOfElements).toString(),
             property:this.props.pageRequest.pageRequest.property,
             direction:this.props.pageRequest.pageRequest.direction
             }
@@ -33,7 +33,7 @@ class FormDrawer extends Component {
 
     componentDidMount(){
         this.refs.pageForm.refs.page.setValue((this.props.page.number+1).toString());
-        this.refs.pageForm.refs.size.setValue((this.props.page.size).toString());
+        this.refs.pageForm.refs.size.setValue((this.props.page.numberOfElements).toString());
         this.refs.pageForm.refs.property.setValue(this.props.pageRequest.pageRequest.property);
         this.refs.pageForm.refs.direction.setValue(this.props.pageRequest.pageRequest.direction);
     }
@@ -44,7 +44,7 @@ class FormDrawer extends Component {
             nextProps.pageRequest !== undefined &&
             nextProps.pageRequest !== this.props.pageRequest) {
             this.refs.pageForm.refs.page.setValue((nextProps.page.number+1).toString());
-            this.refs.pageForm.refs.size.setValue((nextProps.page.size).toString());
+            this.refs.pageForm.refs.size.setValue((nextProps.page.numberOfElements).toString());
             this.refs.pageForm.refs.property.setValue(nextProps.pageRequest.pageRequest.property);
             this.refs.pageForm.refs.direction.setValue(nextProps.pageRequest.pageRequest.direction);
         }
@@ -67,6 +67,10 @@ class FormDrawer extends Component {
 
         if(isNaN(number)){
             validationErrors.push("Page number must be numeric value");
+        }
+        else if(number<0)
+        {
+            validationErrors.push("Page "+number+" don't exist");
         }
 
         if(isNaN(size)){

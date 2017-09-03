@@ -64,7 +64,7 @@ class ListScreen extends Component {
 
                     let pageRequest = this.props.pageRequest;
                     pageRequest.pageRequest.page=this.props.page.number;
-                    pageRequest.pageRequest.size=this.props.page.size;
+                    pageRequest.pageRequest.size=this.props.page.numberOfElements;
                     this.props.setPageRequest(pageRequest);
 
                     if(this.state.tournamentsEnums.length===0)
