@@ -288,7 +288,7 @@ class PanelOptions extends Component {
                         }}>
                             <View style={OptionsStyles.icon} >
                                 <Icon name="window-close" size={40} color="#4b371b"/>
-                                <Text style={OptionsStyles.iconText}>No accept</Text>
+                                <Text style={OptionsStyles.iconText}>Reject</Text>
                             </View>
                         </TouchableHighlight>
                     </View>
@@ -297,6 +297,7 @@ class PanelOptions extends Component {
                             onPress={() => this.props.changeVisibility(false)}
                             title="Close"
                             color="#4b371b"
+                            style={{alignSelf: "stretch"}}
                         />
                     </View>
                 </View>

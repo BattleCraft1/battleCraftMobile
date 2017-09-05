@@ -10,7 +10,12 @@ const styles = StyleSheet.create({
     },
 
     modalHeader: {
-        backgroundColor: '#4b371b',
+        borderTopColor: '#e3ca86',
+        borderRightColor: '#4b371b',
+        borderBottomColor: '#E0BA51',
+        borderLeftColor: '#ecdbac',
+        borderWidth: 5,
+        backgroundColor: '#805D2C',
         height: 50,
         width:300,
         padding: 10,
@@ -29,7 +34,7 @@ const styles = StyleSheet.create({
         width:300,
         padding: 10,
         borderColor: '#4b371b',
-        backgroundColor: '#E0BA51',
+        backgroundColor: '#805D2C',
         borderLeftWidth:2,
         borderRightWidth:2,
         borderTopWidth:2,
