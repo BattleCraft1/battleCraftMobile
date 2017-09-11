@@ -333,19 +333,24 @@ class ListScreen extends Component {
                 content={formDrawer}
             >
                 <View style={[MainStyles.contentStyle, MainStyles.centering, {flex: 1}]}>
-
-                    <Button title="Open search tab" color='#4b371b' onPress={()=>{
-                        this.setState({formDrawer:'search'});
-                        this.openControlPanel()}}/>
-                    <Button title="Open page tab" color='#4b371b' onPress={()=>{
-                        this.setState({formDrawer:'page'});
-                        this.openControlPanel()}}/>
-                    <Button
-                        title={(this.props.pageRequest.pageRequest.page+1) +"/"+
-                        (this.props.page.totalPages===undefined?0:this.props.page.totalPages)}
-                        color='#4b371b'
-                        onPress={() => {}}
-                    />
+                    <View style={{marginBottom:3}}>
+                        <Button title="Open search tab" color='#4b371b' onPress={()=>{
+                            this.setState({formDrawer:'search'});
+                            this.openControlPanel()}}/>
+                    </View>
+                    <View style={{marginBottom:3}}>
+                        <Button title="Open page tab" color='#4b371b' onPress={()=>{
+                            this.setState({formDrawer:'page'});
+                            this.openControlPanel()}}/>
+                    </View>
+                    <View>
+                        <Button
+                            title={(this.props.pageRequest.pageRequest.page+1) +"/"+
+                            (this.props.page.totalPages===undefined?0:this.props.page.totalPages)}
+                            color='#4b371b'
+                            onPress={() => {}}
+                        />
+                    </View>
 
                 <View style={{flex:1}}>
                     <GestureRecognizer

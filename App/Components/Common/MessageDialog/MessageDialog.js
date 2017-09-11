@@ -10,6 +10,7 @@ import { bindActionCreators } from 'redux';
 
 import Modal from 'react-native-modal';
 import MessageStyles from '../../../Styles/MessageStyle'
+import MainStyles from '../../../Styles/MainStyles'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class MessageDialog extends React.Component {
@@ -42,7 +43,7 @@ class MessageDialog extends React.Component {
                     onPress={() => {
                         this.hideMessageDialog();
                     }}>
-                    <Text style={{color:'#ffffff'}}>Ok</Text>
+                    <Text style={MainStyles.smallWhiteStyle}>Ok</Text>
                 </TouchableHighlight>
         }
         return (
@@ -52,13 +53,13 @@ class MessageDialog extends React.Component {
             >
                 <View style={ MessageStyles.modalContainer }>
                     <View style={ MessageStyles.modalHeader }>
-                        <Text style={MessageStyles.modalHeaderText }>{this.props.message.messageType}</Text>
+                        <Text style={[MainStyles.textStyle,{fontSize: 21}]}>{this.props.message.messageType}</Text>
                     </View>
                     <View style={MessageStyles.modalBody}>
-                        <Text style={MessageStyles.modalBodyText }>{this.props.message.messageText}</Text>
+                        <Text style={MainStyles.smallWhiteStyle}>{this.props.message.messageText}</Text>
                     </View>
                     <View style={MessageStyles.modalFooter} >
-                        <View style={MessageStyles.modalFooterButton}>
+                        <View style={[MessageStyles.modalFooterButton, MainStyles.centering]}>
                             {operationButton}
                         </View>
                     </View>

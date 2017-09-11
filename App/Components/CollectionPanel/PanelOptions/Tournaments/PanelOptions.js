@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import OptionsStyles from '../../../../Styles/OptionsStyles'
+import MainStyles from '../../../../Styles/MainStyles'
 import {
     Text,
     View,
@@ -218,7 +219,7 @@ class PanelOptions extends Component {
                 messageText: "Acceptations for "+elementsToCancelAccept.map(function(element){return element.name}).join(", ")+" are canceled"
             },
             {
-                messageText: "Nothing to cancel accept"
+                messageText: "Nothing to reject"
             }
         );
     }
@@ -292,12 +293,11 @@ class PanelOptions extends Component {
                             </View>
                         </TouchableHighlight>
                     </View>
-                    <View style={OptionsStyles.buttonRow}>
+                    <View style={MainStyles.centering}>
                         <Button
                             onPress={() => this.props.changeVisibility(false)}
                             title="Close"
                             color="#4b371b"
-                            style={{alignSelf: "stretch"}}
                         />
                     </View>
                 </View>

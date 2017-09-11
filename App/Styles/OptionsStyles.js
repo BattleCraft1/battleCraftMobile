@@ -6,18 +6,20 @@ import {
 const styles = StyleSheet.create({
     modal: {
 
-        height: 220,
+        height: 215,
         width: 255,
+        padding: 10,
+        flex:1,
         position: 'absolute',
-        marginLeft: ((Dimensions.get('window').width-285)/2)-10,
+        marginLeft: ((Dimensions.get('window').width-310)/2),
 
         backgroundColor: '#805D2C',
-        padding: 10,
         borderTopColor: '#e3ca86',
         borderRightColor: '#4b371b',
         borderBottomColor: '#E0BA51',
         borderLeftColor: '#ecdbac',
         borderWidth: 5,
+
         flexDirection: 'column'
     },
     icon: {
