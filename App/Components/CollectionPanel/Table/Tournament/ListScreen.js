@@ -4,7 +4,6 @@ import {
     View,
     ListView,
     Button,
-    TouchableHighlight
 } from 'react-native';
 import Drawer from 'react-native-drawer'
 import SearchDrawer from '../../SearchPanel/Tournament/FormDrawer'

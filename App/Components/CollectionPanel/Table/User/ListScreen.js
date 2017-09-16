@@ -4,21 +4,27 @@ import {
     View,
     ListView,
     Button,
-    TouchableHighlight,
     Image
 } from 'react-native';
 import Drawer from 'react-native-drawer'
+import SearchDrawer from '../../SearchPanel/User/FormDrawer'
 import FormDrawer from '../../SearchPanel/User/FormDrawer'
 import MainStyles from '../../../../Styles/MainStyles'
 import TableStyles from '../../../../Styles/TableStyles'
 import DrawerStyles from '../../../../Styles/DrawerStyles'
 import Checkbox from '../../../Common/CheckBox/Checkbox'
 import MultiCheckbox from '../../../Common/CheckBox/MultiCheckbox'
-import PanelOptions from '../../PanelOptions/Tournaments/PanelOptions'
+import PanelOptions from '../../PanelOptions/User/PanelOptions'
 import GestureRecognizer from 'react-native-swipe-gestures';
 import axios from 'axios';
 
-export default class ListScreen extends Component {
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../../../../Redux/actions';
+
+import {serverName} from '../../../../Main/consts/serverName'
+
+class ListScreen extends Component {
 
     constructor(props) {
         super(props); //type of list needed in props listType
@@ -27,59 +33,127 @@ export default class ListScreen extends Component {
         this.openControlPanel = this.openControlPanel.bind(this);
         this.renderRow = this.renderRow.bind(this);
 
-        var ds = new ListView.DataSource({
+        let ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2,
         });
 
         this.state = {
-            dataSource: ds.cloneWithRows(['Placeholder'])
+            dataSource: ds.cloneWithRows(['Placeholder']),
+            formDrawer: "",
+            optionsVisible: false,
+            formDrawerData: {},
+            usersEnums: []
         };
     }
 
-    tempData={
-            user1:{
-                "login": "NaziOverlord88",
-                "avatar": "",
-                "firstname": "Adolf",
-                "surname": "Hitler",
-                "email": "adi1889@reichtag.de",
-                "province": "lubelskie",
-                "city": "Lublin",
-            },
-            user2:{
-                "login": "LuftwaffeBomber",
-                "avatar": "",
-                "firstname": "Hermann",
-                "surname": " Goering",
-                "email": "herMANN@reichtag.de",
-                "province": "lubelskie",
-                "city": "Lublin",
-            },
-            user3:{
-                "login": "TruthPreacher",
-                "avatar": "",
-                "firstname": "Joseph",
-                "surname": "Goebbels",
-                "email": "propaganda@reichtag.de",
-                "province": "lubelskie",
-                "city": "Lublin",
-            },
-            user4:{
-                "login": "SS-SuperKommando",
-                "avatar": "",
-                "firstname": "Heinrich",
-                "surname": " Himmler",
-                "email": "waffenSS@reichtag.de",
-                "province": "lubelskie",
-                "city": "Lublin",
-            }
-    };
 
-    convertData(){
-        var tempData=[]; //get JSON from server here
+    async componentDidMount(){
+        //await this.getPageOfData();
+        await this.getMockupPage();
+    }
 
-        //stores incoming JSON in state
-        this.setState({dataSource: this.state.dataSource.cloneWithRows(this.tempData)});
+    async getMockupPage(){
+        let getMockupPage=() => {
+            this.props.stopLoading();
+            this.props.setPage({
+                "content": [
+                    {
+                        "login": "NaziOverlord88",
+                            "avatar": "",
+                            "firstname": "Adolf",
+                            "surname": "Hitler",
+                            "email": "adi1889@reichtag.de",
+                            "province": "lubelskie",
+                            "city": "Lublin",
+                    },
+                    {
+                        "login": "LuftwaffeBomber",
+                            "avatar": "",
+                            "firstname": "Hermann",
+                            "surname": " Goering",
+                            "email": "herMANN@reichtag.de",
+                            "province": "lubelskie",
+                            "city": "Lublin",
+                    },
+                    {
+                        "login": "TruthPreacher",
+                            "avatar": "",
+                            "firstname": "Joseph",
+                            "surname": "Goebbels",
+                            "email": "propaganda@reichtag.de",
+                            "province": "lubelskie",
+                            "city": "Lublin",
+                    },
+                    {
+                        "login": "SS-SuperKommando",
+                            "avatar": "",
+                            "firstname": "Heinrich",
+                            "surname": " Himmler",
+                            "email": "waffenSS@reichtag.de",
+                            "province": "lubelskie",
+                            "city": "Lublin",
+                    }
+                ],
+                "last": true,
+                "totalElements": 4,
+                "totalPages": 1,
+                "size": 4,
+                "number": 0,
+                "sort": [
+                    {
+                        "direction": "ASC",
+                        "property": "name",
+                        "ignoreCase": false,
+                        "nullHandling": "NATIVE",
+                        "ascending": true,
+                        "descending": false
+                    }
+                ],
+                "first": true,
+                "numberOfElements": 4
+            });
+        };
+        getMockupPage();
+    }
+
+    async getPageOfData(){
+        console.log(this.props.pageRequest);
+        let getPageOfDataOperation=async () => {
+            this.props.startLoading("Fetching users data...");
+            await axios.post(serverName+`page/users`,this.props.pageRequest)
+                .then(async (res) => {
+                    this.props.stopLoading();
+
+                    this.props.setPage(res.data);
+
+                    let pageRequest = this.props.pageRequest;
+                    pageRequest.pageRequest.page=this.props.page.number;
+                    pageRequest.pageRequest.size=this.props.page.numberOfElements;
+                    this.props.setPageRequest(pageRequest);
+
+                    if(this.state.usersEnums.length===0)
+                        await this.getAllUsersEnums();
+                })
+                .catch(async (error) => {
+                    this.props.stopLoading();
+                    await this.props.showErrorMessageBox(error,getPageOfDataOperation);
+                });
+        };
+        await getPageOfDataOperation();
+        this.forceUpdate();
+    }
+
+    async getAllUsersEnums() {
+        this.props.startLoading("Fetching users data...");
+        await axios.get(serverName + `get/users/enums`)
+            .then(res => {
+                this.props.stopLoading();
+                this.setState({usersEnums: res.data});
+            })
+            .catch(error => {
+                this.props.stopLoading();
+                this.props.showErrorMessageBox(error);
+            });
     }
 
     changeVisibilityOptionsModal(isVisible){
@@ -88,7 +162,9 @@ export default class ListScreen extends Component {
 
     renderRow(rowData) {
 
-        let avatar = require('../../../../../img/userLogoDef.png');
+        let avatar
+        if(false) avatar = rowData.avatar; //check if avatar is present in database
+        else avatar = require('../../../../../img/userLogoDef.png'); //else display placeholder
 
         return (
             <View style={[TableStyles.row]}>
@@ -132,11 +208,41 @@ export default class ListScreen extends Component {
         this._drawer.open()
     }
 
-    componentDidMount(){
-        this.convertData();
+    previousPage(event){
+        let pageRequest=this.props.pageRequest;
+        if(pageRequest.pageRequest.page-1>=0){
+            pageRequest.pageRequest.page-=1;
+            this.props.setPageRequest(pageRequest);
+            this.getPageOfData();
+        }
     }
 
+    nextPage(event){
+        let pageRequest=this.props.pageRequest;
+        if(pageRequest.pageRequest.page+1<this.props.page.totalPages){
+            pageRequest.pageRequest.page+=1;
+            this.props.setPageRequest(pageRequest);
+            this.getPageOfData();
+        }
+    }
+
+    setFormDrawerData(formDrawerData){
+        this.setState({formDrawerData: formDrawerData});
+    }
+
+
     render() {
+
+        let formDrawer;
+        if(this.state.formDrawer==='page')
+            formDrawer = <PageDrawer getPageOfData={this.getPageOfData.bind(this)}
+                                     onClosePanel={this.closeControlPanel.bind(this)}/>;
+        else if(this.state.formDrawer==='search')
+            formDrawer= <SearchDrawer getPageOfData={this.getPageOfData.bind(this)}
+                                      onClosePanel={this.closeControlPanel.bind(this)}
+                                      formData={this.state.formDrawerData}
+                                      setFormData={this.setFormDrawerData.bind(this)}
+                                      tournamentsEnums={this.state.tournamentsEnums}/>;
 
         return (
             <Drawer
@@ -148,19 +254,53 @@ export default class ListScreen extends Component {
                 styles={DrawerStyles}
                 closedDrawerOffset={0}
                 tweenHandler={(ratio) => ({main: { opacity:(2-ratio)/2 }})}
-
-                content={<FormDrawer onClosePanel={this.closeControlPanel}/>}
+                content={formDrawer}
             >
                 <View style={[MainStyles.contentStyle, MainStyles.centering, {flex: 1}]}>
-                    <Button title="Open filters tab" color='#4b371b' onPress={()=>this.openControlPanel()}/>
+                    <View style={{marginBottom:3}}>
+                        <Button title="Open search tab" color='#4b371b'onPress={()=>{
+                            this.setState({formDrawer:'search'});
+                            this.openControlPanel()}}/>
+                    </View>
+                    <View style={{marginBottom:3}}>
+                        <Button title="Open page tab" color='#4b371b' onPress={()=>{
+                            this.setState({formDrawer:'page'});
+                            this.openControlPanel()}}/>
+                    </View>
+                    <View>
+                        <Button
+                            title={(this.props.pageRequest.pageRequest.page+1) +"/"+
+                            (this.props.page.totalPages===undefined?0:this.props.page.totalPages)}
+                            color='#4b371b'
+                            onPress={() => {}}
+                        />
+                    </View>
 
-                    <ListView styles={TableStyles.table}
-                              dataSource={this.state.dataSource}
-                              renderHeader={(headerData) => <View style={TableStyles.header}>
-                                  <Text style={MainStyles.bigWhiteStyle}>Users List</Text></View>}
-                              renderRow={this.renderRow}/>
-                    <Button title={"Users Options"} color='#4b371b' onPress={()=>this.openControlPanel()}/>
+                    <View style={{flex:1}}>
+                        <GestureRecognizer
+                            onSwipeLeft={(event) => this.previousPage(event)}
+                            onSwipeRight={(event) => this.nextPage(event)}
+                            config={{
+                                velocityThreshold: 0.1,
+                                directionalOffsetThreshold: 30
+                            }}
+                        >
+                            <ListView styles={TableStyles.table}
+                                      dataSource={this.state.dataSource.cloneWithRows(this.props.page.content)}
+                                      renderHeader={(headerData) => <View style={TableStyles.header}>
+                                          <Text style={MainStyles.bigWhiteStyle}>Users List</Text>
+                                          <MultiCheckbox/>
+                                      </View>}
+                                      renderRow={this.renderRow}/>
+                        </GestureRecognizer>
+                    </View>
+                    <Button title={"Options"} color='#4b371b' onPress={()=>this.setState({optionsVisible:true})}/>
                 </View>
+                <PanelOptions
+                    changeVisibility={this.changeVisibilityOptionsModal.bind(this)}
+                    isVisible={this.state.optionsVisible}
+                    getPage={this.getPageOfData.bind(this)}
+                />
             </Drawer>
         );
     }
@@ -168,3 +308,19 @@ export default class ListScreen extends Component {
 
 
 module.export = ListScreen;
+
+function mapDispatchToProps( dispatch ) {
+    return bindActionCreators( ActionCreators, dispatch );
+}
+
+function mapStateToProps( state ) {
+    return {
+        page: state.page,
+        pageRequest: state.pageRequest,
+        message: state.message,
+        confirmation: state.confirmation,
+        loading: state.loading
+    };
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( ListScreen );
