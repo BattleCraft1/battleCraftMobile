@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import Drawer from 'react-native-drawer'
 import SearchDrawer from '../../SearchPanel/User/FormDrawer'
-import FormDrawer from '../../SearchPanel/User/FormDrawer'
+import PageDrawer from '../../PagePanel/User/FormDrawer'
 import MainStyles from '../../../../Styles/MainStyles'
 import TableStyles from '../../../../Styles/TableStyles'
 import DrawerStyles from '../../../../Styles/DrawerStyles'
