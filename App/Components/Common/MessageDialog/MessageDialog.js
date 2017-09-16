@@ -29,6 +29,7 @@ class MessageDialog extends React.Component {
         if(this.props.message.messageType==="Network error"){
             operationButton=
                 <TouchableHighlight
+                    style={MainStyles.centering}
                     onPress={() => {
                         this.props.message.failedOperation();
                         this.hideMessageDialog();

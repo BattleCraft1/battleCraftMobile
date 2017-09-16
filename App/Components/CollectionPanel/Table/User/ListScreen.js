@@ -12,6 +12,11 @@ import FormDrawer from '../../SearchPanel/User/FormDrawer'
 import MainStyles from '../../../../Styles/MainStyles'
 import TableStyles from '../../../../Styles/TableStyles'
 import DrawerStyles from '../../../../Styles/DrawerStyles'
+import Checkbox from '../../../Common/CheckBox/Checkbox'
+import MultiCheckbox from '../../../Common/CheckBox/MultiCheckbox'
+import PanelOptions from '../../PanelOptions/Tournaments/PanelOptions'
+import GestureRecognizer from 'react-native-swipe-gestures';
+import axios from 'axios';
 
 export default class ListScreen extends Component {
 
@@ -31,18 +36,91 @@ export default class ListScreen extends Component {
         };
     }
 
+    tempData={
+            user1:{
+                "login": "NaziOverlord88",
+                "avatar": "",
+                "firstname": "Adolf",
+                "surname": "Hitler",
+                "email": "adi1889@reichtag.de",
+                "province": "lubelskie",
+                "city": "Lublin",
+            },
+            user2:{
+                "login": "LuftwaffeBomber",
+                "avatar": "",
+                "firstname": "Hermann",
+                "surname": " Goering",
+                "email": "herMANN@reichtag.de",
+                "province": "lubelskie",
+                "city": "Lublin",
+            },
+            user3:{
+                "login": "TruthPreacher",
+                "avatar": "",
+                "firstname": "Joseph",
+                "surname": "Goebbels",
+                "email": "propaganda@reichtag.de",
+                "province": "lubelskie",
+                "city": "Lublin",
+            },
+            user4:{
+                "login": "SS-SuperKommando",
+                "avatar": "",
+                "firstname": "Heinrich",
+                "surname": " Himmler",
+                "email": "waffenSS@reichtag.de",
+                "province": "lubelskie",
+                "city": "Lublin",
+            }
+    };
+
     convertData(){
         var tempData=[]; //get JSON from server here
 
         //stores incoming JSON in state
-        this.setState({dataSource: this.state.dataSource.cloneWithRows(tempData)});
+        this.setState({dataSource: this.state.dataSource.cloneWithRows(this.tempData)});
     }
 
+    changeVisibilityOptionsModal(isVisible){
+        this.setState({optionsVisible:isVisible});
+    }
 
     renderRow(rowData) {
+
+        let avatar = require('../../../../../img/userLogoDef.png');
+
         return (
             <View style={[TableStyles.row]}>
-                <Text style={[TableStyles.row, MainStyles.smallWhiteStyle]}>Ranking row here</Text>
+                <View style={[TableStyles.sectionHeader]}>
+                    <Text style={[MainStyles.smallWhiteStyle, {fontSize: 24}]}> {rowData.login}</Text>
+                    <Checkbox name={rowData.name}/>
+                </View>
+
+                <View style={[TableStyles.row, {flexDirection:'row'}]}>
+                    <View>
+                        <Image
+                            style={{width: 148, height: 147}}
+                            source={avatar} />
+                    </View>
+                    <View style={{flex: 1, alignSelf: "stretch"}}>
+                        <View style={[TableStyles.row]}>
+                            <Text style={[MainStyles.smallWhiteStyle]}> Name: {rowData.firstname}</Text>
+                        </View>
+                        <View style={[TableStyles.row]}>
+                            <Text style={[MainStyles.smallWhiteStyle]}> Surname: {rowData.surname}</Text>
+                        </View>
+                        <View style={[TableStyles.row]}>
+                            <Text style={[MainStyles.smallWhiteStyle]}> e-mail: {rowData.email}</Text>
+                        </View>
+                        <View style={[TableStyles.row]}>
+                            <Text style={[MainStyles.smallWhiteStyle]}> Province: {rowData.province}</Text>
+                        </View>
+                        <View style={[TableStyles.row]}>
+                            <Text style={[MainStyles.smallWhiteStyle]}> City: {rowData.city}</Text>
+                        </View>
+                    </View>
+                </View>
             </View>);
     }
 

@@ -31,39 +31,34 @@ export default class FormDrawer extends Component {
                 </View>
                 <ScrollView keyboardShouldPersistTaps='always' style={{paddingLeft:10,paddingRight:10}}>
                     <Form
-                        ref='filterTorunament'>
+                        ref='filterUser'>
                         <InputField
-                            ref='name'
-                            placeholder='Nazwa turnieju'
+                            ref='username'
+                            placeholder='Username'
                         />
                         <InputField
-                            ref='game'
-                            placeholder='Typ gry'/>
-                        <PickerField ref='class'
-                                     label='Klasa'
+                            ref='firstname'
+                            placeholder='First name'
+                        />
+                        <InputField
+                            ref='surname'
+                            placeholder='Surname'
+                        />
+
+                        <Separator/>
+
+                        <PickerField ref='role'
+                                     label='User role'
                                      options={{
                                          "": '',
-                                         local: 'Local',
-                                         challenger: 'Challenger',
-                                         master: 'Master'
+                                         norm: 'Normal',
+                                         org: 'Organisator',
+                                         adm: 'Admin',
                                      }}/>
+
                         <Separator/>
-                        <DatePickerField ref='dateStart'
-                                         minimumDate={new Date('1/1/1900')}
-                                         maximumDate={new Date()}
-                                         placeholder='Data od'
-                                         style={{backgroundColor:'#a58e60',}}/>
-                        <DatePickerField ref='dateEnd'
-                                         minimumDate={new Date('1/1/1900')}
-                                         maximumDate={new Date()}
-                                         placeholder='Data do'
-                                         style={{backgroundColor:'#a58e60',}}/>
-                        <Separator/>
-                        <InputField
-                            ref='city'
-                            placeholder='Miasto'/>
                         <PickerField ref='province'
-                                     label='Województwo'
+                                     label='Province'
                                      options={{
                                          "": '',
                                          d: 'Dolnośląskie',
@@ -73,10 +68,13 @@ export default class FormDrawer extends Component {
                                          e: 'Małopolskie',
                                          k: ' Mazowieckie',
                                      }}/>
+                        <InputField
+                            ref='city'
+                            placeholder='City'/>
 
 
                     </Form>
-                    <Button title="Filtruj"  color='#4b371b' onPress={this.submitForm.bind(this)}/>
+                    <Button title="Filter"  color='#4b371b' onPress={this.submitForm.bind(this)}/>
                 </ScrollView>
             </View>
         );
