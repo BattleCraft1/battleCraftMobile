@@ -162,15 +162,17 @@ class ListScreen extends Component {
 
     renderRow(rowData) {
 
-        let avatar
-        if(false) avatar = rowData.avatar; //check if avatar is present in database
-        else avatar = require('../../../../../img/userLogoDef.png'); //else display placeholder
+        let avatar;
+        if(rowData.avatar!==undefined && rowData.avatar!=="")
+            avatar = rowData.avatar; //check if avatar is present in database
+        else
+            avatar = require('../../../../../img/userLogoDef.png'); //else display placeholder
 
         return (
             <View style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
                     <Text style={[MainStyles.smallWhiteStyle, {fontSize: 24}]}> {rowData.login}</Text>
-                    <Checkbox name={rowData.name}/>
+                    <Checkbox name={rowData.login}/>
                 </View>
 
                 <View style={[TableStyles.row, {flexDirection:'row'}]}>
