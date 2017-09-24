@@ -27,7 +27,7 @@ import {serverName} from '../../../../Main/consts/serverName'
 class ListScreen extends Component {
 
     constructor(props) {
-        super(props); //type of list needed in props listType
+        super(props);
 
         this.closeControlPanel = this.closeControlPanel.bind(this);
         this.openControlPanel = this.openControlPanel.bind(this);
@@ -58,7 +58,7 @@ class ListScreen extends Component {
             this.props.setPage({
                 "content": [
                     {
-                        "login": "NaziOverlord88",
+                        "name": "NaziOverlord88",
                             "avatar": "",
                             "firstname": "Adolf",
                             "surname": "Hitler",
@@ -67,7 +67,7 @@ class ListScreen extends Component {
                             "city": "Lublin",
                     },
                     {
-                        "login": "LuftwaffeBomber",
+                        "name": "LuftwaffeBomber",
                             "avatar": "",
                             "firstname": "Hermann",
                             "surname": " Goering",
@@ -76,7 +76,7 @@ class ListScreen extends Component {
                             "city": "Lublin",
                     },
                     {
-                        "login": "TruthPreacher",
+                        "name": "TruthPreacher",
                             "avatar": "",
                             "firstname": "Joseph",
                             "surname": "Goebbels",
@@ -85,7 +85,7 @@ class ListScreen extends Component {
                             "city": "Lublin",
                     },
                     {
-                        "login": "SS-SuperKommando",
+                        "name": "SS-SuperKommando",
                             "avatar": "",
                             "firstname": "Heinrich",
                             "surname": " Himmler",
@@ -171,8 +171,8 @@ class ListScreen extends Component {
         return (
             <View style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
-                    <Text style={[MainStyles.smallWhiteStyle, {fontSize: 24}]}> {rowData.login}</Text>
-                    <Checkbox name={rowData.login}/>
+                    <Text style={[MainStyles.smallWhiteStyle, {fontSize: 24}]}> {rowData.name}</Text>
+                    <Checkbox name={rowData.name}/>
                 </View>
 
                 <View style={[TableStyles.row, {flexDirection:'row'}]}>
@@ -307,9 +307,6 @@ class ListScreen extends Component {
         );
     }
 }
-
-
-module.export = ListScreen;
 
 function mapDispatchToProps( dispatch ) {
     return bindActionCreators( ActionCreators, dispatch );

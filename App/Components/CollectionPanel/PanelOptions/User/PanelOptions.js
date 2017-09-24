@@ -82,7 +82,7 @@ class PanelOptions extends Component {
 
     viewProfile(){
         //to do
-            //view new modal with full user info
+            //open new modal with full user info
     }
 
     banCheckedElements(){
