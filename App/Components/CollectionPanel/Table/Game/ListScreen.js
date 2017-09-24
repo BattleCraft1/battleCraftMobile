@@ -23,6 +23,8 @@ import { ActionCreators } from '../../../../Redux/actions';
 
 import {serverName} from '../../../../Main/consts/serverName'
 
+import dateFormat from 'dateformat';
+
 class ListScreen extends Component {
 
     constructor(props) {
@@ -58,28 +60,33 @@ class ListScreen extends Component {
                 "content": [
                     {
                         "name": "Warhammer: Fantasy Battle",
-                            "description": "WAwdajkn akdalkj fdgkjieh dskfgjjklas iuweui ksdfjio idskjfios kdsjfoiwds ksdfjhi",
-                            "accepted": true
+                        "tournamentsNumber": 2,
+                        "creator": "KarlFranz",
+                        "dateOfStart": 1483880700000,
                     },
                     {
                         "name": "Warhammer 40000",
-                            "description": "TYkdjnvjksdej8 834jksdjkj kdshsi ;lkfjseu kfjfgiash ksdjfuier ;lfgkisn dsjjnfh",
-                            "accepted": true
+                        "tournamentsNumber": 5,
+                        "creator": "GodEmperor",
+                        "dateOfStart": 1483880700000,
                     },
                     {
                         "name": "Ogniem i mieczem",
-                            "description": "UYkfjjncxmja jdsbd hdsh j habvfhd kll; lfjngfdj nsdhj  jsdfh jdshf",
-                            "accepted": false
+                        "tournamentsNumber": 1,
+                        "creator": "Twardowski",
+                        "dateOfStart": 1483880700000,
                     },
                     {
                         "name": "Infinity",
-                            "description": "Opfdpl n jdsb has nag hdf jsdfh ghiuyapo kdfsi uadfhiok opsd nujauwn siodfj iadsjhfjk jndsisu djshuise h",
-                            "accepted": true
+                        "tournamentsNumber": 3,
+                        "creator": "EI",
+                        "dateOfStart": 1483880700000,
                     },
                     {
                         "name": "Warzone",
-                            "description": "Q idsijoa nasiu kdsfop jasdiadfijf dsosdfjsdu ndsfjdsjd sdkdfs hisdfu ij lsdksdi jisdh isd",
-                            "accepted": false
+                        "tournamentsNumber": 1,
+                        "creator": "SpacePope",
+                        "dateOfStart": 1483880700000,
                     }
                 ],
                 "last": true,
@@ -160,10 +167,13 @@ class ListScreen extends Component {
                     <Button title={"Download rules"} color='#4b371b'/>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> Description: {rowData.description}</Text>
+                    <Text style={[MainStyles.smallWhiteStyle]}> Tournaments number: {rowData.tournamentsNumber}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> Status: {rowData.accepted?"banned":"accepted"}</Text>
+                    <Text style={[MainStyles.smallWhiteStyle]}> Creator: {rowData.creator}</Text>
+                </View>
+                <View style={[TableStyles.row]}>
+                    <Text style={[MainStyles.smallWhiteStyle]}> Creation date: {dateFormat(rowData.dateOfStart,"dd-MM-yyyy hh:mm")}</Text>
                 </View>
             </View>);
     }
