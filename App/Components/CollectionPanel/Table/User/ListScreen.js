@@ -58,7 +58,7 @@ class ListScreen extends Component {
             this.props.setPage({
                 "content": [
                     {
-                        "name": "NaziOverlord88",
+                            "name": "NaziOverlord88",
                             "avatar": "",
                             "firstname": "Adolf",
                             "surname": "Hitler",
@@ -67,7 +67,7 @@ class ListScreen extends Component {
                             "city": "Lublin",
                     },
                     {
-                        "name": "LuftwaffeBomber",
+                            "name": "LuftwaffeBomber",
                             "avatar": "",
                             "firstname": "Hermann",
                             "surname": " Goering",
@@ -76,7 +76,7 @@ class ListScreen extends Component {
                             "city": "Lublin",
                     },
                     {
-                        "name": "TruthPreacher",
+                            "name": "TruthPreacher",
                             "avatar": "",
                             "firstname": "Joseph",
                             "surname": "Goebbels",
@@ -85,7 +85,7 @@ class ListScreen extends Component {
                             "city": "Lublin",
                     },
                     {
-                        "name": "SS-SuperKommando",
+                            "name": "SS-SuperKommando",
                             "avatar": "",
                             "firstname": "Heinrich",
                             "surname": " Himmler",
