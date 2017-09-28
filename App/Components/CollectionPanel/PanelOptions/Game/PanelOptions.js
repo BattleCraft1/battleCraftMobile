@@ -80,54 +80,6 @@ class PanelOptions extends Component {
         }
     }
 
-    banCheckedElements(){
-        let checkedElements = this.props.page.content.filter(element => element.checked===true);
-        let elementsToBan = checkedElements.filter(element => element.banned===false);
-        this.makeOperation(
-            elementsToBan
-            ,
-            `ban`,
-            "Baning tournaments...",
-            {
-                canBeFailed: false
-            },
-            {
-                header:"Ban checked tournaments",
-                message:"Are you sure?"
-            },
-            {
-                messageText: "Elements "+elementsToBan.map(function(element){return element.name}).join(", ")+" are banned"
-            },
-            {
-                messageText: "Nothing to ban."
-            }
-        );
-    }
-
-    unlockCheckedElements(){
-        let checkedElements = this.props.page.content.filter(element => element.checked===true);
-        let elementsToUnlock = checkedElements.filter(element => element.banned===true);
-        this.makeOperation(
-            elementsToUnlock
-            ,
-            `unlock`,
-            "Unlocking tournaments...",
-            {
-                canBeFailed: false,
-            },
-            {
-                header:"Unlock checked tournaments",
-                message:"Are you sure?"
-            },
-            {
-                messageText: "Elements "+elementsToUnlock.map(function(element){return element.name}).join(", ")+" are unlock"
-            },
-            {
-                messageText: "Nothing to unlock"
-            }
-        );
-    }
-
     deleteCheckedElements(){
         let checkedElements = this.props.page.content.filter(element => element.checked===true);
         let elementsToDelete = checkedElements.filter(element => element.banned===true);
@@ -137,7 +89,7 @@ class PanelOptions extends Component {
             elementsToDelete
             ,
             `delete`,
-            "Deleting tournaments...",
+            "Deleting games...",
             {
                 canBeFailed: true,
                 elements: elementsWhichCannotBeDeleted,
@@ -163,13 +115,13 @@ class PanelOptions extends Component {
     acceptCheckedElements(){
         let checkedElements = this.props.page.content.filter(element => element.checked===true);
         let elementsToAccept = checkedElements.filter(element =>
-        element.tournamentStatus==="NEW" && element.banned===false);
-        let elementsWhichCannotBeAccept = checkedElements.filter(element => element.tournamentStatus!=="NEW");
+        element.gamesStatus==="NEW" && element.banned===false);
+        let elementsWhichCannotBeAccept = checkedElements.filter(element => element.gamesStatus!=="NEW");
         this.makeOperation(
             elementsToAccept
             ,
             `accept`,
-            "Accepting tournaments...",
+            "Accepting games...",
             {
                 canBeFailed: true,
                 elements: elementsWhichCannotBeAccept,
@@ -180,7 +132,7 @@ class PanelOptions extends Component {
                 }
             },
             {
-                header:"Accept checked tournaments",
+                header:"Accept checked games",
                 message:"Are you sure?"
             },
             {
@@ -195,13 +147,13 @@ class PanelOptions extends Component {
     cancelAcceptCheckedElements(){
         let checkedElements = this.props.page.content.filter(element => element.checked===true);
         let elementsToCancelAccept = checkedElements.filter(element =>
-        element.tournamentStatus==="ACCEPTED"  && element.banned===false);
-        let elementsWithFailedCancellation = checkedElements.filter(element => element.tournamentStatus!=="ACCEPTED");
+        element.gamesStatus==="ACCEPTED"  && element.banned===false);
+        let elementsWithFailedCancellation = checkedElements.filter(element => element.gamesStatus!=="ACCEPTED");
         this.makeOperation(
             elementsToCancelAccept
             ,
             `cancel/accept`,
-            "Canceling acceptations for tournaments...",
+            "Canceling acceptations for games...",
             {
                 canBeFailed: true,
                 elements: elementsWithFailedCancellation,
@@ -212,7 +164,7 @@ class PanelOptions extends Component {
                 }
             },
             {
-                header:"Cancel acceptations of checked tournaments",
+                header:"Cancel acceptations of checked games",
                 message:"Are you sure?"
             },
             {
@@ -224,10 +176,6 @@ class PanelOptions extends Component {
         );
     }
 
-    addNewTournament(){
-        console.log("TO DO");
-    }
-
     render(){
         return(
             <Modal
@@ -235,35 +183,6 @@ class PanelOptions extends Component {
                 backdropOpacity={0.3}
             >
                 <View style={OptionsStyles.modal}>
-                    <View style={OptionsStyles.iconsRow}>
-                        <TouchableHighlight onPress={() => {
-                            this.addNewTournament();
-                            this.props.changeVisibility(false);
-                        }}>
-                            <View style={OptionsStyles.icon} >
-                                <Icon name="plus-circle" size={40} color="#4b371b"/>
-                                <Text style={OptionsStyles.iconText}>Add</Text>
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight onPress={() => {
-                            this.banCheckedElements();
-                            this.props.changeVisibility(false);
-                        }}>
-                            <View style={OptionsStyles.icon} >
-                                <Icon name="lock" size={40} color="#4b371b"/>
-                                <Text style={OptionsStyles.iconText}>Ban</Text>
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight onPress={() => {
-                            this.unlockCheckedElements();
-                            this.props.changeVisibility(false);
-                        }}>
-                            <View style={OptionsStyles.icon} >
-                                <Icon name="unlock" size={40} color="#4b371b"/>
-                                <Text style={OptionsStyles.iconText}>Unlock</Text>
-                            </View>
-                        </TouchableHighlight>
-                    </View>
                     <View style={OptionsStyles.iconsRow}>
                         <TouchableHighlight onPress={() => {
                             this.deleteCheckedElements();
