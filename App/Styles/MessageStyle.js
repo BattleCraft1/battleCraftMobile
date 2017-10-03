@@ -1,67 +1,64 @@
 import {
     StyleSheet,
+    Dimensions
 } from 'react-native';
 
 const styles = StyleSheet.create({
     modalContainer: {
-        width:300,
+        width:340,
+        height:270,
         padding: 10,
-        height:300
+        flex:1,
+
+        position: 'absolute',
+        marginLeft: ((Dimensions.get('window').width-340)/2),
     },
 
     modalHeader: {
-        backgroundColor: '#4b371b',
+        borderTopColor: '#e3ca86',
+        borderRightColor: '#4b371b',
+        borderBottomColor: '#E0BA51',
+        borderLeftColor: '#ecdbac',
+        borderWidth: 5,
+        backgroundColor: '#805D2C',
         height: 50,
         width:300,
         padding: 10,
         alignItems: 'center',
         justifyContent: 'center'
-    },
-
-    modalHeaderText: {
-        fontFamily:'arial',
-        textShadowColor: '#000000',
-        fontSize: 17
     },
 
     modalBody: {
-        height: 200,
+        height: 150,
         width:300,
         padding: 10,
         borderColor: '#4b371b',
-        backgroundColor: '#E0BA51',
-        borderLeftWidth:2,
-        borderRightWidth:2,
-        borderTopWidth:2,
+        backgroundColor: '#805D2C',
+        borderLeftWidth:5,
+        borderRightWidth:5,
+        borderTopWidth:5,
         alignItems: 'center',
         justifyContent: 'center'
-    },
-
-    modalBodyText: {
-        fontFamily:'arial',
-        textShadowColor: '#000000',
-        fontSize: 17
     },
 
     modalFooter: {
-        borderLeftWidth:2,
-        borderRightWidth:2,
-        borderBottomWidth:2,
-        padding: 10,
+        flex: 1,
+        flexDirection: 'row',
+        borderLeftWidth:5,
+        borderRightWidth:5,
+        borderBottomWidth:5,
         height: 50,
         width:300,
-        backgroundColor: '#E0BA51',
         borderColor: '#4b371b',
-        alignItems: 'center',
-        justifyContent: 'center'
+        backgroundColor: '#805D2C',
     },
     modalFooterButton:{
-        alignItems: 'center',
-        justifyContent: 'center',
+        margin: 3,
         flex: 1,
-        padding:5,
-        width:50,
-        backgroundColor: '#4b371b'
+        alignSelf: 'stretch',
+        backgroundColor: '#4b371b',
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 });
 

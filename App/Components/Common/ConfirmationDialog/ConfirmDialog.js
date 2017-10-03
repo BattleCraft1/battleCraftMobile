@@ -9,7 +9,8 @@ import { ActionCreators } from '../../../Redux/actions/index';
 import { bindActionCreators } from 'redux';
 
 import Modal from 'react-native-modal';
-import ConfirmationStyles from '../../../Styles/ConfirmationStyles'
+import MainStyles from '../../../Styles/MainStyles'
+import MessageStyle from '../../../Styles/MessageStyle'
 
 class ConfirmDialog extends React.Component {
     constructor(props) {
@@ -28,31 +29,30 @@ class ConfirmDialog extends React.Component {
                 isVisible={this.props.confirmation.isShown}
                 backdropOpacity={0.3}
             >
-                <View style={ ConfirmationStyles.modalContainer }>
-                    <View style={ ConfirmationStyles.modalHeader }>
-                        <Text style={ConfirmationStyles.modalHeaderText }>{this.props.confirmation.header}</Text>
+                <View style={ MessageStyle.modalContainer }>
+                    <View style={ MessageStyle.modalHeader }>
+                        <Text style={[MainStyles.textStyle,{fontSize: 21, justifyContent:'center'}]}>{this.props.confirmation.message}</Text>
                     </View>
-                    <View style={ConfirmationStyles.modalBody}>
-                        <Text style={ConfirmationStyles.modalBodyText }>{this.props.confirmation.message}</Text>
+                    <View style={MessageStyle.modalBody}>
+                        <Text style={MainStyles.smallWhiteStyle }>{this.props.confirmation.header}</Text>
                     </View>
-                    <View style={ConfirmationStyles.modalFooter} >
+                    <View style={MessageStyle.modalFooter} >
 
-                        <View style={ConfirmationStyles.modalFooterButton}>
+                        <View style={MessageStyle.modalFooterButton}>
                             <TouchableHighlight
                                 onPress={() => {
                                     this.props.confirmation.onConfirmFunction();
                                     this.hideConfirmationDialog();
                                 }}>
-                                    <Text style={{color:'#ffffff'}}>Confirm</Text>
+                                    <Text style={[MainStyles.smallWhiteStyle, MainStyles.centering]}>Confirm</Text>
                             </TouchableHighlight>
                         </View>
-                        <View style={ConfirmationStyles.spaceBetweenButtons}/>
-                        <View style={ConfirmationStyles.modalFooterButton}>
+                        <View style={MessageStyle.modalFooterButton}>
                             <TouchableHighlight
                                 onPress={() => {
                                     this.hideConfirmationDialog();
                                 }}>
-                                    <Text style={{color:'#ffffff'}}>Cancel</Text>
+                                    <Text style={[MainStyles.smallWhiteStyle, MainStyles.centering]}>Cancel</Text>
                             </TouchableHighlight>
                         </View>
                     </View>
