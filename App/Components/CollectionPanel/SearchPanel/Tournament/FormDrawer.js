@@ -176,7 +176,7 @@ class FormDrawer extends Component {
             <View style={[MainStyles.contentStyle, MainStyles.centering]}>
                 <ScrollView keyboardShouldPersistTaps='always' style={{paddingLeft:10,paddingRight:10}}>
                     <View>
-                        <Text style={[MainStyles.textStyle, {fontSize: 26,}]}>Search Tournaments</Text>
+                        <Text style={[MainStyles.textStyle, {fontSize: 26,}]}>Search tournaments</Text>
                     </View>
                     <Form
                         ref='searchForm'

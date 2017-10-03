@@ -9,78 +9,174 @@ import { Form,
     Separator,
     PickerField,
     InputField,
-    DatePickerField,
 } from 'react-native-form-generator';
 import MainStyles from '../../../../Styles/MainStyles'
+import convertArrayToObject from '../../../../Main/functions/convertArrayToObject'
+import {checkIfNotNull} from '../../../../Main/functions/checkIfNotNull'
 
-export default class FormDrawer extends Component {
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../../../../Redux/actions';
+
+class FormDrawer extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
+        this.state = {
+            provincesNames:{}
+        };
+    }
+
+    componentDidMount() {
+        this.setInitialFormData();
+        this.setLastTypedData();
+    }
+
+    //may need roles conversion from tab
+    setInitialFormData(){
+        this.setState({provincesNames: convertArrayToObject(this.props.tournamentsEnums.provincesNames)});
+    }
+
+    setLastTypedData(){
+        this.props.formData.username?
+            this.refs.searchForm.refs.username.setValue(this.props.formData.username):undefined;
+        this.props.formData.firstname?
+            this.refs.searchForm.refs.firstname.setValue(this.props.formData.firstname):undefined;
+        this.props.formData.surname?
+            this.refs.searchForm.refs.surname.setValue(this.props.formData.surname):undefined;
+        this.props.formData.role?
+            this.refs.searchForm.refs.role.setValue(this.props.formData.role):undefined;
+        this.props.formData.city?
+            this.refs.searchForm.refs.city.setValue(this.props.formData.city):undefined;
+        this.props.formData.province?
+            this.refs.searchForm.refs.province.setValue(this.props.formData.province):undefined;
     }
 
     submitForm(){
+        this.searchUsers();
         this.props.onClosePanel()
+    }
+
+    //may need fixes for keys
+    searchUsers(){
+        let pageRequest=this.props.pageRequest;
+        pageRequest.searchCriteria=[];
+
+        if(this.props.formData.username!==undefined && this.props.formData.username!==""){
+            pageRequest.searchCriteria.push(
+                {
+                    "keys":["username"],
+                    "operation":":",
+                    "value":this.props.formData.username
+                }
+            )}
+        if(this.props.formData.firstname!==undefined && this.props.formData.firstname!==""){
+            pageRequest.searchCriteria.push(
+                {
+                    "keys":["firstname"],
+                    "operation":":",
+                    "value":this.props.formData.firstname
+                }
+            )}
+        if(this.props.formData.surname!==undefined && this.props.formData.surname!==""){
+            pageRequest.searchCriteria.push(
+                {
+                    "keys":["surname"],
+                    "operation":":",
+                    "value":this.props.formData.surname
+                }
+            )}
+        if(this.props.formData.role!==undefined && this.props.formData.role!==""){
+            pageRequest.searchCriteria.push(
+                {
+                    "keys":["role"],
+                    "operation":":",
+                    "value":this.props.formData.role
+                }
+            )}
+        if(this.props.formData.province!==undefined && this.props.formData.province!==""){
+            pageRequest.searchCriteria.push(
+                {
+                    "keys":["address","province","location"],
+                    "operation":":",
+                    "value":this.props.formData.province
+                }
+            )}
+        if(this.props.formData.city!==undefined && this.props.formData.city!==""){
+            pageRequest.searchCriteria.push(
+                {
+                    "keys":["address", "city"],
+                    "operation":":",
+                    "value":this.props.formData.city
+                }
+            )}
+
+        this.props.setPageRequest(pageRequest);
+        this.props.getPageOfData();
     }
 
     render() {
         return (
             <View style={[MainStyles.contentStyle, MainStyles.centering]}>
                 <View>
-                    <Text style={[MainStyles.textStyle, {fontSize: 26,}]}>Torunament Form</Text>
+                    <Text style={[MainStyles.textStyle, {fontSize: 26,}]}>Search users</Text>
                 </View>
                 <ScrollView keyboardShouldPersistTaps='always' style={{paddingLeft:10,paddingRight:10}}>
                     <Form
-                        ref='filterTorunament'>
+                        ref='searchForm'>
                         <InputField
-                            ref='name'
-                            placeholder='Nazwa turnieju'
+                            ref='username'
+                            placeholder='Username'
                         />
                         <InputField
-                            ref='game'
-                            placeholder='Typ gry'/>
-                        <PickerField ref='class'
-                                     label='Klasa'
+                            ref='firstname'
+                            placeholder='First name'
+                        />
+                        <InputField
+                            ref='surname'
+                            placeholder='Surname'
+                        />
+
+                        <Separator/>
+
+                        <PickerField ref='role'
+                                     label='User role'
                                      options={{
                                          "": '',
-                                         local: 'Local',
-                                         challenger: 'Challenger',
-                                         master: 'Master'
+                                         norm: 'Normal',
+                                         org: 'Organisator',
+                                         adm: 'Admin',
                                      }}/>
+
                         <Separator/>
-                        <DatePickerField ref='dateStart'
-                                         minimumDate={new Date('1/1/1900')}
-                                         maximumDate={new Date()}
-                                         placeholder='Data od'
-                                         style={{backgroundColor:'#a58e60',}}/>
-                        <DatePickerField ref='dateEnd'
-                                         minimumDate={new Date('1/1/1900')}
-                                         maximumDate={new Date()}
-                                         placeholder='Data do'
-                                         style={{backgroundColor:'#a58e60',}}/>
-                        <Separator/>
+                        <PickerField
+                            ref="province"
+                            label='Province'
+                            options={this.state.provincesNames}/>
                         <InputField
                             ref='city'
-                            placeholder='Miasto'/>
-                        <PickerField ref='province'
-                                     label='Województwo'
-                                     options={{
-                                         "": '',
-                                         d: 'Dolnośląskie',
-                                         c: 'Kujawsko-pomorskie',
-                                         l: ' Lubelskie',
-                                         f: 'Łódzkie',
-                                         e: 'Małopolskie',
-                                         k: ' Mazowieckie',
-                                     }}/>
+                            placeholder='City'/>
 
-
+                        <Button title="Filter"  color='#4b371b' onPress={this.submitForm.bind(this)}/>
                     </Form>
-                    <Button title="Filtruj"  color='#4b371b' onPress={this.submitForm.bind(this)}/>
                 </ScrollView>
             </View>
         );
     }
 }
 
-module.export = FormDrawer;
+
+function mapDispatchToProps( dispatch ) {
+    return bindActionCreators( ActionCreators, dispatch );
+}
+
+function mapStateToProps( state ) {
+    return {
+        page: state.page,
+        message: state.message,
+        pageRequest: state.pageRequest,
+        loading: state.loading
+    };
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( FormDrawer );

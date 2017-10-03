@@ -6,7 +6,6 @@ import {
 const styles = StyleSheet.create({
     modal: {
 
-        height: 215,
         width: 255,
         padding: 10,
         flex:1,

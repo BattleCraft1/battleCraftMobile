@@ -4,11 +4,10 @@ import {
     View,
     ListView,
     Button,
-    TouchableHighlight
 } from 'react-native';
 import Drawer from 'react-native-drawer'
 import SearchDrawer from '../../SearchPanel/Tournament/FormDrawer'
-import PageDrawer from '../../PagePanel/Tournament/FormDrawer'
+import PageDrawer from '../../PagePanel/PageDrawer'
 import MainStyles from '../../../../Styles/MainStyles'
 import TableStyles from '../../../../Styles/TableStyles'
 import DrawerStyles from '../../../../Styles/DrawerStyles'
@@ -253,25 +252,25 @@ class ListScreen extends Component {
                     <Checkbox name={rowData.name}/>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> province: {rowData.province}</Text>
+                    <Text style={[MainStyles.smallWhiteStyle]}> Province: {rowData.province}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> city: {rowData.city}</Text>
+                    <Text style={[MainStyles.smallWhiteStyle]}> City: {rowData.city}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> game: {rowData.game}</Text>
+                    <Text style={[MainStyles.smallWhiteStyle]}> Game: {rowData.game}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> players: {rowData.playersNumber}/{rowData.maxPlayers}</Text>
+                    <Text style={[MainStyles.smallWhiteStyle]}> Players: {rowData.playersNumber}/{rowData.maxPlayers}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> date start: {dateFormat(rowData.dateOfStart,"dd-MM-yyyy hh:mm")}</Text>
+                    <Text style={[MainStyles.smallWhiteStyle]}> Date start: {dateFormat(rowData.dateOfStart,"dd-MM-yyyy hh:mm")}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> date end: {dateFormat(rowData.dateOfEnd,"dd-MM-yyyy hh:mm")}</Text>
+                    <Text style={[MainStyles.smallWhiteStyle]}> Date end: {dateFormat(rowData.dateOfEnd,"dd-MM-yyyy hh:mm")}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> status: {
+                    <Text style={[MainStyles.smallWhiteStyle]}> Status: {
                         rowData.banned?"banned":
                             rowData.tournamentStatus.toLowerCase().split('_').join(' ')}</Text>
                 </View>
@@ -352,24 +351,24 @@ class ListScreen extends Component {
                         />
                     </View>
 
-                <View style={{flex:1}}>
-                    <GestureRecognizer
-                        onSwipeLeft={(event) => this.previousPage(event)}
-                        onSwipeRight={(event) => this.nextPage(event)}
-                        config={{
-                            velocityThreshold: 0.1,
-                            directionalOffsetThreshold: 30
-                        }}
-                    >
-                        <ListView styles={TableStyles.table}
-                                  dataSource={this.state.dataSource.cloneWithRows(this.props.page.content)}
-                                  renderHeader={(headerData) => <View style={TableStyles.header}>
-                                      <Text style={MainStyles.bigWhiteStyle}>Tournaments List</Text>
-                                      <MultiCheckbox/>
-                                  </View>}
-                                  renderRow={this.renderRow}/>
-                    </GestureRecognizer>
-                </View>
+                    <View style={{flex:1}}>
+                        <GestureRecognizer
+                            onSwipeLeft={(event) => this.previousPage(event)}
+                            onSwipeRight={(event) => this.nextPage(event)}
+                            config={{
+                                velocityThreshold: 0.1,
+                                directionalOffsetThreshold: 30
+                            }}
+                        >
+                            <ListView styles={TableStyles.table}
+                                      dataSource={this.state.dataSource.cloneWithRows(this.props.page.content)}
+                                      renderHeader={(headerData) => <View style={TableStyles.header}>
+                                          <Text style={MainStyles.bigWhiteStyle}>Tournaments List</Text>
+                                          <MultiCheckbox/>
+                                      </View>}
+                                      renderRow={this.renderRow}/>
+                        </GestureRecognizer>
+                    </View>
                     <Button title={"Options"} color='#4b371b' onPress={()=>this.setState({optionsVisible:true})}/>
                 </View>
                 <PanelOptions

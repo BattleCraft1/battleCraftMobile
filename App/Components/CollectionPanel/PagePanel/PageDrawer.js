@@ -9,13 +9,13 @@ import { Form,
     InputField,
     PickerField
 } from 'react-native-form-generator';
-import MainStyles from '../../../../Styles/MainStyles'
-import {tournamentFields} from '../../../../Main/consts/fieldsOfObject'
-import {kindOfSort} from '../../../../Main/consts/kindsOfSort'
+import MainStyles from '../../../Styles/MainStyles'
+import {tournamentFields} from '../../../Main/consts/fieldsOfObject'
+import {kindOfSort} from '../../../Main/consts/kindsOfSort'
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ActionCreators } from '../../../../Redux/actions';
+import { ActionCreators } from '../../../Redux/actions/index';
 
 class FormDrawer extends Component {
     constructor(props) {
