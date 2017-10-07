@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import MainStyles from '../../Styles/MainStyles'
 
-export default class AccountScreen extends Component {
+export default class AccountPanel extends Component {
 
     constructor() {
         super()
@@ -20,4 +20,4 @@ export default class AccountScreen extends Component {
     }
 }
 
-module.export = AccountScreen;
+module.export = AccountPanel;
