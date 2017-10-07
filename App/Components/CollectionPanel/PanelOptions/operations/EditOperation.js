@@ -3,7 +3,7 @@ import OperationButton from './operationButton/OperationButton'
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { ActionCreators } from '../../../../redux/actions/index';
+import { ActionCreators } from '../../../../Redux/actions/index';
 
 class EditOperation extends React.Component {
     constructor(props) {

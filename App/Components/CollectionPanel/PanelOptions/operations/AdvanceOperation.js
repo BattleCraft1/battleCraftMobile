@@ -1,11 +1,11 @@
 import React from 'react';
 import OperationButton from './operationButton/OperationButton'
-import {serverName} from '../../../../main/consts/serverName';
+import {serverName} from '../../../../Main/consts/serverName';
 import axios from 'axios';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { ActionCreators } from '../../../../redux/actions/index';
+import { ActionCreators } from '../../../../Redux/actions/index';
 
 class AdvanceOperation extends React.Component {
     constructor(props) {

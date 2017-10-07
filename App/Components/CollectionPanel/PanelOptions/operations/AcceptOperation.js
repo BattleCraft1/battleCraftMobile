@@ -1,11 +1,11 @@
 import React from 'react';
 import OperationButton from './operationButton/OperationButton'
-import {serverName} from '../../../../main/consts/serverName';
+import {serverName} from '../../../../Main/consts/serverName';
 import axios from 'axios';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { ActionCreators } from '../../../../redux/actions/index';
+import { ActionCreators } from '../../../../Redux/actions/index';
 
 class AcceptOperation extends React.Component {
     constructor(props) {
@@ -31,7 +31,6 @@ class AcceptOperation extends React.Component {
 
         let showSuccessMessage = this.props.showSuccessMessageBox;
         let showFailureMessage = this.props.showFailMessageBox;
-        let collectionType = this.props.collectionType;
         let setPage = this.props.setPage;
         let showErrorMessage = this.props.showErrorMessageBox;
         let operationFunction = this.props.showErrorMessageBox;

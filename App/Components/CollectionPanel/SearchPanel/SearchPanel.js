@@ -18,12 +18,12 @@ import {serverName} from "../../../Main/consts/serverName";
 
 import axios from 'axios';
 
-import isNotEmpty from './../../../main/functions/checkIfObjectIsNotEmpty'
+import isNotEmpty from '../../../Main/functions/checkIfObjectIsNotEmpty'
 
-import TournamentsFormInputs from 'Tournament/FormInputs'
-import GamesFormInputs from 'Game/FormInputs'
-import UsersFormInputs from 'User/FormInputs'
-import RankingFormInputs from 'Ranking/FormInputs'
+import TournamentsFormInputs from './Tournament/FormInputs'
+import GamesFormInputs from './Game/FormInputs'
+import UsersFormInputs from './User/FormInputs'
+import RankingFormInputs from './Ranking/FormInputs'
 
 class SearchPanel extends React.Component{
     constructor(props){

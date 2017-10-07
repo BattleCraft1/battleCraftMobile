@@ -43,16 +43,16 @@ class CollectionList extends Component {
         let rows;
 
         switch(this.props.collectionType){
-            case 'tournaments':
+            case "tournaments":
                 return <TournamentsRows content={this.props.page.content}/>;
                 break;
-            case 'users':
+            case "users":
                 return <UsersRows content={this.props.page.content}/>;
                 break;
-            case 'games':
+            case "games":
                 return <GamesRows content={this.props.page.content}/>;
                 break;
-            case 'ranking':
+            case "ranking":
                 return <RankingRows content={this.props.page.content}/>;
                 break;
         }

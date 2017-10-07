@@ -5,12 +5,14 @@ import Modal from 'react-native-modal';
 
 import AcceptOperation from './operations/AcceptOperation'
 import BanOperation from './operations/BanOperation'
-import CancelAcceptOperation from './operations/RejectOperation'
+import RejectOperation from './operations/RejectOperation'
 import DeleteOperation from './operations/DeleteOperation'
 import EditOperation from './operations/EditOperation'
 import UnclokOperation from './operations/UnlockOperation'
 import AdvanceOperation from './operations/AdvanceOperation'
 import DegradeOperation from './operations/DegradeOperation'
+
+import {possibleOperations} from '../../../Main/consts/possibleOperations'
 
 export default class PanelOptions extends Component {
     groupOperations(operations){
@@ -29,9 +31,11 @@ export default class PanelOptions extends Component {
     }
 
     render() {
+        let operations = [];
+
         const mapOfOperations = {
             "Ban":BanOperation,
-            "Cancel":CancelAcceptOperation,
+            "Reject":RejectOperation,
             "Delete":DeleteOperation,
             "Edit":EditOperation,
             "Unlock":UnclokOperation,
@@ -40,8 +44,6 @@ export default class PanelOptions extends Component {
             "Degrade":DegradeOperation,
         };
 
-        let operations = [];
-        let i=0;
         for(let possibleOperation in possibleOperations[this.props.collectionType])
         {
 

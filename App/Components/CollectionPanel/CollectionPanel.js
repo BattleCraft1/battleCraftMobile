@@ -17,10 +17,10 @@ import DrawerStyles from '../../Styles/DrawerStyles'
 
 import Drawer from 'react-native-drawer'
 
-import SearchDrawer from 'SearchPanel/SearchPanel'
-import PageDrawer from 'PagePanel/PageDrawer'
-import PanelOptions from 'PanelOptions/PanelOptions'
-import CollectionList from 'Table/CollectionList'
+import SearchDrawer from './SearchPanel/SearchPanel'
+import PageDrawer from './PagePanel/PageDrawer'
+import PanelOptions from './PanelOptions/PanelOptions'
+import CollectionList from './Table/CollectionList'
 
 class CollectionPanel extends Component {
     constructor(props) {
@@ -72,7 +72,7 @@ class CollectionPanel extends Component {
         console.log(this.props.pageRequest);
         let getPageOfDataOperation=async () => {
             this.props.startLoading("Fetching page of data...");
-            await axios.post(serverName+`page`+collectionType,this.props.pageRequest)
+            await axios.post(serverName+`page/`+collectionType,this.props.pageRequest)
                 .then(async (res) => {
                     this.props.stopLoading();
 
@@ -96,11 +96,11 @@ class CollectionPanel extends Component {
     render(){
         let formDrawer;
         if(this.state.formDrawer==='page')
-            formDrawer = <PageDrawer getPage={this.getPageOfData.bind(this)}
+            formDrawer = <PageDrawer getPage={this.getPageRequest.bind(this)}
                                      collectionType={this.props.collectionType}
                                      onClosePanel={() => this._drawer.close()}/>;
         else if(this.state.formDrawer==='search')
-            formDrawer= <SearchDrawer getPage={this.getPageOfData.bind(this)}
+            formDrawer= <SearchDrawer getPage={this.getPageRequest.bind(this)}
                                       collectionType={this.props.collectionType}
                                       onClosePanel={() => this._drawer.close()}/>;
 
@@ -144,9 +144,9 @@ class CollectionPanel extends Component {
                 <Button title={"Options"} color='#4b371b' onPress={()=>this.setState({optionsVisible:true})}/>
             </View>
             <PanelOptions
-                changeVisibility={(isVisible) => this.setState({optionsVisible:isVisible})}
+                collectionType={this.props.collectionType}
+                onClosePanel={(isVisible) => this.setState({optionsVisible:isVisible})}
                 isVisible={this.state.optionsVisible}
-                getPage={this.getPageRequest.bind(this)}
             />
         </Drawer>)
     }

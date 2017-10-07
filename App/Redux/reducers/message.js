@@ -12,6 +12,13 @@ export const message = createReducer( {}, {
         action.message.messageType="Fail";
         return action.message;
     },
+    [types.HIDE_MESSAGE_BOX]( state, action ) {
+        return {
+            isShown: false,
+            messageText: "",
+            messageType: ""
+        };
+    },
     [types.SHOW_ERROR_MESSAGE_BOX]( state, action ) {
         let message;
         if(action.error===undefined || action.error.message==='Network Error'){

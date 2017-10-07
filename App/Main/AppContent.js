@@ -27,15 +27,14 @@ class App extends Component {
             navigValue: "Main",
             appReady:false
         };
-        this._setScreen = this._setScreen.bind(this);
     }
 
     async componentDidMount() {
         this.setState({appReady:false});
         this.props.startLoading("Starting application...");
         await Font.loadAsync({
-            'arial': require('./../../assets/Fonts/arial.ttf'),
-            'FontAwesome': require('./../../assets/Fonts/FontAwesome.ttf')
+            'arial': require('../../assets/Fonts/arial.ttf'),
+            'FontAwesome': require('../../assets/Fonts/FontAwesome.ttf')
         });
         this.props.stopLoading();
         this.setState({appReady:true});
@@ -51,7 +50,7 @@ class App extends Component {
         if(this.state.appReady){
             content=
                 <View style={{flex:1}}>
-                    <Navbar navigate={this.navigate}/>
+                    <Navbar navigate={this.navigate.bind(this)}/>
                     <FadeView style={{flex:1}}>
                         <Navigator navigValue={this.state.navigValue}/>
                         <ConfirmDialog/>

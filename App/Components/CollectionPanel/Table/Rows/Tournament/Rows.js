@@ -58,7 +58,7 @@ export default class Rows extends Component{
                 <View style={[TableStyles.row]}>
                     <Text style={[MainStyles.smallWhiteStyle]}> Status: {
                         rowData.banned?"banned":
-                            rowData.tournamentStatus.toLowerCase().split('_').join(' ')}</Text>
+                            rowData.status.toLowerCase().split('_').join(' ')}</Text>
                 </View>
             </View>);
     }
@@ -71,7 +71,8 @@ export default class Rows extends Component{
                           <Text style={MainStyles.bigWhiteStyle}>Tournaments List</Text>
                           <MultiCheckbox/>
                       </View>}
-                      renderRow={this.renderRow}/>
+                      renderRow={this.renderRow.bind(this)}/>
         );
     }
 }
+
