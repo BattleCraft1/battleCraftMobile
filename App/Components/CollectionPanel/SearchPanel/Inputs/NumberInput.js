@@ -6,9 +6,8 @@ export default class NumberInput extends React.Component{
         super(props);
     }
 
-    changeInput(event){
-        let value = event.nativeEvent.text;
-        if(value!=="")
+    changeInput(value){
+        if(value!=="" && !isNaN(parseInt(value)))
             this.props.changeSearchForm(
                 this.props.indexOfSearchFields,
                 {
@@ -16,15 +15,20 @@ export default class NumberInput extends React.Component{
                     "operation":this.props.operation,
                     "value":parseInt(value)
                 }
+            );
+        else
+            this.props.changeSearchForm(
+                this.props.indexOfSearchFields,
+                {}
             )
     }
 
     render(){
         return(
             <InputField
-                onChange={this.changeInput.bind(this)}
+                onValueChange={(value)=>this.changeInput(value)}
                 keyboardType = 'numeric'
-                placeholder='Max players'
+                placeholder={this.props.name}
             />
         )
     }

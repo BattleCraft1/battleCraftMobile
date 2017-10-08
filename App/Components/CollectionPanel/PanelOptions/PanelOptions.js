@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import OptionsStyles from '../../../Styles/OptionsStyles'
-import {View} from 'react-native';
+import {
+    View,
+    Button
+} from 'react-native';
+
 import Modal from 'react-native-modal';
 
 import AcceptOperation from './operations/AcceptOperation'
@@ -12,7 +15,10 @@ import UnclokOperation from './operations/UnlockOperation'
 import AdvanceOperation from './operations/AdvanceOperation'
 import DegradeOperation from './operations/DegradeOperation'
 
+import OptionsStyles from '../../../Styles/OptionsStyles'
+
 import {possibleOperations} from '../../../Main/consts/possibleOperations'
+
 
 export default class PanelOptions extends Component {
     groupOperations(operations){
@@ -23,11 +29,12 @@ export default class PanelOptions extends Component {
             if(i*3+1<operations.length) operationsGroup.push(operations[i*3+1]);
             if(i*3+2<operations.length) operationsGroup.push(operations[i*3+2]);
             groupedOperations.push(
-                <View style={OptionsStyles.iconsRow}>
+                <View style={OptionsStyles.iconsRow} key={i}>
                     {operationsGroup}
                 </View>
             )
         }
+        return groupedOperations;
     }
 
     render() {
@@ -63,6 +70,11 @@ export default class PanelOptions extends Component {
             <Modal isVisible={this.props.isVisible} backdropOpacity={0.3}>
                 <View style={OptionsStyles.modal}>
                     {this.groupOperations(operations)}
+                    <Button
+                        onPress={() => this.props.onClosePanel()}
+                        title="Close"
+                        color="#4b371b"
+                    />
                 </View>
             </Modal>
         );

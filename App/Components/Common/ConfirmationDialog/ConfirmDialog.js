@@ -17,12 +17,6 @@ class ConfirmDialog extends React.Component {
         super(props);
     }
 
-    hideConfirmationDialog(){
-        let confirmation=this.props.confirmation;
-        confirmation.isShown=false;
-        this.forceUpdate();
-    }
-
     render(){
         return (
             <Modal
@@ -42,7 +36,7 @@ class ConfirmDialog extends React.Component {
                             <TouchableHighlight
                                 onPress={() => {
                                     this.props.confirmation.onConfirmFunction();
-                                    this.hideConfirmationDialog();
+                                    this.props.hideConfirmationDialog();
                                 }}>
                                     <Text style={[MainStyles.smallWhiteStyle, MainStyles.centering]}>Confirm</Text>
                             </TouchableHighlight>
@@ -50,7 +44,7 @@ class ConfirmDialog extends React.Component {
                         <View style={MessageStyle.modalFooterButton}>
                             <TouchableHighlight
                                 onPress={() => {
-                                    this.hideConfirmationDialog();
+                                    this.props.hideConfirmationDialog();
                                 }}>
                                     <Text style={[MainStyles.smallWhiteStyle, MainStyles.centering]}>Cancel</Text>
                             </TouchableHighlight>

@@ -39,6 +39,7 @@ class AcceptOperation extends React.Component {
         let startLoading=this.props.startLoading;
         let stopLoading=this.props.stopLoading;
         let collectionType = this.props.collectionType;
+        let closePanel = this.props.onClosePanel;
 
         if(elementsToAccept.length>0) {
             let uniqueElementsToBanNames = elementsToAccept.map(function(item) {
@@ -49,7 +50,7 @@ class AcceptOperation extends React.Component {
                 getPageObjectsWrapper: this.props.pageRequest
             };
 
-            let operationFunction = function(){
+            let operationFunction = () => {
                 startLoading("Accepting...");
 
                 axios.post(serverName+`accept/`+collectionType,
@@ -64,12 +65,12 @@ class AcceptOperation extends React.Component {
                         else{
                             showSuccessMessage(getSuccessMessage(elementsToAccept));
                         }
-                        this.props.onClosePanel();
+                        closePanel();
                     })
                     .catch(error => {
                         stopLoading();
                         showErrorMessage(error,operationFunction);
-                        this.props.onClosePanel();
+                        closePanel();
                     })
             };
 
@@ -83,7 +84,7 @@ class AcceptOperation extends React.Component {
         }
         else{
             showFailureMessage("Nothing to accept. Only new elements can be accepted.")
-            this.props.onClosePanel();
+            closePanel();
         }
     }
 

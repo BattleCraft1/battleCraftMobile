@@ -6,8 +6,7 @@ export default class DateInput extends React.Component{
         super(props);
     }
 
-    changeInput(event){
-        let value = event.nativeEvent.text;
+    changeInput(value){
         if(value !=="")
             this.props.changeSearchForm(
                 this.props.indexOfSearchFields,
@@ -17,19 +16,21 @@ export default class DateInput extends React.Component{
                     "value":value
                 }
             );
+        else
+            this.props.changeSearchForm(
+                this.props.indexOfSearchFields,
+                {}
+            )
     }
 
     render(){
         return(
-            <div>
-                <span style={styles.optionLabel}>{this.props.name}:</span>
-                <DatePickerField
-                    onChange={this.changeInput.bind(this)}
-                    minimumDate={new Date('1/1/1900')}
-                    maximumDate={new Date()}
-                    placeholder='Start date'
-                    style={{backgroundColor:'#a58e60',}}/>
-            </div>
+            <DatePickerField
+                onValueChange={(value)=>this.changeInput(value)}
+                minimumDate={new Date('1/1/1900')}
+                maximumDate={new Date('1/1/2100')}
+                placeholder={this.props.name}
+                style={{backgroundColor:'#a58e60',}}/>
         )
     }
 }

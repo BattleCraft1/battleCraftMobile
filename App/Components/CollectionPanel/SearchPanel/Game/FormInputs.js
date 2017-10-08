@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
-    View
+    View,
+    Button
 } from 'react-native';
 
 import TextInput from './../Inputs/TextInput'
@@ -13,7 +14,7 @@ import convertArrayToObject from '../../../../Main/functions/convertArrayToObjec
 export default class FormInputs extends Component{
     constructor(props) {
         super(props);
-        this.tournamentStatus = {
+        this.state = {
             status:{},
             searchFormField: {
                 "name":{},

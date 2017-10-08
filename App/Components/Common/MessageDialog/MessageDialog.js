@@ -26,8 +26,8 @@ class MessageDialog extends React.Component {
                 <TouchableHighlight
                     style={MainStyles.centering}
                     onPress={() => {
-                        this.props.message.failedOperation();
                         this.props.hideMessageBox();
+                        this.props.message.failedOperation();
                     }}>
                     <Icon name="refresh" size={20} color="#ffffff"/>
                 </TouchableHighlight>
@@ -37,7 +37,7 @@ class MessageDialog extends React.Component {
             operationButton=
                 <TouchableHighlight
                     onPress={() => {
-                        this.hideMessageDialog();
+                        this.props.hideMessageBox();
                     }}>
                     <Text style={MainStyles.smallWhiteStyle}>Ok</Text>
                 </TouchableHighlight>

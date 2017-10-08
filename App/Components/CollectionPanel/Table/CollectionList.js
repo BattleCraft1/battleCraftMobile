@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-    Text,
     View
 } from 'react-native';
 
@@ -26,7 +25,7 @@ class CollectionList extends Component {
         if(pageRequest.pageRequest.page-1>=0){
             pageRequest.pageRequest.page-=1;
             this.props.setPageRequest(pageRequest);
-            this.props.getPage();
+            this.props.getPage(this.props.collectionType);
         }
     }
 
@@ -35,7 +34,7 @@ class CollectionList extends Component {
         if(pageRequest.pageRequest.page+1<this.props.page.totalPages){
             pageRequest.pageRequest.page+=1;
             this.props.setPageRequest(pageRequest);
-            this.props.getPage();
+            this.props.getPage(this.props.collectionType);
         }
     }
 

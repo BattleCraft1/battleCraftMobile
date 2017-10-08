@@ -3,30 +3,34 @@
   <component name="ChangeListManager">
     <list default="true" id="9f51dc5f-72f7-4a8a-b51f-77bd6c1f86dc" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/CollectionPanel.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/CollectionPanel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/PagePanel/PageDrawer.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/PagePanel/PageDrawer.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/PanelOptions.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/PanelOptions.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/AcceptOperation.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/AcceptOperation.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/AdvanceOperation.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/AdvanceOperation.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/BanOperation.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/BanOperation.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/DegradeOperation.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/DegradeOperation.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/DeleteOperation.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/DeleteOperation.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/EditOperation.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/EditOperation.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/RejectOperation.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/RejectOperation.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/UnlockOperation.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/UnlockOperation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/operationButton/OperationButton.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/operationButton/OperationButton.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Game/FormInputs.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Game/FormInputs.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/DateInput.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/DateInput.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/NumberInput.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/NumberInput.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/SelectInput.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/SelectInput.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/StatusInput.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/StatusInput.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/TextInput.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/TextInput.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Ranking/FormInputs.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Ranking/FormInputs.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/SearchPanel.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/SearchPanel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Tournament/FormInputs.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Tournament/FormInputs.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/User/FormInputs.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/User/FormInputs.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/Table/CollectionList.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/Table/CollectionList.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/Game/Rows.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/Game/Rows.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/Ranking/Rows.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/Ranking/Rows.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/Tournament/Rows.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/Tournament/Rows.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/User/Rows.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/User/Rows.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/Common/ConfirmationDialog/ConfirmDialog.js" afterPath="$PROJECT_DIR$/App/Components/Common/ConfirmationDialog/ConfirmDialog.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/Common/MessageDialog/MessageDialog.js" afterPath="$PROJECT_DIR$/App/Components/Common/MessageDialog/MessageDialog.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/Navigator/Navigator.js" afterPath="$PROJECT_DIR$/App/Components/Navigator/Navigator.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Main/AppContent.js" afterPath="$PROJECT_DIR$/App/Main/AppContent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Main/consts/possibleOperations.js" afterPath="$PROJECT_DIR$/App/Main/consts/possibleOperations.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Main/consts/serverName.js" afterPath="$PROJECT_DIR$/App/Main/consts/serverName.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Redux/actions/confirmation.js" afterPath="$PROJECT_DIR$/App/Redux/actions/confirmation.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Redux/actions/message.js" afterPath="$PROJECT_DIR$/App/Redux/actions/message.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Redux/reducers/confirmation.js" afterPath="$PROJECT_DIR$/App/Redux/reducers/confirmation.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Redux/reducers/message.js" afterPath="$PROJECT_DIR$/App/Redux/reducers/message.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Redux/types/message.js" afterPath="$PROJECT_DIR$/App/Redux/types/message.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Redux/types/confirmation.js" afterPath="$PROJECT_DIR$/App/Redux/types/confirmation.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -40,11 +44,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SearchPanel.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/SearchPanel.js">
+      <file leaf-file-name="UnlockOperation.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/UnlockOperation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="48" column="8" lean-forward="true" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
+            <state relative-caret-position="272">
+              <caret line="23" column="27" lean-forward="true" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="message.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/App/Redux/reducers/message.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="7" column="39" lean-forward="false" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MessageDialog.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/App/Components/Common/MessageDialog/MessageDialog.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="392">
+              <caret line="55" column="27" lean-forward="true" selection-start-line="55" selection-start-column="27" selection-end-line="55" selection-end-column="27" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -67,6 +93,7 @@
       <find>dataSource</find>
       <find>List</find>
       <find>ListView</find>
+      <find>onChange</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -82,42 +109,46 @@
         <option value="$PROJECT_DIR$/App/Components/Navbar/Navbar.js" />
         <option value="$PROJECT_DIR$/App/Components/Account/AccountPanel.js" />
         <option value="$PROJECT_DIR$/App/Components/CollectionPanel/Table/Tournament/ListScreen.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Game/FormInputs.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Ranking/FormInputs.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Tournament/FormInputs.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/User/FormInputs.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/DateInput.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/NumberInput.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/SelectInput.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/StatusInput.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/TextInput.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PagePanel/PageDrawer.js" />
         <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/CancelAcceptOperation.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/operationButton/OperationButton.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/SearchPanel.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/AcceptOperation.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/AdvanceOperation.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/BanOperation.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/DegradeOperation.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/DeleteOperation.js" />
         <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/EditOperation.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/RejectOperation.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/UnlockOperation.js" />
         <option value="$PROJECT_DIR$/App/Components/Navigator/Navigator.js" />
         <option value="$PROJECT_DIR$/App/Main/AppContent.js" />
         <option value="$PROJECT_DIR$/App/Main/consts/possibleOperations.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/PanelOptions.js" />
         <option value="$PROJECT_DIR$/App/Redux/types/message.js" />
-        <option value="$PROJECT_DIR$/App/Redux/actions/message.js" />
-        <option value="$PROJECT_DIR$/App/Redux/reducers/message.js" />
-        <option value="$PROJECT_DIR$/App/Components/Common/MessageDialog/MessageDialog.js" />
         <option value="$PROJECT_DIR$/App/Main/consts/serverName.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/Table/CollectionList.js" />
         <option value="$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/Tournament/Rows.js" />
         <option value="$PROJECT_DIR$/App/Components/CollectionPanel/CollectionPanel.js" />
         <option value="$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/User/Rows.js" />
         <option value="$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/Ranking/Rows.js" />
         <option value="$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/Game/Rows.js" />
+        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Game/FormInputs.js" />
+        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Ranking/FormInputs.js" />
+        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/User/FormInputs.js" />
+        <option value="$PROJECT_DIR$/App/Components/Common/MessageDialog/MessageDialog.js" />
+        <option value="$PROJECT_DIR$/App/Redux/actions/message.js" />
+        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Tournament/FormInputs.js" />
+        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/TextInput.js" />
+        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/NumberInput.js" />
+        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/SelectInput.js" />
+        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/SearchPanel.js" />
+        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/DateInput.js" />
+        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/StatusInput.js" />
+        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PagePanel/PageDrawer.js" />
+        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/Table/CollectionList.js" />
+        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/PanelOptions.js" />
+        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/operationButton/OperationButton.js" />
+        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/RejectOperation.js" />
+        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/BanOperation.js" />
+        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/AcceptOperation.js" />
+        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/AdvanceOperation.js" />
+        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/DegradeOperation.js" />
+        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/DeleteOperation.js" />
+        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/UnlockOperation.js" />
+        <option value="$PROJECT_DIR$/App/Redux/types/confirmation.js" />
+        <option value="$PROJECT_DIR$/App/Redux/actions/confirmation.js" />
+        <option value="$PROJECT_DIR$/App/Redux/reducers/confirmation.js" />
+        <option value="$PROJECT_DIR$/App/Components/Common/ConfirmationDialog/ConfirmDialog.js" />
+        <option value="$PROJECT_DIR$/App/Redux/reducers/message.js" />
       </list>
     </option>
   </component>
@@ -193,7 +224,42 @@
               <item name="App" type="462c0819:PsiDirectoryNode" />
               <item name="Components" type="462c0819:PsiDirectoryNode" />
               <item name="CollectionPanel" type="462c0819:PsiDirectoryNode" />
-              <item name="SearchPanel" type="462c0819:PsiDirectoryNode" />
+              <item name="PagePanel" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="battleCraftMobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="battleCraftMobile" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
+              <item name="Components" type="462c0819:PsiDirectoryNode" />
+              <item name="CollectionPanel" type="462c0819:PsiDirectoryNode" />
+              <item name="PanelOptions" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="battleCraftMobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="battleCraftMobile" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
+              <item name="Components" type="462c0819:PsiDirectoryNode" />
+              <item name="CollectionPanel" type="462c0819:PsiDirectoryNode" />
+              <item name="PanelOptions" type="462c0819:PsiDirectoryNode" />
+              <item name="operations" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="battleCraftMobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="battleCraftMobile" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
+              <item name="Components" type="462c0819:PsiDirectoryNode" />
+              <item name="CollectionPanel" type="462c0819:PsiDirectoryNode" />
+              <item name="PanelOptions" type="462c0819:PsiDirectoryNode" />
+              <item name="operations" type="462c0819:PsiDirectoryNode" />
+              <item name="operationButton" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="battleCraftMobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="battleCraftMobile" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
+              <item name="Components" type="462c0819:PsiDirectoryNode" />
+              <item name="CollectionPanel" type="462c0819:PsiDirectoryNode" />
+              <item name="Table" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="battleCraftMobile" type="b2602c69:ProjectViewProjectNode" />
@@ -206,14 +272,17 @@
               <item name="battleCraftMobile" type="b2602c69:ProjectViewProjectNode" />
               <item name="battleCraftMobile" type="462c0819:PsiDirectoryNode" />
               <item name="App" type="462c0819:PsiDirectoryNode" />
-              <item name="Main" type="462c0819:PsiDirectoryNode" />
+              <item name="Components" type="462c0819:PsiDirectoryNode" />
+              <item name="Common" type="462c0819:PsiDirectoryNode" />
+              <item name="ConfirmationDialog" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="battleCraftMobile" type="b2602c69:ProjectViewProjectNode" />
               <item name="battleCraftMobile" type="462c0819:PsiDirectoryNode" />
               <item name="App" type="462c0819:PsiDirectoryNode" />
-              <item name="Main" type="462c0819:PsiDirectoryNode" />
-              <item name="consts" type="462c0819:PsiDirectoryNode" />
+              <item name="Components" type="462c0819:PsiDirectoryNode" />
+              <item name="Common" type="462c0819:PsiDirectoryNode" />
+              <item name="MessageDialog" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="battleCraftMobile" type="b2602c69:ProjectViewProjectNode" />
@@ -293,12 +362,13 @@
       <workItem from="1507369496117" duration="1097000" />
       <workItem from="1507370607301" duration="15166000" />
       <workItem from="1507393264388" duration="16829000" />
-      <workItem from="1507413773488" duration="2764000" />
+      <workItem from="1507413773488" duration="2992000" />
+      <workItem from="1507458635208" duration="15278000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35856000" />
+    <option name="totallyTimeSpent" value="51362000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-115" y="162" width="1368" height="741" extended-state="6" />
@@ -331,177 +401,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/Game/ListScreen.js" />
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/Tournament/ListScreen.js" />
-    <entry file="file://$PROJECT_DIR$/App/Main/functions/checkIfNotNull.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/react-native-form-generator/src/Form.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Tournament/FormDrawer.js" />
-    <entry file="file://$PROJECT_DIR$/App/Main/functions/convertArrayToObject.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="24" lean-forward="false" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Game/FormInputs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="34" lean-forward="false" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Ranking/FormInputs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="34" lean-forward="false" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/User/FormInputs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="30" lean-forward="true" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/react-native-form-generator/src/fields/DatePickerField.android.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Tournament/FormInputs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="78" column="21" lean-forward="true" selection-start-line="78" selection-start-column="21" selection-end-line="78" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/DateInput.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/TextInput.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="18" lean-forward="false" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/StatusInput.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/SelectInput.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="19" lean-forward="false" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/NumberInput.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="55" lean-forward="true" selection-start-line="1" selection-start-column="55" selection-end-line="1" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PagePanel/PageDrawer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="28" column="22" lean-forward="false" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/Game/PanelOptions.js" />
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/Tournaments/PanelOptions.js" />
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/AddOperation.js" />
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/SearchOperation.js" />
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/operationButton/OperationButton.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="14" lean-forward="true" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/App/Main/functions/checkIfObjectIsNotEmpty.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/AdvanceOperation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="49" lean-forward="false" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/BanOperation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="49" lean-forward="false" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/DegradeOperation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="49" lean-forward="false" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/DeleteOperation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="49" lean-forward="false" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/RejectOperation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="49" lean-forward="false" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/EditOperation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="29" column="12" lean-forward="true" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -532,27 +440,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/UnlockOperation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="5" column="43" lean-forward="true" selection-start-line="5" selection-start-column="43" selection-end-line="5" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/AcceptOperation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="33" column="35" lean-forward="true" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/PanelOptions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="49" column="28" lean-forward="true" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/App/Main/consts/possibleOperations.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -575,34 +462,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App/Redux/reducers/message.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="12" column="30" lean-forward="true" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#48#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Redux/actions/message.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="30" lean-forward="false" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/Common/MessageDialog/MessageDialog.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="24" column="28" lean-forward="true" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#26#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/App/Main/consts/serverName.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -611,13 +470,79 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/Table/CollectionList.js">
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/Tournament/Rows.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="52" column="34" lean-forward="false" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="67" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="30">
+          <caret line="2" column="4" lean-forward="true" selection-start-line="2" selection-start-column="4" selection-end-line="4" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/User/Rows.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="12" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/Game/Rows.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="12" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/Ranking/Rows.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="12" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Main/consts/fieldsOfObject.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Main/consts/kindsOfSort.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="29" column="12" lean-forward="true" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Game/FormInputs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="4" lean-forward="true" selection-start-line="2" selection-start-column="4" selection-end-line="3" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/User/FormInputs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="10" lean-forward="false" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Ranking/FormInputs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="10" lean-forward="false" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -629,55 +554,293 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/Tournament/Rows.js">
+    <entry file="file://$PROJECT_DIR$/node_modules/react-native-form-generator/src/fields/DatePickerField.android.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="4" lean-forward="true" selection-start-line="2" selection-start-column="4" selection-end-line="4" selection-end-column="12" />
+        <state relative-caret-position="120">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/User/Rows.js">
+    <entry file="file://$PROJECT_DIR$/node_modules/react-native-form-generator/src/lib/InputComponent.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="12" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+        <state relative-caret-position="-825">
+          <caret line="34" column="26" lean-forward="false" selection-start-line="34" selection-start-column="18" selection-end-line="34" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/Game/Rows.js">
+    <entry file="file://$PROJECT_DIR$/node_modules/react-native-form-generator/src/fields/InputField.ios.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="12" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+        <state relative-caret-position="270">
+          <caret line="20" column="23" lean-forward="true" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/Table/Rows/Ranking/Rows.js">
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/NumberInput.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="12" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+        <state relative-caret-position="2">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/CollectionPanel.js">
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/SelectInput.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="102" column="66" lean-forward="false" selection-start-line="102" selection-start-column="66" selection-end-line="102" selection-end-column="66" />
+        <state relative-caret-position="270">
+          <caret line="18" column="8" lean-forward="true" selection-start-line="18" selection-start-column="8" selection-end-line="22" selection-end-column="13" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/TextInput.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="8" lean-forward="true" selection-start-line="19" selection-start-column="8" selection-end-line="23" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#26#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/StatusInput.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="23" lean-forward="false" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#26#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/DateInput.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="28" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#26#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Tournament/FormInputs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="55" column="20" lean-forward="false" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#41#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/SearchPanel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="48" column="8" lean-forward="true" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
+        <state relative-caret-position="686">
+          <caret line="74" column="54" lean-forward="false" selection-start-line="74" selection-start-column="54" selection-end-line="74" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#26#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PagePanel/PageDrawer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="962">
+          <caret line="141" column="36" lean-forward="true" selection-start-line="141" selection-start-column="36" selection-end-line="141" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/Table/CollectionList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="8" lean-forward="false" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/CollectionPanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1798">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Styles/OptionsStyles.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="8" column="18" lean-forward="false" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/operationButton/OperationButton.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="11" column="16" lean-forward="true" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/PanelOptions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="602">
+          <caret line="70" column="47" lean-forward="true" selection-start-line="70" selection-start-column="47" selection-end-line="70" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/AcceptOperation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="52" column="42" lean-forward="false" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/AdvanceOperation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="48" column="42" lean-forward="false" selection-start-line="48" selection-start-column="42" selection-end-line="48" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/DegradeOperation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="48" column="42" lean-forward="false" selection-start-line="48" selection-start-column="42" selection-end-line="48" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/DeleteOperation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="51" column="42" lean-forward="false" selection-start-line="51" selection-start-column="42" selection-end-line="51" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/EditOperation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Redux/types/confirmation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="44" lean-forward="false" selection-start-line="1" selection-start-column="44" selection-end-line="1" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Redux/actions/loading.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/BanOperation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="65" column="37" lean-forward="false" selection-start-line="65" selection-start-column="20" selection-end-line="65" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/RejectOperation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="51" column="36" lean-forward="false" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Redux/reducers/confirmation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="35" lean-forward="false" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Redux/actions/confirmation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="38" lean-forward="false" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/Common/ConfirmationDialog/ConfirmDialog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="46" column="72" lean-forward="false" selection-start-line="46" selection-start-column="72" selection-end-line="46" selection-end-column="72" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Redux/actions/message.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="36" lean-forward="false" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/UnlockOperation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="23" column="27" lean-forward="true" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/Common/MessageDialog/MessageDialog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="55" column="27" lean-forward="true" selection-start-line="55" selection-start-column="27" selection-end-line="55" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Redux/reducers/message.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="7" column="39" lean-forward="false" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -38,6 +38,7 @@ class CancelAcceptOperation extends React.Component {
         let getSuccessMessage = this.getSuccessMessage;
         let startLoading=this.props.startLoading;
         let stopLoading=this.props.stopLoading;
+        let closePanel = this.props.onClosePanel;
 
         if(elementsToCancelAccept.length>0) {
             let uniqueElementsToBanNames = elementsToCancelAccept.map(function(item) {
@@ -48,7 +49,7 @@ class CancelAcceptOperation extends React.Component {
                 getPageObjectsWrapper: this.props.pageRequest
             };
 
-            let operationFunction = function(){
+            let operationFunction = () => {
                 startLoading("Rejecting...");
 
                 axios.post(serverName+`cancel/accept/`+collectionType,
@@ -60,12 +61,12 @@ class CancelAcceptOperation extends React.Component {
                             showFailureMessage(getFailureMessage(elementsWithFailedCancellation));
                         else
                             showSuccessMessage(getSuccessMessage(elementsToCancelAccept));
-                        this.props.onClosePanel();
+                        closePanel();
                     })
                     .catch(error => {
                         stopLoading();
                         showErrorMessage(error,operationFunction);
-                        this.props.onClosePanel();
+                        closePanel();
                     })
             };
 
@@ -79,7 +80,7 @@ class CancelAcceptOperation extends React.Component {
         }
         else{
             showFailureMessage("Nothing to reject. You can cancel acceptation only for accepted and not banned elements.")
-            this.props.onClosePanel();
+            closePanel();
         }
     }
 

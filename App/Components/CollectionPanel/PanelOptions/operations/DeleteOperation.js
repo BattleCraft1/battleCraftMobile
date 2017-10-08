@@ -38,6 +38,7 @@ class DeleteOperation extends React.Component {
         let getSuccessMessage = this.getSuccessMessage;
         let startLoading=this.props.startLoading;
         let stopLoading=this.props.stopLoading;
+        let closePanel = this.props.onClosePanel;
 
         if(elementsToDelete.length>0) {
             let uniqueElementsToBanNames = elementsToDelete.map(function(item) {
@@ -48,7 +49,7 @@ class DeleteOperation extends React.Component {
                 getPageObjectsWrapper: this.props.pageRequest
             };
 
-            let operationFunction = function(){
+            let operationFunction = () => {
                 startLoading("Deleting...");
 
                 axios.post(serverName+`delete/`+collectionType,
@@ -60,12 +61,12 @@ class DeleteOperation extends React.Component {
                             showFailureMessage(getFailureMessage(elementsWhichCannotBeDeleted));
                         else
                             showSuccessMessage(getSuccessMessage(elementsToDelete));
-                        this.props.onClosePanel();
+                        closePanel();
                     })
                     .catch(error => {
                         stopLoading();
                         showErrorMessage(error,operationFunction);
-                        this.props.onClosePanel();
+                        closePanel();
                     })
             };
 
@@ -79,7 +80,7 @@ class DeleteOperation extends React.Component {
         }
         else{
             showFailureMessage("Nothing to delete. You can delete only banned elements.")
-            this.props.onClosePanel();
+            closePanel();
         }
     }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
-    View
+    View,
+    Button
 } from 'react-native';
 
 import TextInput from './../Inputs/TextInput'
@@ -14,7 +15,7 @@ import convertArrayToObject from '../../../../Main/functions/convertArrayToObjec
 export default class FormInputs extends Component{
     constructor(props) {
         super(props);
-        this.tournamentStatus = {
+        this.state = {
             provincesNames:{},
             tournamentsGames:{},
             status:{},
@@ -35,18 +36,19 @@ export default class FormInputs extends Component{
 
     async componentWillReceiveProps(nextProps) {
         if (nextProps.enums!==undefined && nextProps.enums !== this.props.enums) {
-            this.setState({provincesNames:convertArrayToObject(this.props.enums.provincesNames)});
-            this.setState({tournamentsGames:convertArrayToObject(this.props.enums.gamesNames)});
-            let status = this.props.enums.tournamentsStatus;
+            this.setState({provincesNames:convertArrayToObject(this.props.enums["provincesNames"])});
+            this.setState({tournamentsGames:convertArrayToObject(this.props.enums["gamesNames"])});
+            let status = this.props.enums["tournamentStatus"];
+            console.log(status);
             status.push("BANNED");
             this.setState({status: convertArrayToObject(status)});
         }
     }
 
     componentDidMount(){
-        this.setState({provincesNames:convertArrayToObject(this.props.enums.provincesNames)});
-        this.setState({tournamentsGames:convertArrayToObject(this.props.enums.gamesNames)});
-        let status = this.props.enums.tournamentsStatus;
+        this.setState({provincesNames:convertArrayToObject(this.props.enums["provincesNames"])});
+        this.setState({tournamentsGames:convertArrayToObject(this.props.enums["gamesNames"])});
+        let status = this.props.enums["tournamentStatus"];
         status.push("BANNED");
         this.setState({status: convertArrayToObject(status)});
     }

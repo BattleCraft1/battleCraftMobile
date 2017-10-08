@@ -27,6 +27,9 @@ class UnlockOperation extends React.Component {
         let setPage = this.props.setPage;
         let showErrorMessage = this.props.showErrorMessageBox;
         let getSuccessMessage = this.getSuccessMessage;
+        let closePanel = this.props.onClosePanel;
+        let startLoading=this.props.startLoading;
+        let stopLoading=this.props.stopLoading;
 
         if(elementsToUnlock.length>0) {
             let uniqueElementsToBanNames = elementsToUnlock.map(function(item) {
@@ -37,7 +40,7 @@ class UnlockOperation extends React.Component {
                 getPageObjectsWrapper: this.props.pageRequest
             };
 
-            let operationFunction = function(){
+            let operationFunction = () => {
                 startLoading("Unlocking...");
 
                 axios.post(serverName+`unlock/`+collectionType,
@@ -46,12 +49,12 @@ class UnlockOperation extends React.Component {
                         stopLoading();
                         setPage(res.data);
                         showSuccessMessage(getSuccessMessage(elementsToUnlock));
-                        this.props.onClosePanel();
+                        closePanel();
                     })
                     .catch(error => {
                         stopLoading();
-                        showNetworkErrorMessage(error);
-                        this.props.onClosePanel();
+                        showErrorMessage(error);
+                        closePanel();
                     })
             };
             this.props.showConfirmationDialog(
@@ -64,7 +67,7 @@ class UnlockOperation extends React.Component {
         }
         else{
             showFailureMessage("Nothing to unlock. Only banned elements can be unlock.")
-            this.props.onClosePanel();
+            closePanel();
         }
     }
 

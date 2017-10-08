@@ -35,6 +35,7 @@ class DegradeOperation extends React.Component {
         let getSuccessMessage = this.getSuccessMessage;
         let startLoading=this.props.startLoading;
         let stopLoading=this.props.stopLoading;
+        let closePanel = this.props.onClosePanel;
 
         if(elementsToDegrade.length>0) {
             let uniqueElementsToDegradeNames = elementsToDegrade.map(function(item) {
@@ -45,7 +46,7 @@ class DegradeOperation extends React.Component {
                 getPageObjectsWrapper: this.props.pageRequest
             };
 
-            let operationFunction = function(){
+            let operationFunction = () => {
                 startLoading("Degrading...");
 
                 axios.post(serverName+`degrade/organizers`,
@@ -57,12 +58,12 @@ class DegradeOperation extends React.Component {
                             showFailureMessage(getFailureMessage(elementsWhichCannotBeDegrade));
                         else
                             showSuccessMessage(getSuccessMessage(elementsToDegrade));
-                        this.props.onClosePanel();
+                        closePanel();
                     })
                     .catch(error => {
                         stopLoading();
                         showErrorMessage(error,operationFunction);
-                        this.props.onClosePanel();
+                        closePanel();
                     })
             };
 
@@ -76,7 +77,7 @@ class DegradeOperation extends React.Component {
         }
         else{
             showFailureMessage("Nothing to degrade. You can only degrade Organizers")
-            this.props.onClosePanel();
+            closePanel();
         }
     }
 

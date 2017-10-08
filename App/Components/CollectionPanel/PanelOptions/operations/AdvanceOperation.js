@@ -35,6 +35,7 @@ class AdvanceOperation extends React.Component {
         let getSuccessMessage = this.getSuccessMessage;
         let startLoading=this.props.startLoading;
         let stopLoading=this.props.stopLoading;
+        let closePanel = this.props.onClosePanel;
 
         if(elementsToAdvance.length>0) {
             let uniqueElementsToAdvanceNames = elementsToAdvance.map(function(item) {
@@ -45,7 +46,7 @@ class AdvanceOperation extends React.Component {
                 getPageObjectsWrapper: this.props.pageRequest
             };
 
-            let operationFunction = function(){
+            let operationFunction = () => {
                 startLoading("Advancing...");
 
                 axios.post(serverName+`advance/users`,
@@ -59,12 +60,12 @@ class AdvanceOperation extends React.Component {
                         else{
                             showSuccessMessage(getSuccessMessage(elementsToAdvance));
                         }
-                        this.props.onClosePanel();
+                        closePanel();
                     })
                     .catch(error => {
                         stopLoading();
                         showErrorMessage(error,operationFunction);
-                        this.props.onClosePanel();
+                        closePanel();
                     })
             };
 
@@ -78,7 +79,7 @@ class AdvanceOperation extends React.Component {
         }
         else{
             showFailureMessage("Nothing to advance. Only Accepted users can be advanced.")
-            this.props.onClosePanel();
+            closePanel();
         }
     }
 

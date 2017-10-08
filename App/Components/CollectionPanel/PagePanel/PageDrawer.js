@@ -107,7 +107,7 @@ class FormDrawer extends Component {
             pageRequest.pageRequest.direction=direction;
             this.props.setPageRequest(pageRequest);
 
-            this.props.getPageOfData();
+            this.props.getPage(this.props.collectionType);
 
             this.props.onClosePanel();
         }

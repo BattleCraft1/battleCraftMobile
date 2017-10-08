@@ -7,8 +7,7 @@ export default class TextInput extends React.Component{
         super(props);
     }
 
-    changeInput(event){
-        let value = event.nativeEvent.text;
+    changeInput(value){
         if(value !=="")
             this.props.changeSearchForm(
                 this.props.indexOfSearchFields,
@@ -17,13 +16,18 @@ export default class TextInput extends React.Component{
                     "operation":this.props.operation,
                     "value":value
                 }
-             )
-          }
+            );
+        else
+            this.props.changeSearchForm(
+                this.props.indexOfSearchFields,
+                {}
+            )
+    }
 
     render(){
         return(
             <InputField
-                onChange={this.changeInput.bind(this)}
+                onValueChange={(value)=>this.changeInput(value)}
                 placeholder={this.props.name}
             />
         )

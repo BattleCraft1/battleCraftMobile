@@ -24,6 +24,6 @@ export function showErrorMessageBox(error, failedOperation) {
 
 export function hideMessageBox() {
     return {
-        type: types.SHOW_ERROR_MESSAGE_BOX
+        type: types.HIDE_MESSAGE_BOX
     }
 }

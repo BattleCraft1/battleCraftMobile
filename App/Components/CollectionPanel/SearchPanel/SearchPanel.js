@@ -45,16 +45,20 @@ class SearchPanel extends React.Component{
     }
 
     async getEnums(collectionType){
-        this.props.startLoading("Fetching data...");
-        await axios.get(serverName+`get/`+collectionType+`/enums`)
-            .then(res => {
-                this.props.stopLoading();
-                this.setState({enums:res.data});
-            })
-            .catch(error => {
-                this.props.stopLoading();
-                this.props.showErrorMessageBox(error);
-            });
+        let getEnumsOperation =async () =>{
+            this.props.startLoading("Fetching data...");
+            await axios.get(serverName+`get/`+collectionType+`/enums`)
+                .then(async res => {
+                    this.props.stopLoading();
+                    this.setState({enums:res.data});
+                })
+                .catch(async error => {
+                    this.props.stopLoading();
+                    await this.props.showErrorMessageBox(error,getEnumsOperation);
+                });
+        }
+        await getEnumsOperation();
+        this.forceUpdate();
     }
 
     search(inputs){
@@ -119,8 +123,7 @@ class SearchPanel extends React.Component{
                 <View>
                     <Text style={[MainStyles.textStyle, {fontSize: 26,}]}>Search</Text>
                 </View>
-                <Form
-                    ref='searchForm'>
+                <Form ref='searchForm'>
                     {searchInputs}
                 </Form>
             </ScrollView>
@@ -137,7 +140,7 @@ function mapStateToProps( state ) {
     return {
         page: state.page,
         pageRequest: state.pageRequest,
-        search: state.search,
+        message: state.message,
         loading: state.loading
     };
 }

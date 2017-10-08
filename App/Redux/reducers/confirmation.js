@@ -6,6 +6,14 @@ export const confirmation = createReducer( {}, {
         action.confirmation.isShown=true;
         let newState = action.confirmation;
         return newState;
+    },
+    [types.HIDE_CONFIRMATION_DIALOG]( state, action ) {
+        return {
+            isShown: false,
+            header: "",
+            message: "",
+            onConfirmFunction:()=>{}
+        };
     }
 } );
 

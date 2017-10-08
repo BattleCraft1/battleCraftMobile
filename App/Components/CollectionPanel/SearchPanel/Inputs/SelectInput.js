@@ -6,8 +6,7 @@ export default class SelectInput extends React.Component{
         super(props);
     }
 
-    changeInput(event){
-        let value = event.nativeEvent.text;
+    changeInput(value){
         if(value!=="")
             this.props.changeSearchForm(
                 this.props.indexOfSearchFields,
@@ -16,13 +15,18 @@ export default class SelectInput extends React.Component{
                     "operation":this.props.operation,
                     "value":value
                 }
+            );
+        else
+            this.props.changeSearchForm(
+                this.props.indexOfSearchFields,
+                {}
             )
     }
 
     render(){
         return(
             <PickerField
-                onChange={this.changeInput.bind(this)}
+                onValueChange={(value)=>this.changeInput(value)}
                 label={this.props.name}
                 options={this.props.options}/>
         )

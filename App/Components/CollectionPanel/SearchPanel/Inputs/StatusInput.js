@@ -6,10 +6,9 @@ export default class TournamentStatus extends React.Component{
         super(props);
     }
 
-    changeInput(event){
-        let value = event.nativeEvent.text;
+    changeInput(value){
         if(value!==""){
-            if(this.status.value==='BANNED')
+            if(value==='BANNED')
                 this.props.changeSearchForm(
                 "status",
                     {
@@ -28,12 +27,17 @@ export default class TournamentStatus extends React.Component{
                     }
                 );
         }
+        else
+            this.props.changeSearchForm(
+                "status",
+                {}
+            )
     }
 
     render(){
         return(
             <PickerField
-                onChange={this.changeInput.bind(this)}
+                onValueChange={(value)=>this.changeInput(value)}
                 label='Status'
                 options={this.props.options}/>
         )

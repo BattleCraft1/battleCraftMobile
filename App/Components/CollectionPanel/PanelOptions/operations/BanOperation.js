@@ -28,6 +28,7 @@ class BanOperation extends React.Component {
         let startLoading=this.props.startLoading;
         let stopLoading=this.props.stopLoading;
         let collectionType = this.props.collectionType;
+        let closePanel = this.props.onClosePanel;
 
         if(elementsToBan.length>0) {
             let uniqueElementsToBanNames = elementsToBan.map(function(item) {
@@ -38,7 +39,7 @@ class BanOperation extends React.Component {
                 getPageObjectsWrapper: this.props.pageRequest
             };
 
-            let operationFunction = function(){
+            let operationFunction = () => {
                 startLoading("Banning...");
 
                 axios.post(serverName+'ban/'+collectionType,
@@ -47,12 +48,13 @@ class BanOperation extends React.Component {
                         stopLoading();
                         setPage(res.data);
                         showSuccessMessage(getSuccessMessage(elementsToBan));
-                        this.props.onClosePanel();
+                        closePanel();
+
                     })
                     .catch(error => {
                         stopLoading();
                         showErrorMessage(error,operationFunction);
-                        this.props.onClosePanel();
+                        closePanel();
                     });
 
             };
@@ -67,7 +69,7 @@ class BanOperation extends React.Component {
         }
         else{
             showFailureMessage("Nothing to ban. You can ban only not banned elements.")
-            this.props.onClosePanel();
+            closePanel();
         }
     }
 
