@@ -21,11 +21,11 @@ export default class Navbar extends Component {
 
     updateText = (id,val) => {
         this.setState({menuText: val});
-        this.props.onChangeScreen(val);
+        this.props.navigate(val);
     };
 
     onPressLogo = () => {
-        this.props.onChangeScreen("Main");
+        this.props.navigate("Main");
 	};
 
 	render() {

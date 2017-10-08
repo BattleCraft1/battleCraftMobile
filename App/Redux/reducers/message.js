@@ -3,14 +3,25 @@ import * as types from '../types/message'
 
 export const message = createReducer( {}, {
     [types.SHOW_SUCCESS_MESSAGE_BOX]( state, action ) {
-        action.message.isShown=true;
-        action.message.messageType="Success";
-        return action.message;
+        return {
+            isShown: true,
+            messageText: action.message,
+            messageType: "Success"
+        };
     },
     [types.SHOW_FAIL_MESSAGE_BOX]( state, action ) {
-        action.message.isShown=true;
-        action.message.messageType="Fail";
-        return action.message;
+        return {
+            isShown: true,
+            messageText: action.message,
+            messageType: "Fail"
+        };
+    },
+    [types.HIDE_MESSAGE_BOX]( state, action ) {
+        return {
+            isShown: false,
+            messageText: "",
+            messageType: ""
+        };
     },
     [types.SHOW_ERROR_MESSAGE_BOX]( state, action ) {
         let message;

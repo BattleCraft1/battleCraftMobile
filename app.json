@@ -1,21 +1,5 @@
 {
   "expo": {
-    "name": "battleCraft",
-    "description": "An empty new project",
-    "slug": "battleCraft",
-    "privacy": "public",
-    "sdkVersion": "20.0.0",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "primaryColor": "#cccccc",
-    "loading": {
-      "hideExponentText": false
-    },
-    "packagerOpts": {
-      "assetExts": ["ttf", "mp4"]
-    },
-    "ios": {
-      "supportsTablet": true
-    }
+    "sdkVersion": "21.0.0"
   }
 }

@@ -6,12 +6,8 @@ import {
 } from 'react-native';
 
 import Navbar from '../Components/Navbar/Navbar';
+import Navigator from '../Components/Navigator/Navigator'
 import SplashScreen from '../Components/Common/SplashScreen';
-import TournamentList from '../Components/CollectionPanel/Table/Tournament/ListScreen';
-import GamesList from '../Components/CollectionPanel/Table/Game/ListScreen';
-import UsersList from '../Components/CollectionPanel/Table/User/ListScreen';
-import Ranking from '../Components/CollectionPanel/Table/Ranking/ListScreen';
-import AccountScreen from '../Components/Account/AccountScreen';
 import MainStyles from '../Styles/MainStyles'
 import FadeView from '../Components/Common/FadeView'
 import ConfirmDialog from '../Components/Common/ConfirmationDialog/ConfirmDialog'
@@ -28,52 +24,35 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentScreen: "Main",
+            navigValue: "Main",
             appReady:false
         };
-        this._setScreen = this._setScreen.bind(this);
     }
 
     async componentDidMount() {
         this.setState({appReady:false});
         this.props.startLoading("Starting application...");
         await Font.loadAsync({
-            'arial': require('./../../assets/Fonts/arial.ttf'),
-            'FontAwesome': require('./../../assets/Fonts/FontAwesome.ttf')
+            'arial': require('../../assets/Fonts/arial.ttf'),
+            'FontAwesome': require('../../assets/Fonts/FontAwesome.ttf')
         });
         this.props.stopLoading();
         this.setState({appReady:true});
     }
 
-    _setScreen(screenValue){
-        this.setState({currentScreen: screenValue});
+    navigate(navigValue){
+        this.setState({navigValue: navigValue});
     }
 
-    selectMainScreen() {
-        switch(this.state.currentScreen) {
-            case "Tournaments":
-                return <TournamentList/>;
-            case "Games":
-                return <GamesList/>;
-            case "Rankings":
-                return <Ranking/>;
-            case "Users":
-                return <UsersList/>;
-            case "My account":
-                return <AccountScreen/>;
-            default:
-                return <SplashScreen/>;
-        }
-    }
 
     createContent(){
         let content;
         if(this.state.appReady){
             content=
                 <View style={{flex:1}}>
-                    <Navbar onChangeScreen={this._setScreen}/>
+                    <Navbar navigate={this.navigate.bind(this)}/>
                     <FadeView style={{flex:1}}>
-                        {this.selectMainScreen()}
+                        <Navigator navigValue={this.state.navigValue}/>
                         <ConfirmDialog/>
                         <MessageDialog/>
                         <LoadingSpinner/>

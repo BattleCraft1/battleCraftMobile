@@ -6,3 +6,9 @@ export function showConfirmationDialog(confirmation) {
         confirmation: confirmation
     }
 }
+
+export function hideConfirmationDialog() {
+    return {
+        type: types.HIDE_CONFIRMATION_DIALOG
+    }
+}

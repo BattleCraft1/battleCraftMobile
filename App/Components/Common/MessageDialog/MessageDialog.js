@@ -18,21 +18,16 @@ class MessageDialog extends React.Component {
         super(props);
     }
 
-    hideMessageDialog(){
-        let message=this.props.message;
-        message.isShown=false;
-        this.forceUpdate();
-    }
-
     render(){
         let operationButton;
         if(this.props.message.messageType==="Network error"){
+            console.log(this.props.message.isShown);
             operationButton=
                 <TouchableHighlight
                     style={MainStyles.centering}
                     onPress={() => {
+                        this.props.hideMessageBox();
                         this.props.message.failedOperation();
-                        this.hideMessageDialog();
                     }}>
                     <Icon name="refresh" size={20} color="#ffffff"/>
                 </TouchableHighlight>
@@ -42,7 +37,7 @@ class MessageDialog extends React.Component {
             operationButton=
                 <TouchableHighlight
                     onPress={() => {
-                        this.hideMessageDialog();
+                        this.props.hideMessageBox();
                     }}>
                     <Text style={MainStyles.smallWhiteStyle}>Ok</Text>
                 </TouchableHighlight>
