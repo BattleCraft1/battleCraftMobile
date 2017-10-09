@@ -33,7 +33,6 @@ class AcceptOperation extends React.Component {
         let showFailureMessage = this.props.showFailMessageBox;
         let setPage = this.props.setPage;
         let showErrorMessage = this.props.showErrorMessageBox;
-        let operationFunction = this.props.showErrorMessageBox;
         let getFailureMessage = this.getFailureMessage;
         let getSuccessMessage = this.getSuccessMessage;
         let startLoading=this.props.startLoading;

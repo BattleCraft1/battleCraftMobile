@@ -40,12 +40,12 @@ const styles = StyleSheet.create({
         fontFamily:'arial',
         color: '#fff',
         fontWeight: 'bold',
-        fontSize: 26,
+        fontSize: 20,
     },
     smallWhiteStyle: {
         fontFamily:'arial',
         color: '#fff',
-        fontSize: 20,
+        fontSize: 17,
     },
 });
 

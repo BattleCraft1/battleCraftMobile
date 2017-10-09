@@ -13,8 +13,7 @@ const styles = StyleSheet.create({
     row:{
         backgroundColor:'#a58e60',
         borderColor:'#e3ca86',
-        borderWidth: 2,
-        borderTopWidth: 0,
+        borderWidth: 2
     },
     sectionHeader:{
         flexDirection: 'row',

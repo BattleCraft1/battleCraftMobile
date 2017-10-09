@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    ListView
+    ListView,
+    Image
 } from 'react-native';
 
 import TableStyles from '../../../../../Styles/TableStyles'
 import MainStyles from '../../../../../Styles/MainStyles'
+
+import Checkbox from '../../../../Common/CheckBox/Checkbox'
+import MultiCheckbox from '../../../../Common/CheckBox/MultiCheckbox'
+
+import {serverName} from '../../../../../Main/consts/serverName';
 
 export default class Rows extends Component{
 
@@ -29,31 +35,43 @@ export default class Rows extends Component{
         return (
             <View style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
-                    <Text style={[MainStyles.smallWhiteStyle, {fontSize: 24}]}> {rowData.name}</Text>
+                    <Text style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {rowData.name}</Text>
                     <Checkbox name={rowData.name}/>
                 </View>
 
-                <View style={[TableStyles.row, {flexDirection:'row'}]}>
-                    <View>
-                        <Image
-                            style={{width: 148, height: 147}}
-                            source={avatar} />
+                <View style={[TableStyles.row, {flexDirection:'column'}]}>
+                    <View style={{flexDirection:'row'}}>
+                        <View style={{flex:1,justifyContent: 'center', alignItems: 'center'}}>
+                            <Image
+                                style={{width: 70, height: 70}}
+                                source={{uri:serverName+`/get/user/`+rowData.name+`/avatar/mobile`}} />
+                        </View>
+                        <View style={{flex: 3, alignSelf: "stretch"}}>
+                            <View style={[TableStyles.row]}>
+                                <Text style={[MainStyles.smallWhiteStyle]}> Name: {rowData.firstname}</Text>
+                            </View>
+                            <View style={[TableStyles.row]}>
+                                <Text style={[MainStyles.smallWhiteStyle]}> Surname: {rowData.lastname}</Text>
+                            </View>
+                            <View style={[TableStyles.row]}>
+                                <Text style={[MainStyles.smallWhiteStyle]}> E-mail: {rowData.email}</Text>
+                            </View>
+                        </View>
                     </View>
-                    <View style={{flex: 1, alignSelf: "stretch"}}>
-                        <View style={[TableStyles.row]}>
-                            <Text style={[MainStyles.smallWhiteStyle]}> Name: {rowData.firstname}</Text>
-                        </View>
-                        <View style={[TableStyles.row]}>
-                            <Text style={[MainStyles.smallWhiteStyle]}> Surname: {rowData.surname}</Text>
-                        </View>
-                        <View style={[TableStyles.row]}>
-                            <Text style={[MainStyles.smallWhiteStyle]}> e-mail: {rowData.email}</Text>
-                        </View>
+                    <View>
                         <View style={[TableStyles.row]}>
                             <Text style={[MainStyles.smallWhiteStyle]}> Province: {rowData.province}</Text>
                         </View>
                         <View style={[TableStyles.row]}>
                             <Text style={[MainStyles.smallWhiteStyle]}> City: {rowData.city}</Text>
+                        </View>
+                        <View style={[TableStyles.row]}>
+                            <Text style={[MainStyles.smallWhiteStyle]}> Phone number: {rowData.phoneNumber}</Text>
+                        </View>
+                        <View style={[TableStyles.row]}>
+                            <Text style={[MainStyles.smallWhiteStyle]}> Status: {
+                                rowData.banned?"banned":
+                                    rowData.status.toLowerCase().split('_').join(' ')}</Text>
                         </View>
                     </View>
                 </View>

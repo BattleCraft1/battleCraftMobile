@@ -10,7 +10,7 @@ import { Form,
     PickerField
 } from 'react-native-form-generator';
 import MainStyles from '../../../Styles/MainStyles'
-import {tournamentFields} from '../../../Main/consts/fieldsOfObject'
+import {fieldsOfObjects} from '../../../Main/consts/fieldsOfObject'
 import {kindOfSort} from '../../../Main/consts/kindsOfSort'
 
 import { connect } from 'react-redux';
@@ -81,7 +81,7 @@ class FormDrawer extends Component {
             validationErrors.push("Page size must be between 1 and 10");
         }
 
-        if(!tournamentFields.hasOwnProperty(property))
+        if(!fieldsOfObjects[this.props.collectionType].hasOwnProperty(property))
         {
             validationErrors.push("Sort field has not valid value");
         }
@@ -118,7 +118,7 @@ class FormDrawer extends Component {
             <View style={[MainStyles.contentStyle, MainStyles.centering]}>
                 <ScrollView keyboardShouldPersistTaps='always' style={{paddingLeft:10,paddingRight:10}}>
                     <View>
-                        <Text style={[MainStyles.textStyle, {fontSize: 26,}]}>Get Tournaments Page</Text>
+                        <Text style={[MainStyles.textStyle, {fontSize: 26,}]}>Get Page</Text>
                     </View>
                     <Form
                         ref='pageForm'
@@ -137,7 +137,7 @@ class FormDrawer extends Component {
                         <PickerField
                             ref="property"
                             label='Sort by field'
-                            options={tournamentFields}
+                            options={fieldsOfObjects[this.props.collectionType]}
                         />
                         <PickerField
                             ref="direction"

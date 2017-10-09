@@ -2,15 +2,27 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    ListView
+    ListView,
+    Button
 } from 'react-native';
+
+import Checkbox from '../../../../Common/CheckBox/Checkbox'
+import MultiCheckbox from '../../../../Common/CheckBox/MultiCheckbox'
 
 import TableStyles from '../../../../../Styles/TableStyles'
 import MainStyles from '../../../../../Styles/MainStyles'
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../../../../../Redux/actions';
+
 import dateFormat from 'dateformat';
 
-export default class Rows extends Component{
+import {serverName} from '../../../../../Main/consts/serverName';
+
+import { FileSystem } from 'expo';
+
+class Rows extends Component{
 
     constructor(props) {
         super(props);
@@ -26,25 +38,52 @@ export default class Rows extends Component{
         };
     }
 
+    async downloadGameRules(gameName){
+        const URL = serverName + `/get/game/` + gameName + `/rules`;
+        const fileName = gameName+'.pdf';
+        const direcotory = FileSystem.documentDirectory + fileName;
+
+        let downloadGameRulesOperation = async () => {
+        this.props.startLoading("Downloading game rules...");
+        await FileSystem.downloadAsync(serverName, direcotory)
+            .then(async (response) => {
+                this.props.stopLoading();
+                this.props.showSuccessMessageBox("file saved in: "+direcotory);
+            })
+            .catch(async (error) => {
+                this.props.stopLoading();
+                await this.props.showErrorMessageBox(error,downloadGameRulesOperation);
+            });
+        };
+
+        await downloadGameRulesOperation();
+    }
+
+
 
     renderRow(rowData) {
         return (
             <View style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
-                    <Text style={[MainStyles.smallWhiteStyle, {fontSize: 24}]}> {rowData.name}</Text>
+                    <Text style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {rowData.name}</Text>
                     <Checkbox name={rowData.name}/>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Button title={"Download rules"} color='#4b371b'/>
+                    <Button onPress={async () => await this.downloadGameRules(rowData.name)} title={"Download rules"} color='#4b371b'/>
                 </View>
                 <View style={[TableStyles.row]}>
                     <Text style={[MainStyles.smallWhiteStyle]}> Tournaments number: {rowData.tournamentsNumber}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> Creator: {rowData.creator}</Text>
+                    <Text style={[MainStyles.smallWhiteStyle]}> Creator: {rowData.creatorName}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
                     <Text style={[MainStyles.smallWhiteStyle]}> Creation date: {dateFormat(rowData.dateOfStart,"dd-MM-yyyy hh:mm")}</Text>
+                </View>
+                <View style={[TableStyles.row]}>
+                    <Text style={[MainStyles.smallWhiteStyle]}> Status: {
+                        rowData.banned?"banned":
+                            rowData.status.toLowerCase().split('_').join(' ')}</Text>
                 </View>
             </View>);
     }
@@ -61,3 +100,16 @@ export default class Rows extends Component{
         );
     }
 }
+
+function mapDispatchToProps( dispatch ) {
+    return bindActionCreators( ActionCreators, dispatch );
+}
+
+function mapStateToProps( state ) {
+    return {
+        message: state.message,
+        loading: state.loading
+    };
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( Rows );

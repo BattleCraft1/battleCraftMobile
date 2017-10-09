@@ -30,16 +30,16 @@ export default class FormInputs extends Component{
 
     async componentWillReceiveProps(nextProps) {
         if (nextProps.enums!==undefined && nextProps.enums !== this.props.enums) {
-            this.setState({provincesNames:convertArrayToObject(nextProps.enums.provincesNames)});
-            let status = this.props.enums.usersTypes;
+            this.setState({provincesNames:convertArrayToObject(nextProps.enums["provincesNames"])});
+            let status = this.props.enums["usersTypes"];
             status.push("BANNED");
             this.setState({status: convertArrayToObject(status)});
         }
     }
 
     componentDidMount(){
-        this.setState({provincesNames:this.convertArrayToObject(props.enums.provincesNames)});
-        this.setState({status:convertArrayToObject(this.props.enums.usersTypes)});
+        this.setState({provincesNames:convertArrayToObject(this.props.enums["provincesNames"])});
+        this.setState({status:convertArrayToObject(this.props.enums["usersTypes"])});
         let status = this.props.enums.usersTypes;
         status.push("BANNED");
         this.setState({status: convertArrayToObject(status)});
