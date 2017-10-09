@@ -33,11 +33,23 @@ class CollectionPanel extends Component {
         }
     }
 
+    getRankingRequest(pageRequest){
+        pageRequest.pageRequest.direction = "DESC";
+        pageRequest.pageRequest.property = "points";
+        pageRequest.searchCriteria = [];
+        pageRequest.searchCriteria.push(
+            {
+                "keys": ["tour", "tournament", "game","name"],
+                "operation":":",
+                "value":"Warhammer"
+            }
+        );
+    }
+
     async componentDidMount() {
         if(this.props.collectionType==='ranking'){
             let pageRequest = this.props.pageRequest;
-            pageRequest.pageRequest.direction = "DESC";
-            pageRequest.pageRequest.property = "points";
+            this.getRankingRequest(pageRequest);
             this.props.setPageRequest(pageRequest);
         }
         this.setState({collectionType: this.props.collectionType});
@@ -54,14 +66,13 @@ class CollectionPanel extends Component {
             pageRequest.pageRequest.page = 0;
             pageRequest.pageRequest.size = 10;
             if(nextProps.collectionType==='ranking'){
-                pageRequest.pageRequest.direction = "DESC";
-                pageRequest.pageRequest.property = "points";
+                this.getRankingRequest(pageRequest);
             }
             else{
                 pageRequest.pageRequest.direction = "ASC";
                 pageRequest.pageRequest.property = "name";
+                pageRequest.searchCriteria = [];
             }
-            pageRequest.searchCriteria = [];
             this.props.setPageRequest(pageRequest);
             await this.getPageRequest(nextProps.collectionType);
 
@@ -104,6 +115,11 @@ class CollectionPanel extends Component {
                                       collectionType={this.props.collectionType}
                                       onClosePanel={() => this._drawer.close()}/>;
 
+        let optionsButton = <View/>;
+        if(this.props.collectionType!=='ranking'){
+            optionsButton = <Button title={"Options"} color='#4b371b' onPress={()=>this.setState({optionsVisible:true})}/>;
+        }
+
         return(<Drawer
             ref={(ref) => this._drawer = ref}
             type="overlay"
@@ -141,13 +157,12 @@ class CollectionPanel extends Component {
                     <CollectionList getPage={this.getPageRequest.bind(this)}
                                     collectionType={this.props.collectionType}/>
                 </View>
-                <Button title={"Options"} color='#4b371b' onPress={()=>this.setState({optionsVisible:true})}/>
+                {optionsButton}
             </View>
             <PanelOptions
                 collectionType={this.props.collectionType}
                 onClosePanel={(isVisible) => this.setState({optionsVisible:isVisible})}
-                isVisible={this.state.optionsVisible}
-            />
+                isVisible={this.state.optionsVisible}/>
         </Drawer>)
     }
 }

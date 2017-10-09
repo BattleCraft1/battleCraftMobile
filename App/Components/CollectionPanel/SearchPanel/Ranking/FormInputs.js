@@ -23,29 +23,29 @@ export default class FormInputs extends Component{
                 "city":{},
                 "numberOfBattles":{},
                 "numberOfTournaments":{},
-                "points":{}
+                "points":{},
+                "dateOfStart":{},
+                "dateOfEnd":{},
             }
         };
     }
 
     async componentWillReceiveProps(nextProps) {
         if (nextProps.enums!==undefined && nextProps.enums !== this.props.enums) {
-            this.setState({provincesNames:nextProps.enums.provincesNames});
-            this.setState({tournamentsGames:nextProps.enums.gamesNames});
+            this.setState({provincesNames:nextProps.enums["provincesNames"]});
+            this.setState({tournamentsGames:nextProps.enums["gamesNames"]});
         }
     }
 
     componentDidMount(){
-        this.setState({provincesNames:convertArrayToObject(this.props.enums.provincesNames)});
-        this.setState({tournamentsGames:convertArrayToObject(this.props.enums.gamesNames)});
-        let status = this.props.enums.tournamentsStatus;
-        status.push("BANNED");
-        this.setState({status: convertArrayToObject(status)});
+        this.setState({provincesNames:nextProps.enums["provincesNames"]});
+        this.setState({tournamentsGames:nextProps.enums["gamesNames"]});
     }
 
     changeSearchForm(index,value){
-        this.setState({provincesNames:this.props.enums.provincesNames});
-        this.setState({tournamentsGames:this.props.enums.gamesNames});
+        let searchFormFields = this.state.searchFormField;
+        searchFormFields[index] = value;
+        this.setState({searchFormField:searchFormFields});
     }
 
     render(){

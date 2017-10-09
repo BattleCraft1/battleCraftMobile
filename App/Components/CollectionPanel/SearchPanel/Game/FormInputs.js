@@ -27,16 +27,14 @@ export default class FormInputs extends Component{
 
     async componentWillReceiveProps(nextProps) {
         if (nextProps.enums!==undefined && nextProps.enums !== this.props.enums) {
-            this.setState({status:convertArrayToObject(nextProps.enums.gamesStatus)});
-            let status = this.props.enums.status;
+            let status = this.props.enums["gamesStatus"];
             status.push("BANNED");
             this.setState({status: convertArrayToObject(status)});
         }
     }
 
     componentDidMount(){
-        this.setState({status:convertArrayToObject(this.props.enums.gamesStatus)});
-        let status = this.props.enums.status;
+        let status = this.props.enums["gamesStatus"];
         status.push("BANNED");
         this.setState({status: convertArrayToObject(status)});
     }

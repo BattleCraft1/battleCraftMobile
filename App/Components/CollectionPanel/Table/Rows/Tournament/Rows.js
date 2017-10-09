@@ -34,7 +34,7 @@ export default class Rows extends Component{
         return (
             <View style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
-                    <Text style={[MainStyles.smallWhiteStyle, {fontSize: 24}]}> {rowData.name}</Text>
+                    <Text style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {rowData.name}</Text>
                     <Checkbox name={rowData.name}/>
                 </View>
                 <View style={[TableStyles.row]}>

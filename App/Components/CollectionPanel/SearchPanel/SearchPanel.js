@@ -56,7 +56,7 @@ class SearchPanel extends React.Component{
                     this.props.stopLoading();
                     await this.props.showErrorMessageBox(error,getEnumsOperation);
                 });
-        }
+        };
         await getEnumsOperation();
         this.forceUpdate();
     }
