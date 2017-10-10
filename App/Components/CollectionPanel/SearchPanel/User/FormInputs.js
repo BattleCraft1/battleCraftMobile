@@ -28,21 +28,24 @@ export default class FormInputs extends Component{
         };
     }
 
-    async componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps) {
         if (nextProps.enums!==undefined && nextProps.enums !== this.props.enums) {
             this.setState({provincesNames:convertArrayToObject(nextProps.enums["provincesNames"])});
             let status = this.props.enums["usersTypes"];
-            status.push("BANNED");
-            this.setState({status: convertArrayToObject(status)});
+            if(status!==undefined){
+                status.push("BANNED");
+                this.setState({status: convertArrayToObject(status)});
+            }
         }
     }
 
     componentDidMount(){
         this.setState({provincesNames:convertArrayToObject(this.props.enums["provincesNames"])});
-        this.setState({status:convertArrayToObject(this.props.enums["usersTypes"])});
-        let status = this.props.enums.usersTypes;
-        status.push("BANNED");
-        this.setState({status: convertArrayToObject(status)});
+        let status = this.props.enums["usersTypes"];
+        if(status!==undefined){
+            status.push("BANNED");
+            this.setState({status: convertArrayToObject(status)});
+        }
     }
 
     changeSearchForm(index,value){
@@ -55,6 +58,7 @@ export default class FormInputs extends Component{
         return(
             <View>
                 <TextInput
+                    key="name"
                     name = "Name"
                     placeholder = "Jarek123"
                     keys = {["name"]}
@@ -62,6 +66,7 @@ export default class FormInputs extends Component{
                     indexOfSearchFields = "Name"
                     changeSearchForm = {this.changeSearchForm.bind(this)}/>
                 <TextInput
+                    key="firstName"
                     name = "First name"
                     placeholder = "Jarek"
                     keys = {["firstname"]}
@@ -69,6 +74,7 @@ export default class FormInputs extends Component{
                     indexOfSearchFields = "firstname"
                     changeSearchForm = {this.changeSearchForm.bind(this)}/>
                 <TextInput
+                    key="lastName"
                     name = "Last name"
                     placeholder = "Kowalski"
                     keys = {["lastname"]}
@@ -76,6 +82,7 @@ export default class FormInputs extends Component{
                     indexOfSearchFields = "lastname"
                     changeSearchForm = {this.changeSearchForm.bind(this)}/>
                 <TextInput
+                    key="eMail"
                     name = "E-mail"
                     placeholder = "Jarek@gmail.com"
                     keys = {["email"]}
@@ -83,6 +90,7 @@ export default class FormInputs extends Component{
                     indexOfSearchFields = "email"
                     changeSearchForm = {this.changeSearchForm.bind(this)}/>
                 <TextInput
+                    key="city"
                     name = "City"
                     placeholder = "Lublin"
                     keys = {["address", "city"]}
@@ -90,6 +98,7 @@ export default class FormInputs extends Component{
                     indexOfSearchFields = "city"
                     changeSearchForm = {this.changeSearchForm.bind(this)}/>
                 <SelectInput
+                    key="province"
                     name = "Province"
                     keys = {["address", "province","location"]}
                     operation = ":"
@@ -97,6 +106,7 @@ export default class FormInputs extends Component{
                     options = {this.state.provincesNames}
                     changeSearchForm = {this.changeSearchForm.bind(this)}/>
                 <StatusInput
+                    key="status"
                     options = {this.state.status}
                     changeSearchForm = {this.changeSearchForm.bind(this)}/>
                 <Button title="Search"  color='#4b371b' onPress={()=>this.props.search(this.state.searchFormField)}/>

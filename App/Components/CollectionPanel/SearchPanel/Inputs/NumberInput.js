@@ -7,20 +7,17 @@ export default class NumberInput extends React.Component{
     }
 
     changeInput(value){
+        let result = {};
         if(value!=="" && !isNaN(parseInt(value)))
-            this.props.changeSearchForm(
-                this.props.indexOfSearchFields,
-                {
-                    "keys":this.props.keys,
-                    "operation":this.props.operation,
-                    "value":parseInt(value)
-                }
-            );
-        else
-            this.props.changeSearchForm(
-                this.props.indexOfSearchFields,
-                {}
-            )
+            result = {
+                "keys":this.props.keys,
+                "operation":this.props.operation,
+                "value":parseInt(value)
+            };
+        this.props.changeSearchForm(
+            this.props.indexOfSearchFields,
+            result
+        );
     }
 
     render(){

@@ -29,6 +29,14 @@ export default class Rows extends Component{
         };
     }
 
+    printStatus(data){
+        if(data.banned===true)
+            return "banned";
+        else if(data.status!==undefined)
+            return data.status.toLowerCase().split('_').join(' ');
+        else
+            return "";
+    }
 
     renderRow(rowData) {
         return (
@@ -56,9 +64,7 @@ export default class Rows extends Component{
                     <Text style={[MainStyles.smallWhiteStyle]}> Date end: {dateFormat(rowData.dateOfEnd,"dd-MM-yyyy hh:mm")}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> Status: {
-                        rowData.banned?"banned":
-                            rowData.status.toLowerCase().split('_').join(' ')}</Text>
+                    <Text style={[MainStyles.smallWhiteStyle]}> Status: {this.printStatus(rowData)}</Text>
                 </View>
             </View>);
     }

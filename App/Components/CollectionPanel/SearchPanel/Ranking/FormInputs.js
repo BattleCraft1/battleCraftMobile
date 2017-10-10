@@ -8,21 +8,28 @@ import TextInput from './../Inputs/TextInput'
 import SelectInput from './../Inputs/SelectInput'
 import NumberInput from './../Inputs/NumberInput'
 import DateInput from './../Inputs/DateInput'
+import GameInputForRanking from './../Inputs/GameInputForRanking'
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../../../../Redux/actions';
 
 import convertArrayToObject from '../../../../Main/functions/convertArrayToObject'
+import convertArrayToObjectWithoutEmptyField from '../../../../Main/functions/convertArrayToObjectWithoutEmptyField'
+import findGameName from '../../../../Main/functions/findGameName'
 
-export default class FormInputs extends Component{
+class FormInputs extends Component{
     constructor(props) {
         super(props);
         this.state = {
+            gameName:findGameName(this.props.pageRequest.searchCriteria),
             provincesNames:{},
             tournamentsGames:{},
             searchFormField: {
                 "name":{},
                 "province":{},
                 "city":{},
-                "numberOfBattles":{},
-                "numberOfTournaments":{},
+                "game":{},
                 "points":{},
                 "dateOfStart":{},
                 "dateOfEnd":{},
@@ -30,16 +37,29 @@ export default class FormInputs extends Component{
         };
     }
 
-    async componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps) {
         if (nextProps.enums!==undefined && nextProps.enums !== this.props.enums) {
-            this.setState({provincesNames:nextProps.enums["provincesNames"]});
-            this.setState({tournamentsGames:nextProps.enums["gamesNames"]});
+            this.setState({provincesNames:convertArrayToObject(nextProps.enums["provincesNames"])});
+            this.setState({tournamentsGames:convertArrayToObjectWithoutEmptyField(nextProps.enums["gamesNames"])});
+            this.setDefaultGameSearchCriteria();
         }
     }
 
     componentDidMount(){
-        this.setState({provincesNames:nextProps.enums["provincesNames"]});
-        this.setState({tournamentsGames:nextProps.enums["gamesNames"]});
+        this.setState({provincesNames:convertArrayToObject(this.props.enums["provincesNames"])});
+        this.setState({tournamentsGames:convertArrayToObjectWithoutEmptyField(this.props.enums["gamesNames"])});
+        this.setDefaultGameSearchCriteria();
+    }
+
+    setDefaultGameSearchCriteria(){
+        this.changeSearchForm(
+            "game",
+            {
+                "keys":["tour","tournament","game","name"],
+                "operation":":",
+                "value":this.state.gameName
+            }
+        );
     }
 
     changeSearchForm(index,value){
@@ -52,6 +72,7 @@ export default class FormInputs extends Component{
         return(
             <View>
                 <TextInput
+                    key="name"
                     name = "Name"
                     placeholder = "Jarek123"
                     keys = {["player","name"]}
@@ -60,6 +81,7 @@ export default class FormInputs extends Component{
                     changeSearchForm = {this.changeSearchForm.bind(this)}
                 />
                 <TextInput
+                    key="city"
                     name = "City"
                     placeholder = "Lublin"
                     keys = {["tour","tournament","address", "city"]}
@@ -68,6 +90,7 @@ export default class FormInputs extends Component{
                     changeSearchForm = {this.changeSearchForm.bind(this)}
                 />
                 <SelectInput
+                    key="province"
                     name = "Province"
                     keys = {["tour","tournament","address", "province","location"]}
                     operation = ":"
@@ -75,8 +98,10 @@ export default class FormInputs extends Component{
                     options = {this.state.provincesNames}
                     changeSearchForm = {this.changeSearchForm.bind(this)}
                 />
-                <SelectInput
+                <GameInputForRanking
+                    key="game"
                     name = "Game"
+                    value = {this.state.gameName}
                     keys = {["tour","tournament","game","name"]}
                     operation = ":"
                     indexOfSearchFields = "game"
@@ -84,6 +109,7 @@ export default class FormInputs extends Component{
                     changeSearchForm = {this.changeSearchForm.bind(this)}
                 />
                 <NumberInput
+                    key="points"
                     name = "Points"
                     keys = {["players","points"]}
                     operation = "<"
@@ -91,6 +117,7 @@ export default class FormInputs extends Component{
                     changeSearchForm = {this.changeSearchForm.bind(this)}
                 />
                 <DateInput
+                    key="dateFrom"
                     name = "Date from"
                     keys = {["tour","tournament","dateOfStart"]}
                     operation = ">"
@@ -98,6 +125,7 @@ export default class FormInputs extends Component{
                     changeSearchForm = {this.changeSearchForm.bind(this)}
                 />
                 <DateInput
+                    key="dateTo"
                     name = "Date to"
                     keys = {["tour","tournament","dateOfEnd"]}
                     operation = "<"
@@ -108,3 +136,17 @@ export default class FormInputs extends Component{
             </View>);
     }
 }
+
+
+
+function mapDispatchToProps( dispatch ) {
+    return bindActionCreators( ActionCreators, dispatch );
+}
+
+function mapStateToProps( state ) {
+    return {
+        pageRequest: state.pageRequest
+    };
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( FormInputs );

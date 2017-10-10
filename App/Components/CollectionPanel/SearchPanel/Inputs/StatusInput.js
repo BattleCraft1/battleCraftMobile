@@ -7,31 +7,26 @@ export default class TournamentStatus extends React.Component{
     }
 
     changeInput(value){
+        let result = {}
         if(value!==""){
             if(value==='BANNED')
-                this.props.changeSearchForm(
-                "status",
-                    {
-                        "keys":["banned"],
-                        "operation":":",
-                        "value":true
-                    }
-                );
+                result = {
+                    "keys":["banned"],
+                    "operation":":",
+                    "value":true
+                };
             else
-                this.props.changeSearchForm(
-                    "status",
-                    {
-                        "keys":["status"],
-                        "operation":":",
-                        "value":value
-                    }
-                );
+                result ={
+                    "keys":["status"],
+                    "operation":":",
+                    "value":value
+                };
         }
-        else
-            this.props.changeSearchForm(
-                "status",
-                {}
-            )
+
+        this.props.changeSearchForm(
+            "status",
+            result
+        );
     }
 
     render(){

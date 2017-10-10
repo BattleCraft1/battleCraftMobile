@@ -43,16 +43,28 @@ class CollectionList extends Component {
 
         switch(this.props.collectionType){
             case "tournaments":
-                return <TournamentsRows content={this.props.page.content}/>;
+                return React.createElement(
+                    TournamentsRows,
+                    {content:this.props.page.content},
+                    null);
                 break;
             case "users":
-                return <UsersRows content={this.props.page.content}/>;
+                return React.createElement(
+                    UsersRows,
+                    {content:this.props.page.content},
+                    null);
                 break;
             case "games":
-                return <GamesRows content={this.props.page.content}/>;
+                return React.createElement(
+                    GamesRows,
+                    {content:this.props.page.content},
+                    null);
                 break;
             case "ranking":
-                return <RankingRows content={this.props.page.content}/>;
+                return React.createElement(
+                    RankingRows,
+                    {content:this.props.page.content},
+                    null);
                 break;
         }
     }

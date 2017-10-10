@@ -58,7 +58,6 @@ class SearchPanel extends React.Component{
                 });
         };
         await getEnumsOperation();
-        this.forceUpdate();
     }
 
     search(inputs){
@@ -81,36 +80,40 @@ class SearchPanel extends React.Component{
         if(isNotEmpty(this.state.enums))
             switch(this.props.collectionType){
                 case 'tournaments':
-                    searchFormInputs=
-                    <TournamentsFormInputs
-                        enums = {this.state.enums}
-                        search = {this.search.bind(this)}
-                        hide = {this.props.onClosePanel.bind(this)}
-                    />;
+                    searchFormInputs=React.createElement(
+                        TournamentsFormInputs,
+                        {
+                            enums : this.state.enums,
+                            search : this.search.bind(this),
+                            hide : this.props.onClosePanel.bind(this)
+                        }, null);
                     break;
                 case 'users':
-                    searchFormInputs=
-                        <UsersFormInputs
-                            enums = {this.state.enums}
-                            search = {this.search.bind(this)}
-                            hide = {this.props.onClosePanel.bind(this)}
-                        />;
+                    searchFormInputs=React.createElement(
+                        UsersFormInputs,
+                        {
+                            enums : this.state.enums,
+                            search : this.search.bind(this),
+                            hide : this.props.onClosePanel.bind(this)
+                        }, null);
                     break;
                 case 'games':
-                    searchFormInputs=
-                        <GamesFormInputs
-                            enums = {this.state.enums}
-                            search = {this.search.bind(this)}
-                            hide = {this.props.onClosePanel.bind(this)}
-                        />;
+                    searchFormInputs=React.createElement(
+                        GamesFormInputs,
+                        {
+                            enums : this.state.enums,
+                            search : this.search.bind(this),
+                            hide : this.props.onClosePanel.bind(this)
+                        }, null);
                     break;
                 case 'ranking':
-                    searchFormInputs=
-                        <RankingFormInputs
-                            enums = {this.state.enums}
-                            search = {this.search.bind(this)}
-                            hide = {this.props.onClosePanel.bind(this)}
-                        />;
+                    searchFormInputs=React.createElement(
+                        RankingFormInputs,
+                        {
+                            enums : this.state.enums,
+                            search : this.search.bind(this),
+                            hide : this.props.onClosePanel.bind(this)
+                        }, null);
                     break;
             }
         return searchFormInputs;

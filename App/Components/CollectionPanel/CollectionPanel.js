@@ -59,7 +59,7 @@ class CollectionPanel extends Component {
     async componentWillReceiveProps(nextProps) {
         if (nextProps.collectionType !== undefined &&
             nextProps.collectionType !== this.props.collectionType) {
-
+            this.setState({formDrawer:""})
             this.setState({collectionType: nextProps.collectionType});
 
             let pageRequest = this.props.pageRequest;
@@ -85,14 +85,13 @@ class CollectionPanel extends Component {
             this.props.startLoading("Fetching page of data...");
             await axios.post(serverName+`page/`+collectionType,this.props.pageRequest)
                 .then(async (res) => {
-                    this.props.stopLoading();
-
-                    this.props.setPage(res.data);
+                    await this.props.setPage(res.data);
 
                     let pageRequest = this.props.pageRequest;
                     pageRequest.pageRequest.page=this.props.page.number;
                     pageRequest.pageRequest.size=this.props.page.numberOfElements;
                     this.props.setPageRequest(pageRequest);
+                    this.props.stopLoading();
                 })
                 .catch(async (error) => {
                     this.props.stopLoading();
@@ -100,25 +99,45 @@ class CollectionPanel extends Component {
                 });
         };
         await getPageOfDataOperation();
-        this.forceUpdate();
     }
 
-
-    render(){
-        let formDrawer;
+    createDrawer(){
+        let formDrawer = <View/>;
         if(this.state.formDrawer==='page')
-            formDrawer = <PageDrawer getPage={this.getPageRequest.bind(this)}
-                                     collectionType={this.props.collectionType}
-                                     onClosePanel={() => this._drawer.close()}/>;
+            formDrawer = React.createElement(
+                PageDrawer,
+                {
+                    getPage:this.getPageRequest.bind(this),
+                    collectionType:this.props.collectionType,
+                    onClosePanel:() => this._drawer.close()
+                },
+                null
+            );
         else if(this.state.formDrawer==='search')
-            formDrawer= <SearchDrawer getPage={this.getPageRequest.bind(this)}
-                                      collectionType={this.props.collectionType}
-                                      onClosePanel={() => this._drawer.close()}/>;
+            formDrawer = React.createElement(
+                SearchDrawer,
+                {
+                    getPage:this.getPageRequest.bind(this),
+                    collectionType:this.props.collectionType,
+                    onClosePanel:() => this._drawer.close()
+                },
+                null
+            );
+        return formDrawer;
+    }
 
+    createOptionsButton(){
         let optionsButton = <View/>;
         if(this.props.collectionType!=='ranking'){
             optionsButton = <Button title={"Options"} color='#4b371b' onPress={()=>this.setState({optionsVisible:true})}/>;
         }
+        return optionsButton;
+    }
+
+
+    render(){
+        let formDrawer = this.createDrawer();
+        let optionsButton = this.createOptionsButton();
 
         return(<Drawer
             ref={(ref) => this._drawer = ref}

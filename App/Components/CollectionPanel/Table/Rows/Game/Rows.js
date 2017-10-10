@@ -59,7 +59,14 @@ class Rows extends Component{
         await downloadGameRulesOperation();
     }
 
-
+    printStatus(data){
+        if(data.banned===true)
+            return "banned";
+        else if(data.status!==undefined)
+            return data.status.toLowerCase().split('_').join(' ');
+        else
+            return "";
+    }
 
     renderRow(rowData) {
         return (
@@ -81,9 +88,7 @@ class Rows extends Component{
                     <Text style={[MainStyles.smallWhiteStyle]}> Creation date: {dateFormat(rowData.dateOfStart,"dd-MM-yyyy hh:mm")}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> Status: {
-                        rowData.banned?"banned":
-                            rowData.status.toLowerCase().split('_').join(' ')}</Text>
+                    <Text style={[MainStyles.smallWhiteStyle]}> Status: {this.printStatus(rowData)}</Text>
                 </View>
             </View>);
     }

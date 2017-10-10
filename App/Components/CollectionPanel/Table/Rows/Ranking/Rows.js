@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../../../../Redux/actions';
 
-import compareArrays from '../../../../../Main/functions/compareArrays'
+import findGameName from '../../../../../Main/functions/findGameName'
 
 class Rows extends Component{
 
@@ -29,17 +29,6 @@ class Rows extends Component{
             dataSource: dataSource.cloneWithRows(['Placeholder'])
         };
     }
-
-    findGameName(){
-        let searchCriteria = this.props.pageRequest.searchCriteria;
-        let gameName = "";
-        if(searchCriteria.length>0){
-            let gameCriteria = searchCriteria.find(criteria => compareArrays(criteria["keys"],["tour", "tournament", "game","name"]));
-            gameName = gameCriteria["value"];
-        }
-        return gameName;
-    }
-
 
     renderRow(rowData) {
         return (
@@ -70,7 +59,7 @@ class Rows extends Component{
             <ListView styles={TableStyles.table}
                       dataSource={this.state.dataSource.cloneWithRows(this.props.content)}
                       renderHeader={(headerData) => <View style={TableStyles.header}>
-                          <Text style={MainStyles.bigWhiteStyle}>{this.findGameName()} ranking</Text>
+                          <Text style={MainStyles.bigWhiteStyle}>{findGameName(this.props.pageRequest.searchCriteria)} ranking</Text>
                       </View>}
                       renderRow={this.renderRow}/>
         );
