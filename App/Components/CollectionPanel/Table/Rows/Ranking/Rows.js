@@ -30,11 +30,11 @@ class Rows extends Component{
         };
     }
 
-    renderRow(rowData) {
+    renderRow(index, rowData) {
         return (
             <View style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
-                    <Text style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {rowData.name}</Text>
+                    <Text style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {index+"."+rowData.name}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
                     <Text style={[MainStyles.smallWhiteStyle]}> Points: {rowData.points}</Text>
@@ -61,7 +61,7 @@ class Rows extends Component{
                       renderHeader={(headerData) => <View style={TableStyles.header}>
                           <Text style={MainStyles.bigWhiteStyle}>{findGameName(this.props.pageRequest.searchCriteria)} ranking</Text>
                       </View>}
-                      renderRow={this.renderRow}/>
+                      renderRow={(rowData, sectionID, rowID) => this.renderRow(parseInt(rowID)+1,rowData)}/>
         );
     }
 }
