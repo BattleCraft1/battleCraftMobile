@@ -34,14 +34,15 @@ export default class FormInputs extends Component{
         };
     }
 
-    async componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps) {
         if (nextProps.enums!==undefined && nextProps.enums !== this.props.enums) {
             this.setState({provincesNames:convertArrayToObject(this.props.enums["provincesNames"])});
             this.setState({tournamentsGames:convertArrayToObject(this.props.enums["gamesNames"])});
             let status = this.props.enums["tournamentStatus"];
-            console.log(status);
-            status.push("BANNED");
-            this.setState({status: convertArrayToObject(status)});
+            if(status!==undefined) {
+                status.push("BANNED");
+                this.setState({status: convertArrayToObject(status)});
+            }
         }
     }
 
@@ -49,8 +50,10 @@ export default class FormInputs extends Component{
         this.setState({provincesNames:convertArrayToObject(this.props.enums["provincesNames"])});
         this.setState({tournamentsGames:convertArrayToObject(this.props.enums["gamesNames"])});
         let status = this.props.enums["tournamentStatus"];
-        status.push("BANNED");
-        this.setState({status: convertArrayToObject(status)});
+        if(status!==undefined) {
+            status.push("BANNED");
+            this.setState({status: convertArrayToObject(status)});
+        }
     }
 
     changeSearchForm(index,value){
@@ -63,6 +66,7 @@ export default class FormInputs extends Component{
         return(
         <View>
             <TextInput
+                key="tournamentName"
                 name = "Tournament name"
                 placeholder = "Tournament 2017"
                 keys = {["name"]}
@@ -71,6 +75,7 @@ export default class FormInputs extends Component{
                 changeSearchForm = {this.changeSearchForm.bind(this)}
             />
             <SelectInput
+                key="gameGenre"
                 name = "Game genre"
                 keys = {["game","name"]}
                 operation = ":"
@@ -79,10 +84,12 @@ export default class FormInputs extends Component{
                 changeSearchForm = {this.changeSearchForm.bind(this)}
             />
             <StatusInput
+                key="status"
                 options = {this.state.status}
                 changeSearchForm = {this.changeSearchForm.bind(this)}
             />
             <NumberInput
+                key="playerNumber"
                 name = "Players number"
                 keys = {["playersNumber"]}
                 operation = "<"
@@ -90,6 +97,7 @@ export default class FormInputs extends Component{
                 changeSearchForm = {this.changeSearchForm.bind(this)}
             />
             <NumberInput
+                key="maxPlayers"
                 name = "Max players"
                 keys = {["maxPlayers"]}
                 operation = "<"
@@ -97,6 +105,7 @@ export default class FormInputs extends Component{
                 changeSearchForm = {this.changeSearchForm.bind(this)}
             />
             <NumberInput
+                key="freeSlots"
                 name = "Free slots"
                 keys = {["freeSlots"]}
                 operation = ">"
@@ -104,6 +113,7 @@ export default class FormInputs extends Component{
                 changeSearchForm = {this.changeSearchForm.bind(this)}
             />
             <TextInput
+                key="city"
                 name = "City"
                 placeholder = "Lublin"
                 keys = {["address", "city"]}
@@ -112,6 +122,7 @@ export default class FormInputs extends Component{
                 changeSearchForm = {this.changeSearchForm.bind(this)}
             />
             <SelectInput
+                key="province"
                 name = "Province"
                 keys = {["address", "province","location"]}
                 operation = ":"
@@ -120,6 +131,7 @@ export default class FormInputs extends Component{
                 changeSearchForm = {this.changeSearchForm.bind(this)}
             />
             <DateInput
+                key="dateFrom"
                 name = "Date from"
                 keys = {["dateOfStart"]}
                 operation = ">"
@@ -127,6 +139,7 @@ export default class FormInputs extends Component{
                 changeSearchForm = {this.changeSearchForm.bind(this)}
             />
             <DateInput
+                key="dateTo"
                 name = "Date to"
                 keys = {["dateOfEnd"]}
                 operation = "<"

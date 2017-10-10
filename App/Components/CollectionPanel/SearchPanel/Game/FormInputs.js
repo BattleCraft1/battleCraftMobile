@@ -25,18 +25,22 @@ export default class FormInputs extends Component{
         };
     }
 
-    async componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps) {
         if (nextProps.enums!==undefined && nextProps.enums !== this.props.enums) {
             let status = this.props.enums["gamesStatus"];
-            status.push("BANNED");
-            this.setState({status: convertArrayToObject(status)});
+            if(status!==undefined) {
+                status.push("BANNED");
+                this.setState({status: convertArrayToObject(status)});
+            }
         }
     }
 
     componentDidMount(){
         let status = this.props.enums["gamesStatus"];
-        status.push("BANNED");
-        this.setState({status: convertArrayToObject(status)});
+        if(status!==undefined) {
+            status.push("BANNED");
+            this.setState({status: convertArrayToObject(status)});
+        }
     }
 
     changeSearchForm(index,value){
@@ -49,6 +53,7 @@ export default class FormInputs extends Component{
         return(
             <View>
                 <TextInput
+                    key="name"
                     name = "Name"
                     placeholder = "Warhammer"
                     keys = {["name"]}
@@ -57,6 +62,7 @@ export default class FormInputs extends Component{
                     changeSearchForm = {this.changeSearchForm.bind(this)}
                 />
                 <NumberInput
+                    key="tournamentsNumber"
                     name = "Tournaments number"
                     keys = {["tournamentsNumber"]}
                     operation = "<"
@@ -64,6 +70,7 @@ export default class FormInputs extends Component{
                     changeSearchForm = {this.changeSearchForm.bind(this)}
                 />
                 <DateInput
+                    key="creationDate"
                     name = "Creation date"
                     keys = {["dateOfCreation"]}
                     operation = "<"
@@ -71,6 +78,7 @@ export default class FormInputs extends Component{
                     changeSearchForm = {this.changeSearchForm.bind(this)}
                 />
                 <TextInput
+                    key="creatorName"
                     name = "Creator name"
                     placeholder = "Jarek123"
                     keys = {["creatorName"]}
@@ -79,6 +87,7 @@ export default class FormInputs extends Component{
                     changeSearchForm = {this.changeSearchForm.bind(this)}
                 />
                 <StatusInput
+                    key="status"
                     options = {this.state.status}
                     changeSearchForm = {this.changeSearchForm.bind(this)}
                 />

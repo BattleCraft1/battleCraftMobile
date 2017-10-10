@@ -7,20 +7,17 @@ export default class DateInput extends React.Component{
     }
 
     changeInput(value){
+        let result = {};
         if(value !=="")
-            this.props.changeSearchForm(
-                this.props.indexOfSearchFields,
-                {
-                    "keys":this.props.keys,
-                    "operation":this.props.operation,
-                    "value":value
-                }
-            );
-        else
-            this.props.changeSearchForm(
-                this.props.indexOfSearchFields,
-                {}
-            )
+            result = {
+                "keys":this.props.keys,
+                "operation":this.props.operation,
+                "value":value
+            };
+        this.props.changeSearchForm(
+            this.props.indexOfSearchFields,
+            result
+        );
     }
 
     render(){
