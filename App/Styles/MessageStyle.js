@@ -2,6 +2,7 @@ import {
     StyleSheet,
     Dimensions
 } from 'react-native';
+import BaseColours from "../Main/consts/BaseColours"
 
 const styles = StyleSheet.create({
     modalContainer: {
@@ -15,12 +16,12 @@ const styles = StyleSheet.create({
     },
 
     modalHeader: {
-        borderTopColor: '#e3ca86',
-        borderRightColor: '#4b371b',
-        borderBottomColor: '#E0BA51',
-        borderLeftColor: '#ecdbac',
+        borderTopColor: BaseColours.border.top,
+        borderRightColor: BaseColours.border.right,
+        borderBottomColor: BaseColours.border.bottom,
+        borderLeftColor: BaseColours.border.left,
         borderWidth: 5,
-        backgroundColor: '#805D2C',
+        backgroundColor: BaseColours.background.mediumBrown,
         height: 50,
         width:300,
         padding: 10,
@@ -32,8 +33,8 @@ const styles = StyleSheet.create({
         height: 150,
         width:300,
         padding: 10,
-        borderColor: '#4b371b',
-        backgroundColor: '#805D2C',
+        borderColor: BaseColours.background.darkBrown,
+        backgroundColor: BaseColours.background.mediumBrown,
         borderLeftWidth:5,
         borderRightWidth:5,
         borderTopWidth:5,
@@ -49,14 +50,14 @@ const styles = StyleSheet.create({
         borderBottomWidth:5,
         height: 50,
         width:300,
-        borderColor: '#4b371b',
-        backgroundColor: '#805D2C',
+        borderColor: BaseColours.background.darkBrown,
+        backgroundColor: BaseColours.background.mediumBrown,
     },
     modalFooterButton:{
         margin: 3,
         flex: 1,
         alignSelf: 'stretch',
-        backgroundColor: '#4b371b',
+        backgroundColor: BaseColours.background.darkBrown,
         justifyContent: 'center',
         alignItems: 'center',
     }

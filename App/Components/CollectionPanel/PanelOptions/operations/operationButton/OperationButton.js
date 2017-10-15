@@ -10,7 +10,7 @@ export default class OperationButton extends React.Component {
                 this.props.operation();
             }}>
                 <View style={OptionsStyles.icon} >
-                    <Icon name={this.props.icon} size={40} color="#4b371b"/>
+                    <Icon name={this.props.icon} size={40} color="#ffffff"/>
                     <Text style={OptionsStyles.iconText}>{this.props.name}</Text>
                 </View>
             </TouchableHighlight>

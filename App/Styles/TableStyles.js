@@ -5,29 +5,30 @@
 import {
     StyleSheet,
 } from 'react-native';
+import BaseColours from "../Main/consts/BaseColours"
 
 const styles = StyleSheet.create({
     table:{
         alignSelf: "stretch"
     },
     row:{
-        backgroundColor:'#a58e60',
-        borderColor:'#e3ca86',
+        backgroundColor: BaseColours.background.lightBrown,
+        borderColor:BaseColours.border.top,
         borderWidth: 2
     },
     sectionHeader:{
         flexDirection: 'row',
         justifyContent:'space-between',
-        backgroundColor:'#4b371b',
-        borderColor:'#e3ca86',
+        backgroundColor: BaseColours.background.darkBrown,
+        borderColor:BaseColours.border.top,
         borderWidth: 2,
         borderTopWidth: 0,
     },
     header:{
         flexDirection: 'row',
         justifyContent:'center',
-        backgroundColor:'#4b371b',
-        borderColor:'#e3ca86',
+        backgroundColor: BaseColours.background.darkBrown,
+        borderColor:BaseColours.border.top,
         borderWidth: 3,
         padding: 3,
     }

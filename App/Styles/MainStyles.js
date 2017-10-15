@@ -5,6 +5,7 @@
 import {
     StyleSheet,
 } from 'react-native';
+import BaseColours from "../Main/consts/BaseColours"
 
 const styles = StyleSheet.create({
     background: {
@@ -22,19 +23,19 @@ const styles = StyleSheet.create({
         color: '#fff',
     },
     borderStyle:{
-        borderTopColor: '#e3ca86',
-        borderRightColor: '#4b371b',
-        borderBottomColor: '#E0BA51',
-        borderLeftColor: '#ecdbac',
+        borderTopColor: BaseColours.border.top,
+        borderRightColor: BaseColours.border.right,
+        borderBottomColor: BaseColours.border.bottom,
+        borderLeftColor: BaseColours.border.left,
     },
     contentStyle: {
         flex: 1,
         padding: 5,
         marginTop: 1,
         justifyContent: 'center',
-        borderColor: '#4b371b',
+        borderColor: BaseColours.background.darkBrown,
         borderWidth: 5,
-        backgroundColor: '#805D2C',
+        backgroundColor: BaseColours.background.mediumBrown,
     },
     bigWhiteStyle: {
         fontFamily:'arial',
