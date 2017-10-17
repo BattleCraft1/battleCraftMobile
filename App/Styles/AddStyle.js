@@ -1,3 +1,7 @@
+/**
+ * Created by FBegiello on 17.10.2017.
+ */
+
 import {
     StyleSheet,
     Dimensions
@@ -6,12 +10,12 @@ import BaseColours from "../Main/consts/BaseColours"
 
 const styles = StyleSheet.create({
     modal: {
-
-        width: 255,
+        width: Dimensions.get('window').width*0.9,
+        height:600,
         padding: 10,
         flex:1,
         position: 'absolute',
-        marginLeft: ((Dimensions.get('window').width-310)/2),
+        marginLeft: ((Dimensions.get('window').width*0.1-50)/2),
 
         backgroundColor: BaseColours.background.mediumBrown,
         borderColor: BaseColours.background.darkBrown,
@@ -19,28 +23,21 @@ const styles = StyleSheet.create({
 
         flexDirection: 'column'
     },
-    icon: {
-        width: 70,
-        height: 70,
-        backgroundColor: BaseColours.misc.deepRed,
+    title: {
         borderTopColor: BaseColours.border.top,
         borderRightColor: BaseColours.border.right,
         borderBottomColor: BaseColours.border.bottom,
         borderLeftColor: BaseColours.border.left,
         borderWidth: 3,
-        margin: 2,
-        alignItems:'center'
+        backgroundColor: BaseColours.misc.deepRed,
+        marginBottom: 1
     },
-    iconsRow:{
-        flexDirection: 'row'
+    button:{
+        flex: 1,
+        margin: 1
     },
     buttonRow:{
-        flex: 1,
         flexDirection: 'row',
-    },
-    iconText:{
-        color: '#ffffff',
-        fontWeight: 'bold'
     },
 });
 

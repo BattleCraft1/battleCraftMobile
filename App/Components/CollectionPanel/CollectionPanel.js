@@ -20,6 +20,7 @@ import Drawer from 'react-native-drawer'
 import SearchDrawer from './SearchPanel/SearchPanel'
 import PageDrawer from './PagePanel/PageDrawer'
 import PanelOptions from './PanelOptions/PanelOptions'
+import PanelAdd from './PanelAdd/PanelAdd'
 import CollectionList from './Table/CollectionList'
 
 class CollectionPanel extends Component {
@@ -29,7 +30,8 @@ class CollectionPanel extends Component {
         this.state = {
             collectionType:"tournaments",
             formDrawer: "",
-            optionsVisible: false
+            optionsVisible: false,
+            addVisible: false
         }
     }
 
@@ -134,10 +136,19 @@ class CollectionPanel extends Component {
         return optionsButton;
     }
 
+    createAddElementButton(){
+        let addButton = <View/>;
+        if(this.props.collectionType!=='ranking'&&this.props.collectionType!=='users'){
+            addButton = <View style={{marginBottom:3}}><Button title={"Add "+this.props.collectionType.slice(0, -1)} color='#4b371b' onPress={()=>this.setState({addVisible:true})}/></View>;
+        }
+        return addButton;
+    }
+
 
     render(){
         let formDrawer = this.createDrawer();
         let optionsButton = this.createOptionsButton();
+        let addElementButton = this.createAddElementButton();
 
         return(<Drawer
             ref={(ref) => this._drawer = ref}
@@ -176,12 +187,18 @@ class CollectionPanel extends Component {
                     <CollectionList getPage={this.getPageRequest.bind(this)}
                                     collectionType={this.props.collectionType}/>
                 </View>
+                {addElementButton}
                 {optionsButton}
             </View>
             <PanelOptions
                 collectionType={this.props.collectionType}
                 onClosePanel={(isVisible) => this.setState({optionsVisible:isVisible})}
                 isVisible={this.state.optionsVisible}/>
+            <PanelAdd
+                onClosePanel={(isVisible) => this.setState({addVisible:isVisible})}
+                isVisible={this.state.addVisible}
+                collectionType={this.state.collectionType}
+                action="Add"/>
         </Drawer>)
     }
 }

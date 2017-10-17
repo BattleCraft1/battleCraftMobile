@@ -15,18 +15,26 @@ export default class Navbar extends Component {
     constructor() {
         super();
         this.state = {
-            menuText: "BattleCraft"
+            menuText: "BattleCraft",
+			optionList: ["Tournaments", "Add tournament", "Games", "Add game", "Rankings", "Users", "My account"]
         }
     }
 
+
     updateText = (id,val) => {
-        this.setState({menuText: val});
-        this.props.navigate(val);
+            this.setState({
+				menuText: val,
+                optionList: ["Tournaments", "Add tournament", "Games", "Add game", "Rankings", "Users", "My account"]
+            });
+            this.props.navigate(val);
     };
 
     onPressLogo = () => {
+        this.setState({menuText: "BattleCraft"});
         this.props.navigate("Main");
 	};
+
+
 
 	render() {
 
@@ -45,7 +53,7 @@ export default class Navbar extends Component {
 				</View>
 
 				<View>
-					<ModalDropdown options={["Tournaments", "Games", "Rankings", "Users", "My account"]}
+					<ModalDropdown options={this.state.optionList}
 								   dropdownStyle={[NavbarStyles.menuStyle, {width: Dimensions.get('window').width}, MainStyles.borderStyle]}
 								   dropdownTextStyle={[MainStyles.textStyle, NavbarStyles.menuTextStyle, MainStyles.borderStyle]}
 								   dropdownTextHighlightStyle={[MainStyles.textStyle, NavbarStyles.menuTextStyle, MainStyles.borderStyle, {fontWeight:'bold'}]}

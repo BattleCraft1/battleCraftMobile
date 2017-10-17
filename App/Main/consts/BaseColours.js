@@ -14,6 +14,9 @@ const BaseColours={
         left: '#ecdbac',
         right: '#4b371b',
     },
+    misc:{
+        deepRed: '#721515'
+    }
 };
 
 export default BaseColours;
