@@ -14,6 +14,7 @@ import {
 import Modal from 'react-native-modal';
 
 import TournamentPanelContent from './Tournament/PanelContent';
+import GamePanelContent from './Game/PanelContent';
 
 import MainStyle from '../../../Styles/MainStyles';
 import AddStyle from '../../../Styles/AddStyle';
@@ -28,6 +29,8 @@ export default class PanelAdd extends Component {
         switch (this.props.collectionType) {
             case "tournaments":
                 return <TournamentPanelContent/>;
+            case "games":
+                return <GamePanelContent/>;
             default:
                 return <View style={{flex: 1}}/>;
         }

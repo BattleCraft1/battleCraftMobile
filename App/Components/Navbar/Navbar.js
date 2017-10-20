@@ -16,7 +16,7 @@ export default class Navbar extends Component {
         super();
         this.state = {
             menuText: "BattleCraft",
-			optionList: ["Tournaments", "Add tournament", "Games", "Add game", "Rankings", "Users", "My account"]
+			optionList: ["Tournaments", "Games", "Rankings", "Users", "My account"]
         }
     }
 
@@ -24,7 +24,7 @@ export default class Navbar extends Component {
     updateText = (id,val) => {
             this.setState({
 				menuText: val,
-                optionList: ["Tournaments", "Add tournament", "Games", "Add game", "Rankings", "Users", "My account"]
+                optionList: ["Tournaments", "Games", "Rankings", "Users", "My account"]
             });
             this.props.navigate(val);
     };

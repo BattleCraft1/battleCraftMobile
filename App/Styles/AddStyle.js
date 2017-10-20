@@ -11,7 +11,8 @@ import BaseColours from "../Main/consts/BaseColours"
 const styles = StyleSheet.create({
     modal: {
         width: Dimensions.get('window').width*0.9,
-        height:600,
+        minHeight:300,
+        maxHeight:600,
         padding: 10,
         flex:1,
         position: 'absolute',
@@ -30,8 +31,23 @@ const styles = StyleSheet.create({
         borderLeftColor: BaseColours.border.left,
         borderWidth: 3,
         backgroundColor: BaseColours.misc.deepRed,
-        marginBottom: 1
+        marginBottom: 1,
     },
+
+    formWindow:{
+        borderColor: BaseColours.border.top,
+        borderWidth: 3,
+        marginBottom: 3,
+    },
+    formHeader:{
+        backgroundColor: BaseColours.background.darkBrown,
+        borderColor: BaseColours.border.top,
+        borderWidth: 3,
+        borderBottomWidth: 0,
+        alignItems: 'center',
+        marginTop: 1,
+    },
+
     button:{
         flex: 1,
         margin: 1
