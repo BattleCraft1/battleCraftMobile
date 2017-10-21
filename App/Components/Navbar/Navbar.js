@@ -6,7 +6,7 @@ import {
     Dimensions,
 	TouchableHighlight,
 } from 'react-native';
-import ModalDropdown from 'react-native-modal-dropdown';
+
 import MainStyles from '../../Styles/MainStyles'
 import NavbarStyles from '../../Styles/NavbarStyles'
 
@@ -53,15 +53,9 @@ export default class Navbar extends Component {
 				</View>
 
 				<View>
-					<ModalDropdown options={this.state.optionList}
-								   dropdownStyle={[NavbarStyles.menuStyle, {width: Dimensions.get('window').width}, MainStyles.borderStyle]}
-								   dropdownTextStyle={[MainStyles.textStyle, NavbarStyles.menuTextStyle, MainStyles.borderStyle]}
-								   dropdownTextHighlightStyle={[MainStyles.textStyle, NavbarStyles.menuTextStyle, MainStyles.borderStyle, {fontWeight:'bold'}]}
-								   onSelect = {(index,value)=>{this.updateText(index,value)}}>
 						<Image
 							style={NavbarStyles.iconStyle}
 							source={require('../../../img/navbarMenuIcon.png')} />
-					</ModalDropdown>
 				</View>
 
 			</View>

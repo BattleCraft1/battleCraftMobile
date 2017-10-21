@@ -7,6 +7,7 @@ import {
 
 import Navbar from '../Components/Navbar/Navbar';
 import Navigator from '../Components/Navigator/Navigator'
+import Dropdown from '../Components/Common/Dropdown/Dropdown'
 import SplashScreen from '../Components/Common/SplashScreen';
 import MainStyles from '../Styles/MainStyles'
 import FadeView from '../Components/Common/FadeView'
@@ -57,6 +58,7 @@ class App extends Component {
                         <MessageDialog/>
                         <LoadingSpinner/>
                     </FadeView>
+                    <Dropdown ListElements={["Tournaments", "Games", "Rankings", "Users", "My account"]}/>
                 </View>
         }
         else{
