@@ -53,9 +53,11 @@ export default class Navbar extends Component {
 				</View>
 
 				<View>
+					<TouchableHighlight onPress={this.props.toggleMenu}>
 						<Image
 							style={NavbarStyles.iconStyle}
 							source={require('../../../img/navbarMenuIcon.png')} />
+					</TouchableHighlight>
 				</View>
 
 			</View>

@@ -2,6 +2,10 @@
  * Created by FBegiello on 21.10.2017.
  */
 
+/**
+ * Created by FBegiello on 21.10.2017.
+ */
+
 import React, { Component } from 'react';
 import {
     View,
@@ -19,47 +23,48 @@ export default class Dropdown extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dropdownVisible: false,
-            selectedVal: null,
+            dropdownVisible: false
         }
     }
 
     toggleDropdownVisibility(){
         this.setState({dropdownVisible: !this.state.dropdownVisible})
     }
-
     setVisibility(val){
         this.setState({dropdownVisible: val})
-    }
-
-    menuSelect(val){
-        this.setVisibility(false);
-        this.props.navigate(val);
     }
 
 
     renderListElement(elementText){
         return (
             <View style={DropdownStyles.dropdownOptionStyle}>
-                <TouchableHighlight underlayColor="#4b371b" onPress={()=>{this.menuSelect(elementText)}}>
-                    <Text style={MainStyles.bigWhiteStyle}>{elementText}</Text>
+                <TouchableHighlight onPress={()=>{}}>
+                    <Text>{elementText}</Text>
                 </TouchableHighlight>
             </View>
         );
     }
 
     render(){
-        let dropdownContent=[];
-        for (let i=0;i<this.props.listElements.length;i++)
+        let dropdownContent='';
+        for (let i=0;i<this.props.ListElements.length;i++)
         {
-            dropdownContent.push(this.renderListElement(this.props.listElements[i]));
+            dropdownContent+=this.renderListElement(this.props.ListElements[i]);
         }
 
         if(this.state.dropdownVisible)
             return(
-                <View style={DropdownStyles.dropdownContainerStyle}>
-                    {dropdownContent}
-                </View>
+                <ScrollView style={DropdownStyles.dropdownContainerStyle}>
+                    <View style={DropdownStyles.dropdownOptionStyle}>
+                        <Text>Penis</Text>
+                    </View>
+                    <View style={DropdownStyles.dropdownOptionStyle}>
+                        <Text>Penis</Text>
+                    </View>
+                    <View style={DropdownStyles.dropdownOptionStyle}>
+                        <Text>Penis</Text>
+                    </View>
+                </ScrollView>
             )
         else return null;
     }

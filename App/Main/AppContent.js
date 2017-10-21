@@ -26,7 +26,7 @@ class App extends Component {
         super(props);
         this.state = {
             navigValue: "Main",
-            appReady:false
+            appReady: false
         };
     }
 
@@ -45,20 +45,24 @@ class App extends Component {
         this.setState({navigValue: navigValue});
     }
 
+    toggleMenu(){
+        this.refs.Menu.toggleDropdownVisibility();
+    }
+
 
     createContent(){
         let content;
         if(this.state.appReady){
             content=
                 <View style={{flex:1}}>
-                    <Navbar navigate={this.navigate.bind(this)}/>
+                    <Navbar navigate={this.navigate.bind(this)} toggleMenu={this.toggleMenu.bind(this)}/>
                     <FadeView style={{flex:1}}>
                         <Navigator navigValue={this.state.navigValue}/>
                         <ConfirmDialog/>
                         <MessageDialog/>
                         <LoadingSpinner/>
                     </FadeView>
-                    <Dropdown ListElements={["Tournaments", "Games", "Rankings", "Users", "My account"]}/>
+                    <Dropdown ref="Menu" navigate={this.navigate.bind(this)} listElements={["Tournaments", "Games", "Rankings", "Users", "My account"]}/>
                 </View>
         }
         else{

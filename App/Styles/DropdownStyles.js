@@ -12,13 +12,19 @@ const styles = StyleSheet.create({
         zIndex: 10000,
         top:60,
         right:0,
-        width: 300,
+        width: 250,
         height: 400,
-        backgroundColor: '#ff0000',
+        backgroundColor: BaseColours.background.mediumBrown,
+        borderColor: BaseColours.border.top,
+        borderWidth: 3
     },
     dropdownOptionStyle:{
-
-    }
+        flex: 1,
+        alignItems: 'center',
+        justifyContent:'center',
+        marginTop:2,
+        backgroundColor: BaseColours.background.darkBrown,
+    },
 });
 
 export default styles;
