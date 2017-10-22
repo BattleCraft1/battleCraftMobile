@@ -25,7 +25,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            navigValue: "Main",
+            navigValue: "BattleCraft",
             appReady: false
         };
     }
@@ -55,7 +55,7 @@ class App extends Component {
         if(this.state.appReady){
             content=
                 <View style={{flex:1}}>
-                    <Navbar navigate={this.navigate.bind(this)} toggleMenu={this.toggleMenu.bind(this)}/>
+                    <Navbar navigate={this.navigate.bind(this)} menuText={this.state.navigValue} toggleMenu={this.toggleMenu.bind(this)}/>
                     <FadeView style={{flex:1}}>
                         <Navigator navigValue={this.state.navigValue}/>
                         <ConfirmDialog/>

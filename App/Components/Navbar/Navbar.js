@@ -16,22 +16,13 @@ export default class Navbar extends Component {
         super();
         this.state = {
             menuText: "BattleCraft",
-			optionList: ["Tournaments", "Games", "Rankings", "Users", "My account"]
         }
     }
 
 
-    updateText = (id,val) => {
-            this.setState({
-				menuText: val,
-                optionList: ["Tournaments", "Games", "Rankings", "Users", "My account"]
-            });
-            this.props.navigate(val);
-    };
-
     onPressLogo = () => {
         this.setState({menuText: "BattleCraft"});
-        this.props.navigate("Main");
+        this.props.navigate("BattleCraft");
 	};
 
 
@@ -49,7 +40,7 @@ export default class Navbar extends Component {
 				</View>
 
 				<View>
-					<Text style={[MainStyles.textStyle,NavbarStyles.navbarTextStyle]}>{this.state.menuText}</Text>
+					<Text style={[MainStyles.textStyle,NavbarStyles.navbarTextStyle]}>{this.props.menuText}</Text>
 				</View>
 
 				<View>
