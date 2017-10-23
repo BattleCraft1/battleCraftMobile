@@ -7,12 +7,10 @@ import {
     View,
     TouchableHighlight,
     Text,
-    ScrollView
 } from 'react-native';
 
 import DropdownStyles from '../../../Styles/DropdownStyles'
 import MainStyles from '../../../Styles/MainStyles'
-
 
 export default class Dropdown extends Component {
 
@@ -29,7 +27,7 @@ export default class Dropdown extends Component {
     }
 
     setVisibility(val){
-        this.setState({dropdownVisible: val})
+        if(val!==this.dropdownVisible)this.setState({dropdownVisible: val})
     }
 
     menuSelect(val){
@@ -57,9 +55,9 @@ export default class Dropdown extends Component {
 
         if(this.state.dropdownVisible)
             return(
-                <View style={DropdownStyles.dropdownContainerStyle}>
-                    {dropdownContent}
-                </View>
+                    <View style={DropdownStyles.dropdownContainerStyle}>
+                        {dropdownContent}
+                    </View>
             )
         else return null;
     }

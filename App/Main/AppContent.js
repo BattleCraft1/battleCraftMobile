@@ -3,6 +3,7 @@ import {
     AppRegistry,
     StyleSheet,
     View,
+    TouchableWithoutFeedback,
 } from 'react-native';
 
 import Navbar from '../Components/Navbar/Navbar';
@@ -49,19 +50,26 @@ class App extends Component {
         this.refs.Menu.toggleDropdownVisibility();
     }
 
+    setMenu(val){
+        this.refs.Menu.setVisibility(val);
+    }
 
     createContent(){
         let content;
         if(this.state.appReady){
             content=
                 <View style={{flex:1}}>
-                    <Navbar navigate={this.navigate.bind(this)} menuText={this.state.navigValue} toggleMenu={this.toggleMenu.bind(this)}/>
-                    <FadeView style={{flex:1}}>
-                        <Navigator navigValue={this.state.navigValue}/>
-                        <ConfirmDialog/>
-                        <MessageDialog/>
-                        <LoadingSpinner/>
-                    </FadeView>
+                    <TouchableWithoutFeedback style={{flex:1}} onPress={()=>{this.setMenu(false)}}>
+                        <View style={{flex:1}}>
+                            <Navbar navigate={this.navigate.bind(this)} menuText={this.state.navigValue} toggleMenu={this.toggleMenu.bind(this)}/>
+                            <FadeView style={{flex:1}}>
+                                <Navigator navigValue={this.state.navigValue}/>
+                                <ConfirmDialog/>
+                                <MessageDialog/>
+                                <LoadingSpinner/>
+                            </FadeView>
+                        </View>
+                    </TouchableWithoutFeedback>
                     <Dropdown ref="Menu" navigate={this.navigate.bind(this)} listElements={["Tournaments", "Games", "Rankings", "Users", "My account"]}/>
                 </View>
         }
