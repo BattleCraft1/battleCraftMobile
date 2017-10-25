@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     logoStyle: {
-        width: 50,
-        height: 50,
+        width: 45,
+        height: 45,
     },
     iconStyle: {
         width: 40,

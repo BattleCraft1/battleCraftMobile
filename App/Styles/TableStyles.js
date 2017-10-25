@@ -19,19 +19,24 @@ const styles = StyleSheet.create({
     sectionHeader:{
         flexDirection: 'row',
         justifyContent:'space-between',
+        alignItems:'center',
         backgroundColor: BaseColours.background.darkBrown,
         borderColor:BaseColours.border.top,
         borderWidth: 2,
         borderTopWidth: 0,
+        paddingLeft:10,
+        height:50,
     },
     header:{
         flexDirection: 'row',
+        alignItems:'center',
         justifyContent:'center',
-        backgroundColor: BaseColours.background.darkBrown,
+        backgroundColor: BaseColours.misc.deepRed,
         borderColor:BaseColours.border.top,
         borderWidth: 3,
         padding: 3,
-    }
+        height:55,
+    },
 });
 
 

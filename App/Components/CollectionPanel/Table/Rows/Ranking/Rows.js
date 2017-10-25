@@ -59,7 +59,7 @@ class Rows extends Component{
             <ListView styles={TableStyles.table}
                       dataSource={this.state.dataSource.cloneWithRows(this.props.content)}
                       renderHeader={(headerData) => <View style={TableStyles.header}>
-                          <Text style={MainStyles.bigWhiteStyle}>{findGameName(this.props.pageRequest.searchCriteria)} ranking</Text>
+                          <Text style={[MainStyles.textStyle, {fontSize: 24}]}>{findGameName(this.props.pageRequest.searchCriteria)} ranking</Text>
                       </View>}
                       renderRow={(rowData, sectionID, rowID) => this.renderRow(parseInt(rowID)+1,rowData)}/>
         );

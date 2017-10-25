@@ -110,7 +110,7 @@ class Rows extends Component{
             <ListView styles={TableStyles.table}
                       dataSource={this.state.dataSource.cloneWithRows(this.props.content)}
                       renderHeader={(headerData) => <View style={TableStyles.header}>
-                          <Text style={MainStyles.bigWhiteStyle}>Games List</Text>
+                          <Text style={[MainStyles.textStyle, {fontSize: 24}]}>Games list</Text>
                           <MultiCheckbox/>
                       </View>}
                       renderRow={this.renderRow}/>
