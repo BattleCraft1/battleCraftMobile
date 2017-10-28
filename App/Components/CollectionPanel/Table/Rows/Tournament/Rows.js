@@ -7,6 +7,7 @@ import {
 
 import TableStyles from '../../../../../Styles/TableStyles'
 import MainStyles from '../../../../../Styles/MainStyles'
+import ListColours from '../../../../../Main/consts/ListColours'
 
 import Checkbox from '../../../../Common/CheckBox/Checkbox'
 import MultiCheckbox from '../../../../Common/CheckBox/MultiCheckbox'
@@ -38,7 +39,21 @@ export default class Rows extends Component{
             return "";
     }
 
+    backgroundColourCheck(rowData){
+        switch(this.printStatus(rowData)){
+            case 'new': return ListColours.tournaments.NEW;
+            case 'accepted': return ListColours.tournaments.ACCEPTED;
+            case 'in progress': return ListColours.tournaments.IN_PROGRESS;
+            case 'finished': return ListColours.tournaments.FINISHED;
+            case 'banned': return ListColours.tournaments.BANNED;
+            default: return ListColours.tournaments.NEW;
+        }
+    }
+
     renderRow(rowData) {
+
+        let backgroundColour = this.backgroundColourCheck(rowData);
+
         return (
             <View style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
@@ -63,7 +78,7 @@ export default class Rows extends Component{
                 <View style={[TableStyles.row]}>
                     <Text style={[MainStyles.smallWhiteStyle]}> Date end: {dateFormat(rowData.dateOfEnd,"dd-MM-yyyy hh:mm")}</Text>
                 </View>
-                <View style={[TableStyles.row]}>
+                <View style={[TableStyles.row, {backgroundColor: backgroundColour}]}>
                     <Text style={[MainStyles.smallWhiteStyle]}> Status: {this.printStatus(rowData)}</Text>
                 </View>
             </View>);
@@ -74,7 +89,7 @@ export default class Rows extends Component{
             <ListView styles={TableStyles.table}
                       dataSource={this.state.dataSource.cloneWithRows(this.props.content)}
                       renderHeader={(headerData) => <View style={TableStyles.header}>
-                          <Text style={MainStyles.bigWhiteStyle}>Tournaments List</Text>
+                          <Text style={[MainStyles.textStyle, {fontSize: 24}]}>Tournaments List</Text>
                           <MultiCheckbox/>
                       </View>}
                       renderRow={this.renderRow.bind(this)}/>

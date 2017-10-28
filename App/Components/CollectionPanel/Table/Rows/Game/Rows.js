@@ -8,6 +8,7 @@ import {
 
 import Checkbox from '../../../../Common/CheckBox/Checkbox'
 import MultiCheckbox from '../../../../Common/CheckBox/MultiCheckbox'
+import ListColours from '../../../../../Main/consts/ListColours'
 
 import TableStyles from '../../../../../Styles/TableStyles'
 import MainStyles from '../../../../../Styles/MainStyles'
@@ -68,7 +69,18 @@ class Rows extends Component{
             return "";
     }
 
+    backgroundColourCheck(rowData){
+        switch(this.printStatus(rowData)){
+            case 'new': return ListColours.games.NEW;
+            case 'accepted': return ListColours.games.ACCEPTED;
+            case 'banned': return ListColours.games.BANNED;
+            default: return ListColours.games.NEW;
+        }
+    }
+
     renderRow(rowData) {
+        let backgroundColour = this.backgroundColourCheck(rowData);
+
         return (
             <View style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
@@ -87,7 +99,7 @@ class Rows extends Component{
                 <View style={[TableStyles.row]}>
                     <Text style={[MainStyles.smallWhiteStyle]}> Creation date: {dateFormat(rowData.dateOfStart,"dd-MM-yyyy hh:mm")}</Text>
                 </View>
-                <View style={[TableStyles.row]}>
+                <View style={[TableStyles.row, {backgroundColor: backgroundColour}]}>
                     <Text style={[MainStyles.smallWhiteStyle]}> Status: {this.printStatus(rowData)}</Text>
                 </View>
             </View>);
@@ -98,7 +110,7 @@ class Rows extends Component{
             <ListView styles={TableStyles.table}
                       dataSource={this.state.dataSource.cloneWithRows(this.props.content)}
                       renderHeader={(headerData) => <View style={TableStyles.header}>
-                          <Text style={MainStyles.bigWhiteStyle}>Games List</Text>
+                          <Text style={[MainStyles.textStyle, {fontSize: 24}]}>Games list</Text>
                           <MultiCheckbox/>
                       </View>}
                       renderRow={this.renderRow}/>

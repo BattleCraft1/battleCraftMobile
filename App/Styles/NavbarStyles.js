@@ -5,7 +5,7 @@
 import {
     StyleSheet,
 } from 'react-native';
-
+import BaseColours from "../Main/consts/BaseColours"
 
 const styles = StyleSheet.create({
     navbarStyle: {
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingRight: 5,
         borderWidth: 5,
-        backgroundColor: '#805D2C',
+        backgroundColor: BaseColours.background.mediumBrown,
     },
     navbarTextStyle: {
         fontWeight: 'bold',
@@ -26,18 +26,18 @@ const styles = StyleSheet.create({
         left:0,
         borderWidth: 0,
         height: 255,
-        backgroundColor: '#805D2C',
+        backgroundColor: BaseColours.background.mediumBrown,
     },
     menuTextStyle: {
         textAlign: 'center',
         borderWidth: 3,
-        backgroundColor: '#805D2C',
+        backgroundColor: BaseColours.background.mediumBrown,
 
         fontSize: 18,
     },
     logoStyle: {
-        width: 50,
-        height: 50,
+        width: 45,
+        height: 45,
     },
     iconStyle: {
         width: 40,

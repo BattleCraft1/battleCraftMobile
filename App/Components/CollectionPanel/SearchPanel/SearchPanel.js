@@ -13,6 +13,7 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../../Redux/actions';
 
 import MainStyles from '../../../Styles/MainStyles'
+import SearchStyles from '../../../Styles/SearchStyles'
 
 import {serverName} from "../../../Main/consts/serverName";
 
@@ -123,8 +124,8 @@ class SearchPanel extends React.Component{
         let searchInputs = this.prepareSearchInputs();
         return (<View style={[MainStyles.contentStyle, MainStyles.centering]}>
             <ScrollView keyboardShouldPersistTaps='always' style={{paddingLeft:10,paddingRight:10}}>
-                <View>
-                    <Text style={[MainStyles.textStyle, {fontSize: 26,}]}>Search</Text>
+                <View style={SearchStyles.headerStyle}>
+                    <Text style={[MainStyles.textStyle, {fontSize: 26}]}>Search</Text>
                 </View>
                 <Form ref='searchForm'>
                     {searchInputs}

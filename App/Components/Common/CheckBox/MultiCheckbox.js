@@ -38,7 +38,7 @@ class MultiCheckbox extends React.Component {
     render(){
         return(
             <CheckBox
-                style={{flex: 1, padding: 10}}
+                style={{padding: 10}}
                 isChecked={this.state.checked}
                 onClick={() => {
                     let checked=this.state.checked;

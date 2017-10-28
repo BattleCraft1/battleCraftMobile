@@ -20,6 +20,7 @@ import Drawer from 'react-native-drawer'
 import SearchDrawer from './SearchPanel/SearchPanel'
 import PageDrawer from './PagePanel/PageDrawer'
 import PanelOptions from './PanelOptions/PanelOptions'
+import PanelAdd from './PanelAdd/PanelAdd'
 import CollectionList from './Table/CollectionList'
 
 class CollectionPanel extends Component {
@@ -29,7 +30,8 @@ class CollectionPanel extends Component {
         this.state = {
             collectionType:"tournaments",
             formDrawer: "",
-            optionsVisible: false
+            optionsVisible: false,
+            addVisible: false
         }
     }
 
@@ -129,15 +131,24 @@ class CollectionPanel extends Component {
     createOptionsButton(){
         let optionsButton = <View/>;
         if(this.props.collectionType!=='ranking'){
-            optionsButton = <Button title={"Options"} color='#4b371b' onPress={()=>this.setState({optionsVisible:true})}/>;
+            optionsButton = <View style={{flex:1, marginRight: 3}}><Button title={"Options"} color='#4b371b' onPress={()=>this.setState({optionsVisible:true})}/></View>;
         }
         return optionsButton;
+    }
+
+    createAddElementButton(){
+        let addButton = <View/>;
+        if(this.props.collectionType!=='ranking'&&this.props.collectionType!=='users'){
+            addButton = <View style={{flex:1}}><Button title={"Add "+this.props.collectionType.slice(0, -1)} color='#4b371b' onPress={()=>this.setState({addVisible:true})}/></View>;
+        }
+        return addButton;
     }
 
 
     render(){
         let formDrawer = this.createDrawer();
         let optionsButton = this.createOptionsButton();
+        let addElementButton = this.createAddElementButton();
 
         return(<Drawer
             ref={(ref) => this._drawer = ref}
@@ -151,37 +162,46 @@ class CollectionPanel extends Component {
             content={formDrawer}
         >
             <View style={[MainStyles.contentStyle, MainStyles.centering, {flex: 1}]}>
-                <View style={{marginBottom:3}}>
-                    <Button title="Open search tab" color='#4b371b'
-                        onPress={()=>{
-                        this.setState({formDrawer:'search'});
-                        this._drawer.open()}}/>
+                <View style={{marginBottom:3, flexDirection:'row'}}>
+                    <View style={{flex:1, marginRight: 3}}>
+                        <Button title="Open page tab" color='#4b371b'
+                                onPress={()=>{
+                                    this.setState({formDrawer:'page'});
+                                    this._drawer.open()}}/>
+                    </View>
+                    <View style={{flex:1}}>
+                        <Button title="Open search tab" color='#4b371b'
+                                onPress={()=>{
+                                    this.setState({formDrawer:'search'});
+                                    this._drawer.open()}}/>
+                    </View>
                 </View>
-                <View style={{marginBottom:3}}>
-                    <Button title="Open page tab" color='#4b371b'
-                        onPress={()=>{
-                        this.setState({formDrawer:'page'});
-                        this._drawer.open()}}/>
-                </View>
-                <View>
-                    <Button
-                        title={(this.props.pageRequest.pageRequest.page+1) +"/"+
-                        (this.props.page.totalPages===undefined?0:this.props.page.totalPages)}
-                        color='#4b371b'
-                        onPress={() => {}}
-                    />
-                </View>
-
                 <View style={{flex:1}}>
+                    <View style={[DrawerStyles.pageWindow, MainStyles.borderStyle]}>
+                        <Button
+                            title={(this.props.pageRequest.pageRequest.page+1) +"/"+
+                            (this.props.page.totalPages===undefined?0:this.props.page.totalPages)}
+                            color='#721515'
+                            onPress={() => {}}
+                        />
+                    </View>
                     <CollectionList getPage={this.getPageRequest.bind(this)}
                                     collectionType={this.props.collectionType}/>
                 </View>
-                {optionsButton}
+                <View style={{marginTop:3, flexDirection:'row'}}>
+                    {optionsButton}
+                    {addElementButton}
+                </View>
             </View>
             <PanelOptions
                 collectionType={this.props.collectionType}
                 onClosePanel={(isVisible) => this.setState({optionsVisible:isVisible})}
                 isVisible={this.state.optionsVisible}/>
+            <PanelAdd
+                onClosePanel={(isVisible) => this.setState({addVisible:isVisible})}
+                isVisible={this.state.addVisible}
+                collectionType={this.state.collectionType}
+                action="Add"/>
         </Drawer>)
     }
 }

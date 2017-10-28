@@ -3,10 +3,12 @@ import {
     AppRegistry,
     StyleSheet,
     View,
+    TouchableWithoutFeedback,
 } from 'react-native';
 
 import Navbar from '../Components/Navbar/Navbar';
 import Navigator from '../Components/Navigator/Navigator'
+import Dropdown from '../Components/Common/Dropdown/Dropdown'
 import SplashScreen from '../Components/Common/SplashScreen';
 import MainStyles from '../Styles/MainStyles'
 import FadeView from '../Components/Common/FadeView'
@@ -24,8 +26,8 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            navigValue: "Main",
-            appReady:false
+            navigValue: "BattleCraft",
+            appReady: false
         };
     }
 
@@ -44,19 +46,31 @@ class App extends Component {
         this.setState({navigValue: navigValue});
     }
 
+    toggleMenu(){
+        this.refs.Menu.toggleDropdownVisibility();
+    }
+
+    setMenu(val){
+        this.refs.Menu.setVisibility(val);
+    }
 
     createContent(){
         let content;
         if(this.state.appReady){
             content=
                 <View style={{flex:1}}>
-                    <Navbar navigate={this.navigate.bind(this)}/>
-                    <FadeView style={{flex:1}}>
-                        <Navigator navigValue={this.state.navigValue}/>
-                        <ConfirmDialog/>
-                        <MessageDialog/>
-                        <LoadingSpinner/>
-                    </FadeView>
+                    <TouchableWithoutFeedback style={{flex:1}} onPress={()=>{this.setMenu(false)}}>
+                        <View style={{flex:1}}>
+                            <Navbar navigate={this.navigate.bind(this)} menuText={this.state.navigValue} toggleMenu={this.toggleMenu.bind(this)}/>
+                            <FadeView style={{flex:1}}>
+                                <Navigator navigValue={this.state.navigValue}/>
+                                <ConfirmDialog/>
+                                <MessageDialog/>
+                                <LoadingSpinner/>
+                            </FadeView>
+                        </View>
+                    </TouchableWithoutFeedback>
+                    <Dropdown ref="Menu" navigate={this.navigate.bind(this)} listElements={["Tournaments", "Games", "Rankings", "Users", "My account"]}/>
                 </View>
         }
         else{
