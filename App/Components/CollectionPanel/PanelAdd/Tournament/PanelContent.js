@@ -22,6 +22,9 @@ export default class PanelContent extends Component {
 
         this.state={
             formType: "Base info",
+            tournamentInfo:{
+
+            }
         }
     }
 
@@ -40,10 +43,6 @@ export default class PanelContent extends Component {
         }
     }
 
-    validateTabsForms()
-    {
-
-    }
 
 
     render() {

@@ -7,6 +7,7 @@ import {
     View,
     Text,
     ScrollView,
+    Button
 } from 'react-native';
 
 import {Form} from 'react-native-form-generator';
@@ -29,7 +30,10 @@ export default class AddresForm extends Component{
             <View>
                 <ScrollView>
                     <Form ref="baseForm">
+                        <View style={{flex:1}}>
 
+                        </View>
+                        <Button title={"Save base info"} color='#4b371b' onPress={()=>{/*todo - save input from form to state and pass to main component*/}}/>
                     </Form>
                 </ScrollView>
             </View>
