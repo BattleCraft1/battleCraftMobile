@@ -6,7 +6,8 @@ import {
     View,
     Text,
     ListView,
-    Button
+    Button,
+    Image
 } from 'react-native';
 
 import TableStyles from '../../../../../Styles/TableStyles'
@@ -31,15 +32,15 @@ export default class UserForms extends Component{
 
     users={
         user1:{
-            name:'Hitler',
+            name:'Temp1',
             status: 'accepted'
         },
         user2:{
-            name:'Stalin',
+            name:'Temp2',
             status: 'accepted'
         },
         user3:{
-            name:'Mao',
+            name:'Temp3',
             status: 'new'
         },
     }
@@ -59,10 +60,15 @@ export default class UserForms extends Component{
 
         return (
             <View style={[TableStyles.row, {flexDirection: 'row'}]}>
+                <View style={{width: 35, justifyContent: 'center', alignItems: 'center'}}>
+                    <Image
+                        style={{width: 35, height: 35}}
+                        source={require("../../../../../../img/userLogoDef.png")}/>
+                </View>
                 <View style={{backgroundColor: backgroundColour, flex: 1}}>
                     <Text style={[MainStyles.bigWhiteStyle, {padding:3}]}> {rowData.name}</Text>
                 </View>
-                <Button title={"Remove"} color='#4b371b' onPress={()=>{}}/>
+                <Button title={"Remove"} color='#4b371b' onPress={()=>{/*todo - add remove action*/}}/>
             </View>);
     }
 
@@ -72,7 +78,7 @@ export default class UserForms extends Component{
                 <ListView styles={TableStyles.table}
                           dataSource={this.state.dataSource.cloneWithRows(this.users)}
                           renderRow={this.renderRow.bind(this)}/>
-                <Button title={"Add new "+this.props.UserType} color='#4b371b' onPress={()=>{}}/>
+                <Button title={"Add new "+this.props.UserType} color='#4b371b' onPress={()=>{/*todo - add panel with users to choose from*/}}/>
             </View>
         );
     }

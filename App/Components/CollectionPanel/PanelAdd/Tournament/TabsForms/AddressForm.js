@@ -28,7 +28,10 @@ export default class AddresForm extends Component{
             <View>
                 <ScrollView>
                     <Form ref="addressForm">
-   
+                        <View style={{flex:1}}>
+
+                        </View>
+                        <Button title={"Save address info"} color='#4b371b' onPress={()=>{/*todo - save input from form to state and pass to main component*/}}/>
                     </Form>
                 </ScrollView>
             </View>

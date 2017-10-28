@@ -10,6 +10,7 @@ import { Form,
     PickerField
 } from 'react-native-form-generator';
 import MainStyles from '../../../Styles/MainStyles'
+import SearchStyles from '../../../Styles/SearchStyles'
 import {fieldsOfObjects} from '../../../Main/consts/fieldsOfObject'
 import {kindOfSort} from '../../../Main/consts/kindsOfSort'
 
@@ -117,8 +118,8 @@ class FormDrawer extends Component {
         return (
             <View style={[MainStyles.contentStyle, MainStyles.centering]}>
                 <ScrollView keyboardShouldPersistTaps='always' style={{paddingLeft:10,paddingRight:10}}>
-                    <View>
-                        <Text style={[MainStyles.textStyle, {fontSize: 26,}]}>Get Page</Text>
+                    <View style={SearchStyles.headerStyle}>
+                        <Text style={[MainStyles.textStyle, {fontSize: 26,}]}>Get page</Text>
                     </View>
                     <Form
                         ref='pageForm'
