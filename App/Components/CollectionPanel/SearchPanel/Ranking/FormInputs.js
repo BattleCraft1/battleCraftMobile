@@ -92,7 +92,7 @@ class FormInputs extends Component{
                 <SelectInput
                     key="province"
                     name = "Province"
-                    keys = {["tour","tournament","address", "province","location"]}
+                    keys = {["tour","tournament","address", "province"]}
                     operation = ":"
                     indexOfSearchFields = "province"
                     options = {this.state.provincesNames}
