@@ -1,7 +1,7 @@
 /**
  * Created by FBegiello on 06.08.2017.
  */
-import BaseColours from "../Main/consts/BaseColours"
+import BaseColours from "../main/consts/BaseColours"
 
 const styles = {
     drawer: {

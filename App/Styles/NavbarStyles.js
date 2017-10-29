@@ -5,7 +5,7 @@
 import {
     StyleSheet,
 } from 'react-native';
-import BaseColours from "../Main/consts/BaseColours"
+import BaseColours from "../main/consts/BaseColours"
 
 const styles = StyleSheet.create({
     navbarStyle: {
