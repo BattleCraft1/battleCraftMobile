@@ -71,28 +71,28 @@ export default class Rows extends Component{
                         </View>
                         <View style={{flex: 3, alignSelf: "stretch"}}>
                             <View style={[TableStyles.row]}>
-                                <Text style={[MainStyles.smallWhiteStyle]}> Name: {rowData.firstname}</Text>
+                                <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Name: {rowData.firstname}</Text>
                             </View>
                             <View style={[TableStyles.row]}>
-                                <Text style={[MainStyles.smallWhiteStyle]}> Surname: {rowData.lastname}</Text>
+                                <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Surname: {rowData.lastname}</Text>
                             </View>
                             <View style={[TableStyles.row]}>
-                                <Text style={[MainStyles.smallWhiteStyle]}> E-mail: {rowData.email}</Text>
+                                <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> E-mail: {rowData.email}</Text>
                             </View>
                         </View>
                     </View>
                     <View>
                         <View style={[TableStyles.row]}>
-                            <Text style={[MainStyles.smallWhiteStyle]}> Province: {rowData.province}</Text>
+                            <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Province: {rowData.province}</Text>
                         </View>
                         <View style={[TableStyles.row]}>
-                            <Text style={[MainStyles.smallWhiteStyle]}> City: {rowData.city}</Text>
+                            <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> City: {rowData.city}</Text>
                         </View>
                         <View style={[TableStyles.row]}>
-                            <Text style={[MainStyles.smallWhiteStyle]}> Phone number: {rowData.phoneNumber}</Text>
+                            <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Phone number: {rowData.phoneNumber}</Text>
                         </View>
                         <View style={[TableStyles.row]}>
-                            <Text style={[MainStyles.smallWhiteStyle, {backgroundColor: backgroundColour}]}> Status: {this.printStatus(rowData)}</Text>
+                            <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle, {backgroundColor: backgroundColour}]}> Status: {this.printStatus(rowData)}</Text>
                         </View>
                     </View>
                 </View>

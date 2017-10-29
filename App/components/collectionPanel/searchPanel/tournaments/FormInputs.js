@@ -9,18 +9,16 @@ import SelectInput from '../inputs/SelectInput'
 import DateInput from "../inputs/DateInput";
 import NumberInput from "../inputs/NumberInput";
 import StatusInput from "../inputs/StatusInput";
+import SelectTournamentTypeInput from "../inputs/SelectTournamentTypeInput";
 
 import {provinces} from "../../../../main/consts/provinces";
+import {type} from "../../../../main/consts/tournamentType";
 import {tournamentStatus} from "../../../../main/consts/status";
 
 import {serverName} from "../../../../main/consts/serverName";
 import axios from 'axios'
 
-let tournamentTypeOptions = {
-    4:"Group",
-    2:"Duel",
-    "":" "
-};
+import convertArrayToObject from '../../../../main/functions/convertArrayToObject'
 
 export default class FormInputs extends Component{
     constructor(props) {
@@ -47,9 +45,7 @@ export default class FormInputs extends Component{
     async componentDidMount(){
         await axios.get(serverName+`get/tournaments/enums`)
             .then(res => {
-                let tournamentsGames = {};
-                tournamentsGames[""] = " ";
-                this.setState({tournamentsGames:Object.assign(tournamentsGames,res.data)});
+                this.setState({tournamentsGames:convertArrayToObject(res.data)});
             })
             .catch(error => {
                 this.props.showNetworkErrorMessage(error);
@@ -115,13 +111,13 @@ export default class FormInputs extends Component{
                 indexOfSearchFields = "freeSlots"
                 changeSearchForm = {this.changeSearchForm.bind(this)}
             />
-            <SelectInput
-                key="type"
-                name = "Type"
+            <SelectTournamentTypeInput
+                key="tournamentType"
+                name = "Tournament type"
                 keys = {["playersOnTableCount"]}
                 operation = ":"
                 indexOfSearchFields = "playersOnTableCount"
-                options = {tournamentTypeOptions}
+                options = {type}
                 changeSearchForm = {this.changeSearchForm.bind(this)}
             />
             <TextInput

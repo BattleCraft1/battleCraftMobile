@@ -17,7 +17,7 @@ export const tournamentStatus = {
     "":"",
     "NEW":"NEW",
     "ACCEPTED":"ACCEPTED",
-    "IN_PROGRESS":"IN_PROGRESS",
+    "IN_PROGRESS":"IN PROGRESS",
     "FINISHED":"FINISHED",
     "BANNED":"BANNED"
 };

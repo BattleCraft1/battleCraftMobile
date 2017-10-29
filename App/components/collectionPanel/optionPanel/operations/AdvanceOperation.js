@@ -15,7 +15,6 @@ class AdvanceOperation extends React.Component {
 
     advanceElements(){
         let checkedElementsNames = this.props.page.checkedElementsNames;
-        let collectionType = this.props.collectionType;
         let checkPreviouslyCheckedElements = this.props.checkPreviouslyCheckedElements;
 
         let showSuccessMessage = this.props.showSuccessMessage;
@@ -36,7 +35,7 @@ class AdvanceOperation extends React.Component {
             let operationFunction = () => {
                 startLoading("Advancing...");
 
-                axios.post(serverName+`advance/users`, GetPageAndModifyDataDTO)
+                axios.post(serverName+`advance/players`, GetPageAndModifyDataDTO)
                     .then(res => {
                         stopLoading();
                         checkPreviouslyCheckedElements(res.data);
