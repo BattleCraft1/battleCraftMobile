@@ -7,7 +7,7 @@ export default class TournamentStatus extends React.Component{
     }
 
     changeInput(value){
-        let result = {}
+        let result = {};
         if(value!==""){
             if(value==='BANNED')
                 result = {

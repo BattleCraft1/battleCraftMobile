@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    ListView
+    ListView,
+    Image
 } from 'react-native';
 
 import TableStyles from '../../../../../Styles/TableStyles'
@@ -13,6 +14,7 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../../../../redux/actions';
 
 import findGameName from '../../../../../main/functions/findGameName'
+import {serverName} from "../../../../../main/consts/serverName";
 
 class Rows extends Component{
 
@@ -34,22 +36,33 @@ class Rows extends Component{
         return (
             <View style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
-                    <Text style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {index+"."+rowData.name}</Text>
+                    <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {index+"."+rowData.name}</Text>
                 </View>
-                <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> Points: {rowData.points}</Text>
-                </View>
-                <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> Province: {rowData.province}</Text>
-                </View>
-                <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> City: {rowData.city}</Text>
-                </View>
-                <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> Tournaments count: {rowData.numberOfTournaments}</Text>
-                </View>
-                <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> Battles count: {rowData.numberOfBattles}</Text>
+                <View style={[TableStyles.row, {flexDirection:'column'}]}>
+                    <View style={{flexDirection:'row'}}>
+                        <View style={{flex:1,justifyContent: 'center', alignItems: 'center'}}>
+                            <Image
+                                style={{width: 70, height: 70}}
+                                source={{uri:serverName+`/get/user/avatar?username=${rowData.name}`}} />
+                        </View>
+                        <View style={{flex: 3, alignSelf: "stretch"}}>
+                            <View style={[TableStyles.row]}>
+                                <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Points: {rowData.points}</Text>
+                            </View>
+                            <View style={[TableStyles.row]}>
+                                <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Province: {rowData.playerProvince}</Text>
+                            </View>
+                            <View style={[TableStyles.row]}>
+                                <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> City: {rowData.playerCity}</Text>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={[TableStyles.row]}>
+                        <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Tournaments count: {rowData.numberOfTournaments}</Text>
+                    </View>
+                    <View style={[TableStyles.row]}>
+                        <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Battles count: {rowData.numberOfBattles}</Text>
+                    </View>
                 </View>
             </View>);
     }
@@ -60,7 +73,7 @@ class Rows extends Component{
                       dataSource={this.state.dataSource.cloneWithRows(this.props.content)}
                       enableEmptySections={true}
                       renderHeader={(headerData) => <View style={TableStyles.header}>
-                          <Text style={[MainStyles.textStyle, {fontSize: 24}]}>{findGameName(this.props.pageRequest.searchCriteria)}</Text>
+                          <Text numberOfLines={1} style={[MainStyles.textStyle, {fontSize: 24}]}>{findGameName(this.props.pageRequest.searchCriteria)}</Text>
                       </View>}
                       renderRow={(rowData, sectionID, rowID) => this.renderRow(parseInt(rowID)+1,rowData)}/>
         );

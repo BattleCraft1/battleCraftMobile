@@ -57,29 +57,29 @@ export default class Rows extends Component{
         return (
             <View style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
-                    <Text style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {rowData.name}</Text>
+                    <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {rowData.name}</Text>
                     <Checkbox elementName = {rowData.name} checked = {rowData.checked}/>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> Province: {rowData.province}</Text>
+                    <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Province: {rowData.province}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> City: {rowData.city}</Text>
+                    <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> City: {rowData.city}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> Game: {rowData.game}</Text>
+                    <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Game: {rowData.game}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> Players: {rowData.playersNumber}/{rowData.maxPlayers}</Text>
+                    <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Players: {rowData.playersNumber}/{rowData.maxPlayers}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> Date start: {dateFormat(rowData.dateOfStart,"dd-MM-yyyy hh:mm")}</Text>
+                    <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Date start: {dateFormat(rowData.dateOfStart,"dd-MM-yyyy hh:mm")}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> Date end: {dateFormat(rowData.dateOfEnd,"dd-MM-yyyy hh:mm")}</Text>
+                    <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Date end: {dateFormat(rowData.dateOfEnd,"dd-MM-yyyy hh:mm")}</Text>
                 </View>
                 <View style={[TableStyles.row, {backgroundColor: backgroundColour}]}>
-                    <Text style={[MainStyles.smallWhiteStyle]}> Status: {this.printStatus(rowData)}</Text>
+                    <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Status: {this.printStatus(rowData)}</Text>
                 </View>
             </View>);
     }
