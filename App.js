@@ -1,4 +1,5 @@
 import React from 'react';
+import {Dimensions} from 'react-native';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
@@ -22,6 +23,11 @@ const store = configureStore( {
     loading:{
         dataFetched:false,
         message:""
+    },
+    dimension:{
+        height: Dimensions.get('screen').height,
+        width: Dimensions.get('screen').width,
+        orientation: Dimensions.get('screen').height >= Dimensions.get('screen').width?'portrait':'landscape'
     },
     possibleOperations:[],
     entityPanel: {

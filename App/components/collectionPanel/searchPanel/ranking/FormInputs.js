@@ -39,14 +39,16 @@ class FormInputs extends Component{
     }
 
     async componentDidMount(){
-        await axios.get(serverName+`get/tournaments/enums`)
-            .then(res => {
-                this.setState({tournamentsGames:convertArrayToObjectWithoutEmptyField(res.data)});
-            })
-            .catch(error => {
-                this.props.showNetworkErrorMessage(error);
-            });
-        this.setDefaultGameSearchCriteria();
+        let getGameOperation = async () => {
+            await axios.get(serverName + `get/tournaments/enums`)
+                .then(res => {
+                    this.setState({tournamentsGames: convertArrayToObject(res.data)});
+                })
+                .catch(error => {
+                    this.props.showNetworkErrorMessage(error,getGameOperation);
+                });
+        };
+        await getGameOperation();
     }
 
     setDefaultGameSearchCriteria(){

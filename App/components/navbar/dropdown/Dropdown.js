@@ -12,29 +12,23 @@ import {
 import DropdownStyles from '../../../Styles/DropdownStyles'
 import MainStyles from '../../../Styles/MainStyles'
 
-export default class Dropdown extends Component {
+import { ActionCreators } from '../../../redux/actions/index';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+class Dropdown extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            dropdownVisible: false,
             selectedVal: null,
         }
     }
 
-    toggleDropdownVisibility(){
-        this.setState({dropdownVisible: !this.state.dropdownVisible})
-    }
-
-    setVisibility(val){
-        if(val!==this.dropdownVisible)this.setState({dropdownVisible: val})
-    }
-
     menuSelect(val){
-        this.setVisibility(false);
+        this.props.hideDropdown();
         this.props.navigate(val);
     }
-
 
     renderListElement(elementText){
         return (
@@ -52,12 +46,28 @@ export default class Dropdown extends Component {
             dropdownContent.push(this.renderListElement(this.props.listElements[i]));
         }
 
-        if(this.state.dropdownVisible)
+        let isPortrait = this.props.dimension.orientation==='portrait';
+
+        if(this.props.dropdownVisible)
             return(
-                    <View style={DropdownStyles.dropdownContainerStyle}>
+                    <View style={[DropdownStyles.dropdownContainerStyle,
+                        {height: isPortrait?350:300},
+                        {width: isPortrait?250:400}]}>
                         {dropdownContent}
                     </View>
             );
         else return null;
     }
 }
+
+function mapDispatchToProps( dispatch ) {
+    return bindActionCreators( ActionCreators, dispatch );
+}
+
+function mapStateToProps( state ) {
+    return {
+        dimension: state.dimension
+    };
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( Dropdown );

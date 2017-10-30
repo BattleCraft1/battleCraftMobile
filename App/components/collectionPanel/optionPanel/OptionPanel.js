@@ -35,7 +35,7 @@ const mapOfOperations = {
 };
 
 class OptionPanel extends Component {
-    groupOperations(operations){
+    groupOperationsInRows(operations){
         let groupedOperations = [];
         for(let i=0;i<operations.length/3;i++){
             let operationsGroup = [];
@@ -49,6 +49,23 @@ class OptionPanel extends Component {
             )
         }
         return groupedOperations;
+    }
+
+    groupOperationsInRow(operations){
+        return <View style={OptionsStyles.iconsRow} key={1}>
+            {operations}
+        </View>
+    }
+
+    calculateLeftMargin(isPortrait, numberOfElements){
+        let elementWidth = 90;
+        if(isPortrait){
+            let numberOfElementsInRow = 3;
+            return (this.props.dimension.width - numberOfElementsInRow*elementWidth)/2;
+        }
+        else{
+            return (this.props.dimension.width -numberOfElements*elementWidth)/2;
+        }
     }
 
     render() {
@@ -68,10 +85,12 @@ class OptionPanel extends Component {
             );
         });
 
+        let isPortrait = this.props.dimension.orientation === 'portrait';
+
         return (
             <Modal isVisible={this.props.isVisible} backdropOpacity={0.3}>
-                <View style={OptionsStyles.modal}>
-                    {this.groupOperations(operations)}
+                <View style={[OptionsStyles.modal,{marginLeft: this.calculateLeftMargin(isPortrait,operations.length)}]}>
+                    {isPortrait? this.groupOperationsInRows(operations):this.groupOperationsInRow(operations)}
                     <Button
                         onPress={() => this.props.onClosePanel()}
                         title="Close"
@@ -89,7 +108,8 @@ function mapDispatchToProps( dispatch ) {
 
 function mapStateToProps( state ) {
     return {
-        possibleOperations: state.possibleOperations
+        possibleOperations: state.possibleOperations,
+        dimension: state.dimension
     };
 }
 

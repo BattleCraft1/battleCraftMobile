@@ -45,6 +45,7 @@ export default class FormInputs extends Component{
                 />
                 <NumberInput
                     key="tournamentsNumber"
+                    placeholder = "Tournaments number"
                     name = "Tournaments number"
                     keys = {["tournamentsNumber"]}
                     operation = "<"

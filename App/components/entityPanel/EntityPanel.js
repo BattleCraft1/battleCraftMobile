@@ -13,53 +13,73 @@ import {
 
 import Modal from 'react-native-modal';
 
-import TournamentPanelContent from './tournament/PanelContent';
-import GamePanelContent from './game/PanelContent';
+import TournamentPanel from './tournament/Panel';
+import GamePanel from './game/Panel';
+import UserPanel from './user/Panel';
 
 import MainStyle from '../../Styles/MainStyles';
-import AddStyle from '../../Styles/AddStyle';
+import EntityPanelStyle from '../../Styles/EntityPanelStyle';
 
-export default class PanelAdd extends Component {
+import { ActionCreators } from '../../redux/actions/index';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-    constructor(props) {
-        super(props);
-    }
 
-    setContent(){
-        switch (this.props.collectionType) {
-            case "tournaments":
-                return <TournamentPanelContent/>;
-            case "games":
-                return <GamePanelContent/>;
-            default:
-                return <View style={{flex: 1}}/>;
-        }
-    }
+const panelTypeMap = {
+    'tournament':TournamentPanel,
+    'game':GamePanel,
+    'user':UserPanel
+};
 
-    actionButton() {
-        //handle action
+class EntityPanel extends Component {
 
-        //close panel
+    createPanel(){
+        let panelType = panelTypeMap[this.props.entityPanel.entityType];
+
+        return panelType ? React.createElement(
+            panelType,
+            {
+                mode:this.props.entityPanel.mode,
+                type:this.props.entityPanel.entityType,
+                name:this.props.entityPanel.entityName,
+                hidden:this.props.entityPanel.hidden,
+                relatedEntity:this.props.entityPanel.relatedEntity,
+                disable:this.props.closeEntityPanel.bind(this),
+            },
+            null) : <View/>
     }
 
     render() {
-        let content = this.setContent();
+        let content = this.createPanel();
 
         return (
-            <Modal isVisible={this.props.isVisible} backdropOpacity={0.3}>
-                <View style={AddStyle.modal}>
-                    <View style={[AddStyle.title,{alignItems:'center'}]}>
-                        <Text style={[MainStyle.textStyle,{fontSize: 22}]}>Add {this.props.collectionType.slice(0, -1)}</Text>
+            <Modal isVisible={!this.props.entityPanel.hidden} backdropOpacity={0.3}>
+                <View style={[EntityPanelStyle.modal, {
+                        width: this.props.dimension.width*0.9,
+                        maxHeight: this.props.dimension.height*0.9,
+                        marginLeft: ((this.props.dimension.width*0.1-50)/2)
+                }]}>
+                    <View style={[EntityPanelStyle.title,{alignItems:'center'}]}>
+                        <Text style={[MainStyle.textStyle,{fontSize: 22}]}>
+                            {this.props.entityPanel.mode.charAt(0).toUpperCase()+this.props.entityPanel.mode.slice(1)+" "+this.props.entityPanel.entityType}
+                        </Text>
                     </View>
-
                     {content}
-
-                    <View style={AddStyle.buttonRow}>
-                        <View style={AddStyle.button}><Button title={"Close"} color='#721515' onPress={() => this.props.onClosePanel()}/></View>
-                        <View style={AddStyle.button}><Button title={this.props.action} color='#721515' onPress={() => this.actionButton}/></View>
-                    </View>
                 </View>
             </Modal>
         );
     }
 }
+
+function mapDispatchToProps( dispatch ) {
+    return bindActionCreators( ActionCreators, dispatch );
+}
+
+function mapStateToProps( state ) {
+    return {
+        entityPanel:state.entityPanel,
+        dimension: state.dimension
+    };
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( EntityPanel );

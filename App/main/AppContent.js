@@ -15,6 +15,7 @@ import FadeView from '../components/commonComponents/FadeView'
 import ConfirmDialog from '../components/commonComponents/confirmationDialog/ConfirmDialog'
 import MessageDialog from '../components/commonComponents/messageDialog/MessageDialog'
 import LoadingSpinner from '../components/commonComponents/loading/LoadingSpinner'
+import DimensionChangeListener from '../components/commonComponents/dimensionChangeListener/DimensionChangeListener'
 import { Font } from 'expo';
 
 import { connect } from 'react-redux';
@@ -27,7 +28,8 @@ class App extends Component {
         super(props);
         this.state = {
             navigValue: "BattleCraft",
-            appReady: false
+            appReady: false,
+            dropdownVisible: false
         };
     }
 
@@ -47,11 +49,11 @@ class App extends Component {
     }
 
     toggleMenu(){
-        this.refs.Menu.toggleDropdownVisibility();
+        this.setState({dropdownVisible:!this.state.dropdownVisible})
     }
 
-    setMenu(val){
-        this.refs.Menu.setVisibility(val);
+    hideDropdown(){
+        this.setState({dropdownVisible:false});
     }
 
     createContent(){
@@ -59,7 +61,7 @@ class App extends Component {
         if(this.state.appReady){
             content=
                 <View style={{flex:1}}>
-                    <TouchableWithoutFeedback style={{flex:1}} onPress={()=>{this.setMenu(false)}}>
+                    <TouchableWithoutFeedback style={{flex:1}} onPress={this.hideDropdown.bind(this)}>
                         <View style={{flex:1}}>
                             <Navbar navigate={this.navigate.bind(this)} menuText={this.state.navigValue} toggleMenu={this.toggleMenu.bind(this)}/>
                             <FadeView style={{flex:1}}>
@@ -67,10 +69,15 @@ class App extends Component {
                                 <ConfirmDialog/>
                                 <MessageDialog/>
                                 <LoadingSpinner/>
+                                <DimensionChangeListener/>
                             </FadeView>
                         </View>
                     </TouchableWithoutFeedback>
-                    <Dropdown ref="Menu" navigate={this.navigate.bind(this)} listElements={["Tournaments", "Games", "Ranking", "Users", "My account"]}/>
+                    <Dropdown
+                        hideDropdown={this.hideDropdown.bind(this)}
+                        dropdownVisible={this.state.dropdownVisible}
+                        navigate={this.navigate.bind(this)}
+                        listElements={["Tournaments", "Games", "Ranking", "Users", "My account"]}/>
                 </View>
         }
         else{
@@ -108,9 +115,7 @@ function mapDispatchToProps( dispatch ) {
 }
 
 function mapStateToProps( state ) {
-    return {
-        loading: state.loading
-    };
+    return {};
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( App );

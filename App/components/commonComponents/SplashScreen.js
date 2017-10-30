@@ -1,26 +1,33 @@
 import React, { Component } from 'react';
 import {
     Image,
-    View,
-    Dimensions,
+    View
 } from 'react-native';
-import FadeView from './FadeView'
 
-export default class SplashScreen extends Component {
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../../redux/actions';
 
-    constructor() {
-        super()
-    }
-
+class SplashScreen extends Component {
     render() {
         return (
                 <View style={{flex: 1}}>
                     <Image
-                        style={{flex:1, width: Dimensions.get('window').width}}
+                        style={{flex:1, width: this.props.dimension.width}}
                         source={require('../../../img/logoBig.png')} />
                 </View>
         );
     }
 }
 
-module.export = SplashScreen;
+function mapDispatchToProps( dispatch ) {
+    return bindActionCreators( ActionCreators, dispatch );
+}
+
+function mapStateToProps( state ) {
+    return {
+        dimension: state.dimension
+    };
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( SplashScreen );

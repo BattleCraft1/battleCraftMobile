@@ -1,10 +1,11 @@
 export const fieldsOfObjects={
     "tournaments":{
         "name":'name',
-        "province.location":'province',
+        "province":'province',
         "address.city":'city',
         "game.name":'game',
         "freeSlots":'free slots',
+        "playersOnTableCount":"type",
         "dateOfStart":'start date',
         "dateOfEnd":'end date'
     },
@@ -13,14 +14,14 @@ export const fieldsOfObjects={
         "firstname":'firstname',
         "lastname":'lastname',
         "email":'email',
-        "province.location":'province',
+        "province":'province',
         "address.city":'city',
         "phoneNumber":'phone number',
     },
     "ranking":{
         "name":'name',
-        "province.location":'province',
-        "address.city":'city',
+        "playerAddress.province":'province',
+        "playerAddress.city":'city',
         "numberOfTournaments":'count of tournaments',
         "numberOfBattles":'count of battles',
         "points":'points'

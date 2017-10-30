@@ -6,17 +6,13 @@ import BaseColours from "../main/consts/BaseColours"
 
 const styles = StyleSheet.create({
     modal: {
-
-        width: 255,
-        padding: 10,
         flex:1,
         position: 'absolute',
-        marginLeft: ((Dimensions.get('window').width-310)/2),
-
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: BaseColours.background.mediumBrown,
         borderColor: BaseColours.background.darkBrown,
         borderWidth: 5,
-
         flexDirection: 'column'
     },
     icon: {
