@@ -6,7 +6,7 @@ import {
     ScrollView
 } from 'react-native';
 
-import AddStyle from '../../../Styles/AddStyle'
+import EntityPanelStyle from '../../../Styles/EntityPanelStyle'
 
 import { Form } from 'react-native-form-generator';
 
@@ -15,7 +15,7 @@ export default class PanelContent extends Component {
     render() {
         return (
             <View style={{flex:1}}>
-                <View style={[AddStyle.formWindow, {flex:1, paddingTop: 10}]}>
+                <View style={[EntityPanelStyle.formWindow, {flex:1, paddingTop: 10}]}>
                     <Form ref="game">
                         <View>
                             <Text>Input game name here</Text>

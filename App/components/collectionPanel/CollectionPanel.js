@@ -36,8 +36,7 @@ class CollectionPanel extends Component {
         this.state = {
             collectionType:"tournaments",
             formDrawer: "",
-            optionsVisible: false,
-            entityPanelVisible: false
+            optionsVisible: false
         }
     }
 
@@ -173,7 +172,9 @@ class CollectionPanel extends Component {
     createOptionsButton(){
         let optionsButton = <View/>;
         if(this.props.collectionType!=='ranking'){
-            optionsButton = <View style={{flex:1, marginRight: 3}}><Button title={"Options"} color='#4b371b' onPress={()=>this.setState({optionsVisible:true})}/></View>;
+            optionsButton = <View style={{flex:1, marginRight: 3}}>
+                <Button title={"Options"} color='#4b371b'
+                        onPress={()=>{this.setState({optionsVisible:true})}}/></View>;
         }
         return optionsButton;
     }
@@ -181,7 +182,14 @@ class CollectionPanel extends Component {
     createAddElementButton(){
         let addButton = <View/>;
         if(this.props.collectionType!=='ranking'&&this.props.collectionType!=='users'){
-            addButton = <View style={{flex:1}}><Button title={"Add "+this.props.collectionType.slice(0, -1)} color='#4b371b' onPress={()=>this.setState({entityPanelVisible:true})}/></View>;
+            let entityType = this.props.collectionType.slice(0, -1);
+            addButton =
+                <View style={{flex:1}}>
+                    <Button
+                        title={"Add "+entityType}
+                        color='#4b371b'
+                        onPress={()=>this.props.addEntity(entityType)}/>
+                </View>;
         }
         return addButton;
     }
@@ -239,11 +247,7 @@ class CollectionPanel extends Component {
                 collectionType={this.props.collectionType}
                 onClosePanel={(isVisible) => this.setState({optionsVisible:isVisible})}
                 isVisible={this.state.optionsVisible}/>
-            <EntityPanel
-                onClosePanel={(isVisible) => this.setState({entityPanelVisible:isVisible})}
-                isVisible={this.state.entityPanelVisible}
-                collectionType={this.state.collectionType}
-                action="Add"/>
+            {this.props.entityPanel.mode!=='disabled' && <EntityPanel/>}
         </Drawer>)
     }
 }

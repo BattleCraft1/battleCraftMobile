@@ -10,14 +10,10 @@ import BaseColours from "../main/consts/BaseColours"
 
 const styles = StyleSheet.create({
     modal: {
-        width: Dimensions.get('window').width*0.9,
         minHeight:300,
-        maxHeight:600,
         padding: 10,
         flex:1,
         position: 'absolute',
-        marginLeft: ((Dimensions.get('window').width*0.1-50)/2),
-
         backgroundColor: BaseColours.background.mediumBrown,
         borderColor: BaseColours.background.darkBrown,
         borderWidth: 5,

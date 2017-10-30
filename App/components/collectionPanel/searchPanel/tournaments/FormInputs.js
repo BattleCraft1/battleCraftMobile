@@ -42,14 +42,17 @@ export default class FormInputs extends Component{
         };
     }
 
-    async componentDidMount(){
-        await axios.get(serverName+`get/tournaments/enums`)
-            .then(res => {
-                this.setState({tournamentsGames:convertArrayToObject(res.data)});
-            })
-            .catch(error => {
-                this.props.showNetworkErrorMessage(error);
-            });
+    async componentDidMount() {
+        let getGameOperation = async () => {
+            await axios.get(serverName + `get/tournaments/enums`)
+                .then(res => {
+                    this.setState({tournamentsGames: convertArrayToObject(res.data)});
+                })
+                .catch(error => {
+                    this.props.showNetworkErrorMessage(error,getGameOperation);
+                });
+        };
+        await getGameOperation();
     }
 
     changeSearchForm(index,value){
@@ -89,6 +92,7 @@ export default class FormInputs extends Component{
             }
             <NumberInput
                 key="playerNumber"
+                placeholder = "Players number"
                 name = "Players number"
                 keys = {["playersNumber"]}
                 operation = "<"
@@ -97,6 +101,7 @@ export default class FormInputs extends Component{
             />
             <NumberInput
                 key="maxPlayers"
+                placeholder = "Max players"
                 name = "Max players"
                 keys = {["maxPlayers"]}
                 operation = "<"
@@ -105,6 +110,7 @@ export default class FormInputs extends Component{
             />
             <NumberInput
                 key="freeSlots"
+                placeholder = "Free slots"
                 name = "Free slots"
                 keys = {["freeSlots"]}
                 operation = ">"

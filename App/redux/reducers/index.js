@@ -7,6 +7,7 @@ import * as loadingReducer from './loading'
 import * as entityPanelReducer from './entityPanel'
 import * as possibleOperationsReducer from './possibleOperations'
 import * as additionalEntityPanelReducer from './additionalEntityPanel'
+import * as orientationReducer from './dimension'
 
 export default combineReducers( Object.assign(
     pageReducer,
@@ -16,5 +17,6 @@ export default combineReducers( Object.assign(
     loadingReducer,
     entityPanelReducer,
     possibleOperationsReducer,
-    additionalEntityPanelReducer
+    additionalEntityPanelReducer,
+    orientationReducer
 ) );
