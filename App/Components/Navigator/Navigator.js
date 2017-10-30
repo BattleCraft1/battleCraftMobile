@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CollectionPanel from '../CollectionPanel/CollectionPanel'
 import AccountPanel from '../Account/AccountPanel'
 import SplashScreen from '../Common/SplashScreen'
+import TournamentPanel from 'battleCraftMobile/App/Components/TournamentPanel/TournamentPanel'
 
 export default class Navigator extends Component {
 
@@ -21,6 +22,9 @@ export default class Navigator extends Component {
                 break;
             case 'My account':
                 return <AccountPanel/>;
+                break;
+            case 'Tournament battles':
+                return <TournamentPanel/>;
                 break;
             default:
                 return <SplashScreen/>;

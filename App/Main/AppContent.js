@@ -70,7 +70,7 @@ class App extends Component {
                             </FadeView>
                         </View>
                     </TouchableWithoutFeedback>
-                    <Dropdown ref="Menu" navigate={this.navigate.bind(this)} listElements={["Tournaments", "Games", "Rankings", "Users", "My account"]}/>
+                    <Dropdown ref="Menu" navigate={this.navigate.bind(this)} listElements={["Tournaments", "Games", "Rankings", "Users", "My account", "Tournament battles"]}/>
                 </View>
         }
         else{
