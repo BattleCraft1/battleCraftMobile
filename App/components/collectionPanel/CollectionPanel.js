@@ -19,10 +19,15 @@ import Drawer from 'react-native-drawer'
 import SearchDrawer from './searchPanel/SearchPanel'
 import PageDrawer from './pagePanel/PagePanel'
 import PanelOptions from './optionPanel/OptionPanel'
-import EntityPanel from '../entityPanel/EntityPanel'
 import CollectionList from './table/CollectionList'
 
 import {possibleOperationsForCollections} from "../../main/consts/possibleOperationsForCollections";
+import compareArrays from "../../main/functions/compareArrays";
+
+import OpenOperationsButton from "./buttons/OpenOperationsButton";
+import AddEntityButton from "./buttons/AddEntityButton";
+import InviteButton from "./buttons/InviteButton";
+import CancelInviteButton from "./buttons/CancelInviteButton";
 
 const drawerMap = {
     'page':PageDrawer,
@@ -169,36 +174,30 @@ class CollectionPanel extends Component {
         return formDrawer;
     }
 
-    createOptionsButton(){
-        let optionsButton = <View/>;
-        if(this.props.collectionType!=='ranking'){
-            optionsButton = <View style={{flex:1, marginRight: 3}}>
-                <Button title={"Options"} color='#4b371b'
-                        onPress={()=>{this.setState({optionsVisible:true})}}/></View>;
-        }
-        return optionsButton;
-    }
 
-    createAddElementButton(){
-        let addButton = <View/>;
-        if(this.props.collectionType!=='ranking'&&this.props.collectionType!=='users'){
-            let entityType = this.props.collectionType.slice(0, -1);
-            addButton =
-                <View style={{flex:1}}>
-                    <Button
-                        title={"Add "+entityType}
-                        color='#4b371b'
-                        onPress={()=>this.props.addEntity(entityType)}/>
-                </View>;
+    createButtons(){
+        let buttons = [];
+
+        if(compareArrays(this.props.possibleOperations,["Invite"])){
+            buttons = [
+                <InviteButton key="invite"/>,
+                <CancelInviteButton key="cancelInvite"/>
+            ]
         }
-        return addButton;
+        else if(this.props.collectionType!=='ranking') {
+            buttons.push(<OpenOperationsButton key="openOperations" action={() => this.setState({optionsVisible:true})}/>);
+            if (this.props.collectionType !== 'users') {
+                buttons.push(<AddEntityButton key="addEntity" entityType={this.props.collectionType.slice(0, -1)}/>);
+            }
+        }
+
+        return buttons;
     }
 
 
     render(){
         let formDrawer = this.createDrawer();
-        let optionsButton = this.createOptionsButton();
-        let addElementButton = this.createAddElementButton();
+        let buttons = this.createButtons();
 
         return(<Drawer
             ref={(ref) => this._drawer = ref}
@@ -239,15 +238,13 @@ class CollectionPanel extends Component {
                                     collectionType={this.props.collectionType}/>
                 </View>
                 <View style={{marginTop:3, flexDirection:'row'}}>
-                    {optionsButton}
-                    {addElementButton}
+                    {buttons}
                 </View>
             </View>
             <PanelOptions
                 collectionType={this.props.collectionType}
                 onClosePanel={(isVisible) => this.setState({optionsVisible:isVisible})}
                 isVisible={this.state.optionsVisible}/>
-            {this.props.entityPanel.mode!=='disabled' && <EntityPanel/>}
         </Drawer>)
     }
 }
@@ -260,7 +257,8 @@ function mapStateToProps( state ) {
     return {
         page: state.page,
         pageRequest: state.pageRequest,
-        entityPanel: state.entityPanel
+        entityPanel: state.entityPanel,
+        possibleOperations: state.possibleOperations
     };
 }
 

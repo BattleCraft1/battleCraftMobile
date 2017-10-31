@@ -42,7 +42,7 @@ export default class FormInputs extends Component{
             <View>
                 <TextInput
                     key="name"
-                    name = "Name"
+                    name = "Name:"
                     placeholder = "Jarek123"
                     keys = {["name"]}
                     operation = ":"
@@ -50,7 +50,7 @@ export default class FormInputs extends Component{
                     changeSearchForm = {this.changeSearchForm.bind(this)}/>
                 <TextInput
                     key="firstName"
-                    name = "First name"
+                    name = "First name:"
                     placeholder = "Jarek"
                     keys = {["firstname"]}
                     operation = ":"
@@ -58,7 +58,7 @@ export default class FormInputs extends Component{
                     changeSearchForm = {this.changeSearchForm.bind(this)}/>
                 <TextInput
                     key="lastName"
-                    name = "Last name"
+                    name = "Last name:"
                     placeholder = "Kowalski"
                     keys = {["lastname"]}
                     operation = ":"
@@ -66,7 +66,7 @@ export default class FormInputs extends Component{
                     changeSearchForm = {this.changeSearchForm.bind(this)}/>
                 <TextInput
                     key="eMail"
-                    name = "E-mail"
+                    name = "E-mail:"
                     placeholder = "Jarek@gmail.com"
                     keys = {["email"]}
                     operation = ":"
@@ -74,7 +74,7 @@ export default class FormInputs extends Component{
                     changeSearchForm = {this.changeSearchForm.bind(this)}/>
                 <TextInput
                     key="city"
-                    name = "City"
+                    name = "City:"
                     placeholder = "Lublin"
                     keys = {["address", "city"]}
                     operation = ":"
@@ -82,7 +82,7 @@ export default class FormInputs extends Component{
                     changeSearchForm = {this.changeSearchForm.bind(this)}/>
                 <SelectInput
                     key="province"
-                    name = "Province"
+                    name = "Province:"
                     keys = {["address", "province"]}
                     operation = ":"
                     indexOfSearchFields = "province"

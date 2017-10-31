@@ -6,13 +6,10 @@ import BaseColours from "../main/consts/BaseColours"
 
 const styles = StyleSheet.create({
     modalContainer: {
-        width:340,
-        height:270,
+        width:290,
         padding: 10,
         flex:1,
-
         position: 'absolute',
-        marginLeft: ((Dimensions.get('window').width-340)/2),
     },
 
     modalHeader: {
@@ -23,7 +20,7 @@ const styles = StyleSheet.create({
         borderWidth: 5,
         backgroundColor: BaseColours.background.mediumBrown,
         height: 50,
-        width:300,
+        width:290,
         padding: 10,
         alignItems: 'center',
         justifyContent: 'center'
@@ -31,7 +28,7 @@ const styles = StyleSheet.create({
 
     modalBody: {
         height: 150,
-        width:300,
+        width:290,
         padding: 10,
         borderColor: BaseColours.background.darkBrown,
         backgroundColor: BaseColours.background.mediumBrown,
@@ -49,7 +46,7 @@ const styles = StyleSheet.create({
         borderRightWidth:5,
         borderBottomWidth:5,
         height: 50,
-        width:300,
+        width:290,
         borderColor: BaseColours.background.darkBrown,
         backgroundColor: BaseColours.background.mediumBrown,
     },

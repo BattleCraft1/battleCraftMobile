@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    Button,
+    TouchableHighlight,
     ScrollView
 } from 'react-native';
 
 import EntityPanelStyle from '../../../Styles/EntityPanelStyle'
-import MainStyles from '../../../Styles/MainStyles'
 
 import BasicDataTab from './Tabs/BasicDataTab';
 import AddressTab from './Tabs/AddressTab';
 import ParticipantsTab from './Tabs/ParticipantsTab';
 import OrganizersTab from './Tabs/OrganizersTab';
+
+import Navigation from './navigation/Navigation'
 
 import { ActionCreators } from '../../../redux/actions/index';
 import { bindActionCreators } from 'redux';
@@ -50,7 +51,7 @@ class Panel extends Component {
         tomorrow.setDate(today.getDate()+1);
         dayAfterTomorrow.setDate(tomorrow.getDate()+1);
         this.state = {
-            activeTab : "basicData",
+            activeTab : "",
             entity:{
                 "name": "",
                 "nameChange": "",
@@ -92,18 +93,24 @@ class Panel extends Component {
         if(this.props.mode==='edit' || this.props.mode==='get')
         {
             let getEntityOperation = async () => {
+                this.props.startLoading("Featching tournament...");
                 await axios.get(serverName+`get/`+this.props.type+`?name=`+this.props.name)
                 .then(res => {
                     this.setState({entity:res.data});
+                    this.setState({activeTab:"basicData"});
+                    this.props.stopLoading();
                     console.log("input entity: ");
                     console.log(res.data);
                 })
                 .catch(error => {
                     this.props.showNetworkErrorMessage(error,getEntityOperation);
                 });
-            }
+            };
 
             await getEntityOperation();
+        }
+        else {
+            this.setState({activeTab:"basicData"});
         }
     }
 
@@ -112,6 +119,7 @@ class Panel extends Component {
             this.props.hidden === true &&
             nextProps.relatedEntity.relatedEntityNames.length > 0 &&
             !compareArrays(nextProps.relatedEntity.relatedEntityNames,this.props.relatedEntity.relatedEntityNames)) {
+            console.log("debug");
             this.actualizeRelatedEntityObjects(
                 nextProps.relatedEntity.relatedEntityType,
                 nextProps.relatedEntity.relatedEntityNames)
@@ -153,15 +161,19 @@ class Panel extends Component {
     }
 
     createContent(){
-        return React.createElement(
-            tabsMap[this.state.activeTab],
-            {
-                entity:this.state.entity,
-                inputsDisabled: this.props.mode === 'get',
-                changeEntity: this.changeEntity.bind(this),
-                validationErrors: this.state.validationErrors
-            },
-            null)
+        if(this.state.activeTab!=="")
+            return React.createElement(
+                tabsMap[this.state.activeTab],
+                {
+                    navigate:this.props.navigate,
+                    entity:this.state.entity,
+                    inputsDisabled: this.props.mode === 'get',
+                    changeEntity: this.changeEntity.bind(this),
+                    validationErrors: this.state.validationErrors
+                },
+                null);
+        else
+            return <View/>
     }
 
     changeEntity(fieldName,value){
@@ -230,36 +242,29 @@ class Panel extends Component {
         let buttons = [];
         if(this.props.mode!=='get'){
             buttons = [
-                <View key="save" style={EntityPanelStyle.button}><Button title={"Save"} color='#721515' onPress={() => this.sendEntity()}/></View>,
-                <View key="close" style={EntityPanelStyle.button}><Button title={"Close"} color='#721515' onPress={() => this.props.disable()}/></View>
+                <TouchableHighlight key="save" style={[EntityPanelStyle.button,{backgroundColor:'#721515' }]} onPress={() => this.sendEntity()}>
+                    <Text style={EntityPanelStyle.buttonText}>SAVE</Text>
+                </TouchableHighlight>,
+                <TouchableHighlight key="close" style={[EntityPanelStyle.button,{backgroundColor:'#721515' }]} onPress={() => this.props.disable()}>
+                    <Text style={EntityPanelStyle.buttonText}>CLOSE</Text>
+                </TouchableHighlight>
             ]
         }
         else{
             buttons = [
-                <View key="ok" style={EntityPanelStyle.button}><Button title={"Ok"} color='#721515' onPress={() => this.props.disable()}/></View>
+                <TouchableHighlight key="ok" style={[EntityPanelStyle.button,{backgroundColor:'#721515' }]} onPress={() => this.props.disable()}>
+                    <Text style={EntityPanelStyle.buttonText}>OK</Text>
+                </TouchableHighlight>
             ]
         }
 
+
         return (
             <View>
-                <View>
-                    <View style={EntityPanelStyle.buttonRow}>
-                        <View style={EntityPanelStyle.button}><Button title={"Base data"} color={this.isTabActive("basicData")} onPress={() => {this.setActiveTab("basicData")}}/></View>
-                        <View style={EntityPanelStyle.button}><Button title={"Address"} color={this.isTabActive("address")} onPress={() => {this.setActiveTab("address")}}/></View>
-                    </View>
-                    <View style={EntityPanelStyle.buttonRow}>
-                        <View style={EntityPanelStyle.button}><Button title={"Organisers"} color={this.isTabActive("organizers")} onPress={() => {this.setActiveTab("organizers")}}/></View>
-                        <View style={EntityPanelStyle.button}><Button title={"Participants"} color={this.isTabActive("participants")} onPress={() => {this.setActiveTab("participants")}}/></View>
-                    </View>
-                </View>
-
-                <View style={EntityPanelStyle.formHeader}><Text style={[MainStyles.textStyle,{fontSize: 20}]}>{tabsNamesMap[this.state.activeTab]}</Text></View>
+                <Navigation setActiveTab={this.setActiveTab.bind(this)} isTabActive={this.isTabActive.bind(this)}/>
                 <View style={[EntityPanelStyle.formWindow]}>
-                    <ScrollView style={{maxHeight:300}}>
                         {content}
-                    </ScrollView>
                 </View>
-
                 <View style={EntityPanelStyle.buttonRow}>
                     {buttons}
                 </View>

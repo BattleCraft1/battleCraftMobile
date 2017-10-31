@@ -3,39 +3,96 @@
  */
 import React, { Component } from 'react';
 import {
-    View,
-    Button,
-    ScrollView,
+    ScrollView
 } from 'react-native';
 
-import {Form} from 'react-native-form-generator';
+import SelectInput from '../../inputs/SelectInput'
+import TextInput from '../../inputs/TextInput'
+import TextArea from '../../inputs/TextArea'
 
+import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
+import {provinces} from "../../../../main/consts/provincesWithoutEmptyOption";
+import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
 
-import TableStyles from '../../../../Styles/TableStyles'
-import MainStyles from '../../../../Styles/MainStyles'
-import ListColours from '../../../../main/consts/ListColours'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../../../../redux/actions/index';
 
-export default class AddressTab extends Component{
+class AddressTab extends Component{
 
-    constructor(props) {
-        super(props);
-
+    calculateHeight(){
+        return this.props.dimension.orientation === 'portrait'?
+            this.props.dimension.height*0.8-145:this.props.dimension.height*0.7-115;
     }
 
-
     render(){
+        let height = this.calculateHeight();
         return(
-            <View>
-                <ScrollView>
-                    <Form ref="addressForm">
-                        <View style={{flex:1}}>
+            <ScrollView
+                style={{height:height}}
+                contentContainerStyle={EntityPanelStyle.scrollView}>
+                <SelectInput
+                    value={this.props.entity["province"]}
+                    fieldName="province"
+                    changeEntity={this.props.changeEntity}
+                    options={provinces}
+                    disabled = {this.props.inputsDisabled}
+                    name="Province:"/>
+                <ValidationErrorMessage
+                    validationErrorMessage={this.props.validationErrors["province"]}/>
 
-                        </View>
-                        <Button title={"Save address info"} color='#4b371b' onPress={()=>{/*todo - save input from form to state and pass to main component*/}}/>
-                    </Form>
-                </ScrollView>
-            </View>
+                <TextInput
+                    value={this.props.entity["city"]}
+                    fieldName="city"
+                    changeEntity={this.props.changeEntity}
+                    disabled = {this.props.inputsDisabled}
+                    placeholder = "Lublin"
+                    name="City:"/>
+                <ValidationErrorMessage
+                    validationErrorMessage={this.props.validationErrors["city"]}/>
+
+                <TextInput
+                    value={this.props.entity["street"]}
+                    fieldName="street"
+                    changeEntity={this.props.changeEntity}
+                    disabled = {this.props.inputsDisabled}
+                    placeholder = "Nadbystrzycka"
+                    name="Street:"/>
+                <ValidationErrorMessage
+                    validationErrorMessage={this.props.validationErrors["street"]}/>
+
+                <TextInput
+                    value={this.props.entity["zipCode"]}
+                    fieldName="zipCode"
+                    changeEntity={this.props.changeEntity}
+                    disabled = {this.props.inputsDisabled}
+                    placeholder = "12-123"
+                    name="ZIP code:"/>
+                <ValidationErrorMessage
+                    validationErrorMessage={this.props.validationErrors["zipCode"]}/>
+
+                <TextArea
+                    value={this.props.entity["description"]}
+                    fieldName="description"
+                    changeEntity={this.props.changeEntity}
+                    disabled = {this.props.inputsDisabled}
+                    placeholder = ""
+                    name="Description:"/>
+                <ValidationErrorMessage
+                    validationErrorMessage={this.props.validationErrors["zipCode"]}/>
+            </ScrollView>
         );
     }
 }
+function mapDispatchToProps( dispatch ) {
+    return bindActionCreators( ActionCreators, dispatch );
+}
+
+function mapStateToProps( state ) {
+    return {
+        dimension: state.dimension
+    };
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( AddressTab );
 

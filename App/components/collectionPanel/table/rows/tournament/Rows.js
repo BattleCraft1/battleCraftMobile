@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    ListView
+    ListView,
+    TouchableHighlight
 } from 'react-native';
 
 import TableStyles from '../../../../../Styles/TableStyles'
@@ -12,9 +13,13 @@ import ListColours from '../../../../../main/consts/ListColours'
 import Checkbox from '../../../../commonComponents/checkBox/Checkbox'
 import MultiCheckbox from '../../../../commonComponents/checkBox/MultiCheckbox'
 
+import { ActionCreators } from '../../../../../redux/actions/index';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 import dateFormat from 'dateformat';
 
-export default class Rows extends Component{
+class Rows extends Component{
 
     constructor(props) {
         super(props);
@@ -50,6 +55,16 @@ export default class Rows extends Component{
         }
     }
 
+    editEntity(element){
+        //if(this.props.entityPanel.mode!=='disabled')
+            //this.props.showAdditionalEntityPanel("tournament",element.name); else
+        if(element.status!=='NEW' && element.status!=='ACCEPTED'){
+            this.props.getEntity("tournament",element.name);
+        }
+        else
+            this.props.editEntity("tournament",element.name);
+    }
+
     renderRow(rowData) {
 
         let backgroundColour = this.backgroundColourCheck(rowData);
@@ -57,7 +72,11 @@ export default class Rows extends Component{
         return (
             <View style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
-                    <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {rowData.name}</Text>
+                    <TouchableHighlight
+                        style={{flex:1}}
+                        onPress={() => this.editEntity(rowData)}>
+                        <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {rowData.name}</Text>
+                    </TouchableHighlight>
                     <Checkbox elementName = {rowData.name} checked = {rowData.checked}/>
                 </View>
                 <View style={[TableStyles.row]}>
@@ -97,4 +116,17 @@ export default class Rows extends Component{
         );
     }
 }
+
+
+function mapDispatchToProps( dispatch ) {
+    return bindActionCreators( ActionCreators, dispatch );
+}
+
+function mapStateToProps( state ) {
+    return {
+        entityPanel: state.entityPanel
+    };
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( Rows );
 

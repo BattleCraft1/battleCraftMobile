@@ -4,10 +4,7 @@
 
 import React, { Component } from 'react';
 import {
-    View,
-    Text,
-    ScrollView,
-    Button
+    ScrollView
 } from 'react-native';
 
 import SelectInput from '../../inputs/SelectInput'
@@ -27,15 +24,17 @@ import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../../../redux/actions/index';
-import convertArrayToObject from "../../../../main/functions/convertArrayToObject";
+
+import convertArrayToObject from "../../../../main/functions/convertArrayToObjectWithoutEmptyField";
 import {type} from "../../../../main/consts/tournamentType";
+import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
 
 class BasicDataTab extends Component{
     constructor(props) {
         super(props);
 
         this.state = {
-            gameNames:[]
+            gameNames:{}
         };
     }
 
@@ -45,9 +44,13 @@ class BasicDataTab extends Component{
 
     async getGameSelectData(){
         let getGameOperation = async () => {
+            this.props.startLoading("Fetching games...");
             await axios.get(serverName + `get/tournaments/enums`)
                 .then(res => {
-                    this.setState({tournamentsGames: convertArrayToObject(res.data)});
+                    console.log("games");
+                    console.log(res.data);
+                    this.setState({gameNames: convertArrayToObject(res.data)});
+                    this.props.stopLoading();
                 })
                 .catch(error => {
                     this.props.showNetworkErrorMessage(error,getGameOperation);
@@ -67,78 +70,88 @@ class BasicDataTab extends Component{
             return "Master";
     }
 
+    calculateHeight(){
+        return this.props.dimension.orientation === 'portrait'?
+            this.props.dimension.height*0.8-145:this.props.dimension.height*0.7-115;
+    }
+
     render(){
+        let height = this.calculateHeight();
         let maxPlayers = this.props.entity["tablesCount"]*this.props.entity["playersOnTableCount"];
         return(
-            <View>
-                    <View>
-                        <View>
-                            <ValidationErrorMessage
-                                validationErrorMessage={this.props.validationErrors["nameChange"]}/>
-                            <ValidationErrorMessage
-                                validationErrorMessage={this.props.validationErrors["game"]}/>
-                            <ValidationErrorMessage
-                                validationErrorMessage={this.props.validationErrors["tablesCount"]}/>
-                            <ValidationErrorMessage
-                                validationErrorMessage={this.props.validationErrors["playersOnTableCount"]}/>
-                            <ValidationErrorMessage
-                                validationErrorMessage={this.props.validationErrors["dateOfStart"]}/>
-                            <ValidationErrorMessage
-                                validationErrorMessage={this.props.validationErrors["dateOfEnd"]}/>
-                        </View>
-                        <View>
-                            <TextInput
-                                value={this.props.entity["nameChange"]}
-                                fieldName="nameChange"
-                                changeEntity={this.props.changeEntity}
-                                disabled = {this.props.inputsDisabled}
-                                name="Name"/>
-                            <TextOutput
-                                value={this.props.entity["status"]}
-                                name="Tournament status"/>
-                            <SelectInput
-                                value={this.props.entity["game"]}
-                                fieldName="game"
-                                changeEntity={this.props.changeEntity}
-                                options={this.state.gameNames}
-                                disabled = {this.props.inputsDisabled}
-                                name="Game"/>
+            <ScrollView
+                style={{height:height}}
+                contentContainerStyle={EntityPanelStyle.scrollView}>
+                <TextInput
+                    value={this.props.entity["nameChange"]}
+                    fieldName="nameChange"
+                    changeEntity={this.props.changeEntity}
+                    disabled = {this.props.inputsDisabled}
+                    placeholder = "Tournament 2017"
+                    name="Name:"/>
+                <ValidationErrorMessage
+                    validationErrorMessage={this.props.validationErrors["nameChange"]}/>
 
-                            <NumberInput
-                                value={this.props.entity["tablesCount"]}
-                                fieldName="tablesCount"
-                                changeEntity={this.props.changeEntity}
-                                disabled = {this.props.inputsDisabled}
-                                name="Tables count"/>
+                <TextOutput
+                    value={this.props.entity["status"]}
+                    name="Tournament status:"/>
 
-                            <SelectNumberInput
-                                value={this.props.entity["playersOnTableCount"]}
-                                fieldName="playersOnTableCount"
-                                changeEntity={this.props.changeEntity}
-                                options={type}
-                                disabled = {this.props.inputsDisabled}
-                                name="Type"/>
-                            <NumberOutput
-                                value={maxPlayers}
-                                name="Max players"/>
-                            <TextOutput
-                                value={this.calculateTournamentType(maxPlayers)}
-                                name="Tournament class"/>
-                            <DateInput
-                                value={this.props.entity["dateOfStart"]}
-                                fieldName="dateOfStart"
-                                changeEntity={this.props.changeEntity}
-                                disabled = {this.props.inputsDisabled}
-                                name="Start at"/>
-                            <DateInput
-                                value={this.props.entity["dateOfEnd"]}
-                                fieldName="dateOfEnd"
-                                changeEntity={this.props.changeEntity}
-                                disabled = {this.props.inputsDisabled}
-                                name="Ends at"/>
-                        </View>
-                    </View>
-            </View>
+                <SelectInput
+                    value={this.props.entity["game"]}
+                    fieldName="game"
+                    changeEntity={this.props.changeEntity}
+                    options={this.state.gameNames}
+                    disabled = {this.props.inputsDisabled}
+                    name="Game:"/>
+                <ValidationErrorMessage
+                    validationErrorMessage={this.props.validationErrors["game"]}/>
+
+                <NumberInput
+                    value={this.props.entity["tablesCount"]}
+                    fieldName="tablesCount"
+                    changeEntity={this.props.changeEntity}
+                    disabled = {this.props.inputsDisabled}
+                    placeholder = "Tables count"
+                    name="Tables count:"/>
+                <ValidationErrorMessage
+                    validationErrorMessage={this.props.validationErrors["tablesCount"]}/>
+
+                <SelectNumberInput
+                    value={this.props.entity["playersOnTableCount"]}
+                    fieldName="playersOnTableCount"
+                    changeEntity={this.props.changeEntity}
+                    options={type}
+                    disabled = {this.props.inputsDisabled}
+                    name="Type:"/>
+                <ValidationErrorMessage
+                    validationErrorMessage={this.props.validationErrors["playersOnTableCount"]}/>
+
+                <NumberOutput
+                    value={maxPlayers}
+                    name="Max players:"/>
+                <TextOutput
+                    value={this.calculateTournamentType(maxPlayers)}
+                    name="Tournament class:"/>
+
+                <DateInput
+                    value={this.props.entity["dateOfStart"]}
+                    fieldName="dateOfStart"
+                    changeEntity={this.props.changeEntity}
+                    disabled = {this.props.inputsDisabled}
+                    name="Start at:"/>
+                <ValidationErrorMessage
+                    validationErrorMessage={this.props.validationErrors["dateOfStart"]}/>
+
+                <DateInput
+                    value={this.props.entity["dateOfEnd"]}
+                    fieldName="dateOfEnd"
+                    changeEntity={this.props.changeEntity}
+                    disabled = {this.props.inputsDisabled}
+                    name="Ends at:"/>
+                <ValidationErrorMessage
+                    validationErrorMessage={this.props.validationErrors["dateOfEnd"]}/>
+
+            </ScrollView>
         );
     }
 }
@@ -148,7 +161,9 @@ function mapDispatchToProps( dispatch ) {
 }
 
 function mapStateToProps( state ) {
-    return {};
+    return {
+        dimension: state.dimension
+    };
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( BasicDataTab );

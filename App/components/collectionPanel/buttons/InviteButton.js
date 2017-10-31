@@ -1,26 +1,32 @@
 import React from 'react';
-import OperationButton from './operationButton/OperationButton'
+import {
+    View,
+    Button,
+} from 'react-native';
+
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { ActionCreators } from '../../../../redux/actions/index';
+import { ActionCreators } from '../../../redux/actions/index';
 
-class InviteOperation extends React.Component {
+class InviteButton extends React.Component {
 
-    inviteElements(){
+    invite(){
         this.props.setRelatedEntity(this.props.page.checkedElementsNames,
             this.props.entityPanel.relatedEntity.relatedEntityType,
             this.props.entityPanel.relatedEntity.relatedEntityCriteria);
         this.props.clearCheckedElements();
         this.props.showEntityPanel(true);
+
     }
 
     render() {
         return (
-            <OperationButton
-                name = "Invite"
-                icon = "envelope-open"
-                operation = {this.inviteElements.bind(this)}
-            />
+            <View style={{flex:1, marginRight: 3}}>
+                <Button
+                    title={"Invite"}
+                    color='#4b371b'
+                    onPress={()=>this.invite()}/>
+            </View>
         );
     }
 }
@@ -32,8 +38,8 @@ function mapDispatchToProps( dispatch ) {
 function mapStateToProps( state ) {
     return {
         entityPanel:state.entityPanel,
-        page:state.page
+        page: state.page
     };
 }
 
-export default connect( mapStateToProps, mapDispatchToProps )( InviteOperation );
+export default connect( mapStateToProps, mapDispatchToProps )( InviteButton );

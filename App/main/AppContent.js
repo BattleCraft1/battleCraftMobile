@@ -13,6 +13,7 @@ import SplashScreen from '../components/commonComponents/SplashScreen';
 import MainStyles from '../Styles/MainStyles'
 import FadeView from '../components/commonComponents/FadeView'
 import ConfirmDialog from '../components/commonComponents/confirmationDialog/ConfirmDialog'
+import EntityPanel from '../components/entityPanel/EntityPanel'
 import MessageDialog from '../components/commonComponents/messageDialog/MessageDialog'
 import LoadingSpinner from '../components/commonComponents/loading/LoadingSpinner'
 import DimensionChangeListener from '../components/commonComponents/dimensionChangeListener/DimensionChangeListener'
@@ -70,14 +71,15 @@ class App extends Component {
                                 <MessageDialog/>
                                 <LoadingSpinner/>
                                 <DimensionChangeListener/>
+                                <EntityPanel navigate={this.navigate.bind(this)}/>
                             </FadeView>
                         </View>
                     </TouchableWithoutFeedback>
-                    <Dropdown
+                    {this.state.dropdownVisible && <Dropdown
                         hideDropdown={this.hideDropdown.bind(this)}
                         dropdownVisible={this.state.dropdownVisible}
                         navigate={this.navigate.bind(this)}
-                        listElements={["Tournaments", "Games", "Ranking", "Users", "My account"]}/>
+                        listElements={["Tournaments", "Games", "Ranking", "Users", "My account"]}/>}
                 </View>
         }
         else{

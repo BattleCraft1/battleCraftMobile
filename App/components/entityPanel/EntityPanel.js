@@ -6,10 +6,9 @@
 import React, { Component } from 'react';
 import {
     View,
-    Text,
-    Button,
-
+    Text
 } from 'react-native';
+
 
 import Modal from 'react-native-modal';
 
@@ -33,16 +32,18 @@ const panelTypeMap = {
 
 class EntityPanel extends Component {
 
-    createPanel(){
+    createPanel(height){
         let panelType = panelTypeMap[this.props.entityPanel.entityType];
 
         return panelType ? React.createElement(
             panelType,
             {
+                navigate: this.props.navigate,
                 mode:this.props.entityPanel.mode,
                 type:this.props.entityPanel.entityType,
                 name:this.props.entityPanel.entityName,
                 hidden:this.props.entityPanel.hidden,
+                orientation:this.props.dimension.orientation,
                 relatedEntity:this.props.entityPanel.relatedEntity,
                 disable:this.props.closeEntityPanel.bind(this),
             },
@@ -50,21 +51,26 @@ class EntityPanel extends Component {
     }
 
     render() {
-        let content = this.createPanel();
-
+        let panel;
+        let height = 0;
+        if(this.props.entityPanel.mode!=='disabled'){
+            height = this.props.dimension.orientation === 'portrait'?
+                this.props.dimension.height*0.8:this.props.dimension.height*0.7;
+            panel = this.createPanel(height);
+        }
         return (
+            this.props.entityPanel.mode !== 'disabled' &&
             <Modal isVisible={!this.props.entityPanel.hidden} backdropOpacity={0.3}>
-                <View style={[EntityPanelStyle.modal, {
+                <View style={[EntityPanelStyle.modal,{
                         width: this.props.dimension.width*0.9,
-                        maxHeight: this.props.dimension.height*0.9,
-                        marginLeft: ((this.props.dimension.width*0.1-50)/2)
-                }]}>
+                        height: height
+                    }]}>
                     <View style={[EntityPanelStyle.title,{alignItems:'center'}]}>
                         <Text style={[MainStyle.textStyle,{fontSize: 22}]}>
                             {this.props.entityPanel.mode.charAt(0).toUpperCase()+this.props.entityPanel.mode.slice(1)+" "+this.props.entityPanel.entityType}
                         </Text>
                     </View>
-                    {content}
+                    {panel}
                 </View>
             </Modal>
         );

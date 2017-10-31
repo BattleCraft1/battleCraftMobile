@@ -34,7 +34,7 @@ const store = configureStore( {
         mode:entityPanelModes.disabled,
         entityType:entityPanelTypes.none,
         entityName:"",
-        hidden:false,
+        hidden:true,
         relatedEntity:{
             relatedEntityNames:[],
             relatedEntityType:"",

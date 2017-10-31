@@ -12,7 +12,7 @@ export default class NumberInput extends React.Component{
                 <Text>{this.props.name}</Text>
                 <InputField
                     value = {this.props.value.toString()}
-                    disabled={true}
+                    editable={false}
                     keyboardType = 'numeric'
                 />
             </View>

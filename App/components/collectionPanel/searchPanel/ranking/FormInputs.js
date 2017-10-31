@@ -73,7 +73,7 @@ class FormInputs extends Component{
             <View>
                 <TextInput
                     key="name"
-                    name = "Name"
+                    name = "Name:"
                     placeholder = "Jarek123"
                     keys = {["players","player","name"]}
                     operation = ":"
@@ -82,7 +82,7 @@ class FormInputs extends Component{
                 />
                 <TextInput
                     key="city"
-                    name = "Tournaments city"
+                    name = "Tournaments city:"
                     placeholder = "Lublin"
                     keys = {["tour","tournament","address", "city"]}
                     operation = ":"
@@ -91,7 +91,7 @@ class FormInputs extends Component{
                 />
                 <SelectInput
                     key="province"
-                    name = "Tournaments province"
+                    name = "Tournaments province:"
                     keys = {["tour","tournament","address", "province"]}
                     operation = ":"
                     indexOfSearchFields = "province"
@@ -100,7 +100,7 @@ class FormInputs extends Component{
                 />
                 <GameInputForRanking
                     key="game"
-                    name = "Game"
+                    name = "Game:"
                     value = {this.state.gameName}
                     keys = {["tour","tournament","game","name"]}
                     operation = ":"
@@ -110,7 +110,7 @@ class FormInputs extends Component{
                 />
                 <DateInput
                     key="dateFrom"
-                    name = "Date from"
+                    name = "Date from:"
                     keys = {["tour","tournament","dateOfStart"]}
                     operation = ">"
                     indexOfSearchFields = "dateOfStart"
@@ -118,7 +118,7 @@ class FormInputs extends Component{
                 />
                 <DateInput
                     key="dateTo"
-                    name = "Date to"
+                    name = "Date to:"
                     keys = {["tour","tournament","dateOfEnd"]}
                     operation = "<"
                     indexOfSearchFields = "dateOfEnd"

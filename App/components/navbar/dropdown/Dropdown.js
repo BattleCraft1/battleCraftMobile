@@ -26,6 +26,8 @@ class Dropdown extends Component {
     }
 
     menuSelect(val){
+        this.props.clearCheckedElements();
+        this.props.closeEntityPanel();
         this.props.hideDropdown();
         this.props.navigate(val);
     }
@@ -48,15 +50,13 @@ class Dropdown extends Component {
 
         let isPortrait = this.props.dimension.orientation==='portrait';
 
-        if(this.props.dropdownVisible)
             return(
                     <View style={[DropdownStyles.dropdownContainerStyle,
-                        {height: isPortrait?350:300},
+                        {height: this.props.dimension.height-60},
                         {width: isPortrait?250:400}]}>
                         {dropdownContent}
                     </View>
             );
-        else return null;
     }
 }
 

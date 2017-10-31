@@ -5,83 +5,110 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    ListView,
+    ScrollView,
     Button,
     Image
 } from 'react-native';
 
+import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
+
 import TableStyles from '../../../../Styles/TableStyles'
 import MainStyles from '../../../../Styles/MainStyles'
 import ListColours from '../../../../main/consts/ListColours'
+import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
 
-export default class UserForms extends Component{
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../../../../redux/actions/index';
+import EmptyRow from "../../outputs/EmptyRow";
+import {serverName} from "../../../../main/consts/serverName";
 
-    constructor(props) {
-        super(props);
+class ParticipantsTab extends Component{
 
-        this.renderRow = this.renderRow.bind(this);
-
-        let dataSource = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1 !== r2,
-        });
-
-        this.state = {
-            dataSource: dataSource.cloneWithRows(['Placeholder'])
-        };
-    }
-
-    users={
-        user1:{
-            name:'Temp1',
-            status: 'accepted'
-        },
-        user2:{
-            name:'Temp2',
-            status: 'accepted'
-        },
-        user3:{
-            name:'Temp3',
-            status: 'new'
-        },
-    }
-
-
-    backgroundColourCheck(rowData){
-        switch(rowData.status){
-            case 'new': return ListColours.users.NEW;
-            case 'accepted': return ListColours.users.ACCEPTED;
-            default: return ListColours.users.NEW;
-        }
+    backgroundColourCheck(accepted){
+        return accepted? ListColours.users.ACCEPTED:ListColours.users.NEW;
     }
 
     renderRow(rowData) {
 
-        let backgroundColour = this.backgroundColourCheck(rowData);
+        let backgroundColour = this.backgroundColourCheck(rowData.accepted);
 
         return (
-            <View style={[TableStyles.row, {flexDirection: 'row'}]}>
+            <View key={rowData.name} style={[TableStyles.row, {flexDirection: 'row'}]}>
                 <View style={{width: 35, justifyContent: 'center', alignItems: 'center'}}>
                     <Image
                         style={{width: 35, height: 35}}
-                        source={require("../../../../../img/userLogoDef.png")}/>
+                        source={{uri:serverName+`/get/user/avatar?username=${rowData.name}`}}/>
                 </View>
-                <View style={{backgroundColor: backgroundColour, flex: 1}}>
-                    <Text style={[MainStyles.bigWhiteStyle, {padding:3}]}> {rowData.name}</Text>
+                <View style={{backgroundColor: backgroundColour, flex: 1, justifyContent:'center'}}>
+                    <Text numberOfLines={1} style={[MainStyles.verySmallWhiteStyle, {padding:3}]}> {rowData.name}</Text>
                 </View>
-                <Button title={"Remove"} color='#4b371b' onPress={()=>{/*todo - add remove action*/}}/>
+                {!this.props.inputsDisabled &&
+                <Button title={"Remove"} color='#4b371b' onPress={()=>this.deleteElement(rowData.name)}/>}
             </View>);
     }
 
+    deleteElement(name){
+        let elements = this.props.entity["participants"];
+        elements = elements.filter(user => {
+            return user.name!==name
+        });
+        this.props.changeEntity("participants",elements);
+    }
+
+    startInviteParticipants(){
+        this.props.setOperations(["Invite"]);
+        this.props.setRelatedEntity(
+            this.props.entity["participants"].map(entity => entity.name),
+            "participants",
+            ["ORGANIZER","ACCEPTED"]);
+        this.props.showEntityPanel(false);
+        this.props.navigate('Users');
+    }
+
+    createListOfUsers(){
+        if(this.props.entity["participants"].length===0){
+            return <EmptyRow/>
+        }
+        else{
+            return this.props.entity["participants"].map(organizer => this.renderRow(organizer));
+        }
+    }
+
+    calculateHeight(inputsDisabled){
+        let disabledInputHeight = inputsDisabled?35:0;
+        return this.props.dimension.orientation === 'portrait'?
+            this.props.dimension.height*0.8-180+disabledInputHeight
+            :
+            this.props.dimension.height*0.7-150+disabledInputHeight;
+    }
+
     render(){
+        let height = this.calculateHeight(this.props.inputsDisabled);
         return(
             <View>
-                <ListView styles={TableStyles.table}
-                          dataSource={this.state.dataSource.cloneWithRows(this.users)}
-                          enableEmptySections={true}
-                          renderRow={this.renderRow.bind(this)}/>
-                <Button title={"Add new "+this.props.UserType} color='#4b371b' onPress={()=>{/*todo - add panel with users to choose from*/}}/>
+                <ScrollView
+                    style={{height:height}}
+                    contentContainerStyle={EntityPanelStyle.scrollView}>
+                    {this.createListOfUsers()}
+                </ScrollView>
+                <ValidationErrorMessage validationErrorMessage={this.props.validationErrors["participants"]}/>
+                {!this.props.inputsDisabled &&
+                <Button title={"Invite"} color='#4b371b'
+                        onPress={()=>this.startInviteParticipants()}/>}
             </View>
         );
     }
 }
 
+function mapDispatchToProps( dispatch ) {
+    return bindActionCreators( ActionCreators, dispatch );
+}
+
+function mapStateToProps( state ) {
+    return {
+        dimension: state.dimension
+    };
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( ParticipantsTab );
