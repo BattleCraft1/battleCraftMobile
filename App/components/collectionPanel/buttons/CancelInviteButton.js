@@ -1,11 +1,14 @@
 import React from 'react';
-import OperationButton from './operationButton/OperationButton'
+import {
+    View,
+    Button,
+} from 'react-native';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { ActionCreators } from '../../../../redux/actions/index';
+import { ActionCreators } from '../../../redux/actions/index';
 
-class CancelInviteOperation extends React.Component {
+class CancelInviteButton extends React.Component {
 
     cancelInvite(){
         this.props.setRelatedEntity([],this.props.entityPanel.relatedEntity.relatedEntityType,"");
@@ -15,11 +18,12 @@ class CancelInviteOperation extends React.Component {
 
     render() {
         return (
-            <OperationButton
-                name = "Cancel"
-                icon = "close"
-                operation = {this.cancelInvite.bind(this)}
-            />
+            <View style={{flex:1}}>
+                <Button
+                    title={"Cancel"}
+                    color='#4b371b'
+                    onPress={()=>this.cancelInvite()}/>
+            </View>
         );
     }
 }
@@ -34,4 +38,4 @@ function mapStateToProps( state ) {
     };
 }
 
-export default connect( mapStateToProps, mapDispatchToProps )( CancelInviteOperation );
+export default connect( mapStateToProps, mapDispatchToProps )( CancelInviteButton );

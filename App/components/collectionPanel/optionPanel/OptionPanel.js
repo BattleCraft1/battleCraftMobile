@@ -9,8 +9,6 @@ import Modal from 'react-native-modal';
 import AcceptOperation from './operations/AcceptOperation'
 import BanOperation from './operations/BanOperation'
 import CancelAcceptOperation from './operations/CancelAcceptOperation'
-import CancelInviteOperation from './operations/CancelInviteOperation'
-import InviteOperation from './operations/InviteOperation'
 import DeleteOperation from './operations/DeleteOperation'
 import UnlockOperation from './operations/UnlockOperation'
 import AdvanceOperation from './operations/AdvanceOperation'
@@ -30,8 +28,6 @@ const mapOfOperations = {
     "Accept":AcceptOperation,
     "Advance":AdvanceOperation,
     "Degrade":DegradeOperation,
-    "Invite":InviteOperation,
-    "CancelInvite":CancelInviteOperation
 };
 
 class OptionPanel extends Component {
@@ -72,9 +68,11 @@ class OptionPanel extends Component {
         let operations = [];
 
         this.props.possibleOperations.forEach(operation => {
+            let operationElement = mapOfOperations[operation];
+            if(operationElement !== undefined)
             operations.push(
                 React.createElement(
-                    mapOfOperations[operation],
+                    operationElement,
                     {
                         onClosePanel:this.props.onClosePanel.bind(this),
                         collectionType:this.props.collectionType,

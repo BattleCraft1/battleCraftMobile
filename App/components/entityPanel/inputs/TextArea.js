@@ -11,11 +11,11 @@ export default class NumberInput extends React.Component{
             <View>
                 <Text>{this.props.name}</Text>
                 <InputField
-                    onValueChange={(value)=>{this.props.changeEntity(this.props.fieldName,parseInt(value))}}
-                    value = {this.props.value.toString()}
-                    editable={!this.props.disabled}
+                    multiline={true}
+                    onValueChange={(value)=>{this.props.changeEntity(this.props.fieldName,value)}}
+                    value = {this.props.value}
                     placeholder={this.props.placeholder}
-                    keyboardType = 'numeric'
+                    editable={!this.props.disabled}
                 />
             </View>
         )

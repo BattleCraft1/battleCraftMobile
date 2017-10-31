@@ -18,6 +18,7 @@ class MessageDialog extends React.Component {
         super(props);
     }
 
+
     render(){
         let operationButton;
         if(this.props.message.messageType==="Network error"){
@@ -47,7 +48,7 @@ class MessageDialog extends React.Component {
                 isVisible={this.props.message.isShown}
                 backdropOpacity={0.3}
             >
-                <View style={ MessageStyles.modalContainer }>
+                <View style={ [MessageStyles.modalContainer,{marginLeft: ((this.props.dimension.width-340)/2),}] }>
                     <View style={ MessageStyles.modalHeader }>
                         <Text style={[MainStyles.textStyle,{fontSize: 21}]}>{this.props.message.messageType}</Text>
                     </View>
@@ -71,7 +72,8 @@ function mapDispatchToProps( dispatch ) {
 
 function mapStateToProps( state ) {
     return {
-        message: state.message
+        message: state.message,
+        dimension: state.dimension
     };
 }
 

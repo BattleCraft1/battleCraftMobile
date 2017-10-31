@@ -13,7 +13,8 @@ export default class NumberInput extends React.Component{
                 <InputField
                     onValueChange={(value)=>{this.props.changeEntity(this.props.fieldName,value)}}
                     value = {this.props.value}
-                    disabled={this.props.disabled}
+                    placeholder={this.props.placeholder}
+                    editable={!this.props.disabled}
                 />
             </View>
         )

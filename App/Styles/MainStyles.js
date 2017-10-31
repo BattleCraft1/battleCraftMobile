@@ -48,6 +48,11 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 17,
     },
+    verySmallWhiteStyle: {
+        fontFamily:'arial',
+        color: '#fff',
+        fontSize: 15,
+    },
 });
 
 export default styles;

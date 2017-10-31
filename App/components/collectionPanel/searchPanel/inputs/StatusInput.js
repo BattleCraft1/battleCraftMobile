@@ -33,7 +33,7 @@ export default class TournamentStatus extends React.Component{
         return(
             <PickerField
                 onValueChange={(value)=>this.changeInput(value)}
-                label='Status'
+                label='Status:'
                 options={this.props.options}/>
         )
     }

@@ -10,16 +10,17 @@ import BaseColours from "../main/consts/BaseColours"
 
 const styles = StyleSheet.create({
     modal: {
-        minHeight:300,
-        padding: 10,
-        flex:1,
+        padding: 5,
         position: 'absolute',
         backgroundColor: BaseColours.background.mediumBrown,
         borderColor: BaseColours.background.darkBrown,
         borderWidth: 5,
-
         flexDirection: 'column'
     },
+    scrollView:{
+        padding:3
+    },
+    navigation:{},
     title: {
         borderTopColor: BaseColours.border.top,
         borderRightColor: BaseColours.border.right,
@@ -27,30 +28,37 @@ const styles = StyleSheet.create({
         borderLeftColor: BaseColours.border.left,
         borderWidth: 3,
         backgroundColor: BaseColours.misc.deepRed,
-        marginBottom: 1,
+        marginBottom: 1
     },
 
     formWindow:{
         borderColor: BaseColours.border.top,
-        borderWidth: 3,
-        marginBottom: 3,
+        borderWidth: 3
     },
     formHeader:{
         backgroundColor: BaseColours.background.darkBrown,
         borderColor: BaseColours.border.top,
         borderWidth: 3,
         borderBottomWidth: 0,
-        alignItems: 'center',
-        marginTop: 1,
+        alignItems: 'center'
     },
 
     button:{
+        alignItems: 'center',
+        justifyContent:'center',
+        padding:1,
+        paddingTop:2,
+        paddingBottom:2,
         flex: 1,
         margin: 1
     },
     buttonRow:{
         flexDirection: 'row',
     },
+    buttonText:{
+        color:'white',
+        fontSize:15
+    }
 });
 
 export default styles;

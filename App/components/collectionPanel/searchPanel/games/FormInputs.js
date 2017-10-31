@@ -36,7 +36,7 @@ export default class FormInputs extends Component{
             <View>
                 <TextInput
                     key="name"
-                    name = "Name"
+                    name = "Name:"
                     placeholder = "Warhammer"
                     keys = {["name"]}
                     operation = ":"
@@ -46,7 +46,7 @@ export default class FormInputs extends Component{
                 <NumberInput
                     key="tournamentsNumber"
                     placeholder = "Tournaments number"
-                    name = "Tournaments number"
+                    name = "Tournaments number:"
                     keys = {["tournamentsNumber"]}
                     operation = "<"
                     indexOfSearchFields = "tournamentsNumber"
@@ -54,7 +54,7 @@ export default class FormInputs extends Component{
                 />
                 <DateInput
                     key="creationDate"
-                    name = "Creation date"
+                    name = "Creation date:"
                     keys = {["dateOfCreation"]}
                     operation = "<"
                     indexOfSearchFields = "dateOfCreation"
@@ -62,7 +62,7 @@ export default class FormInputs extends Component{
                 />
                 <TextInput
                     key="creatorName"
-                    name = "Creator name"
+                    name = "Creator name:"
                     placeholder = "Jarek123"
                     keys = {["creatorName"]}
                     operation = ":"

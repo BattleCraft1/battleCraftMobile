@@ -142,12 +142,12 @@ class PagePanel extends Component {
                         />
                         <PickerField
                             ref="property"
-                            label='Sort by field'
+                            label='Sort by field:'
                             options={fieldsOfObjects[this.props.collectionType]}
                         />
                         <PickerField
                             ref="direction"
-                            label='Sort type'
+                            label='Sort type:'
                             options={kindOfSort}
                         />
                         <Button title="Get page"  color='#4b371b' onPress={this.submitForm.bind(this)}/>

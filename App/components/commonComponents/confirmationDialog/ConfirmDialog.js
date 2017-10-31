@@ -11,11 +11,14 @@ import { bindActionCreators } from 'redux';
 import Modal from 'react-native-modal';
 import MainStyles from '../../../Styles/MainStyles'
 import MessageStyle from '../../../Styles/MessageStyle'
+import {dimension} from "../../../redux/reducers/dimension";
 
 class ConfirmDialog extends React.Component {
     constructor(props) {
         super(props);
     }
+
+    calculateLeftMargin(){}
 
     render(){
         return (
@@ -23,7 +26,7 @@ class ConfirmDialog extends React.Component {
                 isVisible={this.props.confirmation.isShown}
                 backdropOpacity={0.3}
             >
-                <View style={ MessageStyle.modalContainer }>
+                <View style={ [MessageStyle.modalContainer,{marginLeft: ((this.props.dimension.width-340)/2),}] }>
                     <View style={ MessageStyle.modalHeader }>
                         <Text style={[MainStyles.textStyle,{fontSize: 21, justifyContent:'center'}]}>{this.props.confirmation.message}</Text>
                     </View>
@@ -63,6 +66,7 @@ function mapDispatchToProps( dispatch ) {
 function mapStateToProps( state ) {
     return {
         confirmation: state.confirmation,
+        dimension: state.dimension
     };
 }
 

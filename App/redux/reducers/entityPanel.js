@@ -70,6 +70,8 @@ export const entityPanel = createReducer( {}, {
         };
     },
     [types.SET_RELATED_ENTITY]( state, action ) {
+
+        console.log(state.mode);
         return {
             mode:state.mode,
             entityType:state.entityType,

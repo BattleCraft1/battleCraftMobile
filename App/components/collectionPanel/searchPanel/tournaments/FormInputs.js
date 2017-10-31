@@ -66,7 +66,7 @@ export default class FormInputs extends Component{
         <View>
             <TextInput
                 key="tournamentName"
-                name = "Tournament name"
+                name = "Tournament name:"
                 placeholder = "Tournament 2017"
                 keys = {["name"]}
                 operation = ":"
@@ -75,7 +75,7 @@ export default class FormInputs extends Component{
             />
             <SelectInput
                 key="gameGenre"
-                name = "Game genre"
+                name = "Game genre:"
                 keys = {["game","name"]}
                 operation = ":"
                 indexOfSearchFields = "game"
@@ -93,7 +93,7 @@ export default class FormInputs extends Component{
             <NumberInput
                 key="playerNumber"
                 placeholder = "Players number"
-                name = "Players number"
+                name = "Players number:"
                 keys = {["playersNumber"]}
                 operation = "<"
                 indexOfSearchFields = "playersNumber"
@@ -102,7 +102,7 @@ export default class FormInputs extends Component{
             <NumberInput
                 key="maxPlayers"
                 placeholder = "Max players"
-                name = "Max players"
+                name = "Max players:"
                 keys = {["maxPlayers"]}
                 operation = "<"
                 indexOfSearchFields = "maxPlayers"
@@ -111,7 +111,7 @@ export default class FormInputs extends Component{
             <NumberInput
                 key="freeSlots"
                 placeholder = "Free slots"
-                name = "Free slots"
+                name = "Free slots:"
                 keys = {["freeSlots"]}
                 operation = ">"
                 indexOfSearchFields = "freeSlots"
@@ -119,7 +119,7 @@ export default class FormInputs extends Component{
             />
             <SelectTournamentTypeInput
                 key="tournamentType"
-                name = "Tournament type"
+                name = "Tournament type:"
                 keys = {["playersOnTableCount"]}
                 operation = ":"
                 indexOfSearchFields = "playersOnTableCount"
@@ -128,7 +128,7 @@ export default class FormInputs extends Component{
             />
             <TextInput
                 key="city"
-                name = "City"
+                name = "City:"
                 placeholder = "Lublin"
                 keys = {["address", "city"]}
                 operation = ":"
@@ -137,7 +137,7 @@ export default class FormInputs extends Component{
             />
             <SelectInput
                 key="province"
-                name = "Province"
+                name = "Province:"
                 keys = {["address", "province"]}
                 operation = ":"
                 indexOfSearchFields = "province"
@@ -146,7 +146,7 @@ export default class FormInputs extends Component{
             />
             <DateInput
                 key="dateFrom"
-                name = "Date from"
+                name = "Date from:"
                 keys = {["dateOfStart"]}
                 operation = ">"
                 indexOfSearchFields = "dateOfStart"
@@ -154,7 +154,7 @@ export default class FormInputs extends Component{
             />
             <DateInput
                 key="dateTo"
-                name = "Date to"
+                name = "Date to:"
                 keys = {["dateOfEnd"]}
                 operation = "<"
                 indexOfSearchFields = "dateOfEnd"
