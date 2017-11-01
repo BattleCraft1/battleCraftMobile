@@ -22,6 +22,11 @@ const ListColours={
             "ACCEPTED": '#749858',
             "BANNED": '#9C6357',
     },
+    "battle": {
+        "DRAW": '#a58e60',
+        "WIN": '#749858',
+        "LOSE": '#9C6357',
+    },
 };
 
 export default ListColours;

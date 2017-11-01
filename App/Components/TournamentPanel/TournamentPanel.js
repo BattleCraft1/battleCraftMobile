@@ -8,11 +8,12 @@ import {
     View,
     Text,
     Button,
+    TouchableHighlight
 
 } from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
-import Battle from './Battle/Battle'
+import Battle from './Battle/BattleRow'
 
 import MainStyles from '../../Styles/MainStyles'
 import TournamentStyles from '../../Styles/TournamentStyles'
@@ -39,19 +40,25 @@ export default class TournamentPanel extends Component {
         battle2:{
             player1:'Temp1',
             player2:'Temp2',
-            score1: 0,
-            score2: 20,
+            score1: 16,
+            score2: 4,
         },
         battle3:{
             player1:'Temp1',
             player2:'Temp2',
-            score1: 0,
-            score2: 20,
+            score1: 10,
+            score2: 10,
+        },
+        battle4:{
+            player1:'Temp1',
+            player2:'Temp2',
+            score1: 13,
+            score2: 7,
         },
     }
 
     onSwipeLeft(gestureState) {
-        if(this.state.currentTab>0) this.setState({currentTab: this.state.currentTab-1});
+        if(this.state.currentTab>1) this.setState({currentTab: this.state.currentTab-1});
     }
 
     onSwipeRight(gestureState) {
@@ -74,18 +81,15 @@ export default class TournamentPanel extends Component {
                     onSwipeLeft={(event) => this.onSwipeLeft(event)}
                     onSwipeRight={(event) => this.onSwipeRight(event)}
                     config={config}
-                    style={{flex: 1}}>
-                    <View style={[TournamentStyles.turnHeader]}>
-                        <Text style={[MainStyles.textStyle, {fontSize:22}]}>Turn {this.state.currentTab}</Text>
-                    </View>
-                    <View>
-                        <Battle content={this.battlesContent}/>
-                    </View>
-                    <View style={[TournamentStyles.pageWindow, MainStyles.borderStyle]}>
-                        <Text style={MainStyles.smallWhiteStyle}>{this.state.currentTab}/{this.state.turnMax}</Text>
+                    style={{flex: 1, alignItems:'center'}}>
+                    <View style={{flex: 1}}>
+                        <View style={[TournamentStyles.pageWindow, MainStyles.borderStyle]}>
+                            <Text style={MainStyles.smallWhiteStyle}>{this.state.currentTab}/{this.state.turnMax}</Text>
+                        </View>
+                        <Battle currentTab={this.state.currentTab} content={this.battlesContent}/>
                     </View>
                 </GestureRecognizer>
-                <Button title={"Return"} color='#4b371b' onPress={()=>{}}/>
+                <View><Button title={"Return"} color='#4b371b' onPress={()=>{}}/></View>
             </View>
         );
     }

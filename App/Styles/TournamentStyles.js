@@ -12,16 +12,8 @@ const styles = {
         padding:5,
         marginBottom:3
     },
-    turnHeader:{
-        justifyContent: 'center',
-        alignItems: 'center',
-        height:55,
-        backgroundColor:  BaseColours.misc.deepRed,
-        borderWidth: 3,
-        borderColor: BaseColours.border.top,
-        padding:5
-    },
     pageWindow:{
+        flexDirection: 'row',
         position:'absolute',
         right:0,
         top:0,
@@ -33,7 +25,6 @@ const styles = {
         height:55,
         zIndex: 1000,
         padding:1
-
     },
 
 };
