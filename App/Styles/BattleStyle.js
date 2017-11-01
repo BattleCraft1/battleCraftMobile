@@ -3,8 +3,7 @@
  */
 
 import {
-    StyleSheet,
-    Dimensions
+    StyleSheet
 } from 'react-native';
 import BaseColours from "../Main/consts/BaseColours"
 

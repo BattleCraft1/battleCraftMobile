@@ -8,12 +8,12 @@ import {
     View,
     Text,
     Button,
-    TouchableHighlight
 
 } from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 import Battle from './Battle/BattleRow'
+import BattleInspector from './Battle/BattleInspector'
 
 import MainStyles from '../../Styles/MainStyles'
 import TournamentStyles from '../../Styles/TournamentStyles'
@@ -24,6 +24,9 @@ export default class TournamentPanel extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            inspectVisible: false,
+            inspectorBattleId: 'someID',
+
             tournamentName: "Temptemptemptemp",
             turnMax: 4,
             currentTab: 1,
@@ -36,24 +39,32 @@ export default class TournamentPanel extends Component {
             player2:'Temp2',
             score1: 0,
             score2: 20,
+            total1: 34,
+            total2: 42
         },
         battle2:{
             player1:'Temp1',
             player2:'Temp2',
             score1: 16,
             score2: 4,
+            total1: 56,
+            total2: 42
         },
         battle3:{
             player1:'Temp1',
             player2:'Temp2',
             score1: 10,
             score2: 10,
+            total1: 42,
+            total2: 42
         },
         battle4:{
             player1:'Temp1',
             player2:'Temp2',
             score1: 13,
             score2: 7,
+            total1: 34,
+            total2: 76
         },
     }
 
@@ -63,6 +74,12 @@ export default class TournamentPanel extends Component {
 
     onSwipeRight(gestureState) {
         if(this.state.currentTab<this.state.turnMax) this.setState({currentTab: this.state.currentTab+1});
+    }
+
+    openInspector(battleId){
+        this.setState({
+            inspectVisible: true,
+            inspectorBattleId: battleId})
     }
 
     render() {
@@ -77,6 +94,7 @@ export default class TournamentPanel extends Component {
                 <View style={[TournamentStyles.tournamentHeader,MainStyles.borderStyle]}>
                     <Text style={MainStyles.bigWhiteStyle}>{this.state.tournamentName}</Text>
                 </View>
+                <View style={{marginBottom: 3}}><Button title={"My battle"} color='#4b371b' onPress={()=>{this.openInspector("MyBattleID")}}/></View>
                 <GestureRecognizer
                     onSwipeLeft={(event) => this.onSwipeLeft(event)}
                     onSwipeRight={(event) => this.onSwipeRight(event)}
@@ -90,6 +108,10 @@ export default class TournamentPanel extends Component {
                     </View>
                 </GestureRecognizer>
                 <View><Button title={"Return"} color='#4b371b' onPress={()=>{}}/></View>
+                <BattleInspector
+                    onClosePanel={(isVisible) => this.setState({inspectVisible:isVisible})}
+                    isVisible={this.state.inspectVisible}
+                    battleData={this.battlesContent.battle1}/>
             </View>
         );
     }

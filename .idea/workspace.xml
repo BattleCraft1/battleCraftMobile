@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f51dc5f-72f7-4a8a-b51f-77bd6c1f86dc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/operationButton/OperationButton.js" afterPath="$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/operationButton/OperationButton.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Components/TournamentPanel/TournamentPanel.js" afterPath="$PROJECT_DIR$/App/Components/TournamentPanel/TournamentPanel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Main/consts/BaseColours.js" afterPath="$PROJECT_DIR$/App/Main/consts/BaseColours.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Main/consts/ListColours.js" afterPath="$PROJECT_DIR$/App/Main/consts/ListColours.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Styles/BattleStyle.js" afterPath="$PROJECT_DIR$/App/Styles/BattleStyle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Styles/TournamentStyles.js" afterPath="$PROJECT_DIR$/App/Styles/TournamentStyles.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/App/Components/TournamentPanel/Battle/Battle.js" afterPath="$PROJECT_DIR$/App/Components/TournamentPanel/Battle/BattleRow.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -30,8 +24,8 @@
       <file leaf-file-name="TournamentPanel.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/App/Components/TournamentPanel/TournamentPanel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="623">
-              <caret line="85" column="89" lean-forward="false" selection-start-line="85" selection-start-column="89" selection-end-line="85" selection-end-column="89" />
+            <state relative-caret-position="674">
+              <caret line="66" column="22" lean-forward="true" selection-start-line="66" selection-start-column="22" selection-end-line="66" selection-end-column="22" />
               <folding>
                 <element signature="e#49#90#0" expanded="true" />
               </folding>
@@ -42,8 +36,8 @@
       <file leaf-file-name="BattleRow.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/App/Components/TournamentPanel/Battle/BattleRow.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="725">
-              <caret line="76" column="44" lean-forward="false" selection-start-line="76" selection-start-column="44" selection-end-line="76" selection-end-column="44" />
+            <state relative-caret-position="368">
+              <caret line="37" column="46" lean-forward="true" selection-start-line="37" selection-start-column="46" selection-end-line="37" selection-end-column="46" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#41#82#0" expanded="true" />
@@ -52,12 +46,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ListColours.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/App/Main/consts/ListColours.js">
+      <file leaf-file-name="BattleInspector.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/App/Components/TournamentPanel/Battle/BattleInspector.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+            <state relative-caret-position="368">
+              <caret line="61" column="106" lean-forward="false" selection-start-line="61" selection-start-column="106" selection-end-line="61" selection-end-column="106" />
+              <folding>
+                <element signature="e#48#89#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AddStyle.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/App/Styles/AddStyle.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="25" selection-end-column="6" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BattleInspectorStyle.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/App/Styles/BattleInspectorStyle.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="8" column="52" lean-forward="false" selection-start-line="8" selection-start-column="52" selection-end-line="8" selection-end-column="52" />
+              <folding>
+                <element signature="e#48#110#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -65,8 +83,8 @@
       <file leaf-file-name="TournamentStyles.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/App/Styles/TournamentStyles.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="29" lean-forward="true" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
+            <state relative-caret-position="51">
+              <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -77,31 +95,11 @@
       <file leaf-file-name="BattleStyle.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/App/Styles/BattleStyle.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="48" column="22" lean-forward="true" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="22" />
+            <state relative-caret-position="861">
+              <caret line="72" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
               <folding>
-                <element signature="e#48#110#0" expanded="true" />
+                <element signature="e#48#94#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BaseColours.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/App/Main/consts/BaseColours.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="27" lean-forward="false" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainStyles.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/App/Styles/MainStyles.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="799">
-              <caret line="52" column="22" lean-forward="false" selection-start-line="52" selection-start-column="22" selection-end-line="52" selection-end-column="22" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -130,9 +128,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/DateInput.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/NumberInput.js" />
-        <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/SelectInput.js" />
         <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/StatusInput.js" />
         <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/GameInputForRanking.js" />
         <option value="$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Ranking/FormInputs.js" />
@@ -178,9 +173,12 @@
         <option value="$PROJECT_DIR$/App/Main/consts/BaseColours.js" />
         <option value="$PROJECT_DIR$/App/Components/TournamentPanel/Battle/Battle.js" />
         <option value="$PROJECT_DIR$/App/Styles/TournamentStyles.js" />
-        <option value="$PROJECT_DIR$/App/Components/TournamentPanel/TournamentPanel.js" />
         <option value="$PROJECT_DIR$/App/Components/TournamentPanel/Battle/BattleRow.js" />
+        <option value="$PROJECT_DIR$/App/Components/TournamentPanel/Battle/BattleInscpect.js" />
         <option value="$PROJECT_DIR$/App/Styles/BattleStyle.js" />
+        <option value="$PROJECT_DIR$/App/Styles/BattleInspectorStyle.js" />
+        <option value="$PROJECT_DIR$/App/Components/TournamentPanel/TournamentPanel.js" />
+        <option value="$PROJECT_DIR$/App/Components/TournamentPanel/Battle/BattleInspector.js" />
       </list>
     </option>
   </component>
@@ -718,12 +716,12 @@
       <workItem from="1508936506842" duration="12613000" />
       <workItem from="1509285816868" duration="3298000" />
       <workItem from="1509383040161" duration="15439000" />
-      <workItem from="1509532396074" duration="4176000" />
+      <workItem from="1509532396074" duration="9901000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="188995000" />
+    <option name="totallyTimeSpent" value="194720000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -756,25 +754,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="11" />
+      <option name="time" value="12" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/GameInputForRanking.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/StatusInput.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/SearchPanel/Inputs/DateInput.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -955,13 +939,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/PanelOptions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="73" column="57" lean-forward="false" selection-start-line="73" selection-start-column="57" selection-end-line="73" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/operations/operationButton/OperationButton.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -976,24 +953,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelAdd/PanelAdd.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="28" column="44" lean-forward="true" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/App/Components/Common/BackgroundImage/BackroundImage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Styles/AddStyle.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1018,13 +981,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
           <caret line="2680" column="12" lean-forward="false" selection-start-line="2680" selection-start-column="12" selection-end-line="2680" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/CollectionPanel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3145">
-          <caret line="185" column="26" lean-forward="true" selection-start-line="185" selection-start-column="26" selection-end-line="185" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -1058,21 +1014,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App/Styles/MainStyles.js">
+    <entry file="file://$PROJECT_DIR$/App/Styles/OptionsStyles.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="52" column="22" lean-forward="false" selection-start-line="52" selection-start-column="22" selection-end-line="52" selection-end-column="22" />
+        <state relative-caret-position="17">
+          <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="15" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Styles/TournamentStyles.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="29" lean-forward="true" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1084,10 +1030,88 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/App/Main/consts/BaseColours.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="10" lean-forward="true" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Styles/MainStyles.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="52" column="22" lean-forward="false" selection-start-line="52" selection-start-column="22" selection-end-line="52" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelOptions/PanelOptions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="73" column="57" lean-forward="false" selection-start-line="73" selection-start-column="57" selection-end-line="73" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/CollectionPanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="199" column="12" lean-forward="false" selection-start-line="199" selection-start-column="12" selection-end-line="203" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Components/CollectionPanel/PanelAdd/PanelAdd.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="57" column="134" lean-forward="false" selection-start-line="57" selection-start-column="103" selection-end-line="57" selection-end-column="134" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Styles/BattleStyle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="861">
+          <caret line="72" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <folding>
+            <element signature="e#48#94#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Styles/TournamentStyles.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Styles/AddStyle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="25" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Styles/BattleInspectorStyle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="52" lean-forward="false" selection-start-line="8" selection-start-column="52" selection-end-line="8" selection-end-column="52" />
+          <folding>
+            <element signature="e#48#110#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/App/Components/TournamentPanel/TournamentPanel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="623">
-          <caret line="85" column="89" lean-forward="false" selection-start-line="85" selection-start-column="89" selection-end-line="85" selection-end-column="89" />
+        <state relative-caret-position="674">
+          <caret line="66" column="22" lean-forward="true" selection-start-line="66" selection-start-column="22" selection-end-line="66" selection-end-column="22" />
           <folding>
             <element signature="e#49#90#0" expanded="true" />
           </folding>
@@ -1096,8 +1120,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/App/Components/TournamentPanel/Battle/BattleRow.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
-          <caret line="76" column="44" lean-forward="false" selection-start-line="76" selection-start-column="44" selection-end-line="76" selection-end-column="44" />
+        <state relative-caret-position="368">
+          <caret line="37" column="46" lean-forward="true" selection-start-line="37" selection-start-column="46" selection-end-line="37" selection-end-column="46" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#41#82#0" expanded="true" />
@@ -1105,29 +1129,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App/Styles/OptionsStyles.js">
+    <entry file="file://$PROJECT_DIR$/App/Components/TournamentPanel/Battle/BattleInspector.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Styles/BattleStyle.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="48" column="22" lean-forward="true" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="22" />
+        <state relative-caret-position="368">
+          <caret line="61" column="106" lean-forward="false" selection-start-line="61" selection-start-column="106" selection-end-line="61" selection-end-column="106" />
           <folding>
-            <element signature="e#48#110#0" expanded="true" />
+            <element signature="e#48#89#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Main/consts/BaseColours.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="27" lean-forward="false" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
