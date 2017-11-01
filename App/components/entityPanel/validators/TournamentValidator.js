@@ -1,7 +1,7 @@
-import setDateFunction from "../../../main/functions/setDateFunction";
 import checkIfObjectIsNotEmpty from "../../../main/functions/checkIfObjectIsNotEmpty";
 import validateAddress from './AddressValidator'
 import getDatesDifferenceInDays from "../../../main/functions/getDatesDifferenceInDays";
+import dateFormat from 'dateformat';
 
 export default (entity) => {
     let validationErrors = {};
@@ -22,12 +22,12 @@ export default (entity) => {
     }
 
     if(entity.dateOfStart===undefined || getDatesDifferenceInDays(new Date(),new Date(entity.dateOfStart))<0)
-        fieldErrors.dateOfStart = "You cannot start tournament at "+setDateFunction(entity.dateOfStart)+" because this date is outdated";
+        fieldErrors.dateOfStart = "You cannot start tournament at "+dateFormat(entity.dateOfStart,"yyyy-mm-dd HH:MM")+" because this date is outdated";
 
     if(entity.dateOfEnd===undefined || getDatesDifferenceInDays(new Date(entity.dateOfStart),new Date(entity.dateOfEnd))<0)
-        fieldErrors.dateOfEnd = "End date must be later than "+setDateFunction(entity.dateOfStart);
+        fieldErrors.dateOfEnd = "End date must be later than "+dateFormat(entity.dateOfStart,"yyyy-mm-dd HH:MM");
 
-    if(getDatesDifferenceInDays(new Date(entity.dateOfEnd),new Date(entity.dateOfStart))>3)
+    if(getDatesDifferenceInDays(new Date(entity.dateOfStart),new Date(entity.dateOfEnd))>3)
         fieldErrors.dateOfEnd = "Duration of tournament cannnot be longer than 3 days";
 
     validateAddress(entity,fieldErrors);

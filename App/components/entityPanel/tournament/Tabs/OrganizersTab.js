@@ -17,11 +17,12 @@ import MainStyles from '../../../../Styles/MainStyles'
 import ListColours from '../../../../main/consts/ListColours'
 import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { ActionCreators } from '../../../../redux/actions/index';
 import EmptyRow from "../../outputs/EmptyRow";
 import {serverName} from "../../../../main/consts/serverName";
+
+import { ActionCreators } from '../../../../redux/actions/index';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 class OrganizersTab extends Component{
 
@@ -77,10 +78,10 @@ class OrganizersTab extends Component{
 
     calculateHeight(inputsDisabled){
         let disabledInputHeight = inputsDisabled?35:0;
-        return this.props.dimension.orientation === 'portrait'?
-            this.props.dimension.height*0.8-180+disabledInputHeight
+        return this.props.orientation === 'portrait'?
+            this.props.height*0.8-180+disabledInputHeight
             :
-            this.props.dimension.height*0.7-150+disabledInputHeight;
+            this.props.height*0.7-150+disabledInputHeight;
     }
 
     render(){
@@ -106,9 +107,7 @@ function mapDispatchToProps( dispatch ) {
 }
 
 function mapStateToProps( state ) {
-    return {
-        dimension: state.dimension
-    };
+    return {};
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( OrganizersTab );

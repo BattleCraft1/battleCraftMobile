@@ -16,7 +16,7 @@ class AddEntityButton extends React.Component {
                 <Button
                     title={"Add "+this.props.entityType}
                     color='#4b371b'
-                    onPress={()=>this.props.addEntity(entityType)}/>
+                    onPress={()=>this.props.addEntity(this.props.entityType)}/>
             </View>
         );
     }
