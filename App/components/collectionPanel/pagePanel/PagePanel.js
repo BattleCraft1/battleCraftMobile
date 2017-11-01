@@ -57,7 +57,6 @@ class PagePanel extends Component {
     }
 
     handlePageFormChanges(pageForm){
-        console.log(pageForm);
         this.setState( {
             pageFormData :pageForm
         });

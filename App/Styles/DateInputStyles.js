@@ -1,6 +1,6 @@
 
 const styles = {
-    inputMainView: {
+    dateInputMainView: {
         backgroundColor: '#ffffff',
         flex:1,
         height:40,
@@ -16,7 +16,7 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center'
     },
-    clearInputStyle: {
+    clearButton: {
         flex:0.1,
         height:40 ,
         justifyContent: 'center',

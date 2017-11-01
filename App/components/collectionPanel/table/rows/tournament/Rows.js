@@ -92,6 +92,9 @@ class Rows extends Component{
                     <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Players: {rowData.playersNumber}/{rowData.maxPlayers}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
+                    <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Type: {rowData.playersOnTableCount===2?"Duel":"Group"}</Text>
+                </View>
+                <View style={[TableStyles.row]}>
                     <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Date start: {dateFormat(rowData.dateOfStart,"dd-MM-yyyy hh:mm")}</Text>
                 </View>
                 <View style={[TableStyles.row]}>

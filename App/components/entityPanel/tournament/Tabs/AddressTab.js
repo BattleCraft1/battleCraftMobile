@@ -14,15 +14,11 @@ import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 import {provinces} from "../../../../main/consts/provincesWithoutEmptyOption";
 import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { ActionCreators } from '../../../../redux/actions/index';
-
-class AddressTab extends Component{
+export default class AddressTab extends Component{
 
     calculateHeight(){
-        return this.props.dimension.orientation === 'portrait'?
-            this.props.dimension.height*0.8-145:this.props.dimension.height*0.7-115;
+        return this.props.orientation === 'portrait'?
+            this.props.height*0.8-145:this.props.height*0.7-115;
     }
 
     render(){
@@ -79,20 +75,9 @@ class AddressTab extends Component{
                     placeholder = ""
                     name="Description:"/>
                 <ValidationErrorMessage
-                    validationErrorMessage={this.props.validationErrors["zipCode"]}/>
+                    validationErrorMessage={this.props.validationErrors["description"]}/>
             </ScrollView>
         );
     }
 }
-function mapDispatchToProps( dispatch ) {
-    return bindActionCreators( ActionCreators, dispatch );
-}
-
-function mapStateToProps( state ) {
-    return {
-        dimension: state.dimension
-    };
-}
-
-export default connect( mapStateToProps, mapDispatchToProps )( AddressTab );
 

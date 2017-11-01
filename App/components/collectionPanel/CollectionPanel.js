@@ -120,11 +120,14 @@ class CollectionPanel extends Component {
     }
 
     async getPage(collectionType){
+        console.log("page request:");
         console.log(this.props.pageRequest);
         let getPageOfDataOperation=async () => {
             this.props.startLoading("Fetching page of data...");
             await axios.post(serverName+`page/`+collectionType,this.props.pageRequest)
                 .then(async (res) => {
+                    console.log("page of data:");
+                    console.log(res.data);
                     this.props.checkPreviouslyCheckedElements(res.data);
                     this.props.setPageRequest({
                         searchCriteria:this.props.pageRequest.searchCriteria,
@@ -177,7 +180,6 @@ class CollectionPanel extends Component {
 
     createButtons(){
         let buttons = [];
-
         if(compareArrays(this.props.possibleOperations,["Invite"])){
             buttons = [
                 <InviteButton key="invite"/>,
@@ -190,7 +192,6 @@ class CollectionPanel extends Component {
                 buttons.push(<AddEntityButton key="addEntity" entityType={this.props.collectionType.slice(0, -1)}/>);
             }
         }
-
         return buttons;
     }
 

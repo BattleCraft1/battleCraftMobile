@@ -6,6 +6,9 @@ import {
     ScrollView
 } from 'react-native';
 
+import Modal from 'react-native-modal';
+
+import MainStyle from '../../../Styles/MainStyles';
 import EntityPanelStyle from '../../../Styles/EntityPanelStyle'
 
 import BasicDataTab from './Tabs/BasicDataTab';
@@ -93,7 +96,7 @@ class Panel extends Component {
         if(this.props.mode==='edit' || this.props.mode==='get')
         {
             let getEntityOperation = async () => {
-                this.props.startLoading("Featching tournament...");
+                this.props.startLoading("Fetching tournament...");
                 await axios.get(serverName+`get/`+this.props.type+`?name=`+this.props.name)
                 .then(res => {
                     this.setState({entity:res.data});
@@ -119,7 +122,6 @@ class Panel extends Component {
             this.props.hidden === true &&
             nextProps.relatedEntity.relatedEntityNames.length > 0 &&
             !compareArrays(nextProps.relatedEntity.relatedEntityNames,this.props.relatedEntity.relatedEntityNames)) {
-            console.log("debug");
             this.actualizeRelatedEntityObjects(
                 nextProps.relatedEntity.relatedEntityType,
                 nextProps.relatedEntity.relatedEntityNames)
@@ -129,7 +131,6 @@ class Panel extends Component {
 
     actualizeRelatedEntityObjects(relatedEntityType,relatedEntityNames){
         let entity = this.state.entity;
-        console.log(relatedEntityType);
         let relatedEntitiesNames = entity[relatedEntityType].map(entity => entity.name);
         relatedEntityNames.forEach(
             elementName => {
@@ -165,6 +166,9 @@ class Panel extends Component {
             return React.createElement(
                 tabsMap[this.state.activeTab],
                 {
+                    width: this.props.dimension.width,
+                    height:this.props.dimension.height,
+                    orientation:this.props.dimension.orientation,
                     navigate:this.props.navigate,
                     entity:this.state.entity,
                     inputsDisabled: this.props.mode === 'get',
@@ -222,7 +226,7 @@ class Panel extends Component {
     setValidationErrors(validationException){
         this.props.showFailureMessage(validationException.message);
         let validationErrors = validationException.fieldErrors;
-        console.log("validation errors:");
+        console.log("validation errors: ");
         console.log(validationErrors);
         let validationErrorsState = this.state.validationErrors;
         for (let field in validationErrorsState) {
@@ -236,12 +240,9 @@ class Panel extends Component {
         this.setState({validationErrors:validationErrorsState})
     }
 
-    render() {
-        let content = this.createContent();
-
-        let buttons = [];
+    createButtons(){
         if(this.props.mode!=='get'){
-            buttons = [
+            return [
                 <TouchableHighlight key="save" style={[EntityPanelStyle.button,{backgroundColor:'#721515' }]} onPress={() => this.sendEntity()}>
                     <Text style={EntityPanelStyle.buttonText}>SAVE</Text>
                 </TouchableHighlight>,
@@ -251,16 +252,34 @@ class Panel extends Component {
             ]
         }
         else{
-            buttons = [
+            return [
                 <TouchableHighlight key="ok" style={[EntityPanelStyle.button,{backgroundColor:'#721515' }]} onPress={() => this.props.disable()}>
                     <Text style={EntityPanelStyle.buttonText}>OK</Text>
                 </TouchableHighlight>
             ]
         }
+    }
 
+    calculatePanelHeight(){
+        return this.props.dimension.orientation === 'portrait'?
+            this.props.dimension.height*0.8:this.props.dimension.height*0.7;
+    }
+
+    render() {
+        let content = this.createContent();
+        let buttons = this.createButtons();
 
         return (
-            <View>
+            <Modal isVisible={!this.props.hidden} backdropOpacity={0.3}>
+                <View style={[EntityPanelStyle.modal,{
+                    width: this.props.dimension.width*0.9,
+                    height: this.calculatePanelHeight()
+                }]}>
+                    <View style={[EntityPanelStyle.title,{alignItems:'center'}]}>
+                        <Text style={[MainStyle.textStyle,{fontSize: 22}]}>
+                            {this.props.mode.charAt(0).toUpperCase()+this.props.mode.slice(1)+" "+this.props.type}
+                        </Text>
+                    </View>
                 <Navigation setActiveTab={this.setActiveTab.bind(this)} isTabActive={this.isTabActive.bind(this)}/>
                 <View style={[EntityPanelStyle.formWindow]}>
                         {content}
@@ -269,6 +288,7 @@ class Panel extends Component {
                     {buttons}
                 </View>
             </View>
+            </Modal>
         );
     }
 }
@@ -278,7 +298,9 @@ function mapDispatchToProps( dispatch ) {
 }
 
 function mapStateToProps( state ) {
-    return {};
+    return {
+        dimension: state.dimension
+    };
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( Panel );

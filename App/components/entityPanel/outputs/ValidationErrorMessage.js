@@ -11,7 +11,7 @@ export default class ValidationErrorMessage extends React.Component{
             <View >
                 {
                     this.props.validationErrorMessage!=="" &&
-                    <Text style={{textColor:'red',marginTop:2,marginBottom:2}}>{this.props.validationErrorMessage}</Text>
+                    <Text style={{color:'red',marginTop:2,marginBottom:2}}>{this.props.validationErrorMessage}</Text>
                 }
             </View>
         )

@@ -46,11 +46,11 @@ export default class DateInput extends React.Component{
         return(
             <View>
                 <Text>{this.props.name}</Text>
-                <View style={DateInputStyles.inputMainView}>
+                <View style={DateInputStyles.dateInputMainView}>
                     <TouchableHighlight style={DateInputStyles.dateInputButton} onPress={() => this.setState({ isDateTimePickerVisible: true })}>
                         <Text style={{fontSize: 20}}>{this.state.value}</Text>
                     </TouchableHighlight>
-                    <TouchableHighlight style={DateInputStyles.clearInputStyle} onPress={this.clearDate.bind(this)}>
+                    <TouchableHighlight style={DateInputStyles.clearButton} onPress={this.clearDate.bind(this)}>
                         <Icon name="remove" size={25}/>
                     </TouchableHighlight>
                 </View>

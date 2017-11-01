@@ -25,6 +25,7 @@ export const message = createReducer( {}, {
     },
     [types.SHOW_NETWORK_ERROR_MESSAGE_BOX]( state, action ) {
         let message;
+        console.log("error: ");
         console.log(action.error);
         if(action.error===undefined || action.error.message==='Network Error'){
             message={

@@ -6,6 +6,7 @@ import {View,TouchableHighlight,Text} from 'react-native';
 import dateFormat from 'dateformat';
 
 import DateInputStyles from '../../../Styles/DateInputStyles'
+import EntityPanelInputsStyles from '../../../Styles/EntityPanelInputsStyles'
 
 export default class DateInput extends React.Component{
     constructor(props) {
@@ -34,21 +35,21 @@ export default class DateInput extends React.Component{
 
     onTimeChange(value){
         this.setState({ isTimePickerVisible: false });
-        let dateString = new Date(this.state.dateValue+" "+dateFormat(value));
+        let dateString = new Date(this.state.dateValue+"T"+dateFormat(value,"HH:MM"));
         this.props.changeEntity(this.props.fieldName,dateString)
     }
 
     onDateChange(value){
         this.setState({ isDatePickerVisible: false });
-        let dateString = new Date(dateFormat(value)+" "+this.state.timeValue);
+        let dateString = new Date(dateFormat(value,"yyyy-mm-dd")+"T"+this.state.timeValue);
         this.props.changeEntity(this.props.fieldName,dateString)
     }
 
     render(){
         return(
-            <View>
+            <View style={EntityPanelInputsStyles.inputStyle}>
                 <Text>{this.props.name}</Text>
-                <View style={DateInputStyles.inputMainView}>
+                <View style={DateInputStyles.dateInputMainView}>
                     <TouchableHighlight style={DateInputStyles.dateInputButton} onPress={() => this.setState({ isDatePickerVisible: true })}>
                         <Text style={{fontSize: 15}}>{this.state.dateValue}</Text>
                     </TouchableHighlight>
@@ -57,19 +58,21 @@ export default class DateInput extends React.Component{
                     </TouchableHighlight>
                 </View>
                 <DateTimePicker
+                    datePickerModeAndroid='spinner'
                     mode='date'
                     minimumDate={new Date()}
-                    isVisible={this.state.isTimePickerVisible}
+                    isVisible={this.state.isDatePickerVisible}
                     onConfirm={this.onDateChange.bind(this)}
-                    onCancel={() => this.setState({ isTimePickerVisible: false })}
+                    onCancel={() => this.setState({ isDatePickerVisible: false })}
                 />
                 <DateTimePicker
+                    datePickerModeAndroid='spinner'
                     is24Hour={true}
                     mode='time'
                     minimumDate={new Date()}
-                    isVisible={this.state.isDatePickerVisible}
+                    isVisible={this.state.isTimePickerVisible}
                     onConfirm={this.onTimeChange.bind(this)}
-                    onCancel={() => this.setState({ isDatePickerVisible: false })}
+                    onCancel={() => this.setState({ isTimePickerVisible: false })}
                 />
             </View>
         )

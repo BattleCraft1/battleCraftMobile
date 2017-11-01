@@ -1,5 +1,5 @@
 import React from 'react';
-import {InputField} from 'react-native-form-generator';
+import EntityPanelInputsStyles from '../../../Styles/EntityPanelInputsStyles'
 import {
     Text,
     View
@@ -8,12 +8,9 @@ import {
 export default class NumberInput extends React.Component{
     render(){
         return(
-            <View>
-                <Text>{this.props.name}</Text>
-                <InputField
-                    value = {this.props.value}
-                    editable={false}
-                />
+            <View style={[EntityPanelInputsStyles.inputStyle,{flexDirection:'column'}]}>
+                <Text style={{flex:1}}>{this.props.name}</Text>
+                <Text style={[EntityPanelInputsStyles.outputTextStyle,{flex:1}]}>{this.props.value}</Text>
             </View>
         )
     }

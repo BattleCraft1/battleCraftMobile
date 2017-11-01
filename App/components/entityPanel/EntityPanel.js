@@ -9,15 +9,9 @@ import {
     Text
 } from 'react-native';
 
-
-import Modal from 'react-native-modal';
-
 import TournamentPanel from './tournament/Panel';
 import GamePanel from './game/Panel';
 import UserPanel from './user/Panel';
-
-import MainStyle from '../../Styles/MainStyles';
-import EntityPanelStyle from '../../Styles/EntityPanelStyle';
 
 import { ActionCreators } from '../../redux/actions/index';
 import { bindActionCreators } from 'redux';
@@ -32,7 +26,7 @@ const panelTypeMap = {
 
 class EntityPanel extends Component {
 
-    createPanel(height){
+    createPanel(){
         let panelType = panelTypeMap[this.props.entityPanel.entityType];
 
         return panelType ? React.createElement(
@@ -43,7 +37,6 @@ class EntityPanel extends Component {
                 type:this.props.entityPanel.entityType,
                 name:this.props.entityPanel.entityName,
                 hidden:this.props.entityPanel.hidden,
-                orientation:this.props.dimension.orientation,
                 relatedEntity:this.props.entityPanel.relatedEntity,
                 disable:this.props.closeEntityPanel.bind(this),
             },
@@ -51,29 +44,7 @@ class EntityPanel extends Component {
     }
 
     render() {
-        let panel;
-        let height = 0;
-        if(this.props.entityPanel.mode!=='disabled'){
-            height = this.props.dimension.orientation === 'portrait'?
-                this.props.dimension.height*0.8:this.props.dimension.height*0.7;
-            panel = this.createPanel(height);
-        }
-        return (
-            this.props.entityPanel.mode !== 'disabled' &&
-            <Modal isVisible={!this.props.entityPanel.hidden} backdropOpacity={0.3}>
-                <View style={[EntityPanelStyle.modal,{
-                        width: this.props.dimension.width*0.9,
-                        height: height
-                    }]}>
-                    <View style={[EntityPanelStyle.title,{alignItems:'center'}]}>
-                        <Text style={[MainStyle.textStyle,{fontSize: 22}]}>
-                            {this.props.entityPanel.mode.charAt(0).toUpperCase()+this.props.entityPanel.mode.slice(1)+" "+this.props.entityPanel.entityType}
-                        </Text>
-                    </View>
-                    {panel}
-                </View>
-            </Modal>
-        );
+        return (this.props.entityPanel.mode!=='disabled' && this.createPanel());
     }
 }
 
@@ -83,8 +54,7 @@ function mapDispatchToProps( dispatch ) {
 
 function mapStateToProps( state ) {
     return {
-        entityPanel:state.entityPanel,
-        dimension: state.dimension
+        entityPanel:state.entityPanel
     };
 }
 

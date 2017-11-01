@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import SelectInput from '../../inputs/SelectInput'
-import SelectNumberInput from '../../inputs/SelectTournamentTypeInput'
+import SelectTournamentTypeInput from '../../inputs/SelectTournamentTypeInput'
 import NumberInput from '../../inputs/NumberInput'
 import TextInput from '../../inputs/TextInput'
 import DateInput from '../../inputs/DateInput'
@@ -21,13 +21,13 @@ import axios from 'axios';
 
 import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { ActionCreators } from '../../../../redux/actions/index';
-
 import convertArrayToObject from "../../../../main/functions/convertArrayToObjectWithoutEmptyField";
-import {type} from "../../../../main/consts/tournamentType";
+import {type} from "../../../../main/consts/tournamentTypeWithoutEmptyOption";
 import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
+
+import { ActionCreators } from '../../../../redux/actions/index';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 class BasicDataTab extends Component{
     constructor(props) {
@@ -47,7 +47,7 @@ class BasicDataTab extends Component{
             this.props.startLoading("Fetching games...");
             await axios.get(serverName + `get/tournaments/enums`)
                 .then(res => {
-                    console.log("games");
+                    console.log("games: ");
                     console.log(res.data);
                     this.setState({gameNames: convertArrayToObject(res.data)});
                     this.props.stopLoading();
@@ -71,8 +71,8 @@ class BasicDataTab extends Component{
     }
 
     calculateHeight(){
-        return this.props.dimension.orientation === 'portrait'?
-            this.props.dimension.height*0.8-145:this.props.dimension.height*0.7-115;
+        return this.props.orientation === 'portrait'?
+            this.props.height*0.8-145:this.props.height*0.7-115;
     }
 
     render(){
@@ -116,7 +116,7 @@ class BasicDataTab extends Component{
                 <ValidationErrorMessage
                     validationErrorMessage={this.props.validationErrors["tablesCount"]}/>
 
-                <SelectNumberInput
+                <SelectTournamentTypeInput
                     value={this.props.entity["playersOnTableCount"]}
                     fieldName="playersOnTableCount"
                     changeEntity={this.props.changeEntity}
@@ -161,9 +161,7 @@ function mapDispatchToProps( dispatch ) {
 }
 
 function mapStateToProps( state ) {
-    return {
-        dimension: state.dimension
-    };
+    return {};
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( BasicDataTab );
