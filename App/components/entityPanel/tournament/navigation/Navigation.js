@@ -10,14 +10,10 @@ import {
 
 import EntityPanelStyle from '../../../../Styles/EntityPanelStyle'
 
-import { ActionCreators } from '../../../../redux/actions/index';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
-class Navigation extends Component {
+export default class Navigation extends Component {
 
     createNavElements(){
-        if(this.props.dimension.orientation==='portrait')
+        if(this.props.orientation==='portrait')
             return <View style={EntityPanelStyle.navigation}>
                 <View style={EntityPanelStyle.buttonRow}>
                     <TouchableHighlight style={[EntityPanelStyle.button,{backgroundColor: this.props.isTabActive("basicData")}]}
@@ -71,15 +67,3 @@ class Navigation extends Component {
         );
     }
 }
-
-function mapDispatchToProps( dispatch ) {
-    return bindActionCreators( ActionCreators, dispatch );
-}
-
-function mapStateToProps( state ) {
-    return {
-        dimension: state.dimension
-    };
-}
-
-export default connect( mapStateToProps, mapDispatchToProps )( Navigation );

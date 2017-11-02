@@ -73,7 +73,7 @@ export default class AddressTab extends Component{
                     changeEntity={this.props.changeEntity}
                     disabled = {this.props.inputsDisabled}
                     placeholder = ""
-                    name="Description:"/>
+                    name="Description (optional):"/>
                 <ValidationErrorMessage
                     validationErrorMessage={this.props.validationErrors["description"]}/>
             </ScrollView>

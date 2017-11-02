@@ -14,6 +14,7 @@ import MainStyles from '../Styles/MainStyles'
 import FadeView from '../components/commonComponents/FadeView'
 import ConfirmDialog from '../components/commonComponents/confirmationDialog/ConfirmDialog'
 import EntityPanel from '../components/entityPanel/EntityPanel'
+import AdditionalEntityPanel from '../components/entityPanel/AdditionalEntityPanel'
 import MessageDialog from '../components/commonComponents/messageDialog/MessageDialog'
 import LoadingSpinner from '../components/commonComponents/loading/LoadingSpinner'
 import DimensionChangeListener from '../components/commonComponents/dimensionChangeListener/DimensionChangeListener'
@@ -72,6 +73,7 @@ class App extends Component {
                                 <LoadingSpinner/>
                                 <DimensionChangeListener/>
                                 <EntityPanel navigate={this.navigate.bind(this)}/>
+                                <AdditionalEntityPanel/>
                             </FadeView>
                         </View>
                     </TouchableWithoutFeedback>

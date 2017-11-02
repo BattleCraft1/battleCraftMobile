@@ -10,6 +10,17 @@ const styles = {
     },
     outputTextStyle: {
         marginTop: 2
+    },
+    avatarContainerStyle:{
+        justifyContent:'center',
+        alignItems:'center',
+        margin:2
+    },
+    avatarStyle:{
+        borderWidth:3,
+        borderColor: BaseColours.background.lightBrown,
+        width:80,
+        height:80
     }
 };
 

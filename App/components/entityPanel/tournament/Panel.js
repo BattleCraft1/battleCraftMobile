@@ -11,10 +11,10 @@ import Modal from 'react-native-modal';
 import MainStyle from '../../../Styles/MainStyles';
 import EntityPanelStyle from '../../../Styles/EntityPanelStyle'
 
-import BasicDataTab from './Tabs/BasicDataTab';
-import AddressTab from './Tabs/AddressTab';
-import ParticipantsTab from './Tabs/ParticipantsTab';
-import OrganizersTab from './Tabs/OrganizersTab';
+import BasicDataTab from './tabs/BasicDataTab';
+import AddressTab from './tabs/AddressTab';
+import ParticipantsTab from './tabs/ParticipantsTab';
+import OrganizersTab from './tabs/OrganizersTab';
 
 import Navigation from './navigation/Navigation'
 
@@ -97,7 +97,7 @@ class Panel extends Component {
         {
             let getEntityOperation = async () => {
                 this.props.startLoading("Fetching tournament...");
-                await axios.get(serverName+`get/`+this.props.type+`?name=`+this.props.name)
+                await axios.get(serverName+`get/tournament?name=`+this.props.name)
                 .then(res => {
                     this.setState({entity:res.data});
                     this.setState({activeTab:"basicData"});
@@ -277,10 +277,13 @@ class Panel extends Component {
                 }]}>
                     <View style={[EntityPanelStyle.title,{alignItems:'center'}]}>
                         <Text style={[MainStyle.textStyle,{fontSize: 22}]}>
-                            {this.props.mode.charAt(0).toUpperCase()+this.props.mode.slice(1)+" "+this.props.type}
+                            {this.props.mode.charAt(0).toUpperCase()+this.props.mode.slice(1)+" tournament"}
                         </Text>
                     </View>
-                <Navigation setActiveTab={this.setActiveTab.bind(this)} isTabActive={this.isTabActive.bind(this)}/>
+                <Navigation
+                    orientation={this.props.dimension.orientation}
+                    setActiveTab={this.setActiveTab.bind(this)}
+                    isTabActive={this.isTabActive.bind(this)}/>
                 <View style={[EntityPanelStyle.formWindow]}>
                         {content}
                 </View>

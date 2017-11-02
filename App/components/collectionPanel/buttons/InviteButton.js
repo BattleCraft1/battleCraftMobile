@@ -23,7 +23,7 @@ class InviteButton extends React.Component {
         return (
             <View style={{flex:1, marginRight: 3}}>
                 <Button
-                    title={"Invite"}
+                    title={"Add"}
                     color='#4b371b'
                     onPress={()=>this.invite()}/>
             </View>

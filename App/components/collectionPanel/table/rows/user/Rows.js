@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
+    TouchableHighlight,
     ListView,
     Image
 } from 'react-native';
@@ -13,9 +14,13 @@ import ListColours from '../../../../../main/consts/ListColours'
 import Checkbox from '../../../../commonComponents/checkBox/Checkbox'
 import MultiCheckbox from '../../../../commonComponents/checkBox/MultiCheckbox'
 
+import { ActionCreators } from '../../../../../redux/actions/index';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 import {serverName} from '../../../../../main/consts/serverName';
 
-export default class Rows extends Component{
+class Rows extends Component{
 
     constructor(props) {
         super(props);
@@ -52,13 +57,26 @@ export default class Rows extends Component{
         }
     }
 
+    editEntity(element){
+        if(this.props.entityPanel.mode!=='disabled'){
+            this.props.showAdditionalEntityPanel("user",element.name);
+        }
+        else{
+            this.props.editEntity("user",element.name);
+        }
+    }
+
     renderRow(rowData) {
         let backgroundColour = this.backgroundColourCheck(rowData);
 
         return (
             <View style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
-                    <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {rowData.name}</Text>
+                    <TouchableHighlight
+                        style={{flex:1}}
+                        onPress={() => this.editEntity(rowData)}>
+                        <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {rowData.name}</Text>
+                    </TouchableHighlight>
                     <Checkbox elementName = {rowData.name} checked = {rowData.checked}/>
                 </View>
 
@@ -112,3 +130,16 @@ export default class Rows extends Component{
         );
     }
 }
+
+
+function mapDispatchToProps( dispatch ) {
+    return bindActionCreators( ActionCreators, dispatch );
+}
+
+function mapStateToProps( state ) {
+    return {
+        entityPanel: state.entityPanel
+    };
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( Rows );

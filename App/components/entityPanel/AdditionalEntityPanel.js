@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 
 import TournamentPanel from './tournament/Panel';
-import GamePanel from './game/Panel';
 import UserPanel from './user/Panel';
 
 import { ActionCreators } from '../../redux/actions/index';
@@ -19,31 +18,30 @@ import { connect } from 'react-redux';
 
 const panelTypeMap = {
     'tournament':TournamentPanel,
-    'game':GamePanel,
     'user':UserPanel
 };
 
-class EntityPanel extends Component {
+class AdditionalEntityPanel extends Component {
 
     createPanel(){
-        let panelType = panelTypeMap[this.props.entityPanel.entityType];
+        let panelType = panelTypeMap[this.props.additionalEntityPanel.additionalEntityType];
 
         return panelType ? React.createElement(
             panelType,
             {
-                navigate: this.props.navigate,
-                mode:this.props.entityPanel.mode,
-                type:this.props.entityPanel.entityType,
-                name:this.props.entityPanel.entityName,
-                hidden:this.props.entityPanel.hidden,
-                relatedEntity:this.props.entityPanel.relatedEntity,
-                disable:this.props.closeEntityPanel.bind(this),
+                navigate:()=>{},
+                mode:'get',
+                type:this.props.additionalEntityPanel.additionalEntityType,
+                name:this.props.additionalEntityPanel.additionalEntityName,
+                hidden:false,
+                relatedEntity:{},
+                disable:this.props.disableAdditionalEntityPanel.bind(this),
             },
             null) : <View/>
     }
 
     render() {
-        return (this.props.entityPanel.mode!=='disabled' && this.createPanel());
+        return (this.props.additionalEntityPanel.additionalEntityName!=="" && this.createPanel());
     }
 }
 
@@ -53,8 +51,8 @@ function mapDispatchToProps( dispatch ) {
 
 function mapStateToProps( state ) {
     return {
-        entityPanel:state.entityPanel
+        additionalEntityPanel:state.additionalEntityPanel
     };
 }
 
-export default connect( mapStateToProps, mapDispatchToProps )( EntityPanel );
+export default connect( mapStateToProps, mapDispatchToProps )( AdditionalEntityPanel );
