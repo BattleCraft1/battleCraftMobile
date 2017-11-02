@@ -27,6 +27,21 @@ const styles = StyleSheet.create({
         paddingLeft:10,
         height:50,
     },
+    icon: {
+        width: 30,
+        height: 30,
+        backgroundColor: BaseColours.misc.deepRed,
+        borderTopColor: BaseColours.border.top,
+        borderRightColor: BaseColours.border.right,
+        borderBottomColor: BaseColours.border.bottom,
+        borderLeftColor: BaseColours.border.left,
+        borderWidth: 2,
+        margin: 1,
+        alignItems:'center'
+    },
+    iconsRow:{
+        flexDirection: 'row'
+    },
     header:{
         flexDirection: 'row',
         alignItems:'center',

@@ -7,7 +7,8 @@ import {
     Text,
     ScrollView,
     Button,
-    Image
+    Image,
+    TouchableHighlight
 } from 'react-native';
 
 import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
@@ -23,6 +24,8 @@ import {serverName} from "../../../../main/consts/serverName";
 import { ActionCreators } from '../../../../redux/actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class OrganizersTab extends Component{
 
@@ -45,7 +48,12 @@ class OrganizersTab extends Component{
                     <Text numberOfLines={1} style={[MainStyles.verySmallWhiteStyle, {padding:3}]}> {rowData.name}</Text>
                 </View>
                 {!this.props.inputsDisabled &&
-                <Button title={"Remove"} color='#4b371b' onPress={()=>this.deleteElement(rowData.name)}/>}
+                <TouchableHighlight onPress={() => {this.deleteElement(rowData.name);}}>
+                    <View style={TableStyles.icon} >
+                        <Icon name='close' size={25} color="#ffffff"/>
+                        <Text style={TableStyles.iconText}>{this.props.name}</Text>
+                    </View>
+                </TouchableHighlight>}
             </View>);
     }
 
