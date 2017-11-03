@@ -42,7 +42,7 @@ class OrganizersTab extends Component{
                 <View style={{width: 35, justifyContent: 'center', alignItems: 'center'}}>
                     <Image
                         style={{width: 35, height: 35}}
-                        source={{uri:serverName+`/get/user/avatar?username=${rowData.name}`}}/>
+                        source={{uri:`${serverName}/get/user/avatar?username=${rowData.name}&${new Date().getTime()}`}}/>
                 </View>
                 <View style={{backgroundColor: backgroundColour, flex: 1, justifyContent:'center'}}>
                     <Text numberOfLines={1} style={[MainStyles.verySmallWhiteStyle, {padding:3}]}> {rowData.name}</Text>

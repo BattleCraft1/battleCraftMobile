@@ -1,8 +1,8 @@
 import React from 'react';
 import EntityPanelInputsStyles from '../../../Styles/EntityPanelInputsStyles'
 import {
-    Image,
     View,
+    Image,
     TouchableHighlight
 } from 'react-native';
 import {serverName} from "../../../main/consts/serverName";
@@ -12,12 +12,12 @@ import { ActionCreators } from '../../../redux/actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import axios from 'axios'
-
 class AvatarInput extends React.Component{
     uploadImage = async() => {
+        if(this.props.disabled)
+            return;
         let pickerResult = await ImagePicker.launchImageLibraryAsync({
-            base64:true,
+            base64: true,
             allowsEditing: false
         });
 
@@ -30,7 +30,7 @@ class AvatarInput extends React.Component{
         try {
             this.props.startLoading("Uploading image...");
             if (!pickerResult.cancelled) {
-                uploadResponse = await this.uploadImageAsync(pickerResult);
+                await this.uploadImageAsync(pickerResult);
             }
         } catch (e) {
             console.log(e);
@@ -41,40 +41,52 @@ class AvatarInput extends React.Component{
     };
 
     async uploadImageAsync(pickerResult) {
-        let file = pickerResult.base64;
         let uri = pickerResult.uri;
         let fileType = uri.substr(uri.lastIndexOf(".") + 1);
-        if(file && (fileType === 'bmp' || fileType === 'gif' || fileType === 'jpg' || fileType === 'jpeg' || fileType === 'png')){
-            let formData = new FormData();
-            formData.append('avatar',file);
-            console.log(formData);
-            await axios.post(serverName+`upload/user/avatar?username=`+ this.props.name,
-                formData,
-                {
-                    headers: {
-                        'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
-                    }
-                })
-                .then(res => {
-                    this.props.showSuccessMessage("Avatar successfully changed");
-                })
-                .catch(error => {
-                    this.props.showNetworkErrorMessage(error);
-                });
+
+        if(fileType === 'bmp' || fileType === 'gif' || fileType === 'jpg' || fileType === 'png') {
+            if(fileType === 'jpg')
+                fileType = 'jpeg';
         }
         else{
             this.props.showFailureMessage("Extension: "+fileType+" is not acceptable extension as user avatar. You should try with jpg, gif, bmp or png");
+            return;
         }
+
+        let formData = new FormData();
+        formData.append('avatar', { uri: uri, name: 'avatar.'+fileType,type: 'image/'+fileType });
+
+        let url = serverName+`upload/user/avatar?username=`+ this.props.name;
+        return await fetch(url, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'content-type': 'multipart/form-data',
+            },
+        }).then(res => {
+            console.log(res);
+            if(res["status"]!==200){
+                this.props.showFailureMessage('Upload failed');
+            }
+            else{
+                this.props.showSuccessMessage("Avatar successfully changed");
+            }
+        }).catch(error => {
+            this.props.showNetworkErrorMessage(error);
+        });
     }
+
 
     render(){
         return(
-            <View style={EntityPanelInputsStyles.avatarContainerStyle}>
-                <TouchableHighlight onPress={this.uploadImage}>
-                    <Image
-                        style={EntityPanelInputsStyles.avatarStyle}
-                        source={{uri:serverName+`/get/user/avatar?username=${this.props.name}`}} />
-                </TouchableHighlight>
+            <View style={{alignItems:'center',justifyContent:'center'}}>
+                <View style={EntityPanelInputsStyles.avatarContainerStyle}>
+                    <TouchableHighlight onPress={this.uploadImage}>
+                        <Image
+                            style={EntityPanelInputsStyles.avatarStyle}
+                            source={{uri:`${serverName}/get/user/avatar?username=${this.props.name}&${new Date().getTime()}`}} />
+                    </TouchableHighlight>
+                </View>
             </View>
         )
     }
@@ -85,7 +97,9 @@ function mapDispatchToProps( dispatch ) {
 }
 
 function mapStateToProps( state ) {
-    return {};
+    return {
+        message: state.message
+    };
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( AvatarInput );

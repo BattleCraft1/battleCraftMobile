@@ -45,13 +45,24 @@ const styles = StyleSheet.create({
     header:{
         flexDirection: 'row',
         alignItems:'center',
-        justifyContent:'center',
         backgroundColor: BaseColours.misc.deepRed,
         borderColor:BaseColours.border.top,
         borderWidth: 3,
         padding: 3,
+        paddingLeft: 10,
         height:55,
     },
+    avatar:{
+        backgroundColor: BaseColours.background.lightBrown,
+        flex:1,
+        alignItems:'center',
+        justifyContent: 'center',
+        borderTopWidth:2,
+        borderBottomWidth:2,
+        borderTopColor: BaseColours.border.top,
+        borderBottomColor: BaseColours.border.top,
+        padding:5
+    }
 });
 
 

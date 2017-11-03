@@ -25,7 +25,7 @@ class Checkbox extends React.Component {
     render(){
         return(
         <CheckBox
-            style={{padding: 10}}
+            style={{padding: 10,width:55, height:55,justifyContent:'center',alignItems:'center'}}
             isChecked={this.state.checked}
             onClick={() => {
                 let checked=this.state.checked;
