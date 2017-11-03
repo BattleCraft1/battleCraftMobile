@@ -73,7 +73,7 @@ class Rows extends Component{
             <View key={rowData.name}  style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
                     <TouchableHighlight
-                        style={{flex:1}}
+                        style={{flex:1,alignItems:'center',justifyContent: 'center', padding:5}}
                         onPress={() => this.editEntity(rowData)}>
                         <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {rowData.name}</Text>
                     </TouchableHighlight>
@@ -82,12 +82,15 @@ class Rows extends Component{
 
                 <View style={[TableStyles.row, {flexDirection:'column'}]}>
                     <View style={{flexDirection:'row'}}>
-                        <View style={{flex:1,justifyContent: 'center', alignItems: 'center'}}>
+                        <TouchableHighlight
+                            style={TableStyles.avatar}
+                            onPress={() => this.editEntity(rowData)}>
                             <Image
-                                style={{width: 70, height: 70}}
-                                source={{uri:serverName+`/get/user/avatar?username=${rowData.name}`}} />
-                        </View>
-                        <View style={{flex: 3, alignSelf: "stretch"}}>
+                                style={{width: 60, height: 60}}
+                                source={{uri:`${serverName}/get/user/avatar?username=${rowData.name}&${new Date().getTime()}`}} />
+                        </TouchableHighlight>
+
+                        <View style={{flex: 4, alignSelf: "stretch"}}>
                             <View style={[TableStyles.row]}>
                                 <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Name: {rowData.firstname}</Text>
                             </View>

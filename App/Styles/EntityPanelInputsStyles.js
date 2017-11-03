@@ -14,13 +14,20 @@ const styles = {
     avatarContainerStyle:{
         justifyContent:'center',
         alignItems:'center',
-        margin:2
+        borderTopColor: BaseColours.border.top,
+        borderRightColor: BaseColours.border.right,
+        borderBottomColor: BaseColours.border.bottom,
+        borderLeftColor: BaseColours.border.left,
+        borderWidth:4,
+        width:85,
+        height:85
     },
     avatarStyle:{
-        borderWidth:3,
-        borderColor: BaseColours.background.lightBrown,
-        width:80,
-        height:80
+        backgroundColor:BaseColours.misc.deepRed,
+        flex: 1,
+        resizeMode:'contain',
+        width:79,
+        height:81
     }
 };
 

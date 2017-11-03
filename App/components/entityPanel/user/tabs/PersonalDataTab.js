@@ -39,7 +39,9 @@ class PersonalDataTab extends Component{
             <ScrollView
                 style={{height:height}}
                 contentContainerStyle={EntityPanelStyle.scrollView}>
-                <AvatarInput name={this.props.entity["name"]}/>
+                <AvatarInput
+                    disabled = {this.props.inputsDisabled}
+                    name={this.props.entity["name"]}/>
 
                 <TextInput
                     value={this.props.entity["nameChange"]}

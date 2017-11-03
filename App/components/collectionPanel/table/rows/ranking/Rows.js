@@ -3,7 +3,8 @@ import {
     View,
     Text,
     ListView,
-    Image
+    Image,
+    TouchableHighlight
 } from 'react-native';
 
 import TableStyles from '../../../../../Styles/TableStyles'
@@ -15,7 +16,6 @@ import { ActionCreators } from '../../../../../redux/actions';
 
 import findGameName from '../../../../../main/functions/findGameName'
 import {serverName} from "../../../../../main/consts/serverName";
-
 
 class Rows extends Component{
 
@@ -33,20 +33,31 @@ class Rows extends Component{
         };
     }
 
+    showUser(name){
+        this.props.getEntity("user",name);
+    }
+
     renderRow(index, rowData) {
         return (
             <View key={rowData.name} style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
-                    <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {index+"."+rowData.name}</Text>
+                    <TouchableHighlight
+                        style={{flex:1}}
+                        onPress={() => this.showUser(rowData.name)}>
+                        <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {index+"."+rowData.name}</Text>
+                    </TouchableHighlight>
                 </View>
                 <View style={[TableStyles.row, {flexDirection:'column'}]}>
                     <View style={{flexDirection:'row'}}>
-                        <View style={{flex:1,justifyContent: 'center', alignItems: 'center'}}>
+                        <TouchableHighlight
+                            style={TableStyles.avatar}
+                            onPress={() => this.showUser(rowData.name)}>
                             <Image
-                                style={{width: 70, height: 70}}
-                                source={{uri:serverName+`/get/user/avatar?username=${rowData.name}`}} />
-                        </View>
-                        <View style={{flex: 3, alignSelf: "stretch"}}>
+                                style={{width: 60, height: 60}}
+                                source={{uri:`${serverName}/get/user/avatar?username=${rowData.name}&${new Date().getTime()}`}} />
+                        </TouchableHighlight>
+
+                        <View style={{flex: 4, alignSelf: "stretch"}}>
                             <View style={[TableStyles.row]}>
                                 <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Points: {rowData.points}</Text>
                             </View>

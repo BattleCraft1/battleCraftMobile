@@ -107,6 +107,7 @@ class Panel extends Component {
                 })
                 .catch(error => {
                     this.props.showNetworkErrorMessage(error,getEntityOperation);
+                    this.props.stopLoading();
                 });
             };
 

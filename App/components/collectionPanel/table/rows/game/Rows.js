@@ -42,14 +42,14 @@ class Rows extends Component{
     async downloadGameRules(gameName){
         const URL = serverName + `/get/game/` + gameName + `/rules`;
         const fileName = gameName+'.pdf';
-        const direcotory = FileSystem.documentDirectory + fileName;
+        const directory = FileSystem.documentDirectory + fileName;
 
         let downloadGameRulesOperation = async () => {
         this.props.startLoading("Downloading game rules...");
-        await FileSystem.downloadAsync(serverName, direcotory)
+        await FileSystem.downloadAsync(serverName, directory)
             .then(async (response) => {
                 this.props.stopLoading();
-                this.props.showSuccessMessageBox("file saved in: "+direcotory);
+                this.props.showSuccessMessageBox("file saved in: "+directory);
             })
             .catch(async (error) => {
                 this.props.stopLoading();
