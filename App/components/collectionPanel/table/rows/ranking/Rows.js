@@ -16,6 +16,7 @@ import { ActionCreators } from '../../../../../redux/actions';
 import findGameName from '../../../../../main/functions/findGameName'
 import {serverName} from "../../../../../main/consts/serverName";
 
+
 class Rows extends Component{
 
     constructor(props) {
@@ -34,7 +35,7 @@ class Rows extends Component{
 
     renderRow(index, rowData) {
         return (
-            <View style={[TableStyles.row]}>
+            <View key={rowData.name} style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
                     <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {index+"."+rowData.name}</Text>
                 </View>

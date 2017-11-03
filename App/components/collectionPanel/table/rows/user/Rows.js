@@ -70,7 +70,7 @@ class Rows extends Component{
         let backgroundColour = this.backgroundColourCheck(rowData);
 
         return (
-            <View style={[TableStyles.row]}>
+            <View key={rowData.name}  style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
                     <TouchableHighlight
                         style={{flex:1}}

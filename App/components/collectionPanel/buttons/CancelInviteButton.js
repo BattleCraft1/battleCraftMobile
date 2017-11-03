@@ -11,7 +11,8 @@ import { ActionCreators } from '../../../redux/actions/index';
 class CancelInviteButton extends React.Component {
 
     cancelInvite(){
-        this.props.setRelatedEntity([],this.props.entityPanel.relatedEntity.relatedEntityType,"");
+        this.props.setRelatedEntity(this.props.entityPanel.relatedEntity.relatedEntityNames,
+            this.props.entityPanel.relatedEntity.relatedEntityType,"");
         this.props.clearCheckedElements();
         this.props.showEntityPanel(true);
     }

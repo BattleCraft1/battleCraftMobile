@@ -19,6 +19,7 @@ import { connect } from 'react-redux';
 
 import dateFormat from 'dateformat';
 
+
 class Rows extends Component{
 
     constructor(props) {
@@ -59,7 +60,6 @@ class Rows extends Component{
         if(this.props.entityPanel.mode!=='disabled')
             this.props.showAdditionalEntityPanel("tournament",element.name);
         else if(element.status!=='NEW' && element.status!=='ACCEPTED'){
-            console.log("debug");
             this.props.getEntity("tournament",element.name);
         }
         else
@@ -71,7 +71,7 @@ class Rows extends Component{
         let backgroundColour = this.backgroundColourCheck(rowData);
 
         return (
-            <View style={[TableStyles.row]}>
+            <View key={rowData.name} style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
                     <TouchableHighlight
                         style={{flex:1}}

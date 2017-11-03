@@ -63,7 +63,9 @@ class App extends Component {
         if(this.state.appReady){
             content=
                 <View style={{flex:1}}>
-                    <TouchableWithoutFeedback style={{flex:1}} onPress={this.hideDropdown.bind(this)}>
+                    <TouchableWithoutFeedback disabled={!this.state.dropdownVisible}
+                                              style={{flex:1}}
+                                              onPressIn={this.hideDropdown.bind(this)}>
                         <View style={{flex:1}}>
                             <Navbar navigate={this.navigate.bind(this)} menuText={this.state.navigValue} toggleMenu={this.toggleMenu.bind(this)}/>
                             <FadeView style={{flex:1}}>

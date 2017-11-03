@@ -118,10 +118,8 @@ class Panel extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.hidden === false &&
-            this.props.hidden === true &&
-            nextProps.relatedEntity.relatedEntityNames.length > 0 &&
-            !compareArrays(nextProps.relatedEntity.relatedEntityNames,this.props.relatedEntity.relatedEntityNames)) {
+        if (nextProps.hidden === false && this.props.hidden === true ) {
+            console.log("tournament panel recive releted entities");
             this.actualizeRelatedEntityObjects(
                 nextProps.relatedEntity.relatedEntityType,
                 nextProps.relatedEntity.relatedEntityNames)

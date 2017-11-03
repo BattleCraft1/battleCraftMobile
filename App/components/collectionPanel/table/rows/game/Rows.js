@@ -82,7 +82,7 @@ class Rows extends Component{
         let backgroundColour = this.backgroundColourCheck(rowData);
 
         return (
-            <View style={[TableStyles.row]}>
+            <View key={rowData.name}  style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
                     <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {rowData.name}</Text>
                     <Checkbox elementName = {rowData.name} checked = {rowData.checked}/>
