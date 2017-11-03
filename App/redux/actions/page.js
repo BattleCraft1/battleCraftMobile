@@ -36,3 +36,9 @@ export function clearCheckedElements() {
         type: types.CLEAR_CHECKED_ELEMENTS
     }
 }
+export function setElementsToCheck(elementsNames) {
+    return {
+        type: types.SET_ELEMENTS_TO_CHECK,
+        elementsNames:elementsNames
+    }
+}

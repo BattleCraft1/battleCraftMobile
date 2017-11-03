@@ -27,23 +27,28 @@ export const message = createReducer( {}, {
         let message;
         console.log("error: ");
         console.log(action.error);
-        if(action.error===undefined || action.error.message==='Network Error'){
-            message={
-                isShown: true,
-                messageText: "You can not connect to server!",
-                messageType: "Network error",
-                failedOperation: action.failedOperation
-            };
+        try{
+            if(action.error===undefined || action.error.message==='Network Error'){
+                message={
+                    isShown: true,
+                    messageText: "You can not connect to server!",
+                    messageType: "Network error",
+                    failedOperation: action.failedOperation
+                };
+            }
+            else if(action.error.response.status !== 200)
+            {
+                if((typeof action.error.response.data)!=="string" || action.error.response.data==="")
+                    throw new Error("error is not a string value");
+                message={
+                    isShown: true,
+                    messageText: action.error.response.data,
+                    messageType: "Fail"
+                };
+                return message;
+            }
         }
-        else if(action.error.message.indexOf('Request failed with status code ') !== -1 && action.error.response.data!==undefined)
-        {
-            message={
-                isShown: true,
-                messageText: action.error.response.data,
-                messageType: "Fail"
-            };
-        }
-        else{
+        catch (e){
             message={
                 isShown: true,
                 messageText: "There are unrecognized problems on the server side. Please contact with administrator.",

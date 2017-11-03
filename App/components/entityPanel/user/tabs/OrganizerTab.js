@@ -88,7 +88,7 @@ class OrganizerTab extends Component{
     }
 
     deleteElement(name){
-        let elements = this.props.value;
+        let elements = this.props.entity["organizedTournaments"];
         elements = elements.filter(tournament => {
             return tournament.name!==name
         });
@@ -96,7 +96,7 @@ class OrganizerTab extends Component{
     }
 
     acceptElement(name){
-        let elements = this.props.value;
+        let elements = this.props.entity["organizedTournaments"];
         let element = elements.find(tournament => {
             return tournament.name===name
         });

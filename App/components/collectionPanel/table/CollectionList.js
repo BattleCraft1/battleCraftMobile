@@ -1,19 +1,17 @@
+'use strict';
+
 import React, { Component } from 'react';
-import {
-    View
-} from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../../redux/actions';
-
-import GestureRecognizer from 'react-native-swipe-gestures';
 
 import TournamentsRows from './rows/tournament/Rows'
 import UsersRows from './rows/user/Rows'
 import RankingRows from './rows/ranking/Rows'
 import GamesRows from './rows/game/Rows'
 
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 const rowTypeMap = {
     "tournaments":TournamentsRows,
@@ -29,6 +27,7 @@ class CollectionList extends Component {
     }
 
     previousPage(event){
+        console.log("previous page");
         let pageRequest=this.props.pageRequest;
         if(pageRequest.pageRequest.page-1>=0){
             pageRequest.pageRequest.page-=1;
@@ -38,6 +37,7 @@ class CollectionList extends Component {
     }
 
     nextPage(event){
+        console.log("next page");
         let pageRequest=this.props.pageRequest;
         if(pageRequest.pageRequest.page+1<this.props.page.totalPages){
             pageRequest.pageRequest.page+=1;
@@ -51,18 +51,17 @@ class CollectionList extends Component {
             rowTypeMap[this.props.collectionType],
             {content:this.props.page.content},
             null);
-
         return(
-            <View style={{flex:1}}>
-                <GestureRecognizer
-                    onSwipeLeft={(event) => this.previousPage(event)}
-                    onSwipeRight={(event) => this.nextPage(event)}
-                    config={{
-                        velocityThreshold: 0.1,
-                        directionalOffsetThreshold: 30}}>
-                    {rows}
-                </GestureRecognizer>
-            </View>
+            <GestureRecognizer
+                style={{flex: 1}}
+                onSwipeLeft={(event) => this.previousPage(event)}
+                onSwipeRight={(event) => this.nextPage(event)}
+                config={{
+                    velocityThreshold: 0.1,
+                    directionalOffsetThreshold: 30}}>
+                {rows}
+            </GestureRecognizer>
+
         );
     }
 

@@ -20,6 +20,10 @@ export const page = createReducer( {}, {
             totalPages:0
         };
     },
+    [types.SET_ELEMENTS_TO_CHECK]( state, action ) {
+        state.checkedElementsNames = action.elementsNames;
+        return Object.create(state);
+    },
     [types.CHECK_ALL_ELEMENTS]( state, action ){
         let elementToCheckNames = state.content
             .map(element => {

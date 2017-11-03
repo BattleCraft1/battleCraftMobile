@@ -93,9 +93,7 @@ class Panel extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.hidden === false &&
-            this.props.hidden === true &&
-            !compareArrays(nextProps.relatedEntity.relatedEntityNames,this.props.relatedEntity.relatedEntityNames)) {
+        if (nextProps.hidden === false && this.props.hidden === true ) {
             this.actualizeRelatedEntityObjects(
                 nextProps.relatedEntity.relatedEntityType,
                 nextProps.relatedEntity.relatedEntityNames)
@@ -192,7 +190,6 @@ class Panel extends Component {
         delete entityToSend["createdGames"];
         delete entityToSend["banned"];
         let validationErrors = validateUser(entityToSend);
-        console.log(validationErrors);
         if(checkIfObjectIsNotEmpty(validationErrors)){
             console.log("output entity:");
             console.log(entityToSend);

@@ -57,8 +57,8 @@ class CollectionPanel extends Component {
             this.props.entityPanel.hidden === false) {
             await this.setState({collectionType: nextProps.collectionType});
             this.createPageRequestForEntityPanel(nextProps.entityPanel.relatedEntity.relatedEntityCriteria);
+            this.props.setElementsToCheck(nextProps.entityPanel.relatedEntity.relatedEntityNames);
             await this.getPage(this.state.collectionType);
-            this.props.checkElements(nextProps.entityPanel.relatedEntity.relatedEntityNames,true)
         }
         else if (nextProps.collectionType !== this.state.collectionType ||
             (nextProps.entityPanel.mode === 'disabled' &&

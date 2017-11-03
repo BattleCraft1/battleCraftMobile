@@ -16,7 +16,6 @@ class InviteButton extends React.Component {
             this.props.entityPanel.relatedEntity.relatedEntityCriteria);
         this.props.clearCheckedElements();
         this.props.showEntityPanel(true);
-
     }
 
     render() {
