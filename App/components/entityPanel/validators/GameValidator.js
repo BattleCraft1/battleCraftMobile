@@ -1,15 +1,14 @@
 import checkIfObjectIsNotEmpty from "../../../main/functions/checkIfObjectIsNotEmpty";
 
-export default (entity,gameRules,isEditMode) => {
+export default (entity,isEditMode) => {
     let validationErrors = {};
     let fieldErrors = {};
 
     if(entity.name.length<1 || entity.name.length>50)
         fieldErrors.nameChange = "Game name must have between 1 to 50 chars";
 
-    console.log("game rules");
-    if(gameRules!==undefined)
-        validateGameRules(gameRules,fieldErrors);
+    if(entity.gameRules!=="")
+        validateGameRules(entity.gameRules,fieldErrors);
     else if(!isEditMode)
         fieldErrors.gameRules = "Please choose pdf file with game rules";
 
@@ -21,12 +20,10 @@ export default (entity,gameRules,isEditMode) => {
     return validationErrors;
 }
 
-function validateGameRules(file,fieldErrors){
-    let fileType = "";
-    if(file){
-        fileType = file.type.toString().split("/")[1];
-    }
-    if(!file || (fileType !== 'pdf')){
-        fieldErrors.gameRules = "Extension: "+fileType+" is not acceptable extension of user avatar. You should try with jpg, gif, bmp or png";
+function validateGameRules(uri,fieldErrors){
+    let fileType = uri.substr(uri.lastIndexOf(".") + 1);;
+
+    if(fileType !== 'pdf'){
+        fieldErrors.gameRules = "Extension: "+fileType+" is not acceptable extension of user avatar. You should try with pdf";
     }
 }

@@ -3,7 +3,7 @@ import {
     View,
     Text,
     TouchableHighlight,
-    ListView,
+    ScrollView,
     Image
 } from 'react-native';
 
@@ -26,14 +26,6 @@ class Rows extends Component{
         super(props);
 
         this.renderRow = this.renderRow.bind(this);
-
-        let dataSource = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1 !== r2,
-        });
-
-        this.state = {
-            dataSource: dataSource.cloneWithRows(['Placeholder'])
-        };
     }
 
     printStatus(data){
@@ -66,6 +58,15 @@ class Rows extends Component{
         }
     }
 
+    createUsersList(){
+        if(this.props.content.length===0){
+            return <View style={[TableStyles.row]}><Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}>Empty</Text></View>;
+        }
+        else{
+            return this.props.content.map(user => this.renderRow(user));
+        }
+    }
+
     renderRow(rowData) {
         let backgroundColour = this.backgroundColourCheck(rowData);
 
@@ -73,7 +74,7 @@ class Rows extends Component{
             <View key={rowData.name}  style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
                     <TouchableHighlight
-                        style={{flex:1,alignItems:'center',justifyContent: 'center', padding:5}}
+                        style={{flex:1}}
                         onPress={() => this.editEntity(rowData)}>
                         <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {rowData.name}</Text>
                     </TouchableHighlight>
@@ -122,14 +123,15 @@ class Rows extends Component{
 
     render(){
         return(
-            <ListView styles={TableStyles.table}
-                      dataSource={this.state.dataSource.cloneWithRows(this.props.content)}
-                      enableEmptySections={true}
-                      renderHeader={(headerData) => <View style={TableStyles.header}>
-                          <Text style={[MainStyles.textStyle, {fontSize: 24}]}>User list</Text>
-                          <MultiCheckbox/>
-                      </View>}
-                      renderRow={this.renderRow}/>
+            <View style={{marginBottom:35}}>
+                <View style={TableStyles.header}>
+                    <Text style={[MainStyles.textStyle, {fontSize: 24}]}>User list</Text>
+                    <MultiCheckbox/>
+                </View>
+                <ScrollView styles={TableStyles.table}>
+                    {this.createUsersList()}
+                </ScrollView>
+            </View>
         );
     }
 }
@@ -141,7 +143,8 @@ function mapDispatchToProps( dispatch ) {
 
 function mapStateToProps( state ) {
     return {
-        entityPanel: state.entityPanel
+        entityPanel: state.entityPanel,
+        page: state.page
     };
 }
 

@@ -37,13 +37,23 @@ class OrganizerTab extends Component{
         }
     }
 
-    createDisabledList(listPattern){
-        if(listPattern.length===0){
+    createCreatedGamesList(){
+        if(this.props.entity["createdGames"].length===0){
             return <EmptyRow/>
         }
         else{
-            return listPattern
-                .map(participatedTournament => this.renderRowOfDisabledList(participatedTournament));
+            return this.props.entity["createdGames"]
+                .map(createdGame => this.renderRowOfCreatedGamesList(createdGame));
+        }
+    }
+
+    createListOfFinishedTournaments(){
+        if(this.props.entity["finishedOrganizedTournaments"].length===0){
+            return <EmptyRow/>
+        }
+        else{
+            return this.props.entity["finishedOrganizedTournaments"]
+                .map(finishedParticipatedTournament => this.renderRowOfFinishedTournamentsList(finishedParticipatedTournament));
         }
     }
 
@@ -74,11 +84,20 @@ class OrganizerTab extends Component{
             </View>);
     }
 
-    renderRowOfDisabledList(rowData) {
+    renderRowOfCreatedGamesList(rowData) {
         return (
             <View key={rowData.name} style={[TableStyles.row, {flexDirection: 'row'}]}>
-                <View style={{backgroundColor: 'white', flex: 1, justifyContent:'center'}}>
+                <View style={{backgroundColor: '#a58e60', flex: 1, justifyContent:'center'}}>
                     <Text numberOfLines={1} style={[MainStyles.verySmallWhiteStyle, {padding:3}]}>{rowData.name}</Text>
+                </View>
+            </View>);
+    }
+
+    renderRowOfFinishedTournamentsList(rowData) {
+        return (
+            <View key={rowData} style={[TableStyles.row, {flexDirection: 'row'}]}>
+                <View style={{backgroundColor: '#a58e60', flex: 1, justifyContent:'center'}}>
+                    <Text numberOfLines={1} style={[MainStyles.verySmallWhiteStyle, {padding:3}]}>{rowData}</Text>
                 </View>
             </View>);
     }
@@ -132,9 +151,9 @@ class OrganizerTab extends Component{
                     <Text>Organized tournaments</Text>
                     {this.createListOfOrganizedTournaments()}
                     <Text>Finished tournaments</Text>
-                    {this.createDisabledList(this.props.entity["finishedOrganizedTournaments"])}
+                    {this.createListOfFinishedTournaments()}
                     <Text>Created games</Text>
-                    {this.createDisabledList(this.props.entity["createdGames"])}
+                    {this.createCreatedGamesList()}
                 </ScrollView>
                 <ValidationErrorMessage validationErrorMessage={this.props.validationErrors["organizedTournaments"]}/>
                 {!this.props.inputsDisabled &&

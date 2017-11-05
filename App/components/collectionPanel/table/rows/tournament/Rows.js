@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    ListView,
+    ScrollView,
     TouchableHighlight
 } from 'react-native';
 
@@ -26,14 +26,6 @@ class Rows extends Component{
         super(props);
 
         this.renderRow = this.renderRow.bind(this);
-
-        let dataSource = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1 !== r2,
-        });
-
-        this.state = {
-            dataSource: dataSource.cloneWithRows(['Placeholder'])
-        };
     }
 
     printStatus(data){
@@ -64,6 +56,15 @@ class Rows extends Component{
         }
         else
             this.props.editEntity("tournament",element.name);
+    }
+
+    createTournamentsList(){
+        if(this.props.content.length===0){
+            return <View style={[TableStyles.row]}><Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}>Empty</Text></View>;
+        }
+        else{
+            return this.props.content.map(tournament => this.renderRow(tournament));
+        }
     }
 
     renderRow(rowData) {
@@ -109,14 +110,15 @@ class Rows extends Component{
 
     render(){
         return(
-            <ListView styles={TableStyles.table}
-                      dataSource={this.state.dataSource.cloneWithRows(this.props.content)}
-                      enableEmptySections={true}
-                      renderHeader={(headerData) => <View style={TableStyles.header}>
-                          <Text style={[MainStyles.textStyle, {fontSize: 24}]}>Tournaments List</Text>
-                          <MultiCheckbox/>
-                      </View>}
-                      renderRow={this.renderRow.bind(this)}/>
+            <View style={{marginBottom:35}}>
+                <View style={TableStyles.header}>
+                    <Text style={[MainStyles.textStyle, {fontSize: 24}]}>Tournaments List</Text>
+                    <MultiCheckbox/>
+                </View>
+                <ScrollView styles={TableStyles.table}>
+                    {this.createTournamentsList()}
+                </ScrollView>
+            </View>
         );
     }
 }
@@ -128,7 +130,8 @@ function mapDispatchToProps( dispatch ) {
 
 function mapStateToProps( state ) {
     return {
-        entityPanel: state.entityPanel
+        entityPanel: state.entityPanel,
+        page: state.page
     };
 }
 

@@ -238,7 +238,7 @@ class CollectionPanel extends Component {
                     <CollectionList getPage={this.getPage.bind(this)}
                                     collectionType={this.props.collectionType}/>
                 </View>
-                <View style={{marginTop:3, flexDirection:'row'}}>
+                <View style={MainStyles.buttonsPanelStyle}>
                     {buttons}
                 </View>
             </View>

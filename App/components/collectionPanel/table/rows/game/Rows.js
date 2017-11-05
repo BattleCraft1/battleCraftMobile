@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    ListView,
-    Button
+    ScrollView,
+    Button,
+    TouchableHighlight
 } from 'react-native';
 
 import Checkbox from '../../../../commonComponents/checkBox/Checkbox'
@@ -29,14 +30,6 @@ class Rows extends Component{
         super(props);
 
         this.renderRow = this.renderRow.bind(this);
-
-        let dataSource = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1 !== r2,
-        });
-
-        this.state = {
-            dataSource: dataSource.cloneWithRows(['Placeholder'])
-        };
     }
 
     async downloadGameRules(gameName){
@@ -49,7 +42,7 @@ class Rows extends Component{
         await FileSystem.downloadAsync(serverName, directory)
             .then(async (response) => {
                 this.props.stopLoading();
-                this.props.showSuccessMessageBox("file saved in: "+directory);
+                this.props.showSuccessMessage("file saved in: "+directory);
             })
             .catch(async (error) => {
                 this.props.stopLoading();
@@ -78,13 +71,30 @@ class Rows extends Component{
         }
     }
 
+    createGamesList(){
+        if(this.props.content.length===0){
+            return <View style={[TableStyles.row]}><Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}>Empty</Text></View>;
+        }
+        else{
+            return this.props.content.map(game => this.renderRow(game));
+        }
+    }
+
+    editEntity(element){
+        this.props.editEntity("game",element.name);
+    }
+
     renderRow(rowData) {
         let backgroundColour = this.backgroundColourCheck(rowData);
 
         return (
             <View key={rowData.name}  style={[TableStyles.row]}>
                 <View style={[TableStyles.sectionHeader]}>
-                    <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {rowData.name}</Text>
+                    <TouchableHighlight
+                        style={{flex:1}}
+                        onPress={() => this.editEntity(rowData)}>
+                        <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {rowData.name}</Text>
+                    </TouchableHighlight>
                     <Checkbox elementName = {rowData.name} checked = {rowData.checked}/>
                 </View>
                 <View style={[TableStyles.row]}>
@@ -107,14 +117,15 @@ class Rows extends Component{
 
     render(){
         return(
-            <ListView styles={TableStyles.table}
-                      dataSource={this.state.dataSource.cloneWithRows(this.props.content)}
-                      enableEmptySections={true}
-                      renderHeader={(headerData) => <View style={TableStyles.header}>
-                          <Text style={[MainStyles.textStyle, {fontSize: 24}]}>Games list</Text>
-                          <MultiCheckbox/>
-                      </View>}
-                      renderRow={this.renderRow}/>
+            <View style={{marginBottom:35}}>
+                <View style={TableStyles.header}>
+                    <Text style={[MainStyles.textStyle, {fontSize: 24}]}>Games list</Text>
+                    <MultiCheckbox/>
+                </View>
+                <ScrollView styles={TableStyles.table}>
+                    {this.createGamesList()}
+                </ScrollView>
+            </View>
         );
     }
 }
@@ -126,7 +137,8 @@ function mapDispatchToProps( dispatch ) {
 function mapStateToProps( state ) {
     return {
         message: state.message,
-        loading: state.loading
+        loading: state.loading,
+        page: state.page
     };
 }
 

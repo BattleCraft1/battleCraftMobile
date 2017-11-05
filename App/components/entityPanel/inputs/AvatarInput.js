@@ -17,7 +17,6 @@ class AvatarInput extends React.Component{
         if(this.props.disabled)
             return;
         let pickerResult = await ImagePicker.launchImageLibraryAsync({
-            base64: true,
             allowsEditing: false
         });
 
@@ -25,8 +24,6 @@ class AvatarInput extends React.Component{
     };
 
     _handleImagePicked = async pickerResult => {
-        let uploadResponse, uploadResult;
-
         try {
             this.props.startLoading("Uploading image...");
             if (!pickerResult.cancelled) {
