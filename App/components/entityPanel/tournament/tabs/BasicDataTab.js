@@ -126,6 +126,15 @@ class BasicDataTab extends Component{
                 <ValidationErrorMessage
                     validationErrorMessage={this.props.validationErrors["playersOnTableCount"]}/>
 
+                <NumberInput
+                    value={this.props.entity["toursCount"]}
+                    fieldName="toursCount"
+                    changeEntity={this.props.changeEntity}
+                    disabled = {this.props.inputsDisabled}
+                    name="Tours count"/>
+                <ValidationErrorMessage
+                    validationErrorMessage={this.props.validationErrors["toursCount"]}/>
+
                 <NumberOutput
                     value={maxPlayers}
                     name="Max players:"/>

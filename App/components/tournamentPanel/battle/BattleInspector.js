@@ -12,10 +12,10 @@ import {
 
 import Modal from 'react-native-modal';
 
-import MainStyles from 'battleCraftMobile/App/Styles/MainStyles';
-import BattleInspectorStyle from 'battleCraftMobile/App/Styles/BattleInspectorStyle';
+import MainStyles from '../../../Styles/MainStyles';
+import BattleInspectorStyle from '../../../Styles/BattleInspectorStyle';
 
-import ListColours from "battleCraftMobile/App/Main/consts/ListColours"
+import ListColours from "../../../main/consts/ListColours"
 
 export default class BattleInspector extends Component {
 
