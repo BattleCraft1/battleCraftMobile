@@ -53,6 +53,12 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 15,
     },
+    buttonsPanelStyle:{
+        marginTop:20,
+        padding:3,
+        flexDirection:'row',
+        backgroundColor: BaseColours.background.mediumBrown
+    }
 });
 
 export default styles;

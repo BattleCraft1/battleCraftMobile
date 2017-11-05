@@ -31,7 +31,7 @@ const mapOfOperations = {
 };
 
 class OptionPanel extends Component {
-    groupOperationsInRows(operations){
+    groupOperationsThreeInRows(operations){
         let groupedOperations = [];
         for(let i=0;i<operations.length/3;i++){
             let operationsGroup = [];
@@ -47,10 +47,21 @@ class OptionPanel extends Component {
         return groupedOperations;
     }
 
-    groupOperationsInRow(operations){
-        return <View style={OptionsStyles.iconsRow} key={1}>
-            {operations}
-        </View>
+    groupOperationsFourInRows(operations){
+        let groupedOperations = [];
+        for(let i=0;i<operations.length/4;i++){
+            let operationsGroup = [];
+            if(i*4<operations.length) operationsGroup.push(operations[i*4]);
+            if(i*4+1<operations.length) operationsGroup.push(operations[i*4+1]);
+            if(i*4+2<operations.length) operationsGroup.push(operations[i*4+2]);
+            if(i*4+3<operations.length) operationsGroup.push(operations[i*4+3]);
+            groupedOperations.push(
+                <View style={OptionsStyles.iconsRow} key={i}>
+                    {operationsGroup}
+                </View>
+            )
+        }
+        return groupedOperations;
     }
 
     calculateLeftMargin(isPortrait, numberOfElements){
@@ -60,7 +71,8 @@ class OptionPanel extends Component {
             return (this.props.dimension.width - numberOfElementsInRow*elementWidth)/2;
         }
         else{
-            return (this.props.dimension.width -numberOfElements*elementWidth)/2;
+            let numberOfElementsInRow = 4;
+            return (this.props.dimension.width -numberOfElementsInRow*elementWidth)/2;
         }
     }
 
@@ -88,7 +100,7 @@ class OptionPanel extends Component {
         return (
             <Modal isVisible={this.props.isVisible} backdropOpacity={0.3}>
                 <View style={[OptionsStyles.modal,{marginLeft: this.calculateLeftMargin(isPortrait,operations.length)}]}>
-                    {isPortrait? this.groupOperationsInRows(operations):this.groupOperationsInRow(operations)}
+                    {isPortrait? this.groupOperationsThreeInRows(operations):this.groupOperationsFourInRows(operations)}
                     <Button
                         onPress={() => this.props.onClosePanel()}
                         title="Close"

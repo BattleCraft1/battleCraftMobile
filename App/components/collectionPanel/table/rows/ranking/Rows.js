@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    ListView,
+    ScrollView,
     Image,
     TouchableHighlight
 } from 'react-native';
@@ -23,18 +23,19 @@ class Rows extends Component{
         super(props);
 
         this.renderRow = this.renderRow.bind(this);
-
-        let dataSource = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1 !== r2,
-        });
-
-        this.state = {
-            dataSource: dataSource.cloneWithRows(['Placeholder'])
-        };
     }
 
     showUser(name){
         this.props.getEntity("user",name);
+    }
+
+    createRanking(){
+        if(this.props.content.length===0){
+            return <View style={[TableStyles.row]}><Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}>Empty</Text></View>;
+        }
+        else{
+            return this.props.content.map((user,index) => this.renderRow(index+1,user));
+        }
     }
 
     renderRow(index, rowData) {
@@ -81,13 +82,14 @@ class Rows extends Component{
 
     render(){
         return(
-            <ListView styles={TableStyles.table}
-                      dataSource={this.state.dataSource.cloneWithRows(this.props.content)}
-                      enableEmptySections={true}
-                      renderHeader={(headerData) => <View style={TableStyles.header}>
-                          <Text numberOfLines={1} style={[MainStyles.textStyle, {fontSize: 24}]}>{findGameName(this.props.pageRequest.searchCriteria)}</Text>
-                      </View>}
-                      renderRow={(rowData, sectionID, rowID) => this.renderRow(parseInt(rowID)+1,rowData)}/>
+            <View style={{marginBottom:35}}>
+                <View style={TableStyles.header}>
+                    <Text numberOfLines={1} style={[MainStyles.textStyle, {fontSize: 24}]}>{findGameName(this.props.pageRequest.searchCriteria)}</Text>
+                </View>
+                <ScrollView styles={TableStyles.table}>
+                    {this.createRanking()}
+                </ScrollView>
+            </View>
         );
     }
 }
@@ -99,7 +101,8 @@ function mapDispatchToProps( dispatch ) {
 
 function mapStateToProps( state ) {
     return {
-        pageRequest: state.pageRequest
+        pageRequest: state.pageRequest,
+        page: state.page
     };
 }
 

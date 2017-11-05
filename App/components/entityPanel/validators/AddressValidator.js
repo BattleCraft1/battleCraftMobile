@@ -2,7 +2,7 @@ import {provinces} from "../../../main/consts/provincesWithoutEmptyOption";
 
 export default (entity,fieldErrors) => {
 
-    if(provinces.indexOf(entity.province)===-1)
+    if(provinces.hasOwnProperty(entity.province)===-1)
         fieldErrors.provinces = "Invalid province name";
 
     if(!new RegExp("^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]{1,39}$").test(entity.city))
