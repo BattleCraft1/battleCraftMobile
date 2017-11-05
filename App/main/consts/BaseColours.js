@@ -15,7 +15,8 @@ const BaseColours={
         right: '#4b371b',
     },
     misc:{
-        deepRed: '#721515'
+        deepRed: '#721515',
+        black: '#000000'
     }
 };
 

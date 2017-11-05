@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CollectionPanel from '../collectionPanel/CollectionPanel'
 import AccountPanel from '../account/AccountPanel'
 import SplashScreen from '../commonComponents/SplashScreen'
+import TournamentPanel from '../tournamentPanel/TournamentPanel'
 
 export default class Navigator extends Component {
 
@@ -21,6 +22,9 @@ export default class Navigator extends Component {
                 break;
             case 'My account':
                 return <AccountPanel/>;
+                break;
+            case 'Tournament battles':
+                return <TournamentPanel/>;
                 break;
             default:
                 return <SplashScreen/>;
