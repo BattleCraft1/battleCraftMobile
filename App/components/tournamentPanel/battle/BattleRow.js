@@ -9,12 +9,11 @@ import {
 
 } from 'react-native';
 
-import MainStyles from 'battleCraftMobile/App/Styles/MainStyles'
-import BattleStyle from 'battleCraftMobile/App/Styles/BattleStyle'
+import MainStyles from '../../../Styles/MainStyles'
+import BattleStyle from '../../../Styles/BattleStyle'
+import ListColours from '../../../main/consts/ListColours'
 
-import ListColours from 'battleCraftMobile/App/Main/consts/ListColours'
-
-export default class Battle extends Component {
+export default class BattleRow extends Component {
 
 
     constructor(props) {

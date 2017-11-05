@@ -2,6 +2,7 @@ import checkIfObjectIsNotEmpty from "../../../main/functions/checkIfObjectIsNotE
 import validateAddress from './AddressValidator'
 import getDatesDifferenceInDays from "../../../main/functions/getDatesDifferenceInDays";
 import dateFormat from 'dateformat';
+import {factorial} from "../../../main/functions/factorial"
 
 export default (entity) => {
     let validationErrors = {};
@@ -20,6 +21,11 @@ export default (entity) => {
         if(entity.tablesCount<1 || entity.tablesCount>15)
             fieldErrors.tablesCount = "Tables count must be between 1 and 15";
     }
+
+    let maxPlayers = entity.playersOnTableCount*entity.tablesCount;
+    let maxToursNumber = factorial(maxPlayers-1)/factorial(maxPlayers-2);
+    if(entity.toursCount>maxToursNumber)
+        fieldErrors.toursCount = "Max tours number in this tournament is: "+maxToursNumber;
 
     if(entity.dateOfStart===undefined || getDatesDifferenceInDays(new Date(),new Date(entity.dateOfStart))<0)
         fieldErrors.dateOfStart = "You cannot start tournament at "+dateFormat(entity.dateOfStart,"yyyy-mm-dd HH:MM")+" because this date is outdated";
