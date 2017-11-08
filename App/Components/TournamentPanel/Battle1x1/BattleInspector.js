@@ -11,10 +11,12 @@ import {
 } from 'react-native';
 
 import Modal from 'react-native-modal';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import MainStyles from 'battleCraftMobile/App/Styles/MainStyles';
 import BattleInspectorStyle from 'battleCraftMobile/App/Styles/BattleInspectorStyle';
 
+import BaseColours from "battleCraftMobile/App/Main/consts/BaseColours"
 import ListColours from "battleCraftMobile/App/Main/consts/ListColours"
 
 export default class BattleInspector extends Component {
@@ -48,37 +50,47 @@ export default class BattleInspector extends Component {
                     <View style={[BattleInspectorStyle.battleHeader, MainStyles.borderStyle]}><Text style={[MainStyles.textStyle, {fontSize: 24}]}>Battle name</Text></View>
                     <View style={BattleInspectorStyle.playerCard}>
                         <View style={[BattleInspectorStyle.playerHeader, MainStyles.borderStyle]}>
+                            <Icon style={{padding:3}} name={"bookmark"} size={24} color={BaseColours.misc.greyBlue}/>
                             <Text style={MainStyles.bigWhiteStyle}>{this.props.battleData.player1}</Text>
                         </View>
                         <View style={BattleInspectorStyle.infoCard}>
                             <Image style={BattleInspectorStyle.avatar} source={require("battleCraftMobile/img/userLogoDef.png")}/>
                             <View style={BattleInspectorStyle.dataColumn}>
-                                <View style={BattleInspectorStyle.dataRow}><Text style={MainStyles.smallWhiteStyle}>Battle points</Text></View>
+                                <View style={BattleInspectorStyle.dataRow}><Text style={MainStyles.smallWhiteStyle}>Full name:</Text></View>
+                                <View style={BattleInspectorStyle.dataRow}><Text style={MainStyles.smallWhiteStyle}>askjdhajksdhkasdhkjkj</Text></View>
                                 <View style={[BattleInspectorStyle.dataRow, {backgroundColor: scoreBackground.P1}]}>
-                                    <Text style={MainStyles.smallWhiteStyle}>{this.props.battleData.score1}</Text>
+                                    <Text style={MainStyles.smallWhiteStyle}>Battle points: {this.props.battleData.score1}</Text>
                                 </View>
-                                <View style={BattleInspectorStyle.dataRow}><Text style={MainStyles.smallWhiteStyle}>Total points</Text></View>
                                 <View style={[BattleInspectorStyle.dataRow, {backgroundColor: totalBackground.P1}]}>
-                                    <Text style={MainStyles.smallWhiteStyle}>{this.props.battleData.total1}</Text>
+                                    <Text style={MainStyles.smallWhiteStyle}>Total points: {this.props.battleData.total1}</Text>
                                 </View>
                             </View>
                         </View>
                     </View>
-                    <Image style={{alignSelf:'center', width: 100, height:100}} source={require("battleCraftMobile/img/vsIcon.png")}/>
+
+                    <View style={[BattleInspectorStyle.vsCard, MainStyles.borderStyle]}>
+                        <Image style={{alignSelf:'center', width:60, height:60}} source={require("battleCraftMobile/img/vsIcon.png")}/>
+                        <View>
+                            <View style={BattleInspectorStyle.dataRow}><Text style={MainStyles.bigWhiteStyle}>Table number:</Text></View>
+                            <View style={[BattleInspectorStyle.dataRow,{borderBottomWidth:0}]}><Text style={MainStyles.bigWhiteStyle}>{this.props.battleData.table}</Text></View>
+                        </View>
+                    </View>
+
                     <View style={BattleInspectorStyle.playerCard}>
                         <View style={[BattleInspectorStyle.playerHeader, MainStyles.borderStyle]}>
+                            <Icon style={{padding:3}} name={"bookmark"} size={24} color={BaseColours.misc.deepRed}/>
                             <Text  style={MainStyles.bigWhiteStyle}>{this.props.battleData.player2}</Text>
                         </View>
                         <View style={BattleInspectorStyle.infoCard}>
                             <Image style={BattleInspectorStyle.avatar} source={require("battleCraftMobile/img/userLogoDef.png")}/>
                             <View style={BattleInspectorStyle.dataColumn}>
-                                <View style={BattleInspectorStyle.dataRow}><Text style={MainStyles.smallWhiteStyle}>Battle points</Text></View>
+                                <View style={BattleInspectorStyle.dataRow}><Text style={MainStyles.smallWhiteStyle}>Full name:</Text></View>
+                                <View style={BattleInspectorStyle.dataRow}><Text style={MainStyles.smallWhiteStyle}>askjdhajksdhkasdhkjkj</Text></View>
                                 <View style={[BattleInspectorStyle.dataRow, {backgroundColor: scoreBackground.P2}]}>
-                                    <Text style={MainStyles.smallWhiteStyle}>{this.props.battleData.score2}</Text>
+                                    <Text style={MainStyles.smallWhiteStyle}>Battle points: {this.props.battleData.score2}</Text>
                                 </View>
-                                <View style={BattleInspectorStyle.dataRow}><Text style={MainStyles.smallWhiteStyle}>Total points</Text></View>
                                 <View style={[BattleInspectorStyle.dataRow, {backgroundColor: totalBackground.P2}]}>
-                                    <Text style={MainStyles.smallWhiteStyle}>{this.props.battleData.total2}</Text>
+                                    <Text style={MainStyles.smallWhiteStyle}>Total points: {this.props.battleData.total2}</Text>
                                 </View>
                             </View>
                         </View>

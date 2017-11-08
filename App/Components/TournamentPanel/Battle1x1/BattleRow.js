@@ -8,10 +8,12 @@ import {
     Image,
 
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import MainStyles from 'battleCraftMobile/App/Styles/MainStyles'
 import BattleStyle from 'battleCraftMobile/App/Styles/BattleStyle'
 
+import BaseColours from "battleCraftMobile/App/Main/consts/BaseColours"
 import ListColours from 'battleCraftMobile/App/Main/consts/ListColours'
 
 export default class Battle extends Component {
@@ -42,10 +44,11 @@ export default class Battle extends Component {
         return (
             <View style={BattleStyle.battleWindow}>
                 <View style={[BattleStyle.playerHeader, MainStyles.borderStyle]}>
+                    <Icon style={{padding:3}} name={"bookmark"} size={24} color={BaseColours.misc.greyBlue}/>
                     <Text style={[BattleStyle.player1Text, MainStyles.bigWhiteStyle]}>{rowData.player1}</Text>
                 </View>
                 <View style={BattleStyle.scoreRow}>
-                    <View style={BattleStyle.avatarContener}>
+                    <View style={[BattleStyle.avatarContener, {backgroundColor:BaseColours.misc.greyBlue}]}>
                         <Image style={BattleStyle.avatarSize} source={require("battleCraftMobile/img/userLogoDef.png")}/>
                     </View>
                     <View style={BattleStyle.scoreContainer}>
@@ -57,12 +60,13 @@ export default class Battle extends Component {
                             <Text style={[MainStyles.textStyle,{fontSize: 32}]}>{rowData.score2}</Text>
                         </View>
                     </View>
-                    <View style={BattleStyle.avatarContener}>
+                    <View style={[BattleStyle.avatarContener, {backgroundColor:BaseColours.misc.deepRed}]}>
                         <Image style={BattleStyle.avatarSize} source={require("battleCraftMobile/img/userLogoDef.png")}/>
                     </View>
                 </View>
                 <View style={[BattleStyle.playerHeader, MainStyles.borderStyle]}>
                     <Text style={[BattleStyle.player2Text, MainStyles.bigWhiteStyle]}>{rowData.player2}</Text>
+                    <Icon style={{padding:3}} name={"bookmark"} size={24} color={BaseColours.misc.deepRed}/>
                 </View>
             </View>);
     }

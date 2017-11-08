@@ -37,6 +37,14 @@ const styles = StyleSheet.create({
         margin:3,
         padding:5
     },
+    vsCard:{
+        backgroundColor: BaseColours.misc.deepRed,
+        flexDirection:'row',
+        alignSelf: 'center',
+        borderWidth:3,
+        margin:3,
+        padding:5
+    },
 
     infoCard:{
         flex:1,
@@ -56,18 +64,32 @@ const styles = StyleSheet.create({
         borderBottomWidth:3,
         padding:3,
     },
+    dataRow2x2:{
+        backgroundColor: BaseColours.background.lightBrown,
+        borderColor: BaseColours.border.top,
+        borderWidth:3,
+        padding:3,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 
     playerHeader:{
+        flex:1,
+        flexDirection:'row',
         backgroundColor: BaseColours.background.mediumBrown,
+        justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 3,
         padding:2,
-
     },
 
     avatar:{
         width:135,
         height:135,
+    },
+    avatar2x2:{
+        width:68,
+        height:68,
     }
 
 });
