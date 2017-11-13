@@ -29,18 +29,31 @@ export function closeEntityPanel() {
     }
 }
 
-export function showEntityPanel(isShow) {
+export function showEntityPanel() {
     return {
-        type: types.SHOW_ENTITY_PANEL,
-        isShow: isShow
+        type: types.SHOW_ENTITY_PANEL
     }
 }
 
-export function setRelatedEntity(relatedEntityNames,relatedEntityType,relatedEntityCriteria){
+export function setRelatedEntity(relatedEntities,relatedEntityType,relatedEntityCriteria,relatedEntityLimit){
     return {
         type: types.SET_RELATED_ENTITY,
-        relatedEntityNames: relatedEntityNames,
+        relatedEntities: relatedEntities,
         relatedEntityType: relatedEntityType,
-        relatedEntityCriteria: relatedEntityCriteria
+        relatedEntityCriteria: relatedEntityCriteria,
+        relatedEntityLimit: relatedEntityLimit
+    }
+}
+
+export function cancelEntityPanelOperation() {
+    return {
+        type: types.CANCEL_ENTITY_PANEL_OPERATION
+    }
+}
+
+export function changeRelatedEntities(relatedEntities) {
+    return {
+        type: types.CHANGE_RELATED_ENTITIES,
+        relatedEntities: relatedEntities
     }
 }

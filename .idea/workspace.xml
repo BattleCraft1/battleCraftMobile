@@ -2,16 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9f51dc5f-72f7-4a8a-b51f-77bd6c1f86dc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/App/main/functions/factorial.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/OrganizedTournamentsTable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/OrganizedTournamentsTableOutput.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/ParticipatedTournamentsTable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/ParticipatedTournamentsTableOutput.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/row/DuelTournamentTableRow.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/row/EmptySecondPlayerInGroupRow.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/row/EmptyTournamentTableRow.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/row/SecondPlayerDataInGroupTournamentRow.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/row/TournamentDataInGroupTournamentRow.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Styles/BattleInspectorStyle.js" afterPath="$PROJECT_DIR$/App/Styles/BattleInspectorStyle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Styles/BattleStyle.js" afterPath="$PROJECT_DIR$/App/Styles/BattleStyle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Styles/TournamentStyles.js" afterPath="$PROJECT_DIR$/App/Styles/TournamentStyles.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/components/entityPanel/tournament/Panel.js" afterPath="$PROJECT_DIR$/App/components/entityPanel/tournament/Panel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/components/entityPanel/tournament/tabs/BasicDataTab.js" afterPath="$PROJECT_DIR$/App/components/entityPanel/tournament/tabs/BasicDataTab.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/components/collectionPanel/CollectionPanel.js" afterPath="$PROJECT_DIR$/App/components/collectionPanel/CollectionPanel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/components/collectionPanel/buttons/CancelInviteButton.js" afterPath="$PROJECT_DIR$/App/components/collectionPanel/buttons/CancelInviteButton.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/components/collectionPanel/buttons/InviteButton.js" afterPath="$PROJECT_DIR$/App/components/collectionPanel/buttons/InviteButton.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/components/collectionPanel/searchPanel/SearchPanel.js" afterPath="$PROJECT_DIR$/App/components/collectionPanel/searchPanel/SearchPanel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/components/collectionPanel/table/rows/game/Rows.js" afterPath="$PROJECT_DIR$/App/components/collectionPanel/table/rows/game/Rows.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/components/collectionPanel/table/rows/tournament/Rows.js" afterPath="$PROJECT_DIR$/App/components/collectionPanel/table/rows/tournament/Rows.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/components/collectionPanel/table/rows/user/Rows.js" afterPath="$PROJECT_DIR$/App/components/collectionPanel/table/rows/user/Rows.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/components/commonComponents/checkBox/Checkbox.js" afterPath="$PROJECT_DIR$/App/components/commonComponents/checkBox/Checkbox.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/components/commonComponents/checkBox/MultiCheckbox.js" afterPath="$PROJECT_DIR$/App/components/commonComponents/checkBox/MultiCheckbox.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/components/entityPanel/user/Panel.js" afterPath="$PROJECT_DIR$/App/components/entityPanel/user/Panel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/components/entityPanel/user/tabs/OrganizerTab.js" afterPath="$PROJECT_DIR$/App/components/entityPanel/user/tabs/OrganizerTab.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/components/entityPanel/user/tabs/PlayerTab.js" afterPath="$PROJECT_DIR$/App/components/entityPanel/user/tabs/PlayerTab.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/components/entityPanel/validators/TournamentValidator.js" afterPath="$PROJECT_DIR$/App/components/entityPanel/validators/TournamentValidator.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/components/tournamentPanel/battle/BattleInspector.js" afterPath="$PROJECT_DIR$/App/components/tournamentPanel/battle/BattleInspector.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/components/tournamentPanel/battle/BattleRow.js" afterPath="$PROJECT_DIR$/App/components/tournamentPanel/battle/BattleRow.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/redux/actions/entityPanel.js" afterPath="$PROJECT_DIR$/App/redux/actions/entityPanel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/redux/reducers/entityPanel.js" afterPath="$PROJECT_DIR$/App/redux/reducers/entityPanel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/redux/reducers/page.js" afterPath="$PROJECT_DIR$/App/redux/reducers/page.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/redux/types/entityPanel.js" afterPath="$PROJECT_DIR$/App/redux/types/entityPanel.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -25,69 +42,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TournamentValidator.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/App/components/entityPanel/validators/TournamentValidator.js">
+      <file leaf-file-name="Panel.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/App/components/entityPanel/user/Panel.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="242">
+              <caret line="139" column="17" lean-forward="true" selection-start-line="139" selection-start-column="17" selection-end-line="139" selection-end-column="17" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrganizerTab.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/App/components/entityPanel/user/tabs/OrganizerTab.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="39" column="53" lean-forward="true" selection-start-line="39" selection-start-column="53" selection-end-line="39" selection-end-column="53" />
+              <folding>
+                <element signature="e#47#88#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrganizedTournamentsTable.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/OrganizedTournamentsTable.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="4" column="18" lean-forward="false" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+              <caret line="16" column="35" lean-forward="true" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Panel.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/App/components/entityPanel/tournament/Panel.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="80" column="32" lean-forward="false" selection-start-line="80" selection-start-column="32" selection-end-line="80" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BattleRow.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/App/components/tournamentPanel/battle/BattleRow.js">
+      <file leaf-file-name="Rows.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/App/components/collectionPanel/table/rows/game/Rows.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
-              <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BattleInspector.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/App/components/tournamentPanel/battle/BattleInspector.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="22" lean-forward="true" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ListColours.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/App/main/consts/ListColours.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="34" column="38" lean-forward="true" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BattleStyle.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/App/Styles/BattleStyle.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="e#48#94#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -103,7 +97,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getPage</find>
       <find>render</find>
       <find>addVisible</find>
       <find>showErrorMessageBox</find>
@@ -126,17 +119,21 @@
       <find>startInviteParticipants</find>
       <find>GestureRecognizer</find>
       <find>console.log</find>
-      <find>Image</find>
       <find>&amp;${new Date().getTime()}</find>
       <find>/get/user/avatar</find>
       <find>borderTopColor</find>
       <find>Button</find>
       <find>showSuccessMessageBox</find>
       <find>/Main/</find>
+      <find>Image</find>
+      <find>this.set</find>
     </findStrings>
     <replaceStrings>
       <replace>EntityPanelStyle</replace>
     </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/App/main</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -144,35 +141,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/App/components/entityPanel/user/tabs/AddressTab.js" />
-        <option value="$PROJECT_DIR$/App/components/entityPanel/tournament/navigation/Navigation.js" />
-        <option value="$PROJECT_DIR$/App/components/entityPanel/EntityPanel.js" />
-        <option value="$PROJECT_DIR$/App/components/entityPanel/AdditionalEntityPanel.js" />
-        <option value="$PROJECT_DIR$/App/components/entityPanel/user/navigation/Navigation.js" />
-        <option value="$PROJECT_DIR$/App/components/entityPanel/user/tabs/PlayerTab.js" />
-        <option value="$PROJECT_DIR$/App/redux/reducers/entityPanel.js" />
-        <option value="$PROJECT_DIR$/App/components/collectionPanel/table/rows/GestureRecognizer.js" />
-        <option value="$PROJECT_DIR$/App/components/collectionPanel/table/CollectionList.js" />
-        <option value="$PROJECT_DIR$/App/components/navbar/dropdown/Dropdown.js" />
-        <option value="$PROJECT_DIR$/App/redux/types/page.js" />
-        <option value="$PROJECT_DIR$/App/redux/actions/page.js" />
-        <option value="$PROJECT_DIR$/App/components/collectionPanel/buttons/CancelInviteButton.js" />
-        <option value="$PROJECT_DIR$/App/components/collectionPanel/buttons/InviteButton.js" />
-        <option value="$PROJECT_DIR$/App/redux/reducers/messages.js" />
-        <option value="$PROJECT_DIR$/App/main/functions/base64ToBlob.js" />
-        <option value="$PROJECT_DIR$/App/components/entityPanel/tournament/tabs/OrganizersTab.js" />
-        <option value="$PROJECT_DIR$/App/components/entityPanel/tournament/tabs/ParticipantsTab.js" />
-        <option value="$PROJECT_DIR$/App/components/entityPanel/user/Panel.js" />
-        <option value="$PROJECT_DIR$/App/components/entityPanel/user/tabs/PersonalDataTab.js" />
         <option value="$PROJECT_DIR$/App/Styles/TableStyles.js" />
         <option value="$PROJECT_DIR$/App/Styles/EntityPanelInputsStyles.js" />
         <option value="$PROJECT_DIR$/App/main/consts/provincesWithoutEmptyOption.js" />
         <option value="$PROJECT_DIR$/App/components/entityPanel/validators/AddressValidator.js" />
-        <option value="$PROJECT_DIR$/App/components/entityPanel/user/tabs/OrganizerTab.js" />
-        <option value="$PROJECT_DIR$/App/components/collectionPanel/CollectionPanel.js" />
         <option value="$PROJECT_DIR$/App/Styles/MainStyles.js" />
-        <option value="$PROJECT_DIR$/App/components/commonComponents/checkBox/Checkbox.js" />
-        <option value="$PROJECT_DIR$/App/components/commonComponents/checkBox/MultiCheckbox.js" />
         <option value="$PROJECT_DIR$/App/components/entityPanel/game/GameDataTab.js" />
         <option value="$PROJECT_DIR$/App/components/entityPanel/inputs/AvatarInput.js" />
         <option value="$PROJECT_DIR$/App/components/entityPanel/validators/GameValidator.js" />
@@ -182,10 +155,6 @@
         <option value="$PROJECT_DIR$/App/components/collectionPanel/optionPanel/operations/operationButton/OperationButton.js" />
         <option value="$PROJECT_DIR$/App/Styles/OptionsStyles.js" />
         <option value="$PROJECT_DIR$/App/components/collectionPanel/optionPanel/OptionPanel.js" />
-        <option value="$PROJECT_DIR$/App/redux/reducers/page.js" />
-        <option value="$PROJECT_DIR$/App/components/collectionPanel/table/rows/tournament/Rows.js" />
-        <option value="$PROJECT_DIR$/App/components/collectionPanel/table/rows/user/Rows.js" />
-        <option value="$PROJECT_DIR$/App/components/collectionPanel/table/rows/game/Rows.js" />
         <option value="$PROJECT_DIR$/App/components/collectionPanel/table/rows/ranking/Rows.js" />
         <option value="$PROJECT_DIR$/App/main/AppContent.js" />
         <option value="$PROJECT_DIR$/App/components/navigator/Navigator.js" />
@@ -194,7 +163,35 @@
         <option value="$PROJECT_DIR$/App/components/tournamentPanel/battle/BattleRow.js" />
         <option value="$PROJECT_DIR$/App/components/tournamentPanel/battle/BattleInspector.js" />
         <option value="$PROJECT_DIR$/App/main/functions/factorial.js" />
+        <option value="$PROJECT_DIR$/App/redux/types/entityPanel.js" />
+        <option value="$PROJECT_DIR$/App/components/collectionPanel/searchPanel/SearchPanel.js" />
+        <option value="$PROJECT_DIR$/App/components/collectionPanel/table/rows/user/Rows.js" />
+        <option value="$PROJECT_DIR$/App/components/collectionPanel/table/rows/tournament/Rows.js" />
+        <option value="$PROJECT_DIR$/App/components/commonComponents/checkBox/MultiCheckbox.js" />
         <option value="$PROJECT_DIR$/App/components/entityPanel/validators/TournamentValidator.js" />
+        <option value="$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/row/GroupTournamentTableRow.js" />
+        <option value="$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/row/SecondPlayerDataInGroupTournament.js" />
+        <option value="$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/row/TournamentDataInGroupTournament.js" />
+        <option value="$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/ParticipatedTournamentsTableOutput.js" />
+        <option value="$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/OrganizedTournamentsTableOutput.js" />
+        <option value="$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/row/EmptyTournamentTableRow.js" />
+        <option value="$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/row/DuelTournamentTableRow.js" />
+        <option value="$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/row/TournamentDataInGroupTournamentRow.js" />
+        <option value="$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/row/SecondPlayerDataInGroupTournamentRow.js" />
+        <option value="$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/row/EmptySecondPlayerInGroupRow.js" />
+        <option value="$PROJECT_DIR$/App/components/collectionPanel/CollectionPanel.js" />
+        <option value="$PROJECT_DIR$/App/components/commonComponents/checkBox/Checkbox.js" />
+        <option value="$PROJECT_DIR$/App/redux/reducers/page.js" />
+        <option value="$PROJECT_DIR$/App/components/collectionPanel/buttons/CancelInviteButton.js" />
+        <option value="$PROJECT_DIR$/App/components/collectionPanel/buttons/InviteButton.js" />
+        <option value="$PROJECT_DIR$/App/redux/actions/entityPanel.js" />
+        <option value="$PROJECT_DIR$/App/redux/reducers/entityPanel.js" />
+        <option value="$PROJECT_DIR$/App/components/entityPanel/user/tabs/PlayerTab.js" />
+        <option value="$PROJECT_DIR$/App/components/entityPanel/user/Panel.js" />
+        <option value="$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/ParticipatedTournamentsTable.js" />
+        <option value="$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/OrganizedTournamentsTable.js" />
+        <option value="$PROJECT_DIR$/App/components/collectionPanel/table/rows/game/Rows.js" />
+        <option value="$PROJECT_DIR$/App/components/entityPanel/user/tabs/OrganizerTab.js" />
       </list>
     </option>
   </component>
@@ -238,6 +235,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -261,15 +259,41 @@
               <item name="battleCraftMobile" type="462c0819:PsiDirectoryNode" />
               <item name="App" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="tournamentPanel" type="462c0819:PsiDirectoryNode" />
+              <item name="collectionPanel" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="battleCraftMobile" type="b2602c69:ProjectViewProjectNode" />
               <item name="battleCraftMobile" type="462c0819:PsiDirectoryNode" />
               <item name="App" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="tournamentPanel" type="462c0819:PsiDirectoryNode" />
-              <item name="battle" type="462c0819:PsiDirectoryNode" />
+              <item name="collectionPanel" type="462c0819:PsiDirectoryNode" />
+              <item name="table" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="battleCraftMobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="battleCraftMobile" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="collectionPanel" type="462c0819:PsiDirectoryNode" />
+              <item name="table" type="462c0819:PsiDirectoryNode" />
+              <item name="rows" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="battleCraftMobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="battleCraftMobile" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="collectionPanel" type="462c0819:PsiDirectoryNode" />
+              <item name="table" type="462c0819:PsiDirectoryNode" />
+              <item name="rows" type="462c0819:PsiDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="battleCraftMobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="battleCraftMobile" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="entityPanel" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="battleCraftMobile" type="b2602c69:ProjectViewProjectNode" />
@@ -281,15 +305,27 @@
               <item name="battleCraftMobile" type="b2602c69:ProjectViewProjectNode" />
               <item name="battleCraftMobile" type="462c0819:PsiDirectoryNode" />
               <item name="App" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="functions" type="462c0819:PsiDirectoryNode" />
+              <item name="redux" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="battleCraftMobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="battleCraftMobile" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
+              <item name="redux" type="462c0819:PsiDirectoryNode" />
+              <item name="actions" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="battleCraftMobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="battleCraftMobile" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
+              <item name="redux" type="462c0819:PsiDirectoryNode" />
+              <item name="reducers" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -366,28 +402,29 @@
       <workItem from="1509814699051" duration="56000" />
       <workItem from="1509836491927" duration="3906000" />
       <workItem from="1509841585932" duration="52000" />
-      <workItem from="1509911011554" duration="2061000" />
+      <workItem from="1509911011554" duration="2655000" />
+      <workItem from="1510525129818" duration="13250000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="283218000" />
+    <option name="totallyTimeSpent" value="297062000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="132" width="1368" height="741" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22254759" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26793557" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -409,174 +446,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/App/main/consts/kindsOfSort.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/main/consts/provinces.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="4" lean-forward="true" selection-start-line="2" selection-start-column="4" selection-end-line="10" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/main/consts/status.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/main/consts/tournamentType.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/main/consts/tournamentTypeWithoutEmptyOption.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/user/tabs/AddressTab.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="33" column="36" lean-forward="false" selection-start-line="33" selection-start-column="36" selection-end-line="33" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/main/consts/provincesWithoutEmptyOption.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="1" lean-forward="false" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/validators/UserValidator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/validators/AddressValidator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="1" lean-forward="true" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/user/tabs/OrganizerTab.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="98" column="56" lean-forward="false" selection-start-line="98" selection-start-column="56" selection-end-line="98" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/tournament/tabs/OrganizersTab.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="88" column="48" lean-forward="false" selection-start-line="88" selection-start-column="48" selection-end-line="88" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/collectionPanel/buttons/AddEntityButton.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Styles/MainStyles.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="55" column="23" lean-forward="true" selection-start-line="55" selection-start-column="23" selection-end-line="55" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/user/tabs/PlayerTab.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="80" column="47" lean-forward="true" selection-start-line="80" selection-start-column="47" selection-end-line="80" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/inputs/DateInput.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-180">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/inputs/NumberInput.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="105" lean-forward="false" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/expo/src/Expo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="146" column="31" lean-forward="false" selection-start-line="146" selection-start-column="31" selection-end-line="146" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/expo/src/DocumentPicker.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="38" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/validators/GameValidator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="5" lean-forward="false" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/user/Panel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2595">
-          <caret line="201" column="20" lean-forward="false" selection-start-line="201" selection-start-column="20" selection-end-line="201" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/inputs/AvatarInput.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="55" column="8" lean-forward="true" selection-start-line="55" selection-start-column="8" selection-end-line="72" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/user/tabs/PersonalDataTab.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="40" column="43" lean-forward="false" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/main/consts/serverName.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/game/tabs/GameDataTab.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-390">
-          <caret line="9" column="48" lean-forward="false" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/App/components/entityPanel/inputs/GameRulesInput.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -605,20 +474,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/commonComponents/checkBox/Checkbox.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="34" column="14" lean-forward="true" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/redux/reducers/page.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="32" column="100" lean-forward="false" selection-start-line="32" selection-start-column="100" selection-end-line="32" selection-end-column="100" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/App/components/collectionPanel/optionPanel/OptionPanel.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -626,105 +481,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/commonComponents/checkBox/MultiCheckbox.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="46" column="42" lean-forward="true" selection-start-line="46" selection-start-column="42" selection-end-line="46" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/collectionPanel/CollectionPanel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="237" column="32" lean-forward="false" selection-start-line="237" selection-start-column="32" selection-end-line="237" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/collectionPanel/table/CollectionList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="16" column="26" lean-forward="true" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/collectionPanel/table/rows/tournament/Rows.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="112" column="17" lean-forward="false" selection-start-line="112" selection-start-column="17" selection-end-line="112" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/collectionPanel/table/rows/user/Rows.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1575">
-          <caret line="125" column="17" lean-forward="false" selection-start-line="125" selection-start-column="17" selection-end-line="125" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/navigator/Navigator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/main/AppContent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="73" column="48" lean-forward="true" selection-start-line="73" selection-start-column="48" selection-end-line="73" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/collectionPanel/table/rows/ranking/Rows.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/collectionPanel/table/rows/game/Rows.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="119" column="43" lean-forward="false" selection-start-line="119" selection-start-column="43" selection-end-line="119" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/EntityPanel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="54" column="12" lean-forward="true" selection-start-line="54" selection-start-column="12" selection-end-line="54" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/tournament/Panel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="80" column="32" lean-forward="false" selection-start-line="80" selection-start-column="32" selection-end-line="80" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -733,7 +493,7 @@
         <state relative-caret-position="602">
           <caret line="128" column="25" lean-forward="false" selection-start-line="128" selection-start-column="25" selection-end-line="128" selection-end-column="25" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -742,9 +502,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="18" column="30" lean-forward="false" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="36" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -753,8 +510,8 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#48#94#0" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
+            <element signature="e#48#94#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -770,9 +527,9 @@
     <entry file="file://$PROJECT_DIR$/App/components/tournamentPanel/battle/BattleRow.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
-          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -787,19 +544,339 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/App/components/tournamentPanel/battle/BattleInspector.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="22" lean-forward="true" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+        <state relative-caret-position="120">
+          <caret line="10" column="22" lean-forward="false" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-720">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#26#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/tournament/Panel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="37" column="0" lean-forward="true" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/redux/types/entityPanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="65" lean-forward="false" selection-start-line="7" selection-start-column="65" selection-end-line="7" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/collectionPanel/searchPanel/SearchPanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="77" column="23" lean-forward="false" selection-start-line="77" selection-start-column="23" selection-end-line="77" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#26#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/collectionPanel/table/rows/ranking/Rows.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/collectionPanel/table/CollectionList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="61" column="19" lean-forward="false" selection-start-line="61" selection-start-column="19" selection-end-line="61" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/collectionPanel/table/rows/user/Rows.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="80" column="37" lean-forward="false" selection-start-line="80" selection-start-column="37" selection-end-line="80" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/collectionPanel/table/rows/tournament/Rows.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="81" column="37" lean-forward="false" selection-start-line="81" selection-start-column="37" selection-end-line="81" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/validators/UserValidator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/App/components/entityPanel/validators/TournamentValidator.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="18" lean-forward="false" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+        <state relative-caret-position="465">
+          <caret line="59" column="93" lean-forward="false" selection-start-line="59" selection-start-column="93" selection-end-line="59" selection-end-column="93" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/outputs/EmptyRow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/ParticipatedTournamentsTableOutput.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="15" column="21" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="68" selection-end-column="1" />
+          <folding>
+            <element signature="e#47#88#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/row/GroupTournamentTableRow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/OrganizedTournamentsTableOutput.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="20" column="31" lean-forward="false" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+          <folding>
+            <element signature="e#47#88#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/react-native/Libraries/react-native/react-native-implementation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="25" column="6" lean-forward="false" selection-start-line="25" selection-start-column="6" selection-end-line="25" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/row/EmptyTournamentTableRow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="22" lean-forward="true" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/row/TournamentDataInGroupTournamentRow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="30" column="79" lean-forward="false" selection-start-line="30" selection-start-column="79" selection-end-line="30" selection-end-column="79" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/row/DuelTournamentTableRow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="30" column="69" lean-forward="false" selection-start-line="30" selection-start-column="63" selection-end-line="30" selection-end-column="69" />
+          <folding>
+            <element signature="e#0#41#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/tournament/tabs/ParticipantsTab.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-750">
+          <caret line="9" column="4" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="10" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/row/SecondPlayerDataInGroupTournamentRow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="38" column="37" lean-forward="false" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/row/EmptySecondPlayerInGroupRow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="38" column="47" lean-forward="false" selection-start-line="38" selection-start-column="47" selection-end-line="38" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#41#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/commonComponents/checkBox/MultiCheckbox.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-507">
+          <caret line="41" column="56" lean-forward="true" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/commonComponents/checkBox/Checkbox.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1080">
+          <caret line="91" column="4" lean-forward="false" selection-start-line="91" selection-start-column="4" selection-end-line="91" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/redux/reducers/page.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="23" column="86" lean-forward="false" selection-start-line="23" selection-start-column="86" selection-end-line="23" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/collectionPanel/buttons/CancelInviteButton.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="34" column="12" lean-forward="false" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/collectionPanel/CollectionPanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="192" column="27" lean-forward="false" selection-start-line="192" selection-start-column="27" selection-end-line="192" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/redux/actions/entityPanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/navigator/Navigator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="34" column="35" lean-forward="false" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/main/AppContent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="71" column="39" lean-forward="false" selection-start-line="71" selection-start-column="39" selection-end-line="71" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/collectionPanel/buttons/InviteButton.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="34" column="12" lean-forward="false" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/EntityPanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="38" column="22" lean-forward="true" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/redux/reducers/entityPanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="66" column="48" lean-forward="false" selection-start-line="66" selection-start-column="48" selection-end-line="66" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/user/Panel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="139" column="17" lean-forward="true" selection-start-line="139" selection-start-column="17" selection-end-line="139" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/user/tabs/PlayerTab.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="87" column="27" lean-forward="true" selection-start-line="87" selection-start-column="27" selection-end-line="87" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/OrganizedTournamentsTable.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="16" column="35" lean-forward="true" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/user/tabs/table/ParticipatedTournamentsTable.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="23" column="46" lean-forward="true" selection-start-line="23" selection-start-column="46" selection-end-line="23" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/collectionPanel/table/rows/game/Rows.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="34" column="38" lean-forward="true" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/components/entityPanel/user/tabs/OrganizerTab.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="39" column="53" lean-forward="true" selection-start-line="39" selection-start-column="53" selection-end-line="39" selection-end-column="53" />
+          <folding>
+            <element signature="e#47#88#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

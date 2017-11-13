@@ -44,11 +44,20 @@ export default (entity) => {
     if((new Set(entity.organizers)).size !== entity.organizers.length)
         fieldErrors.organizers = "You can invite organizer only once";
 
-    if(entity.tablesCount*entity.playersOnTableCount!==0 && entity.participants.length>entity.tablesCount*entity.playersOnTableCount)
-        fieldErrors.participants = "Participants count must be less than "+entity.maxPlayers;
+    let participantsFlatTable = [];
 
-    if((new Set(entity.participants)).size !== entity.participants.length)
+    entity.participants.map(participantGroup => {
+        let participantGroupToValidate = [];
+        participantGroup.forEach(participant => participantGroupToValidate.push(participant.name));
+        participantsFlatTable.push(participantGroupToValidate);
+    });
+
+    if((new Set(participantsFlatTable)).size !== participantsFlatTable.length)
         fieldErrors.organizers = "You can invite player only once";
+
+    if(entity.tablesCount*entity.playersOnTableCount!==0 &&
+        participantsFlatTable.length*entity.playersOnTableCount/2>entity.tablesCount*entity.playersOnTableCount)
+        fieldErrors.participants = "Participants count must be less than "+entity.maxPlayers;
 
     if(!checkIfObjectIsNotEmpty(fieldErrors)){
         validationErrors.message = "Invalid tournament data";

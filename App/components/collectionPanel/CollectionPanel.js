@@ -57,7 +57,7 @@ class CollectionPanel extends Component {
             this.props.entityPanel.hidden === false) {
             await this.setState({collectionType: nextProps.collectionType});
             this.createPageRequestForEntityPanel(nextProps.entityPanel.relatedEntity.relatedEntityCriteria);
-            this.props.setElementsToCheck(nextProps.entityPanel.relatedEntity.relatedEntityNames);
+            this.setElementsToCheckForEntityPanel(nextProps.entityPanel.relatedEntity.relatedEntities);
             await this.getPage(this.state.collectionType);
         }
         else if (nextProps.collectionType !== this.state.collectionType ||
@@ -70,13 +70,21 @@ class CollectionPanel extends Component {
         }
     }
 
+    setElementsToCheckForEntityPanel(relatedEntities){
+        if(this.props.entityPanel.relatedEntity.relatedEntityType==="participatedTournaments"){
+            let relatedEntitiesNames = relatedEntities.map(
+                relatedEntity => relatedEntity.name
+            );
+            this.props.setElementsToCheck(relatedEntitiesNames);
+        }
+        else{
+            this.props.setElementsToCheck(relatedEntities);
+        }
+    }
+
     createPageRequestForEntityPanel(relatedEntityCriteria){
         this.props.setPageRequest({
-            searchCriteria:[{
-                "keys": ["status"],
-                "operation": ":",
-                "value": relatedEntityCriteria
-            }],
+            searchCriteria:relatedEntityCriteria,
             pageRequest:{
                 direction : "ASC",
                 property : "name",
