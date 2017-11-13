@@ -4,84 +4,35 @@
 import React, { Component } from 'react';
 import {
     View,
-    Text,
     ScrollView,
-    Button,
-    Image,
-    TouchableHighlight
+    Button
 } from 'react-native';
 
 import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 
-import TableStyles from '../../../../Styles/TableStyles'
-import MainStyles from '../../../../Styles/MainStyles'
-import ListColours from '../../../../main/consts/ListColours'
 import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
 
-import EmptyRow from "../../outputs/EmptyRow";
-import {serverName} from "../../../../main/consts/serverName";
 
 import { ActionCreators } from '../../../../redux/actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Icon from 'react-native-vector-icons/FontAwesome';
+import OrganizersTable from './table/OrganizersTable'
 
 class OrganizersTab extends Component{
-
-    backgroundColourCheck(accepted){
-        return accepted? ListColours.users.ACCEPTED:ListColours.users.NEW;
-    }
-
-    renderRow(rowData) {
-
-        let backgroundColour = this.backgroundColourCheck(rowData.accepted);
-
-        return (
-            <View key={rowData.name} style={[TableStyles.row, {flexDirection: 'row'}]}>
-                <View style={{width: 35, justifyContent: 'center', alignItems: 'center'}}>
-                    <Image
-                        style={{width: 35, height: 35}}
-                        source={{uri:`${serverName}/get/user/avatar?username=${rowData.name}&${new Date().getTime()}`}}/>
-                </View>
-                <View style={{backgroundColor: backgroundColour, flex: 1, justifyContent:'center'}}>
-                    <Text numberOfLines={1} style={[MainStyles.verySmallWhiteStyle, {padding:3}]}> {rowData.name}</Text>
-                </View>
-                {!this.props.inputsDisabled &&
-                <TouchableHighlight onPress={() => {this.deleteElement(rowData.name);}}>
-                    <View style={TableStyles.icon} >
-                        <Icon name='close' size={25} color="#ffffff"/>
-                        <Text style={TableStyles.iconText}>{this.props.name}</Text>
-                    </View>
-                </TouchableHighlight>}
-            </View>);
-    }
-
-    deleteElement(name){
-        let elements = this.props.entity["organizers"];
-        elements = elements.filter(user => {
-            return user.name!==name
-        });
-        this.props.changeEntity("organizers",elements);
-    }
 
     startInviteOrganizers(){
         this.props.setOperations(["Invite"]);
         this.props.setRelatedEntity(
             this.props.entity["organizers"].map(entity => entity.name),
             "organizers",
-            ["ORGANIZER"]);
-        this.props.showEntityPanel(false);
+            [{
+                "keys": ["status"],
+                "operation": ":",
+                "value": ["ORGANIZER"]
+            }]
+            ,10);
         this.props.navigate('Users');
-    }
-
-    createListOfUsers(){
-        if(this.props.entity["organizers"].length===0){
-            return <EmptyRow/>
-        }
-        else{
-            return this.props.entity["organizers"].map(organizer => this.renderRow(organizer));
-        }
     }
 
     calculateHeight(inputsDisabled){
@@ -99,9 +50,18 @@ class OrganizersTab extends Component{
                 <ScrollView
                     style={{height:height}}
                     contentContainerStyle={EntityPanelStyle.scrollView}>
-                    {this.createListOfUsers()}
+                    <ValidationErrorMessage validationErrorMessage={this.props.validationErrors["organizers"]}/>
+                    <OrganizersTable
+                        shouldActualizeRelatedEntities={this.props.shouldActualizeRelatedEntities}
+                        shouldActualizeRelatedEntitiesCallBack={this.props.shouldActualizeRelatedEntitiesCallBack}
+                        value={this.props.entity["organizers"]}
+                        fieldName="organizers"
+                        disabled = {this.props.inputsDisabled}
+                        changeEntity={this.props.changeEntity}
+                        relatedEntity={this.props.relatedEntity}
+                        hidden={this.props.hidden}
+                        name="Organizers" />
                 </ScrollView>
-                <ValidationErrorMessage validationErrorMessage={this.props.validationErrors["organizers"]}/>
                 {!this.props.inputsDisabled &&
                 <Button title={"Invite"} color='#4b371b'
                         onPress={()=>this.startInviteOrganizers()}/>}

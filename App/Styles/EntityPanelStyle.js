@@ -52,6 +52,16 @@ const styles = StyleSheet.create({
         flex: 1,
         margin: 1
     },
+    participantsGroupButton:{
+        alignItems: 'center',
+        justifyContent:'center',
+        padding:1,
+        paddingTop:2,
+        paddingBottom:2,
+        flex: 1,
+        margin: 1,
+        backgroundColor: BaseColours.misc.deepRed
+    },
     buttonRow:{
         flexDirection: 'row',
     },
