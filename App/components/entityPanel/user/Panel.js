@@ -25,7 +25,6 @@ import {serverName} from '../../../main/consts/serverName';
 import axios from 'axios';
 
 import checkIfObjectIsNotEmpty from '../../../main/functions/checkIfObjectIsNotEmpty'
-import compareArrays from "../../../main/functions/compareArrays";
 import validateUser from '../validators/UserValidator'
 
 class Panel extends Component {
@@ -66,7 +65,8 @@ class Panel extends Component {
                 "organizedTournaments": ""
             },
             tabsMap:{},
-            tabsNamesMap:{}
+            tabsNamesMap:{},
+            shouldActualizeRelatedEntities:false
         };
     }
 
@@ -94,36 +94,10 @@ class Panel extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.hidden === false && this.props.hidden === true ) {
-            this.actualizeRelatedEntityObjects(
-                nextProps.relatedEntity.relatedEntityType,
-                nextProps.relatedEntity.relatedEntityNames)
+        if (nextProps.hidden === false &&
+            this.props.hidden === true && nextProps.relatedEntity.operationCanceled === false) {
+            this.setState({shouldActualizeRelatedEntities:true});
         }
-    }
-
-
-    actualizeRelatedEntityObjects(relatedEntityType,relatedEntityNames){
-        let entity = this.state.entity;
-        let relatedEntitiesNames = entity[relatedEntityType].map(entity => entity.name);
-        relatedEntityNames.forEach(
-            elementName => {
-                if(relatedEntitiesNames.indexOf(elementName)===-1){
-                    entity[relatedEntityType].push({
-                        name:elementName,
-                        accepted:false
-                    })
-                }
-            }
-        );
-        relatedEntitiesNames.forEach(
-            elementName => {
-                if(relatedEntityNames.indexOf(elementName)===-1){
-                    let organizerToDelete = entity[relatedEntityType].find(element => element.name===elementName);
-                    entity[relatedEntityType].splice(entity[relatedEntityType].indexOf(organizerToDelete),1);
-                }
-            }
-        );
-        this.setState({entity:entity});
     }
 
     setAccessToTabsByStatus(status){
@@ -155,11 +129,17 @@ class Panel extends Component {
         return this.state.activeTab === activeTabName?'#E0BA51':'#4b371b';
     }
 
+    shouldActualizeRelatedEntitiesCallBack(){
+        this.setState({shouldActualizeRelatedEntities:true});
+    }
+
     createContent(){
-        if(this.state.activeTab!=="")
+        if(this.state.activeTab === "organizer" || this.state.activeTab === "player")
             return React.createElement(
                 this.state.tabsMap[this.state.activeTab],
                 {
+                    shouldActualizeRelatedEntities: this.state.shouldActualizeRelatedEntities,
+                    shouldActualizeRelatedEntitiesCallBack: this.shouldActualizeRelatedEntitiesCallBack.bind(this),
                     width: this.props.dimension.width,
                     height:this.props.dimension.height,
                     orientation:this.props.dimension.orientation,
@@ -167,10 +147,25 @@ class Panel extends Component {
                     entity:this.state.entity,
                     inputsDisabled: this.props.mode === 'get',
                     changeEntity: this.changeEntity.bind(this),
+                    validationErrors: this.state.validationErrors,
+                    relatedEntity: this.props.relatedEntity,
+                    hidden: this.props.hidden
+                },
+                null);
+        else if(this.state.activeTab!=="")
+            return React.createElement(
+                this.state.tabsMap[this.state.activeTab],
+                {
+                    width: this.props.dimension.width,
+                    height:this.props.dimension.height,
+                    orientation:this.props.dimension.orientation,
+                    entity:this.state.entity,
+                    inputsDisabled: this.props.mode === 'get',
+                    changeEntity: this.changeEntity.bind(this),
                     validationErrors: this.state.validationErrors
                 },
                 null);
-        else
+         else
             return <View/>
     }
 
@@ -190,6 +185,8 @@ class Panel extends Component {
         delete entityToSend["finishedOrganizedTournaments"];
         delete entityToSend["createdGames"];
         delete entityToSend["banned"];
+        console.log("entity");
+        console.log(entityToSend);
         let validationErrors = validateUser(entityToSend);
         if(checkIfObjectIsNotEmpty(validationErrors)){
             console.log("output entity:");

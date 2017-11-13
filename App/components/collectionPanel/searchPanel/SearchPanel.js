@@ -49,11 +49,7 @@ class SearchPanel extends React.Component{
                 )
         }
         if(this.props.entityPanel.mode !== 'disabled'){
-            pageRequest.searchCriteria.push({
-                "keys": ["status"],
-                "operation": ":",
-                "value": this.props.entityPanel.relatedEntity.relatedEntityCriteria
-            });
+            pageRequest.searchCriteria.concat(this.props.entityPanel.relatedEntity.relatedEntityCriteria);
         }
         pageRequest.pageRequest.page = 0;
         pageRequest.pageRequest.size = 10;

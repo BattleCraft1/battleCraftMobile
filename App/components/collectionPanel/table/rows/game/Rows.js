@@ -33,7 +33,7 @@ class Rows extends Component{
     }
 
     async downloadGameRules(gameName){
-        const URL = serverName + `/get/game/` + gameName + `/rules`;
+        const URL = serverName + `/get/game/rules?gameName=${gameName}`;
         const fileName = gameName+'.pdf';
         const directory = FileSystem.documentDirectory + fileName;
 
@@ -95,7 +95,7 @@ class Rows extends Component{
                         onPress={() => this.editEntity(rowData)}>
                         <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {rowData.name}</Text>
                     </TouchableHighlight>
-                    <Checkbox elementName = {rowData.name} checked = {rowData.checked}/>
+                    <Checkbox element = {rowData} checked = {rowData.checked}/>
                 </View>
                 <View style={[TableStyles.row]}>
                     <Button onPress={async () => await this.downloadGameRules(rowData.name)} title={"Download rules"} color='#4b371b'/>

@@ -78,7 +78,7 @@ class Rows extends Component{
                         onPress={() => this.editEntity(rowData)}>
                         <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {rowData.name}</Text>
                     </TouchableHighlight>
-                    <Checkbox elementName = {rowData.name} checked = {rowData.checked}/>
+                    <Checkbox element = {rowData} checked = {rowData.checked}/>
                 </View>
 
                 <View style={[TableStyles.row, {flexDirection:'column'}]}>

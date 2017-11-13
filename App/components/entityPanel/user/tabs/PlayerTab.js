@@ -4,115 +4,68 @@
 import React, { Component } from 'react';
 import {
     View,
-    Text,
     ScrollView,
-    Button,
-    TouchableHighlight
+    Button
 } from 'react-native';
 
 import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 
-import TableStyles from '../../../../Styles/TableStyles'
-import MainStyles from '../../../../Styles/MainStyles'
-import ListColours from '../../../../main/consts/ListColours'
 import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
 
-import EmptyRow from "../../outputs/EmptyRow";
 import NumberOutput from "../../outputs/NumberOutput";
 
 import { ActionCreators } from '../../../../redux/actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Icon from 'react-native-vector-icons/FontAwesome';
+import TournamentsTable from './table/ParticipatedTournamentsTable'
+import TournamentsTableOutput from './table/ParticipatedTournamentsTableOutput'
 
 class PlayerTab extends Component{
-
-    createListOfParticipatedTournaments(){
-        if(this.props.entity["participatedTournaments"].length===0){
-            return <EmptyRow/>
-        }
-        else{
-            return this.props.entity["participatedTournaments"]
-                .map(participatedTournament => this.renderRowOfParticipatedTournaments(participatedTournament));
-        }
-    }
-
-    createListOfFinishedTournaments(){
-        if(this.props.entity["finishedParticipatedTournaments"].length===0){
-            return <EmptyRow/>
-        }
-        else{
-            return this.props.entity["finishedParticipatedTournaments"]
-                .map(finishedTournament => this.renderRowOfFinishedTournaments(finishedTournament));
-        }
-    }
-
-    renderRowOfParticipatedTournaments(rowData) {
-
-        let backgroundColour = this.backgroundColourCheck(rowData.accepted);
-
-        return (
-            <View key={rowData.name} style={[TableStyles.row, {flexDirection: 'row'}]}>
-                <View style={{backgroundColor: backgroundColour, flex: 1, justifyContent:'center'}}>
-                    <Text numberOfLines={1} style={[MainStyles.verySmallWhiteStyle, {padding:3}]}> {rowData.name}</Text>
-                </View>
-                {!this.props.inputsDisabled &&
-                <View style={{flexDirection:'row'}}>
-                    <TouchableHighlight onPress={() => {this.acceptElement(rowData.name);}}>
-                        <View style={TableStyles.icon} >
-                            <Icon name='check-square-o' size={25} color="#ffffff"/>
-                            <Text style={TableStyles.iconText}>{this.props.name}</Text>
-                        </View>
-                    </TouchableHighlight>
-                    <TouchableHighlight onPress={() => {this.deleteElement(rowData.name);}}>
-                        <View style={TableStyles.icon} >
-                            <Icon name='close' size={25} color="#ffffff"/>
-                            <Text style={TableStyles.iconText}>{this.props.name}</Text>
-                        </View>
-                    </TouchableHighlight>
-                </View>}
-            </View>);
-    }
-
-    renderRowOfFinishedTournaments(rowData) {
-        return (
-            <View key={rowData} style={[TableStyles.row, {flexDirection: 'row'}]}>
-                <View style={{backgroundColor: '#a58e60', flex: 1, justifyContent:'center'}}>
-                    <Text numberOfLines={1} style={[MainStyles.verySmallWhiteStyle, {padding:3}]}> {rowData}</Text>
-                </View>
-            </View>);
-    }
-
-    backgroundColourCheck(accepted){
-        return accepted? ListColours.users.ACCEPTED:ListColours.users.NEW;
-    }
-
-    acceptElement(name){
-        let elements = this.props.entity["participatedTournaments"];
-        let element = elements.find(tournament => {
-            return tournament.name===name
-        });
-        element.accepted = !element.accepted;
-        this.props.changeEntity("participatedTournaments",elements)
-    }
-
-    deleteElement(name){
-        let elements = this.props.entity["participatedTournaments"];
-        elements = elements.filter(tournament => {
-            return tournament.name!==name
-        });
-        this.props.changeEntity("participatedTournaments",elements)
-    }
 
     startAddTournaments(){
         this.props.setOperations(["Invite"]);
         this.props.setRelatedEntity(
-            this.props.entity["participatedTournaments"].map(entity => entity.name),
+            this.props.entity["participatedTournaments"].map(entity => {
+                return{
+                    name: entity.name,
+                    playersOnTableCount: entity.playersOnTableCount
+                }
+            }),
             "participatedTournaments",
-            ["ACCEPTED"]);
-        this.props.showEntityPanel(false);
+            [{
+                "keys": ["status"],
+                "operation": ":",
+                "value": ["NEW","ACCEPTED"]
+            }],
+            Number.POSITIVE_INFINITY);
         this.props.navigate('Tournaments');
+    }
+
+    startInviteSecondPlayerToGroup(tournamentName){
+        this.props.setOperations(["Invite"]);
+        this.props.setRelatedEntity(
+            [],
+            "secondPlayerFor"+tournamentName,
+            [
+                {
+                    "keys": ["status"],
+                    "operation": ":",
+                    "value": ["ACCEPTED","ORGANIZER"]
+                },
+                {
+                    "keys": ["name"],
+                    "operation": "not in",
+                    "value": [this.props.entity['name'],""]
+                },
+                {
+                    "keys": ["name"],
+                    "operation": "not participate",
+                    "value": [tournamentName]
+                }
+            ],
+            1);
+        this.props.navigate('Users');
     }
 
     calculateHeight(inputsDisabled){
@@ -130,10 +83,26 @@ class PlayerTab extends Component{
                 <ScrollView
                     style={{height:height}}
                     contentContainerStyle={EntityPanelStyle.scrollView}>
-                    <Text>Participated tournaments</Text>
-                    {this.createListOfParticipatedTournaments()}
-                    <Text>Finished tournaments</Text>
-                    {this.createListOfFinishedTournaments()}
+
+                    <ValidationErrorMessage validationErrorMessage={this.props.validationErrors["participatedTournaments"]}/>
+                    <TournamentsTable
+                        shouldActualizeRelatedEntities={this.props.shouldActualizeRelatedEntities}
+                        shouldActualizeRelatedEntitiesCallBack={this.props.shouldActualizeRelatedEntitiesCallBack}
+                        inviteSecondPlayer={this.startInviteSecondPlayerToGroup.bind(this)}
+                        relatedEntity={this.props.relatedEntity}
+                        hidden={this.props.hidden}
+                        value={this.props.entity["participatedTournaments"]}
+                        fieldName="participatedTournaments"
+                        disabled = {this.props.inputsDisabled}
+                        changeEntity={this.props.changeEntity}
+                        name="Participated tournaments"
+                    />
+
+                    <TournamentsTableOutput
+                        value={this.props.entity["finishedParticipatedTournaments"]}
+                        name="Finished tournaments"
+                    />
+
                     <NumberOutput
                         value={this.props.entity["points"]}
                         name="Points"/>
@@ -141,7 +110,6 @@ class PlayerTab extends Component{
                         value={this.props.entity["numberOfBattles"]}
                         name="Battles Count"/>
                 </ScrollView>
-                <ValidationErrorMessage validationErrorMessage={this.props.validationErrors["participatedTournaments"]}/>
                 {!this.props.inputsDisabled &&
                 <Button title={"ADD TOURNAMENT"} color='#4b371b'
                         onPress={()=>this.startAddTournaments()}/>}

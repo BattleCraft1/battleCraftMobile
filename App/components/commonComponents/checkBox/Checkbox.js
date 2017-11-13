@@ -22,6 +22,44 @@ class Checkbox extends React.Component {
         }
     }
 
+    changeRelatedEntities(element, checked){
+        let relatedEntities = this.props.entityPanel.relatedEntity.relatedEntities;
+
+        if(this.props.entityPanel.relatedEntity.relatedEntityType==="participatedTournaments"){
+            this.props.checkElement(this.props.element.name, checked);
+            this.setState({checked:checked});
+            if(checked){
+                relatedEntities.push(
+                    {
+                        name: element.name,
+                        playersOnTableCount: element.playersOnTableCount
+                    });
+            }
+            else{
+                relatedEntities = relatedEntities.filter(relatedEntity => relatedEntity.name !== element.name)
+            }
+            this.props.changeRelatedEntities(relatedEntities);
+        }
+        else{
+            if(!checked || this.props.entityPanel.relatedEntity.relatedEntityLimit>=relatedEntities.length+1){
+                this.props.checkElement(this.props.element.name, checked);
+                this.setState({checked:checked});
+                if(checked){
+                    relatedEntities.push(element.name);
+                }
+                else{
+                    let index = relatedEntities.indexOf(element.name);
+                    relatedEntities.splice(index,1);
+                }
+                this.props.changeRelatedEntities(relatedEntities);
+            }
+            else{
+                this.props.showFailureMessage("You can choose only "+this.props.entityPanel.relatedEntity.relatedEntityLimit+" elements");
+            }
+        }
+
+    }
+
     render(){
         return(
         <CheckBox
@@ -30,8 +68,13 @@ class Checkbox extends React.Component {
             onClick={() => {
                 let checked=this.state.checked;
                 checked=!checked;
-                this.setState({checked:checked});
-                this.props.checkElement(this.props.elementName, checked);
+                if(this.props.entityPanel.mode!=='disabled'){
+                    this.changeRelatedEntities(this.props.element, checked);
+                }
+                else{
+                    this.props.checkElement(this.props.element.name, checked);
+                    this.setState({checked:checked});
+                }
             }}
         />
         );
@@ -43,7 +86,10 @@ function mapDispatchToProps( dispatch ) {
 }
 
 function mapStateToProps( state ) {
-    return {};
+    return {
+        entityPanel: state.entityPanel,
+        page: state.page
+    };
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( Checkbox );

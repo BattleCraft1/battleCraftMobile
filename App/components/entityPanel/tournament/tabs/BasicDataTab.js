@@ -45,7 +45,7 @@ class BasicDataTab extends Component{
     async getGameSelectData(){
         let getGameOperation = async () => {
             this.props.startLoading("Fetching games...");
-            await axios.get(serverName + `get/tournaments/enums`)
+            await axios.get(serverName + `get/allGames/names`)
                 .then(res => {
                     console.log("games: ");
                     console.log(res.data);
