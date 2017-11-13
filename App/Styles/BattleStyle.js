@@ -44,21 +44,23 @@ const styles = StyleSheet.create({
     },
 
     playerHeader:{
+        flexDirection:'row',
         padding:3,
         borderWidth:3,
     },
     player1Text:{
+        flex:1,
         paddingLeft: 5,
         textAlign:"left",
     },
     player2Text:{
+        flex:1,
         paddingRight: 5,
         textAlign:"right",
     },
     avatarContener:{
         width:110,
         height:110,
-        backgroundColor: BaseColours.misc.deepRed,
         alignItems:'center',
         justifyContent:'center'
     },

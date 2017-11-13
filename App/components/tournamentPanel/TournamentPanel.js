@@ -10,10 +10,13 @@ import {
     Button,
 
 } from 'react-native';
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+import GestureRecognizer from 'react-native-swipe-gestures';
 
-import Battle from './battle/BattleRow'
-import BattleInspector from './battle/BattleInspector'
+
+import Battle from './Battle1x1/BattleRow'
+import BattleInspector from './Battle1x1/BattleInspector'
+import Battle2x2 from './Battle2x2/BattleRow'
+import BattleInspector2x2 from './Battle2x2/BattleInspector'
 
 import MainStyles from '../../Styles/MainStyles'
 import TournamentStyles from '../../Styles/TournamentStyles'
@@ -27,6 +30,8 @@ export default class TournamentPanel extends Component {
             inspectVisible: false,
             inspectorBattleId: 'someID',
 
+            battleType: 2,
+
             tournamentName: "Temptemptemptemp",
             turnMax: 4,
             currentTab: 1,
@@ -35,36 +40,72 @@ export default class TournamentPanel extends Component {
 
     battlesContent = {
         battle1:{
-            player1:'Temp1',
-            player2:'Temp2',
-            score1: 0,
-            score2: 20,
-            total1: 34,
-            total2: 42
+            player1:{
+                nick:'Temp1',
+                name:'Temp1',
+                surname:'Temptemp1',
+                score: 0,
+                total: 34,
+            },
+            player2:{
+                nick:'Temp2',
+                name:'Temp2',
+                surname:'Temptemp2',
+                score: 20,
+                total: 42,
+            },
+            table:1
         },
         battle2:{
-            player1:'Temp1',
-            player2:'Temp2',
-            score1: 16,
-            score2: 4,
-            total1: 56,
-            total2: 42
+            player1:{
+                nick:'Temp1',
+                name:'Temp1',
+                surname:'Temptemp1',
+                score: 16,
+                total: 56,
+            },
+            player2:{
+                nick:'Temp2',
+                name:'Temp2',
+                surname:'Temptemp2',
+                score: 4,
+                total: 42,
+            },
+            table:2
         },
         battle3:{
-            player1:'Temp1',
-            player2:'Temp2',
-            score1: 10,
-            score2: 10,
-            total1: 42,
-            total2: 42
+            player1:{
+                nick:'Temp1',
+                name:'Temp1',
+                surname:'Temptemp1',
+                score: 10,
+                total: 42,
+            },
+            player2:{
+                nick:'Temp2',
+                name:'Temp2',
+                surname:'Temptemp2',
+                score: 10,
+                total: 42,
+            },
+            table:3
         },
         battle4:{
-            player1:'Temp1',
-            player2:'Temp2',
-            score1: 13,
-            score2: 7,
-            total1: 34,
-            total2: 76
+            player1:{
+                nick:'Temp1',
+                name:'Temp1',
+                surname:'Temptemp1',
+                score: 13,
+                total: 34,
+            },
+            player2:{
+                nick:'Temp2',
+                name:'Temp2',
+                surname:'Temptemp2',
+                score: 7,
+                total: 76,
+            },
+            table:4
         },
     }
 
@@ -80,6 +121,29 @@ export default class TournamentPanel extends Component {
         this.setState({
             inspectVisible: true,
             inspectorBattleId: battleId})
+    }
+
+    makeBattle(){
+        if(this.state.battleType===1) {
+            return (<Battle currentTab={this.state.currentTab} content={this.battlesContent}/>)
+        }
+        else {
+            return (<Battle2x2 currentTab={this.state.currentTab} content={this.battlesContent}/>)
+        }
+    }
+    makeBattleInspector(){
+        if(this.state.battleType===1) {
+            return (<BattleInspector
+                    onClosePanel={(isVisible) => this.setState({inspectVisible: isVisible})}
+                    isVisible={this.state.inspectVisible}
+                    battleData={this.battlesContent.battle1}/>)
+        }
+        else {
+            return (<BattleInspector2x2
+                    onClosePanel={(isVisible) => this.setState({inspectVisible: isVisible})}
+                    isVisible={this.state.inspectVisible}
+                    battleData={this.battlesContent.battle1}/>)
+        }
     }
 
     render() {
@@ -104,14 +168,11 @@ export default class TournamentPanel extends Component {
                         <View style={[TournamentStyles.pageWindow, MainStyles.borderStyle]}>
                             <Text style={MainStyles.smallWhiteStyle}>{this.state.currentTab}/{this.state.turnMax}</Text>
                         </View>
-                        <Battle currentTab={this.state.currentTab} content={this.battlesContent}/>
+                        {this.makeBattle()}
                     </View>
                 </GestureRecognizer>
                 <View><Button title={"Return"} color='#4b371b' onPress={()=>{}}/></View>
-                <BattleInspector
-                    onClosePanel={(isVisible) => this.setState({inspectVisible:isVisible})}
-                    isVisible={this.state.inspectVisible}
-                    battleData={this.battlesContent.battle1}/>
+                {this.makeBattleInspector()}
             </View>
         );
     }
