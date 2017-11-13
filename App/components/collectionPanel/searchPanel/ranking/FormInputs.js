@@ -40,7 +40,7 @@ class FormInputs extends Component{
 
     async componentDidMount(){
         let getGameOperation = async () => {
-            await axios.get(serverName + `get/tournaments/enums`)
+            await axios.get(serverName + `get/allGames/names`)
                 .then(res => {
                     this.setState({tournamentsGames: convertArrayToObject(res.data)});
                 })

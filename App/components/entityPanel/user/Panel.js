@@ -156,6 +156,9 @@ class Panel extends Component {
             return React.createElement(
                 this.state.tabsMap[this.state.activeTab],
                 {
+                    width: this.props.dimension.width,
+                    height:this.props.dimension.height,
+                    orientation:this.props.dimension.orientation,
                     entity:this.state.entity,
                     inputsDisabled: this.props.mode === 'get',
                     changeEntity: this.changeEntity.bind(this),

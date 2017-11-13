@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    TouchableHighlight,
-    ScrollView
+    TouchableHighlight
 } from 'react-native';
 
 import Modal from 'react-native-modal';
@@ -26,7 +25,6 @@ import {serverName} from '../../../main/consts/serverName';
 import axios from 'axios';
 
 import checkIfObjectIsNotEmpty from '../../../main/functions/checkIfObjectIsNotEmpty'
-import compareArrays from "../../../main/functions/compareArrays";
 import validateTournament from '../validators/TournamentValidator'
 
 const tabsMap = {
@@ -90,7 +88,8 @@ class Panel extends Component {
                 "description": "",
                 "organizers": "",
                 "participants": ""
-            }
+            },
+            shouldActualizeRelatedEntities:false
         };
     }
 
@@ -121,37 +120,10 @@ class Panel extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.hidden === false && this.props.hidden === true ) {
-            console.log("tournament panel recive releted entities");
-            this.actualizeRelatedEntityObjects(
-                nextProps.relatedEntity.relatedEntityType,
-                nextProps.relatedEntity.relatedEntityNames)
+        if (nextProps.hidden === false &&
+            this.props.hidden === true && nextProps.relatedEntity.operationCanceled === false) {
+            this.setState({shouldActualizeRelatedEntities:true});
         }
-    }
-
-
-    actualizeRelatedEntityObjects(relatedEntityType,relatedEntityNames){
-        let entity = this.state.entity;
-        let relatedEntitiesNames = entity[relatedEntityType].map(entity => entity.name);
-        relatedEntityNames.forEach(
-            elementName => {
-                if(relatedEntitiesNames.indexOf(elementName)===-1){
-                    entity[relatedEntityType].push({
-                        name:elementName,
-                        accepted:false
-                    })
-                }
-            }
-        );
-        relatedEntitiesNames.forEach(
-            elementName => {
-                if(relatedEntityNames.indexOf(elementName)===-1){
-                    let organizerToDelete = entity[relatedEntityType].find(element => element.name===elementName);
-                    entity[relatedEntityType].splice(entity[relatedEntityType].indexOf(organizerToDelete),1);
-                }
-            }
-        );
-        this.setState({entity:entity});
     }
 
     setActiveTab(activeTabName){
@@ -162,21 +134,41 @@ class Panel extends Component {
         return this.state.activeTab === activeTabName?'#E0BA51':'#4b371b';
     }
 
+    shouldActualizeRelatedEntitiesCallBack(){
+        this.setState({shouldActualizeRelatedEntities:true});
+    }
+
     createContent(){
-        if(this.state.activeTab!=="")
+        if(this.state.activeTab === "organizers" || this.state.activeTab === "participants")
+            return React.createElement(
+                tabsMap[this.state.activeTab],
+                {
+                    shouldActualizeRelatedEntities: this.state.shouldActualizeRelatedEntities,
+                    shouldActualizeRelatedEntitiesCallBack: this.shouldActualizeRelatedEntitiesCallBack.bind(this),
+                    width: this.props.dimension.width,
+                    height:this.props.dimension.height,
+                    orientation:this.props.dimension.orientation,
+                    navigate:this.props.navigate,
+                    entity:this.state.entity,
+                    relatedEntity: this.props.relatedEntity,
+                    inputsDisabled: this.props.mode === 'get',
+                    changeEntity: this.changeEntity.bind(this),
+                    validationErrors: this.state.validationErrors
+                },
+                null);
+        else if(this.state.activeTab!=="")
             return React.createElement(
                 tabsMap[this.state.activeTab],
                 {
                     width: this.props.dimension.width,
                     height:this.props.dimension.height,
                     orientation:this.props.dimension.orientation,
-                    navigate:this.props.navigate,
                     entity:this.state.entity,
                     inputsDisabled: this.props.mode === 'get',
                     changeEntity: this.changeEntity.bind(this),
                     validationErrors: this.state.validationErrors
                 },
-                null);
+                null)
         else
             return <View/>
     }
@@ -197,7 +189,15 @@ class Panel extends Component {
 
         let entityToSend = JSON.parse(JSON.stringify(this.state.entity));
         entityToSend.organizers = this.state.entity.organizers.map(element => element.name);
-        entityToSend.participants = this.state.entity.participants.map(element => element.name);
+        entityToSend.participants = [];
+        this.state.entity.participants.map(participantGroup => {
+            let participantGroupToSend = [];
+            participantGroup.forEach(participant =>{
+                if(participant.name !== undefined)
+                    participantGroupToSend.push(participant.name)});
+            if(participantGroupToSend.length !== 0)
+                entityToSend.participants.push(participantGroupToSend);
+        });
         delete entityToSend["status"];
         let validationErrors = validateTournament(entityToSend);
         if(checkIfObjectIsNotEmpty(validationErrors)){
