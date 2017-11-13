@@ -11,11 +11,8 @@ import { ActionCreators } from '../../../redux/actions/index';
 class InviteButton extends React.Component {
 
     invite(){
-        this.props.setRelatedEntity(this.props.page.checkedElementsNames,
-            this.props.entityPanel.relatedEntity.relatedEntityType,
-            this.props.entityPanel.relatedEntity.relatedEntityCriteria);
         this.props.clearCheckedElements();
-        this.props.showEntityPanel(true);
+        this.props.showEntityPanel();
     }
 
     render() {
@@ -35,10 +32,7 @@ function mapDispatchToProps( dispatch ) {
 }
 
 function mapStateToProps( state ) {
-    return {
-        entityPanel:state.entityPanel,
-        page: state.page
-    };
+    return {};
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( InviteButton );

@@ -21,7 +21,7 @@ export const page = createReducer( {}, {
         };
     },
     [types.SET_ELEMENTS_TO_CHECK]( state, action ) {
-        state.checkedElementsNames = action.elementsNames;
+        state.checkedElementsNames = JSON.parse(JSON.stringify(action.elementsNames));
         return Object.create(state);
     },
     [types.CHECK_ALL_ELEMENTS]( state, action ){

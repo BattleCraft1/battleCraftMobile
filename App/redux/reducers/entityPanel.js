@@ -11,9 +11,11 @@ export const entityPanel = createReducer( {}, {
             entityName:"",
             hidden:false,
             relatedEntity: {
-                relatedEntityNames: [],
+                relatedEntities: [],
                 relatedEntityType:"",
-                relatedEntityCriteria: ""
+                relatedEntityCriteria: "",
+                relatedEntityLimit: 0,
+                operationCanceled:false
             }
         };
     },
@@ -24,9 +26,11 @@ export const entityPanel = createReducer( {}, {
             entityName:action.entityName,
             hidden:false,
             relatedEntity: {
-                relatedEntityNames: [],
+                relatedEntities: [],
                 relatedEntityType:"",
-                relatedEntityCriteria: ""
+                relatedEntityCriteria: "",
+                relatedEntityLimit: 0,
+                operationCanceled:false
             }
         };
     },
@@ -37,9 +41,11 @@ export const entityPanel = createReducer( {}, {
             entityName:action.entityName,
             hidden:false,
             relatedEntity: {
-                relatedEntityNames: [],
+                relatedEntities: [],
                 relatedEntityType:"",
-                relatedEntityCriteria: ""
+                relatedEntityCriteria: "",
+                relatedEntityLimit: 0,
+                operationCanceled:false
             }
         };
     },
@@ -50,9 +56,11 @@ export const entityPanel = createReducer( {}, {
             entityName:"",
             hidden:false,
             relatedEntity: {
-                relatedEntityNames: [],
+                relatedEntities: [],
                 relatedEntityType:"",
-                relatedEntityCriteria: ""
+                relatedEntityCriteria: "",
+                relatedEntityLimit: 0,
+                operationCanceled:false
             }
         };
     },
@@ -61,11 +69,13 @@ export const entityPanel = createReducer( {}, {
             mode:state.mode,
             entityType:state.entityType,
             entityName:state.entityName,
-            hidden:!action.isShow,
+            hidden:false,
             relatedEntity: {
-                relatedEntityNames: state.relatedEntity.relatedEntityNames,
+                relatedEntities: state.relatedEntity.relatedEntities,
                 relatedEntityType:state.relatedEntity.relatedEntityType,
-                relatedEntityCriteria: state.relatedEntity.relatedEntityCriteria
+                relatedEntityCriteria: state.relatedEntity.relatedEntityCriteria,
+                relatedEntityLimit: state.relatedEntity.relatedEntityLimit,
+                operationCanceled:false
             }
         };
     },
@@ -74,11 +84,43 @@ export const entityPanel = createReducer( {}, {
             mode:state.mode,
             entityType:state.entityType,
             entityName:state.entityName,
+            hidden:true,
+            relatedEntity:{
+                relatedEntities:action.relatedEntities,
+                relatedEntityType:action.relatedEntityType,
+                relatedEntityCriteria: action.relatedEntityCriteria,
+                relatedEntityLimit: action.relatedEntityLimit,
+                operationCanceled:false
+            }
+        };
+    },
+    [types.CANCEL_ENTITY_PANEL_OPERATION]( state, action ) {
+        return {
+            mode:state.mode,
+            entityType:state.entityType,
+            entityName:state.entityName,
+            hidden:false,
+            relatedEntity:{
+                relatedEntities:state.relatedEntity.relatedEntities,
+                relatedEntityType:state.relatedEntity.relatedEntityType,
+                relatedEntityCriteria: state.relatedEntity.relatedEntityCriteria,
+                relatedEntityLimit: state.relatedEntity.relatedEntityLimit,
+                operationCanceled:true
+            }
+        };
+    },
+    [types.CHANGE_RELATED_ENTITIES]( state, action ) {
+        return {
+            mode:state.mode,
+            entityType:state.entityType,
+            entityName:state.entityName,
             hidden:state.hidden,
             relatedEntity:{
-                relatedEntityNames:action.relatedEntityNames,
-                relatedEntityType:action.relatedEntityType,
-                relatedEntityCriteria: action.relatedEntityCriteria
+                relatedEntities:action.relatedEntities,
+                relatedEntityType:state.relatedEntity.relatedEntityType,
+                relatedEntityCriteria: state.relatedEntity.relatedEntityCriteria,
+                relatedEntityLimit: state.relatedEntity.relatedEntityLimit,
+                operationCanceled:false
             }
         };
     }
