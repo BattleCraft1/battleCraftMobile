@@ -7,7 +7,7 @@ import {
     View,
     TouchableHighlight,
     Text,
-    TouchableWithoutFeedback
+    ScrollView
 } from 'react-native';
 
 import DropdownStyles from '../../../Styles/DropdownStyles'
@@ -53,11 +53,12 @@ class Dropdown extends Component {
 
         return(
             <View style={[DropdownStyles.dropdownContainerStyle,
-                {height: this.props.dimension.height-60},
+                {height: isPortrait?600:this.props.dimension.height-60},
                 {width: isPortrait?250:400}]}>
                 {dropdownContent}
             </View>
         );
+
     }
 }
 

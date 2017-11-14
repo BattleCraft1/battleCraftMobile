@@ -6,10 +6,12 @@ import {
     View,
     ScrollView,
     Button,
+    Text
 } from 'react-native';
 
 import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 
+import MainStyle from '../../../../Styles/MainStyles';
 import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
 
 import { ActionCreators } from '../../../../redux/actions/index';
@@ -74,8 +76,7 @@ class ParticipantsTab extends Component{
                     disabled = {this.props.inputsDisabled}
                     changeEntity={this.props.changeEntity}
                     relatedEntity={this.props.relatedEntity}
-                    hidden={this.props.hidden}
-                    name="Participants" />
+                    hidden={this.props.hidden}/>
         }
         else{
             return <ParticipantsGroupsTable
@@ -87,8 +88,7 @@ class ParticipantsTab extends Component{
                     disabled = {this.props.inputsDisabled}
                     changeEntity={this.props.changeEntity}
                     relatedEntity={this.props.relatedEntity}
-                    hidden={this.props.hidden}
-                    name="Participants" />
+                    hidden={this.props.hidden}/>
 
         }
     }
@@ -121,6 +121,7 @@ class ParticipantsTab extends Component{
                     style={{height:height}}
                     contentContainerStyle={EntityPanelStyle.scrollView}>
                     <ValidationErrorMessage validationErrorMessage={this.props.validationErrors["participants"]}/>
+                    <View style={EntityPanelStyle.playerHeader}><Text style={MainStyle.smallWhiteStyle}>Participants</Text></View>
                     {this.chooseUserTableByTournamentType()}
                 </ScrollView>
                 {this.createButton()}

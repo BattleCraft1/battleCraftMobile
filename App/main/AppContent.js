@@ -83,7 +83,7 @@ class App extends Component {
                         hideDropdown={this.hideDropdown.bind(this)}
                         dropdownVisible={this.state.dropdownVisible}
                         navigate={this.navigate.bind(this)}
-                        listElements={["Tournaments", "Games", "Ranking", "Users", "My account"]}/>}
+                        listElements={["Tournaments", "Games", "Ranking", "Users", "My account", "Tournament battles"]}/>}
                 </View>
         }
         else{

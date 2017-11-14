@@ -27,9 +27,6 @@ export default class PlayerCard extends Component {
                     <Icon style={{padding:3}} name={"bookmark"} size={24} color={this.props.colour}/>
                     <Text style={MainStyles.bigWhiteStyle}>{this.props.playerData.nick}</Text>
                 </View>
-                <View style={[BattleInspectorStyle.dataRow2x2,]}>
-                    <Text style={MainStyles.smallWhiteStyle}>Full name: {this.props.playerData.name} {this.props.playerData.surname}</Text>
-                </View>
                 <View style={BattleInspectorStyle.infoCard}>
                     <Image style={BattleInspectorStyle.avatar2x2} source={require("battleCraftMobile/img/userLogoDef.png")}/>
                     <View style={[BattleInspectorStyle.dataColumn, {flex:1}]}>
@@ -41,9 +38,6 @@ export default class PlayerCard extends Component {
                         </View>
                     </View>
                     <Image style={BattleInspectorStyle.avatar2x2} source={require("battleCraftMobile/img/userLogoDef.png")}/>
-                </View>
-                <View style={[BattleInspectorStyle.dataRow2x2,]}>
-                    <Text style={MainStyles.smallWhiteStyle}>Full name: {this.props.playerData.name} {this.props.playerData.surname}</Text>
                 </View>
                 <View style={[BattleInspectorStyle.playerHeader, MainStyles.borderStyle, {justifyContent: 'flex-end',}]}>
                     <Icon style={{padding:3}} name={"bookmark"} size={24} color={this.props.colour}/>

@@ -30,7 +30,7 @@ export default class TournamentPanel extends Component {
             inspectVisible: false,
             inspectorBattleId: 'someID',
 
-            battleType: 2,
+            battleType: 1,
 
             tournamentName: "Temptemptemptemp",
             turnMax: 4,
@@ -117,7 +117,7 @@ export default class TournamentPanel extends Component {
         if(this.state.currentTab<this.state.turnMax) this.setState({currentTab: this.state.currentTab+1});
     }
 
-    openInspector(battleId){
+    openInspector = (battleId) => {
         this.setState({
             inspectVisible: true,
             inspectorBattleId: battleId})
@@ -125,10 +125,10 @@ export default class TournamentPanel extends Component {
 
     makeBattle(){
         if(this.state.battleType===1) {
-            return (<Battle currentTab={this.state.currentTab} content={this.battlesContent}/>)
+            return (<Battle currentTab={this.state.currentTab} content={this.battlesContent} openInspector={this.openInspector}/>)
         }
         else {
-            return (<Battle2x2 currentTab={this.state.currentTab} content={this.battlesContent}/>)
+            return (<Battle2x2 currentTab={this.state.currentTab} content={this.battlesContent} openInspector={this.openInspector}/>)
         }
     }
     makeBattleInspector(){
@@ -158,7 +158,7 @@ export default class TournamentPanel extends Component {
                 <View style={[TournamentStyles.tournamentHeader,MainStyles.borderStyle]}>
                     <Text style={MainStyles.bigWhiteStyle}>{this.state.tournamentName}</Text>
                 </View>
-                <View style={{marginBottom: 3}}><Button title={"My battle"} color='#4b371b' onPress={()=>{this.openInspector("MyBattleID")}}/></View>
+                <View style={{marginBottom: 3}}><Button title={"My battle"} color='#4b371b' onPress={()=>{this.openInspector('battleId')}}/></View>
                 <GestureRecognizer
                     onSwipeLeft={(event) => this.onSwipeLeft(event)}
                     onSwipeRight={(event) => this.onSwipeRight(event)}

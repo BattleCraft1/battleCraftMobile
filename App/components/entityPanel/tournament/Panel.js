@@ -15,6 +15,8 @@ import AddressTab from './tabs/AddressTab';
 import ParticipantsTab from './tabs/ParticipantsTab';
 import OrganizersTab from './tabs/OrganizersTab';
 
+import BaseColours from 'battleCraftMobile/App/main/consts/BaseColours'
+
 import Navigation from './navigation/Navigation'
 
 import { ActionCreators } from '../../../redux/actions/index';
@@ -131,7 +133,7 @@ class Panel extends Component {
     }
 
     isTabActive(activeTabName){
-        return this.state.activeTab === activeTabName?'#E0BA51':'#4b371b';
+        return this.state.activeTab === activeTabName?BaseColours.border.bottom:BaseColours.background.darkBrown;
     }
 
     shouldActualizeRelatedEntitiesCallBack(){
@@ -244,18 +246,18 @@ class Panel extends Component {
     createButtons(){
         if(this.props.mode!=='get'){
             return [
-                <TouchableHighlight key="save" style={[EntityPanelStyle.button,{backgroundColor:'#721515' }]} onPress={() => this.sendEntity()}>
-                    <Text style={EntityPanelStyle.buttonText}>SAVE</Text>
+                <TouchableHighlight key="save" style={[EntityPanelStyle.button,{backgroundColor: BaseColours.misc.deepRed }]} onPress={() => this.sendEntity()}>
+                    <Text style={MainStyle.bigWhiteStyle}>Save</Text>
                 </TouchableHighlight>,
-                <TouchableHighlight key="close" style={[EntityPanelStyle.button,{backgroundColor:'#721515' }]} onPress={() => this.props.disable()}>
-                    <Text style={EntityPanelStyle.buttonText}>CLOSE</Text>
+                <TouchableHighlight key="close" style={[EntityPanelStyle.button,{backgroundColor: BaseColours.misc.deepRed }]} onPress={() => this.props.disable()}>
+                    <Text style={MainStyle.bigWhiteStyle}>Close</Text>
                 </TouchableHighlight>
             ]
         }
         else{
             return [
-                <TouchableHighlight key="ok" style={[EntityPanelStyle.button,{backgroundColor:'#721515' }]} onPress={() => this.props.disable()}>
-                    <Text style={EntityPanelStyle.buttonText}>OK</Text>
+                <TouchableHighlight key="ok" style={[EntityPanelStyle.button,{backgroundColor: BaseColours.misc.deepRed }]} onPress={() => this.props.disable()}>
+                    <Text style={MainStyle.bigWhiteStyle}>Ok</Text>
                 </TouchableHighlight>
             ]
         }
@@ -263,7 +265,7 @@ class Panel extends Component {
 
     calculatePanelHeight(){
         return this.props.dimension.orientation === 'portrait'?
-            this.props.dimension.height*0.8:this.props.dimension.height*0.7;
+            this.props.dimension.height*0.85:this.props.dimension.height*0.75;
     }
 
     render() {
@@ -274,8 +276,7 @@ class Panel extends Component {
             <Modal isVisible={!this.props.hidden} backdropOpacity={0.3}>
                 <View style={[EntityPanelStyle.modal,{
                     width: this.props.dimension.width*0.9,
-                    height: this.calculatePanelHeight()
-                }]}>
+                    height: this.calculatePanelHeight()}]}>
                     <View style={[EntityPanelStyle.title,{alignItems:'center'}]}>
                         <Text style={[MainStyle.textStyle,{fontSize: 22}]}>
                             {this.props.mode.charAt(0).toUpperCase()+this.props.mode.slice(1)+" tournament"}
@@ -286,7 +287,7 @@ class Panel extends Component {
                     setActiveTab={this.setActiveTab.bind(this)}
                     isTabActive={this.isTabActive.bind(this)}/>
                 <View style={[EntityPanelStyle.formWindow]}>
-                        {content}
+                    {content}
                 </View>
                 <View style={EntityPanelStyle.buttonRow}>
                     {buttons}

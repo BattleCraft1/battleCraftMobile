@@ -64,15 +64,6 @@ const styles = StyleSheet.create({
         borderBottomWidth:3,
         padding:3,
     },
-    dataRow2x2:{
-        backgroundColor: BaseColours.background.lightBrown,
-        borderColor: BaseColours.border.top,
-        borderWidth:3,
-        padding:3,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
     playerHeader:{
         flex:1,
         flexDirection:'row',

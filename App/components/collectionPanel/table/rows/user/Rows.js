@@ -123,12 +123,12 @@ class Rows extends Component{
 
     render(){
         return(
-            <View style={{marginBottom:35}}>
-                <View style={TableStyles.header}>
-                    <Text style={[MainStyles.textStyle, {fontSize: 24}]}>User list</Text>
-                    <MultiCheckbox/>
-                </View>
+            <View >
                 <ScrollView styles={TableStyles.table}>
+                    <View style={TableStyles.header}>
+                        <Text style={[MainStyles.textStyle, {fontSize: 24}]}>User list</Text>
+                        <MultiCheckbox/>
+                    </View>
                     {this.createUsersList()}
                 </ScrollView>
             </View>

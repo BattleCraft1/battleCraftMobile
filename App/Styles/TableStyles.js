@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     },
     header:{
         flexDirection: 'row',
+        justifyContent:'center',
         alignItems:'center',
         backgroundColor: BaseColours.misc.deepRed,
         borderColor:BaseColours.border.top,

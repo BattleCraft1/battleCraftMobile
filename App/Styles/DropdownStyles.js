@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
         zIndex: 10000,
         top:60,
         right:0,
-        width: 250,
         backgroundColor: BaseColours.background.mediumBrown,
         borderColor: BaseColours.border.top,
         borderWidth: 3
@@ -22,6 +21,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent:'center',
         marginTop:2,
+        padding:5,
+        minHeight:50,
         backgroundColor: BaseColours.background.darkBrown,
     },
 });

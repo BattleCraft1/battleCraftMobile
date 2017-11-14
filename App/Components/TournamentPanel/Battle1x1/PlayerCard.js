@@ -30,13 +30,13 @@ export default class PlayerCard extends Component {
                 <View style={BattleInspectorStyle.infoCard}>
                     <Image style={BattleInspectorStyle.avatar} source={require("battleCraftMobile/img/userLogoDef.png")}/>
                     <View style={BattleInspectorStyle.dataColumn}>
-                        <View style={BattleInspectorStyle.dataRow}><Text style={MainStyles.smallWhiteStyle}>Full name:</Text></View>
-                        <View style={BattleInspectorStyle.dataRow}><Text style={MainStyles.smallWhiteStyle}>{this.props.playerData.name} {this.props.playerData.surname}</Text></View>
+                        <View style={BattleInspectorStyle.dataRow}><Text style={MainStyles.smallWhiteStyle}>Battle points:</Text></View>
                         <View style={[BattleInspectorStyle.dataRow, {backgroundColor: this.props.scoreBackground}]}>
-                            <Text style={MainStyles.smallWhiteStyle}>Battle points: {this.props.playerData.score}</Text>
+                            <Text style={MainStyles.smallWhiteStyle}>{this.props.playerData.score}</Text>
                         </View>
+                        <View style={BattleInspectorStyle.dataRow}><Text style={MainStyles.smallWhiteStyle}>Total points:</Text></View>
                         <View style={[BattleInspectorStyle.dataRow, {backgroundColor: this.props.totalBackground}]}>
-                            <Text style={MainStyles.smallWhiteStyle}>Total points: {this.props.playerData.total}</Text>
+                            <Text style={MainStyles.smallWhiteStyle}>{this.props.playerData.total}</Text>
                         </View>
                     </View>
                 </View>

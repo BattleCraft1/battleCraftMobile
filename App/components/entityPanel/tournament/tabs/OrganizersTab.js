@@ -5,13 +5,14 @@ import React, { Component } from 'react';
 import {
     View,
     ScrollView,
-    Button
+    Button,
+    Text
 } from 'react-native';
 
 import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 
+import MainStyle from '../../../../Styles/MainStyles';
 import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
-
 
 import { ActionCreators } from '../../../../redux/actions/index';
 import { bindActionCreators } from 'redux';
@@ -51,6 +52,7 @@ class OrganizersTab extends Component{
                     style={{height:height}}
                     contentContainerStyle={EntityPanelStyle.scrollView}>
                     <ValidationErrorMessage validationErrorMessage={this.props.validationErrors["organizers"]}/>
+                    <View style={EntityPanelStyle.playerHeader}><Text style={MainStyle.smallWhiteStyle}>Organizers</Text></View>
                     <OrganizersTable
                         shouldActualizeRelatedEntities={this.props.shouldActualizeRelatedEntities}
                         shouldActualizeRelatedEntitiesCallBack={this.props.shouldActualizeRelatedEntitiesCallBack}
@@ -59,8 +61,7 @@ class OrganizersTab extends Component{
                         disabled = {this.props.inputsDisabled}
                         changeEntity={this.props.changeEntity}
                         relatedEntity={this.props.relatedEntity}
-                        hidden={this.props.hidden}
-                        name="Organizers" />
+                        hidden={this.props.hidden}/>
                 </ScrollView>
                 {!this.props.inputsDisabled &&
                 <Button title={"Invite"} color='#4b371b'
