@@ -82,14 +82,12 @@ class Rows extends Component{
 
     render(){
         return(
-            <View>
                 <ScrollView styles={TableStyles.table}>
                     <View style={TableStyles.header}>
                         <Text numberOfLines={1} style={[MainStyles.textStyle, {fontSize: 24}]}>{findGameName(this.props.pageRequest.searchCriteria)}</Text>
                     </View>
                     {this.createRanking()}
                 </ScrollView>
-            </View>
         );
     }
 }

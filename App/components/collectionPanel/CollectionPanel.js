@@ -219,7 +219,7 @@ class CollectionPanel extends Component {
             tweenHandler={(ratio) => ({main: { opacity:(2-ratio)/2 }})}
             content={formDrawer}
         >
-            <View style={[MainStyles.contentStyle, {flex: 1}]}>
+            <View style={[MainStyles.contentStyle]}>
                 <View style={{marginBottom:3, flexDirection:'row'}}>
                     <View style={{flex:1, marginRight: 3}}>
                         <Button title="Open page tab" color='#4b371b'

@@ -37,7 +37,11 @@ class Dropdown extends Component {
         return (
 
             <TouchableHighlight style={DropdownStyles.dropdownOptionStyle} key={elementText}  onPress={()=>{this.menuSelect(elementText)}}>
-                    <Text style={MainStyles.bigWhiteStyle}>{elementText}</Text>
+                <View style={DropdownStyles.outerBorder}>
+                    <View style={DropdownStyles.innerBorder}>
+                        <Text style={MainStyles.bigWhiteStyle}>{elementText}</Text>
+                    </View>
+                </View>
             </TouchableHighlight>
         );
     }

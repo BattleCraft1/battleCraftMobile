@@ -23,7 +23,7 @@ const ListColours={
             "BANNED": '#9C6357',
     },
     "battle": {
-        "DRAW": '#a58e60',
+        "DRAW": '#6092A2',
         "WIN": '#749858',
         "LOSE": '#9C6357',
     },

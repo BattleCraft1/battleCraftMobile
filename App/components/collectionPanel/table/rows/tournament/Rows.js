@@ -110,7 +110,6 @@ class Rows extends Component{
 
     render(){
         return(
-            <View>
                 <ScrollView styles={TableStyles.table}>
                     <View style={TableStyles.header}>
                         <Text style={[MainStyles.textStyle, {fontSize: 24}]}>Tournaments List</Text>
@@ -118,7 +117,6 @@ class Rows extends Component{
                     </View>
                     {this.createTournamentsList()}
                 </ScrollView>
-            </View>
         );
     }
 }

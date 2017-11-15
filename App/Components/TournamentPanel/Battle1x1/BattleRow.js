@@ -81,7 +81,7 @@ export default class Battle extends Component {
                  <ListView
                   dataSource={this.state.dataSource.cloneWithRows(this.props.content)}
                   renderHeader={(headerData) => <View style={[BattleStyle.turnHeader]}><Text style={[MainStyles.textStyle, {fontSize:22}]}>Turn {this.props.currentTab}</Text></View>}
-                  renderRow={this.renderRow}/>
+                  renderRow={this.renderRow.bind(this)}/>
         );
     }
 }

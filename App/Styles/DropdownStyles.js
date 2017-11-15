@@ -18,13 +18,26 @@ const styles = StyleSheet.create({
     },
     dropdownOptionStyle:{
         flex: 1,
-        alignItems: 'center',
-        justifyContent:'center',
         marginTop:2,
-        padding:5,
+        padding:10,
         minHeight:50,
         backgroundColor: BaseColours.background.darkBrown,
     },
+    outerBorder:{
+        flex:1,
+        borderColor:BaseColours.border.top,
+        backgroundColor: BaseColours.misc.deepRed,
+        borderWidth:3,
+        padding:3,
+    },
+    innerBorder:{
+        flex:1,
+        alignItems: 'center',
+        justifyContent:'center',
+        borderColor:BaseColours.border.top,
+        borderWidth:3,
+        padding: 5
+    }
 });
 
 export default styles;

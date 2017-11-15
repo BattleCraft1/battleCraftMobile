@@ -17,6 +17,8 @@ import Battle from './Battle1x1/BattleRow'
 import BattleInspector from './Battle1x1/BattleInspector'
 import Battle2x2 from './Battle2x2/BattleRow'
 import BattleInspector2x2 from './Battle2x2/BattleInspector'
+import Scoreboard from './Battle1x1/Scoreboard'
+import Scoreboard2x2 from './Battle2x2/Scoreboard'
 
 import MainStyles from '../../Styles/MainStyles'
 import TournamentStyles from '../../Styles/TournamentStyles'
@@ -29,6 +31,8 @@ export default class TournamentPanel extends Component {
         this.state = {
             inspectVisible: false,
             inspectorBattleId: 'someID',
+
+            scoreboardVisible: false,
 
             battleType: 1,
 
@@ -147,6 +151,18 @@ export default class TournamentPanel extends Component {
                     battleData={this.battlesContent.battle1}/>)
         }
     }
+    makeScoreboard(){
+        if(this.state.battleType===1) {
+            return (<Scoreboard
+                onClosePanel={(isVisible) => this.setState({scoreboardVisible: isVisible})}
+                isVisible={this.state.scoreboardVisible}/>)
+        }
+        else {
+            return (<Scoreboard
+                onClosePanel={(isVisible) => this.setState({scoreboardVisible: isVisible})}
+                isVisible={this.state.scoreboardVisible}/>)
+        }
+    }
 
     render() {
 
@@ -160,6 +176,7 @@ export default class TournamentPanel extends Component {
                 <View style={[TournamentStyles.tournamentHeader,MainStyles.borderStyle]}>
                     <Text style={MainStyles.bigWhiteStyle}>{this.state.tournamentName}</Text>
                 </View>
+                <View style={{marginBottom: 3}}><Button title={"Scoreboard"} color='#4b371b' onPress={()=>this.setState({scoreboardVisible: true,})}/></View>
                 <View style={{marginBottom: 3}}><Button title={"My battle"} color='#4b371b' onPress={()=>this.openInspector('someId')}/></View>
                 <GestureRecognizer
                     onSwipeLeft={(event) => this.onSwipeLeft(event)}
@@ -175,6 +192,7 @@ export default class TournamentPanel extends Component {
                 </GestureRecognizer>
                 <View><Button title={"Return"} color='#4b371b' onPress={()=>{}}/></View>
                 {this.makeBattleInspector()}
+                {this.makeScoreboard()}
             </View>
         );
     }
