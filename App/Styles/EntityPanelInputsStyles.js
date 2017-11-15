@@ -18,16 +18,19 @@ const styles = {
         borderRightColor: BaseColours.border.right,
         borderBottomColor: BaseColours.border.bottom,
         borderLeftColor: BaseColours.border.left,
-        borderWidth:4,
-        width:85,
-        height:85
+        backgroundColor:BaseColours.misc.deepRed,
+        borderWidth:5,
+        padding: 3,
+        margin: 3,
+        width:170,
+        height:170
     },
     avatarStyle:{
-        backgroundColor:BaseColours.misc.deepRed,
         flex: 1,
+        backgroundColor:BaseColours.background.lightBrown,
         resizeMode:'contain',
-        width:79,
-        height:81
+        width:155,
+        height:155
     }
 };
 

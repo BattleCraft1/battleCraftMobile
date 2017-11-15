@@ -4,7 +4,9 @@
 
 import React, { Component } from 'react';
 import {
-    ScrollView
+    ScrollView,
+    View,
+    Text
 } from 'react-native';
 
 import GameRulesInput from '../../inputs/GameRulesInput'
@@ -15,6 +17,7 @@ import NumberOutput from '../../outputs/NumberOutput'
 
 import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 
+import MainStyles from "../../../../Styles/MainStyles";
 import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
 
 import { ActionCreators } from '../../../../redux/actions/index';
@@ -45,28 +48,38 @@ class GameDataTab extends Component{
                 style={{height:height}}
                 contentContainerStyle={EntityPanelStyle.scrollView}>
 
-                <TextInput
-                    value={this.props.entity["nameChange"]}
-                    fieldName="nameChange"
-                    changeEntity={this.props.changeEntity}
-                    disabled = {this.props.inputsDisabled}
-                    placeholder = "jarek2123"
-                    name="Game name:"/>
-                <ValidationErrorMessage
+                <View style={EntityPanelStyle.inputCard}>
+                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Game name:</Text></View>
+                    <TextInput
+                        value={this.props.entity["nameChange"]}
+                        fieldName="nameChange"
+                        changeEntity={this.props.changeEntity}
+                        disabled = {this.props.inputsDisabled}
+                        placeholder = "jarek2123"/>
+                    <ValidationErrorMessage
                     validationErrorMessage={this.props.validationErrors["nameChange"]}/>
+                </View>
 
-                <NumberOutput
-                    value={this.props.entity["tournamentsNumber"]}
-                    name="Tournaments count:"/>
-                <TextOutput
-                    value={this.props.entity["status"]}
-                    name="Status:"/>
-                <TextOutput
-                    value={this.props.entity["creatorName"]}
-                    name="Creator username:"/>
-                <TextOutput
-                    value={setDate(this.props.entity["dateOfCreation"])}
-                    name="Creation date:"/>
+                <View style={EntityPanelStyle.inputCard}>
+                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Tournaments count:</Text></View>
+                    <NumberOutput
+                        value={this.props.entity["tournamentsNumber"]}/>
+                </View>
+                <View style={EntityPanelStyle.inputCard}>
+                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Status:</Text></View>
+                    <TextOutput
+                        value={this.props.entity["status"]}/>
+                </View>
+                <View style={EntityPanelStyle.inputCard}>
+                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Creator username:</Text></View>
+                    <TextOutput
+                        value={this.props.entity["creatorName"]}/>
+                </View>
+                <View style={EntityPanelStyle.inputCard}>
+                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Creation date:</Text></View>
+                    <TextOutput
+                        value={setDate(this.props.entity["dateOfCreation"])}/>
+                </View>
 
                 {!this.props.inputsDisabled &&
                 <GameRulesInput

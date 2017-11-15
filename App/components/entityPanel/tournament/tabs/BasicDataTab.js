@@ -4,7 +4,9 @@
 
 import React, { Component } from 'react';
 import {
-    ScrollView
+    ScrollView,
+    View,
+    Text
 } from 'react-native';
 
 import SelectInput from '../../inputs/SelectInput'
@@ -19,11 +21,12 @@ import TextOutput from '../../outputs/TextOutput'
 import {serverName} from '../../../../main/consts/serverName';
 import axios from 'axios';
 
-import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
+import MainStyles from "../../../../Styles/MainStyles";
+import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
 
 import convertArrayToObject from "../../../../main/functions/convertArrayToObjectWithoutEmptyField";
 import {type} from "../../../../main/consts/tournamentTypeWithoutEmptyOption";
-import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
+import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 
 import { ActionCreators } from '../../../../redux/actions/index';
 import { bindActionCreators } from 'redux';
@@ -82,83 +85,102 @@ class BasicDataTab extends Component{
             <ScrollView
                 style={{height:height}}
                 contentContainerStyle={EntityPanelStyle.scrollView}>
-                <TextInput
-                    value={this.props.entity["nameChange"]}
-                    fieldName="nameChange"
-                    changeEntity={this.props.changeEntity}
-                    disabled = {this.props.inputsDisabled}
-                    placeholder = "Tournament 2017"
-                    name="Name:"/>
-                <ValidationErrorMessage
-                    validationErrorMessage={this.props.validationErrors["nameChange"]}/>
 
-                <TextOutput
-                    value={this.props.entity["status"]}
-                    name="Tournament status:"/>
+                <View style={EntityPanelStyle.inputCard}>
+                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Name:</Text></View>
+                    <TextInput
+                        value={this.props.entity["nameChange"]}
+                        fieldName="nameChange"
+                        changeEntity={this.props.changeEntity}
+                        disabled = {this.props.inputsDisabled}
+                        placeholder = "Tournament 2017"/>
+                    <ValidationErrorMessage
+                        validationErrorMessage={this.props.validationErrors["nameChange"]}/>
+                </View>
 
-                <SelectInput
-                    value={this.props.entity["game"]}
-                    fieldName="game"
-                    changeEntity={this.props.changeEntity}
-                    options={this.state.gameNames}
-                    disabled = {this.props.inputsDisabled}
-                    name="Game:"/>
-                <ValidationErrorMessage
-                    validationErrorMessage={this.props.validationErrors["game"]}/>
+                <View style={EntityPanelStyle.inputCard}>
+                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Tournament status:</Text></View>
+                    <TextOutput
+                        value={this.props.entity["status"]}/>
+                </View>
 
-                <NumberInput
-                    value={this.props.entity["tablesCount"]}
-                    fieldName="tablesCount"
-                    changeEntity={this.props.changeEntity}
-                    disabled = {this.props.inputsDisabled}
-                    placeholder = "Tables count"
-                    name="Tables count:"/>
-                <ValidationErrorMessage
-                    validationErrorMessage={this.props.validationErrors["tablesCount"]}/>
+                <View style={EntityPanelStyle.inputCard}>
+                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Game:</Text></View>
+                    <SelectInput
+                        value={this.props.entity["game"]}
+                        fieldName="game"
+                        changeEntity={this.props.changeEntity}
+                        options={this.state.gameNames}
+                        disabled = {this.props.inputsDisabled}/>
+                    <ValidationErrorMessage
+                        validationErrorMessage={this.props.validationErrors["game"]}/>
+                </View>
 
-                <SelectTournamentTypeInput
-                    value={this.props.entity["playersOnTableCount"]}
-                    fieldName="playersOnTableCount"
-                    changeEntity={this.props.changeEntity}
-                    options={type}
-                    disabled = {this.props.inputsDisabled}
-                    name="Type:"/>
-                <ValidationErrorMessage
-                    validationErrorMessage={this.props.validationErrors["playersOnTableCount"]}/>
+                <View style={EntityPanelStyle.inputCard}>
+                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Tables count:</Text></View>
+                    <NumberInput
+                        value={this.props.entity["tablesCount"]}
+                        fieldName="tablesCount"
+                        changeEntity={this.props.changeEntity}
+                        disabled = {this.props.inputsDisabled}
+                        placeholder = "Tables count"/>
+                    <ValidationErrorMessage
+                        validationErrorMessage={this.props.validationErrors["tablesCount"]}/>
+                </View>
 
-                <NumberInput
-                    value={this.props.entity["toursCount"]}
-                    fieldName="toursCount"
-                    changeEntity={this.props.changeEntity}
-                    disabled = {this.props.inputsDisabled}
-                    name="Tours count"/>
-                <ValidationErrorMessage
-                    validationErrorMessage={this.props.validationErrors["toursCount"]}/>
+                <View style={EntityPanelStyle.inputCard}>
+                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Type:</Text></View>
+                    <SelectTournamentTypeInput
+                        value={this.props.entity["playersOnTableCount"]}
+                        fieldName="playersOnTableCount"
+                        changeEntity={this.props.changeEntity}
+                        options={type}
+                        disabled = {this.props.inputsDisabled}/>
+                    <ValidationErrorMessage
+                        validationErrorMessage={this.props.validationErrors["playersOnTableCount"]}/>
+                </View>
 
-                <NumberOutput
-                    value={maxPlayers}
-                    name="Max players:"/>
-                <TextOutput
-                    value={this.calculateTournamentType(maxPlayers)}
-                    name="Tournament class:"/>
+                <View style={EntityPanelStyle.inputCard}>
+                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Tours count:</Text></View>
+                    <NumberInput
+                        value={this.props.entity["toursCount"]}
+                        fieldName="toursCount"
+                        changeEntity={this.props.changeEntity}
+                        disabled = {this.props.inputsDisabled}/>
+                    <ValidationErrorMessage
+                        validationErrorMessage={this.props.validationErrors["toursCount"]}/>
+                </View>
 
-                <DateInput
-                    value={this.props.entity["dateOfStart"]}
-                    fieldName="dateOfStart"
-                    changeEntity={this.props.changeEntity}
-                    disabled = {this.props.inputsDisabled}
-                    name="Start at:"/>
-                <ValidationErrorMessage
-                    validationErrorMessage={this.props.validationErrors["dateOfStart"]}/>
+                <View style={EntityPanelStyle.inputCard}>
+                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Max players:</Text></View>
+                    <NumberOutput
+                        value={maxPlayers}/>
+                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Tournament class:</Text></View>
+                    <TextOutput
+                        value={this.calculateTournamentType(maxPlayers)}/>
+                </View>
 
-                <DateInput
-                    value={this.props.entity["dateOfEnd"]}
-                    fieldName="dateOfEnd"
-                    changeEntity={this.props.changeEntity}
-                    disabled = {this.props.inputsDisabled}
-                    name="Ends at:"/>
-                <ValidationErrorMessage
-                    validationErrorMessage={this.props.validationErrors["dateOfEnd"]}/>
+                <View style={EntityPanelStyle.inputCard}>
+                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Start at:</Text></View>
+                    <DateInput
+                        value={this.props.entity["dateOfStart"]}
+                        fieldName="dateOfStart"
+                        changeEntity={this.props.changeEntity}
+                        disabled = {this.props.inputsDisabled}/>
+                    <ValidationErrorMessage
+                        validationErrorMessage={this.props.validationErrors["dateOfStart"]}/>
+                </View>
+
+                <View style={EntityPanelStyle.inputCard}>
+                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Ends at:</Text></View>
+                    <DateInput
+                        value={this.props.entity["dateOfEnd"]}
+                        fieldName="dateOfEnd"
+                        changeEntity={this.props.changeEntity}
+                        disabled = {this.props.inputsDisabled}/>
+                    <ValidationErrorMessage
+                        validationErrorMessage={this.props.validationErrors["dateOfEnd"]}/>
+                </View>
 
             </ScrollView>
         );

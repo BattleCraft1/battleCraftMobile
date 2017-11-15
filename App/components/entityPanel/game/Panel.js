@@ -10,6 +10,8 @@ import Modal from 'react-native-modal';
 import MainStyle from '../../../Styles/MainStyles';
 import EntityPanelStyle from '../../../Styles/EntityPanelStyle'
 
+import BaseColours from 'battleCraftMobile/App/main/consts/BaseColours'
+
 import GameDataTab from './tabs/GameDataTab'
 
 import { ActionCreators } from '../../../redux/actions/index';
@@ -185,18 +187,18 @@ class Panel extends Component {
     createButtons(){
         if(this.props.mode!=='get'){
             return [
-                <TouchableHighlight key="save" style={[EntityPanelStyle.button,{backgroundColor:'#721515' }]} onPress={() => this.sendEntity()}>
-                    <Text style={EntityPanelStyle.buttonText}>SAVE</Text>
+                <TouchableHighlight key="save" style={[EntityPanelStyle.button,{backgroundColor: BaseColours.misc.deepRed }]} onPress={() => this.sendEntity()}>
+                    <Text style={MainStyle.bigWhiteStyle}>Save</Text>
                 </TouchableHighlight>,
-                <TouchableHighlight key="close" style={[EntityPanelStyle.button,{backgroundColor:'#721515' }]} onPress={() => this.props.disable()}>
-                    <Text style={EntityPanelStyle.buttonText}>CLOSE</Text>
+                <TouchableHighlight key="close" style={[EntityPanelStyle.button,{backgroundColor: BaseColours.misc.deepRed }]} onPress={() => this.props.disable()}>
+                    <Text style={MainStyle.bigWhiteStyle}>Close</Text>
                 </TouchableHighlight>
             ]
         }
         else{
             return [
-                <TouchableHighlight key="ok" style={[EntityPanelStyle.button,{backgroundColor:'#721515' }]} onPress={() => this.props.disable()}>
-                    <Text style={EntityPanelStyle.buttonText}>OK</Text>
+                <TouchableHighlight key="ok" style={[EntityPanelStyle.button,{backgroundColor: BaseColours.misc.deepRed }]} onPress={() => this.props.disable()}>
+                    <Text style={MainStyle.bigWhiteStyle}>Ok</Text>
                 </TouchableHighlight>
             ]
         }

@@ -4,7 +4,9 @@
 
 import React, { Component } from 'react';
 import {
-    ScrollView
+    ScrollView,
+    View,
+    Text
 } from 'react-native';
 
 import AvatarInput from '../../inputs/AvatarInput'
@@ -13,6 +15,7 @@ import TextInput from '../../inputs/TextInput'
 import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 
 import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
+import MainStyles from "../../../../Styles/MainStyles";
 
 import { ActionCreators } from '../../../../redux/actions/index';
 import { bindActionCreators } from 'redux';
@@ -39,59 +42,71 @@ class PersonalDataTab extends Component{
             <ScrollView
                 style={{height:height}}
                 contentContainerStyle={EntityPanelStyle.scrollView}>
-                <AvatarInput
-                    disabled = {this.props.inputsDisabled}
-                    name={this.props.entity["name"]}/>
+                <View style={{margin:5}}>
+                    <AvatarInput
+                        disabled = {this.props.inputsDisabled}
+                        name={this.props.entity["name"]}/>
+                </View>
 
-                <TextInput
-                    value={this.props.entity["nameChange"]}
-                    fieldName="nameChange"
-                    changeEntity={this.props.changeEntity}
-                    disabled = {this.props.inputsDisabled}
-                    placeholder = "jarek2123"
-                    name="Name:"/>
-                <ValidationErrorMessage
-                    validationErrorMessage={this.props.validationErrors["nameChange"]}/>
+                <View style={EntityPanelStyle.inputCard}>
+                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Name:</Text></View>
+                    <TextInput
+                        value={this.props.entity["nameChange"]}
+                        fieldName="nameChange"
+                        changeEntity={this.props.changeEntity}
+                        disabled = {this.props.inputsDisabled}
+                        placeholder = "jarek2123"/>
+                    <ValidationErrorMessage
+                        validationErrorMessage={this.props.validationErrors["nameChange"]}/>
+                </View>
 
-                <TextInput
-                    value={this.props.entity["firstname"]}
-                    fieldName="firstname"
-                    changeEntity={this.props.changeEntity}
-                    disabled = {this.props.inputsDisabled}
-                    placeholder = "Jarek"
-                    name="First name:"/>
-                <ValidationErrorMessage
-                    validationErrorMessage={this.props.validationErrors["firstname"]}/>
+                <View style={EntityPanelStyle.inputCard}>
+                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>First name:</Text></View>
+                    <TextInput
+                        value={this.props.entity["firstname"]}
+                        fieldName="firstname"
+                        changeEntity={this.props.changeEntity}
+                        disabled = {this.props.inputsDisabled}
+                        placeholder = "Jarek"/>
+                    <ValidationErrorMessage
+                        validationErrorMessage={this.props.validationErrors["firstname"]}/>
+                </View>
 
-                <TextInput
-                    value={this.props.entity["lastname"]}
-                    fieldName="lastname"
-                    changeEntity={this.props.changeEntity}
-                    disabled = {this.props.inputsDisabled}
-                    placeholder = "Kowalski"
-                    name="Surname:"/>
-                <ValidationErrorMessage
-                    validationErrorMessage={this.props.validationErrors["lastname"]}/>
+                <View style={EntityPanelStyle.inputCard}>
+                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Surname:</Text></View>
+                    <TextInput
+                        value={this.props.entity["lastname"]}
+                        fieldName="lastname"
+                        changeEntity={this.props.changeEntity}
+                        disabled = {this.props.inputsDisabled}
+                        placeholder = "Kowalski"/>
+                    <ValidationErrorMessage
+                        validationErrorMessage={this.props.validationErrors["lastname"]}/>
+                </View>
 
-                <TextInput
-                    value={this.props.entity["email"]}
-                    fieldName="email"
-                    changeEntity={this.props.changeEntity}
-                    disabled = {this.props.inputsDisabled}
-                    placeholder = "jarek2123@gmail.com"
-                    name="E-mail:"/>
-                <ValidationErrorMessage
+                <View style={EntityPanelStyle.inputCard}>
+                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>E-mail:</Text></View>
+                    <TextInput
+                        value={this.props.entity["email"]}
+                        fieldName="email"
+                        changeEntity={this.props.changeEntity}
+                        disabled = {this.props.inputsDisabled}
+                        placeholder = "jarek2123@gmail.com"/>
+                    <ValidationErrorMessage
                     validationErrorMessage={this.props.validationErrors["email"]}/>
+                </View>
 
-                <TextInput
-                    value={this.props.entity["phoneNumber"]}
-                    fieldName="phoneNumber"
-                    changeEntity={this.props.changeEntity}
-                    disabled = {this.props.inputsDisabled}
-                    placeholder = "123123123"
-                    name="Phone number (optional):"/>
-                <ValidationErrorMessage
-                    validationErrorMessage={this.props.validationErrors["phoneNumber"]}/>
+                <View style={EntityPanelStyle.inputCard}>
+                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Phone number (optional):</Text></View>
+                    <TextInput
+                        value={this.props.entity["phoneNumber"]}
+                        fieldName="phoneNumber"
+                        changeEntity={this.props.changeEntity}
+                        disabled = {this.props.inputsDisabled}
+                        placeholder = "123123123"/>
+                    <ValidationErrorMessage
+                        validationErrorMessage={this.props.validationErrors["phoneNumber"]}/>
+                </View>
             </ScrollView>
         );
     }

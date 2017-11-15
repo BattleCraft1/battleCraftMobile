@@ -52,7 +52,7 @@ class OrganizersTab extends Component{
                     style={{height:height}}
                     contentContainerStyle={EntityPanelStyle.scrollView}>
                     <ValidationErrorMessage validationErrorMessage={this.props.validationErrors["organizers"]}/>
-                    <View style={EntityPanelStyle.playerHeader}><Text style={MainStyle.smallWhiteStyle}>Organizers</Text></View>
+                    <View style={EntityPanelStyle.playerHeader}><Text style={[MainStyle.smallWhiteStyle, {fontWeight:'bold'}]}>Organizers</Text></View>
                     <OrganizersTable
                         shouldActualizeRelatedEntities={this.props.shouldActualizeRelatedEntities}
                         shouldActualizeRelatedEntitiesCallBack={this.props.shouldActualizeRelatedEntitiesCallBack}

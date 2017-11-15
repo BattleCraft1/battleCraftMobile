@@ -34,14 +34,32 @@ const styles = StyleSheet.create({
     formWindow:{
         borderColor: BaseColours.border.top,
         borderWidth: 3,
-        padding: 5
+        padding: 5,
     },
+
     formHeader:{
         backgroundColor: BaseColours.background.darkBrown,
         borderColor: BaseColours.border.top,
         borderWidth: 3,
         borderBottomWidth: 0,
         alignItems: 'center'
+    },
+
+    inputCard:{
+        borderColor:BaseColours.background.darkBrown,
+        borderWidth:3,
+        padding:3,
+        marginBottom: 5,
+        backgroundColor:BaseColours.background.mediumBrown
+    },
+    inputText:{
+        backgroundColor:BaseColours.background.lightBrown,
+        borderColor:BaseColours.border.top,
+        borderWidth:2,
+        padding:3,
+        marginBottom: 3,
+        alignItems: 'center',
+        justifyContent:'center',
     },
 
     playerHeader:{

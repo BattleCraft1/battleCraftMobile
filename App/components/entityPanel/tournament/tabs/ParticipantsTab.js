@@ -121,7 +121,7 @@ class ParticipantsTab extends Component{
                     style={{height:height}}
                     contentContainerStyle={EntityPanelStyle.scrollView}>
                     <ValidationErrorMessage validationErrorMessage={this.props.validationErrors["participants"]}/>
-                    <View style={EntityPanelStyle.playerHeader}><Text style={MainStyle.smallWhiteStyle}>Participants</Text></View>
+                    <View style={EntityPanelStyle.playerHeader}><Text style={[MainStyle.smallWhiteStyle, {fontWeight:'bold'}]}>Participants</Text></View>
                     {this.chooseUserTableByTournamentType()}
                 </ScrollView>
                 {this.createButton()}

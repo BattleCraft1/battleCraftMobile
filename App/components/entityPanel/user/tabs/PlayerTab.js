@@ -5,11 +5,13 @@ import React, { Component } from 'react';
 import {
     View,
     ScrollView,
-    Button
+    Button,
+    Text
 } from 'react-native';
 
 import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 
+import MainStyles from "../../../../Styles/MainStyles";
 import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
 
 import NumberOutput from "../../outputs/NumberOutput";
@@ -84,31 +86,40 @@ class PlayerTab extends Component{
                     style={{height:height}}
                     contentContainerStyle={EntityPanelStyle.scrollView}>
 
+                    <View style={EntityPanelStyle.inputCard}>
+                        <View style={EntityPanelStyle.playerHeader}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Participated tournaments</Text></View>
                     <ValidationErrorMessage validationErrorMessage={this.props.validationErrors["participatedTournaments"]}/>
-                    <TournamentsTable
-                        shouldActualizeRelatedEntities={this.props.shouldActualizeRelatedEntities}
-                        shouldActualizeRelatedEntitiesCallBack={this.props.shouldActualizeRelatedEntitiesCallBack}
-                        inviteSecondPlayer={this.startInviteSecondPlayerToGroup.bind(this)}
-                        relatedEntity={this.props.relatedEntity}
-                        hidden={this.props.hidden}
-                        value={this.props.entity["participatedTournaments"]}
-                        fieldName="participatedTournaments"
-                        disabled = {this.props.inputsDisabled}
-                        changeEntity={this.props.changeEntity}
-                        name="Participated tournaments"
-                    />
+                        <TournamentsTable
+                            shouldActualizeRelatedEntities={this.props.shouldActualizeRelatedEntities}
+                            shouldActualizeRelatedEntitiesCallBack={this.props.shouldActualizeRelatedEntitiesCallBack}
+                            inviteSecondPlayer={this.startInviteSecondPlayerToGroup.bind(this)}
+                            relatedEntity={this.props.relatedEntity}
+                            hidden={this.props.hidden}
+                            value={this.props.entity["participatedTournaments"]}
+                            fieldName="participatedTournaments"
+                            disabled = {this.props.inputsDisabled}
+                            changeEntity={this.props.changeEntity}/>
+                    </View>
 
-                    <TournamentsTableOutput
-                        value={this.props.entity["finishedParticipatedTournaments"]}
-                        name="Finished tournaments"
-                    />
+                    <View style={EntityPanelStyle.inputCard}>
+                        <View style={EntityPanelStyle.playerHeader}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Finished tournaments</Text></View>
+                        <TournamentsTableOutput
+                            value={this.props.entity["finishedParticipatedTournaments"]}
+                        />
+                    </View>
 
+                    <View style={EntityPanelStyle.inputCard}>
+                        <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Points:</Text></View>
                     <NumberOutput
-                        value={this.props.entity["points"]}
-                        name="Points"/>
+                        value={this.props.entity["points"]}/>
+                    </View>
+
+                    <View style={EntityPanelStyle.inputCard}>
+                        <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Battles Count:</Text></View>
                     <NumberOutput
-                        value={this.props.entity["numberOfBattles"]}
-                        name="Battles Count"/>
+                        value={this.props.entity["numberOfBattles"]}/>
+                    </View>
+
                 </ScrollView>
                 {!this.props.inputsDisabled &&
                 <Button title={"ADD TOURNAMENT"} color='#4b371b'
