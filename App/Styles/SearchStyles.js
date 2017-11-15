@@ -15,9 +15,9 @@ const styles = StyleSheet.create({
         borderBottomColor: BaseColours.border.bottom,
         borderLeftColor: BaseColours.border.left,
         borderWidth: 3,
+        marginBottom:5,
         backgroundColor: BaseColours.misc.deepRed,
         alignItems: 'center',
-
     },
 
 });

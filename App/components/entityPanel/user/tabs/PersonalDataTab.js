@@ -16,6 +16,7 @@ import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 
 import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
 import MainStyles from "../../../../Styles/MainStyles";
+import InputStyles from "../../../../Styles/InputStyles";
 
 import { ActionCreators } from '../../../../redux/actions/index';
 import { bindActionCreators } from 'redux';
@@ -48,8 +49,8 @@ class PersonalDataTab extends Component{
                         name={this.props.entity["name"]}/>
                 </View>
 
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Name:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Name:</Text></View>
                     <TextInput
                         value={this.props.entity["nameChange"]}
                         fieldName="nameChange"
@@ -60,8 +61,8 @@ class PersonalDataTab extends Component{
                         validationErrorMessage={this.props.validationErrors["nameChange"]}/>
                 </View>
 
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>First name:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>First name:</Text></View>
                     <TextInput
                         value={this.props.entity["firstname"]}
                         fieldName="firstname"
@@ -72,8 +73,8 @@ class PersonalDataTab extends Component{
                         validationErrorMessage={this.props.validationErrors["firstname"]}/>
                 </View>
 
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Surname:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Surname:</Text></View>
                     <TextInput
                         value={this.props.entity["lastname"]}
                         fieldName="lastname"
@@ -84,8 +85,8 @@ class PersonalDataTab extends Component{
                         validationErrorMessage={this.props.validationErrors["lastname"]}/>
                 </View>
 
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>E-mail:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>E-mail:</Text></View>
                     <TextInput
                         value={this.props.entity["email"]}
                         fieldName="email"
@@ -96,8 +97,8 @@ class PersonalDataTab extends Component{
                     validationErrorMessage={this.props.validationErrors["email"]}/>
                 </View>
 
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Phone number (optional):</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Phone number (optional):</Text></View>
                     <TextInput
                         value={this.props.entity["phoneNumber"]}
                         fieldName="phoneNumber"

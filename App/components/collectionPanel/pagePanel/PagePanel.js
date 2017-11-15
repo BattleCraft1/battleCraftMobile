@@ -16,6 +16,7 @@ import {
 import MainStyles from '../../../Styles/MainStyles'
 import SearchStyles from '../../../Styles/SearchStyles'
 
+
 import {fieldsOfObjects} from '../../../main/consts/fieldsOfObject'
 import {kindOfSort} from '../../../main/consts/kindsOfSort'
 
@@ -127,8 +128,7 @@ class PagePanel extends Component {
                     </View>
                     <Form
                         ref='pageForm'
-                        onChange={this.handlePageFormChanges.bind(this)}
-                    >
+                        onChange={this.handlePageFormChanges.bind(this)}>
                         <InputField
                             ref="page"
                             keyboardType = 'numeric'

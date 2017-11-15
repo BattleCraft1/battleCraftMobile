@@ -17,8 +17,10 @@ import NumberOutput from '../../outputs/NumberOutput'
 
 import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 
+
 import MainStyles from "../../../../Styles/MainStyles";
 import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
+import InputStyles from "../../../../Styles/InputStyles";
 
 import { ActionCreators } from '../../../../redux/actions/index';
 import { bindActionCreators } from 'redux';
@@ -48,8 +50,8 @@ class GameDataTab extends Component{
                 style={{height:height}}
                 contentContainerStyle={EntityPanelStyle.scrollView}>
 
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Game name:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Game name:</Text></View>
                     <TextInput
                         value={this.props.entity["nameChange"]}
                         fieldName="nameChange"
@@ -60,23 +62,23 @@ class GameDataTab extends Component{
                     validationErrorMessage={this.props.validationErrors["nameChange"]}/>
                 </View>
 
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Tournaments count:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Tournaments count:</Text></View>
                     <NumberOutput
                         value={this.props.entity["tournamentsNumber"]}/>
                 </View>
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Status:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Status:</Text></View>
                     <TextOutput
                         value={this.props.entity["status"]}/>
                 </View>
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Creator username:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Creator username:</Text></View>
                     <TextOutput
                         value={this.props.entity["creatorName"]}/>
                 </View>
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Creation date:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Creation date:</Text></View>
                     <TextOutput
                         value={setDate(this.props.entity["dateOfCreation"])}/>
                 </View>

@@ -14,8 +14,10 @@ import TextArea from '../../inputs/TextArea'
 
 import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 import {provinces} from "../../../../main/consts/provincesWithoutEmptyOption";
+
 import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
 import MainStyles from "../../../../Styles/MainStyles";
+import InputStyles from "../../../../Styles/InputStyles";
 
 export default class AddressTab extends Component{
 
@@ -30,8 +32,8 @@ export default class AddressTab extends Component{
             <ScrollView
                 style={{height:height}}
                 contentContainerStyle={EntityPanelStyle.scrollView}>
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Province:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Province:</Text></View>
                     <SelectInput
                         value={this.props.entity["province"]}
                         fieldName="province"
@@ -42,8 +44,8 @@ export default class AddressTab extends Component{
                         validationErrorMessage={this.props.validationErrors["province"]}/>
                 </View>
 
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>City:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>City:</Text></View>
                     <TextInput
                         value={this.props.entity["city"]}
                         fieldName="city"
@@ -54,8 +56,8 @@ export default class AddressTab extends Component{
                         validationErrorMessage={this.props.validationErrors["city"]}/>
                 </View>
 
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Street:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Street:</Text></View>
                     <TextInput
                         value={this.props.entity["street"]}
                         fieldName="street"
@@ -66,8 +68,8 @@ export default class AddressTab extends Component{
                         validationErrorMessage={this.props.validationErrors["street"]}/>
                 </View>
 
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>ZIP code:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>ZIP code:</Text></View>
                     <TextInput
                         value={this.props.entity["zipCode"]}
                         fieldName="zipCode"
@@ -78,8 +80,8 @@ export default class AddressTab extends Component{
                         validationErrorMessage={this.props.validationErrors["zipCode"]}/>
                 </View>
 
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Description (optional):</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Description (optional):</Text></View>
                     <TextArea
                         value={this.props.entity["description"]}
                         fieldName="description"

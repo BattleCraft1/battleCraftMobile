@@ -13,6 +13,7 @@ import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 
 import MainStyles from "../../../../Styles/MainStyles";
 import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
+import InputStyles from "../../../../Styles/InputStyles";
 
 import NumberOutput from "../../outputs/NumberOutput";
 
@@ -86,7 +87,7 @@ class PlayerTab extends Component{
                     style={{height:height}}
                     contentContainerStyle={EntityPanelStyle.scrollView}>
 
-                    <View style={EntityPanelStyle.inputCard}>
+                    <View style={InputStyles.inputCard}>
                         <View style={EntityPanelStyle.playerHeader}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Participated tournaments</Text></View>
                     <ValidationErrorMessage validationErrorMessage={this.props.validationErrors["participatedTournaments"]}/>
                         <TournamentsTable
@@ -101,21 +102,21 @@ class PlayerTab extends Component{
                             changeEntity={this.props.changeEntity}/>
                     </View>
 
-                    <View style={EntityPanelStyle.inputCard}>
+                    <View style={InputStyles.inputCard}>
                         <View style={EntityPanelStyle.playerHeader}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Finished tournaments</Text></View>
                         <TournamentsTableOutput
                             value={this.props.entity["finishedParticipatedTournaments"]}
                         />
                     </View>
 
-                    <View style={EntityPanelStyle.inputCard}>
-                        <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Points:</Text></View>
+                    <View style={InputStyles.inputCard}>
+                        <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Points:</Text></View>
                     <NumberOutput
                         value={this.props.entity["points"]}/>
                     </View>
 
-                    <View style={EntityPanelStyle.inputCard}>
-                        <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Battles Count:</Text></View>
+                    <View style={InputStyles.inputCard}>
+                        <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Battles Count:</Text></View>
                     <NumberOutput
                         value={this.props.entity["numberOfBattles"]}/>
                     </View>

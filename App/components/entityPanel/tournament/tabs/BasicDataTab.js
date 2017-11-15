@@ -23,6 +23,7 @@ import axios from 'axios';
 
 import MainStyles from "../../../../Styles/MainStyles";
 import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
+import InputStyles from "../../../../Styles/InputStyles";
 
 import convertArrayToObject from "../../../../main/functions/convertArrayToObjectWithoutEmptyField";
 import {type} from "../../../../main/consts/tournamentTypeWithoutEmptyOption";
@@ -86,8 +87,8 @@ class BasicDataTab extends Component{
                 style={{height:height}}
                 contentContainerStyle={EntityPanelStyle.scrollView}>
 
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Name:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Name:</Text></View>
                     <TextInput
                         value={this.props.entity["nameChange"]}
                         fieldName="nameChange"
@@ -98,14 +99,14 @@ class BasicDataTab extends Component{
                         validationErrorMessage={this.props.validationErrors["nameChange"]}/>
                 </View>
 
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Tournament status:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Tournament status:</Text></View>
                     <TextOutput
                         value={this.props.entity["status"]}/>
                 </View>
 
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Game:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Game:</Text></View>
                     <SelectInput
                         value={this.props.entity["game"]}
                         fieldName="game"
@@ -116,8 +117,8 @@ class BasicDataTab extends Component{
                         validationErrorMessage={this.props.validationErrors["game"]}/>
                 </View>
 
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Tables count:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Tables count:</Text></View>
                     <NumberInput
                         value={this.props.entity["tablesCount"]}
                         fieldName="tablesCount"
@@ -128,8 +129,8 @@ class BasicDataTab extends Component{
                         validationErrorMessage={this.props.validationErrors["tablesCount"]}/>
                 </View>
 
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Type:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Type:</Text></View>
                     <SelectTournamentTypeInput
                         value={this.props.entity["playersOnTableCount"]}
                         fieldName="playersOnTableCount"
@@ -140,8 +141,8 @@ class BasicDataTab extends Component{
                         validationErrorMessage={this.props.validationErrors["playersOnTableCount"]}/>
                 </View>
 
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Tours count:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Tours count:</Text></View>
                     <NumberInput
                         value={this.props.entity["toursCount"]}
                         fieldName="toursCount"
@@ -151,8 +152,8 @@ class BasicDataTab extends Component{
                         validationErrorMessage={this.props.validationErrors["toursCount"]}/>
                 </View>
 
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Max players:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Max players:</Text></View>
                     <NumberOutput
                         value={maxPlayers}/>
                     <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Tournament class:</Text></View>
@@ -160,8 +161,8 @@ class BasicDataTab extends Component{
                         value={this.calculateTournamentType(maxPlayers)}/>
                 </View>
 
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Start at:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Start at:</Text></View>
                     <DateInput
                         value={this.props.entity["dateOfStart"]}
                         fieldName="dateOfStart"
@@ -171,8 +172,8 @@ class BasicDataTab extends Component{
                         validationErrorMessage={this.props.validationErrors["dateOfStart"]}/>
                 </View>
 
-                <View style={EntityPanelStyle.inputCard}>
-                    <View style={EntityPanelStyle.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Ends at:</Text></View>
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Ends at:</Text></View>
                     <DateInput
                         value={this.props.entity["dateOfEnd"]}
                         fieldName="dateOfEnd"

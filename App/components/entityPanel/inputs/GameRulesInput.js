@@ -18,7 +18,7 @@ export default class GameRulesInput extends React.Component{
 
     render(){
         return(
-            <View style={{alignItems:'center',justifyContent:'center',marginTop:10}}>
+            <View style={{marginTop:10}}>
                 <Button
                     title="Upload Rules"
                     color='#4b371b'

@@ -1,5 +1,11 @@
 import React from 'react';
 import {PickerField} from 'react-native-form-generator';
+import {
+    Text,
+    View
+} from 'react-native';
+import MainStyles from 'battleCraftMobile/App/Styles/MainStyles'
+import InputStyles from 'battleCraftMobile/App/Styles/InputStyles'
 
 const typeMap = {
     "":"",
@@ -28,10 +34,12 @@ export default class SelectInput extends React.Component{
 
     render(){
         return(
-            <PickerField
-                onValueChange={(value)=>this.changeInput(value)}
-                label={this.props.name}
-                options={this.props.options}/>
+            <View style={InputStyles.inputCard}>
+                <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>{this.props.name}</Text></View>
+                <PickerField
+                    onValueChange={(value)=>this.changeInput(value)}
+                    options={this.props.options}/>
+            </View>
         )
     }
 }

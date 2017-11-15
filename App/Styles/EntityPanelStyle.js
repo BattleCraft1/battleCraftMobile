@@ -45,23 +45,6 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
 
-    inputCard:{
-        borderColor:BaseColours.background.darkBrown,
-        borderWidth:3,
-        padding:3,
-        marginBottom: 5,
-        backgroundColor:BaseColours.background.mediumBrown
-    },
-    inputText:{
-        backgroundColor:BaseColours.background.lightBrown,
-        borderColor:BaseColours.border.top,
-        borderWidth:2,
-        padding:3,
-        marginBottom: 3,
-        alignItems: 'center',
-        justifyContent:'center',
-    },
-
     playerHeader:{
         alignItems: 'center',
         justifyContent:'center',
@@ -98,7 +81,7 @@ const styles = StyleSheet.create({
     buttonText:{
         color:'white',
         fontSize:15
-    }
+    },
 });
 
 export default styles;

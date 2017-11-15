@@ -13,6 +13,7 @@ import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 
 import MainStyle from "../../../../Styles/MainStyles";
 import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
+import InputStyles from "../../../../Styles/InputStyles";
 
 import { ActionCreators } from '../../../../redux/actions/index';
 import { bindActionCreators } from 'redux';
@@ -53,7 +54,7 @@ class OrganizerTab extends Component{
                     style={{height:height}}
                     contentContainerStyle={EntityPanelStyle.scrollView}>
 
-                    <View style={EntityPanelStyle.inputCard}>
+                    <View style={InputStyles.inputCard}>
                         <View style={EntityPanelStyle.playerHeader}><Text style={[MainStyle.smallWhiteStyle, {fontWeight:'bold'}]}>Organized tournaments</Text></View>
                         <ValidationErrorMessage validationErrorMessage={this.props.validationErrors["participatedTournaments"]}/>
                         <TournamentsTable
@@ -67,19 +68,19 @@ class OrganizerTab extends Component{
                             changeEntity={this.props.changeEntity.bind(this)}/>
                     </View>
 
-                    <View style={EntityPanelStyle.inputCard}>
+                    <View style={InputStyles.inputCard}>
                         <View style={EntityPanelStyle.playerHeader}><Text style={[MainStyle.smallWhiteStyle, {fontWeight:'bold'}]}>Finished  participated tournaments</Text></View>
                         <TournamentsTableOutput
                             value={this.props.entity["finishedParticipatedTournaments"]}/>
                     </View>
 
-                    <View style={EntityPanelStyle.inputCard}>
+                    <View style={InputStyles.inputCard}>
                         <View style={EntityPanelStyle.playerHeader}><Text style={[MainStyle.smallWhiteStyle, {fontWeight:'bold'}]}>Finished organized tournaments</Text></View>
                         <TournamentsTableOutput
                             value={this.props.entity["finishedOrganizedTournaments"]}/>
                     </View>
 
-                    <View style={EntityPanelStyle.inputCard}>
+                    <View style={InputStyles.inputCard}>
                         <View style={EntityPanelStyle.playerHeader}><Text style={[MainStyle.smallWhiteStyle, {fontWeight:'bold'}]}>Created games</Text></View>
                         <TournamentsTableOutput
                             inputsDisabled={true}

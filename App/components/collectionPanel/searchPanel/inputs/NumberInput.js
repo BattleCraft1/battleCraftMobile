@@ -4,6 +4,8 @@ import {
     Text,
     View
 } from 'react-native';
+import MainStyles from 'battleCraftMobile/App/Styles/MainStyles'
+import InputStyles from 'battleCraftMobile/App/Styles/InputStyles'
 
 export default class NumberInput extends React.Component{
     constructor(props) {
@@ -26,8 +28,8 @@ export default class NumberInput extends React.Component{
 
     render(){
         return(
-            <View>
-                <Text>{this.props.name}</Text>
+            <View style={InputStyles.inputCard}>
+                <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>{this.props.name}</Text></View>
                 <InputField
                     onValueChange={(value)=>this.changeInput(value)}
                     keyboardType = 'numeric'
