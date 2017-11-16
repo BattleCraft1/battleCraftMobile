@@ -20,10 +20,15 @@ import BattleInspector2x2 from './Battle2x2/BattleInspector'
 import Scoreboard from './Battle1x1/Scoreboard'
 import Scoreboard2x2 from './Battle2x2/Scoreboard'
 
-import MainStyles from '../../Styles/MainStyles'
-import TournamentStyles from '../../Styles/TournamentStyles'
+import MainStyles from '../../Styles/UniversalStyles/MainStyles'
+import TournamentStyles from '../../Styles/BattlePanelStyles/TournamentStyles'
 
-export default class TournamentPanel extends Component {
+import { ActionCreators } from '../../redux/actions/index';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+
+class TournamentPanel extends Component {
 
 
     constructor(props) {
@@ -158,7 +163,7 @@ export default class TournamentPanel extends Component {
                 isVisible={this.state.scoreboardVisible}/>)
         }
         else {
-            return (<Scoreboard
+            return (<Scoreboard2x2
                 onClosePanel={(isVisible) => this.setState({scoreboardVisible: isVisible})}
                 isVisible={this.state.scoreboardVisible}/>)
         }
@@ -171,13 +176,26 @@ export default class TournamentPanel extends Component {
             directionalOffsetThreshold: 30
         };
 
+        let flexStyle;
+        let buttonStyle;
+
+        if(this.props.dimension.orientation==='portrait'){
+            flexStyle={flexDirection:'column'};
+            buttonStyle={}
+        }else{
+            flexStyle={flexDirection:'row'};
+            buttonStyle={flex:1, marginRight:3};
+        }
+
         return (
             <View style={MainStyles.contentStyle}>
                 <View style={[TournamentStyles.tournamentHeader,MainStyles.borderStyle]}>
                     <Text style={MainStyles.bigWhiteStyle}>{this.state.tournamentName}</Text>
                 </View>
-                <View style={{marginBottom: 3}}><Button title={"Scoreboard"} color='#4b371b' onPress={()=>this.setState({scoreboardVisible: true,})}/></View>
-                <View style={{marginBottom: 3}}><Button title={"My battle"} color='#4b371b' onPress={()=>this.openInspector('someId')}/></View>
+                <View style={flexStyle}>
+                    <View style={[buttonStyle, {marginBottom: 3}]}><Button title={"Scoreboard"} color='#4b371b' onPress={()=>this.setState({scoreboardVisible: true,})}/></View>
+                    <View style={[buttonStyle, {marginBottom: 3}]}><Button title={"My battle"} color='#4b371b' onPress={()=>this.openInspector('someId')}/></View>
+                </View>
                 <GestureRecognizer
                     onSwipeLeft={(event) => this.onSwipeLeft(event)}
                     onSwipeRight={(event) => this.onSwipeRight(event)}
@@ -197,3 +215,11 @@ export default class TournamentPanel extends Component {
         );
     }
 }
+
+function mapStateToProps( state ) {
+    return {
+        dimension: state.dimension
+    };
+}
+
+export default connect( mapStateToProps)( TournamentPanel );

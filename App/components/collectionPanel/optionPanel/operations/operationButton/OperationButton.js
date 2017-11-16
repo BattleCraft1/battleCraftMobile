@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import OptionsStyles from 'battleCraftMobile/App/Styles/OptionsStyles'
+import OptionsStyles from 'battleCraftMobile/App/Styles/CollectionPanelStyles/OptionsStyles'
 
 import {View,TouchableHighlight,Text} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';

@@ -11,8 +11,8 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import MainStyles from 'battleCraftMobile/App/Styles/MainStyles'
-import BattleStyle from 'battleCraftMobile/App/Styles/BattleStyle'
+import MainStyles from 'battleCraftMobile/App/Styles/UniversalStyles/MainStyles'
+import BattleStyle from 'battleCraftMobile/App/Styles/BattlePanelStyles/BattleStyle'
 
 import BaseColours from "battleCraftMobile/App/main/consts/BaseColours"
 import ListColours from "battleCraftMobile/App/main/consts/ListColours"

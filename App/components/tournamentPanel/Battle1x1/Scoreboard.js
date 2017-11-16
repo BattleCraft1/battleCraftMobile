@@ -12,13 +12,17 @@ import {
 
 import Modal from 'react-native-modal';
 
-import MainStyles from 'battleCraftMobile/App/Styles/MainStyles';
-import ScoreboardStyles from 'battleCraftMobile/App/Styles/ScoreboardStyles';
+import MainStyles from 'battleCraftMobile/App/Styles/UniversalStyles/MainStyles';
+import ScoreboardStyles from 'battleCraftMobile/App/Styles/BattlePanelStyles/ScoreboardStyles';
 
 import BaseColours from "battleCraftMobile/App/main/consts/BaseColours"
 import ListColours from "battleCraftMobile/App/main/consts/ListColours"
 
-export default class Scoreboard extends Component {
+import { ActionCreators } from '../../../redux/actions/index';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+class Scoreboard extends Component {
 
     constructor(props) {
         super(props);
@@ -47,7 +51,7 @@ export default class Scoreboard extends Component {
 
         return(
             <View style={ScoreboardStyles.scoreboardRow}>
-                <View style={[ScoreboardStyles.positionNumber]}>
+                <View style={[ScoreboardStyles.positionNumber, ScoreboardStyles.numberSize1]}>
                     <Text style={MainStyles.bigWhiteStyle}>{rowData.position}.</Text>
                 </View>
                 <View style={[ScoreboardStyles.dataCard ,{backgroundColor: backgroundColour}]}>
@@ -64,12 +68,12 @@ export default class Scoreboard extends Component {
 
     render() {
 
-        let panelHeight = 600;
+        let panelHeight = this.calculatePanelHeight();
 
 
         return (
             <Modal isVisible={this.props.isVisible} backdropOpacity={0.3}>
-                <View style={[ScoreboardStyles.modal, {height: panelHeight}]}>
+                <View style={[ScoreboardStyles.modal, {width:this.props.dimension.width*0.9, height: panelHeight}]}>
                     <View style={ScoreboardStyles.scoreboardHeader}>
                         <Text style={MainStyles.bigWhiteStyle}>Scoreboard</Text>
                     </View>
@@ -90,3 +94,5 @@ function mapStateToProps( state ) {
         dimension: state.dimension
     };
 }
+
+export default connect( mapStateToProps)( Scoreboard );

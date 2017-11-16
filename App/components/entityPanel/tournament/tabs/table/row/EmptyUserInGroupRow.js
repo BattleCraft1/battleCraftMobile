@@ -5,8 +5,8 @@ import {
     Image
 } from 'react-native';
 
-import TableStyles from '../../../../../../Styles/TableStyles'
-import MainStyles from '../../../../../../Styles/MainStyles'
+import TableStyles from '../../../../../../Styles/CollectionPanelStyles/TableStyles'
+import MainStyles from '../../../../../../Styles/UniversalStyles/MainStyles'
 
 import ListColours from '../../../../../../main/consts/ListColours'
 import {serverName} from "../../../../../../main/consts/serverName";

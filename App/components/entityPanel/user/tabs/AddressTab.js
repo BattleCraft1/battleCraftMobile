@@ -15,9 +15,9 @@ import TextArea from '../../inputs/TextArea'
 import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 import {provinces} from "../../../../main/consts/provincesWithoutEmptyOption";
 
-import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
-import MainStyles from "../../../../Styles/MainStyles";
-import InputStyles from "../../../../Styles/InputStyles";
+import EntityPanelStyle from "../../../../Styles/CollectionPanelStyles/EntityPanelStyle";
+import MainStyles from "../../../../Styles/UniversalStyles/MainStyles";
+import InputStyles from "../../../../Styles/UniversalStyles/InputStyles";
 
 export default class AddressTab extends Component{
 

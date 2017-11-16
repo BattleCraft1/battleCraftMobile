@@ -7,8 +7,8 @@ import {
 	TouchableHighlight,
 } from 'react-native';
 
-import MainStyles from '../../Styles/MainStyles'
-import NavbarStyles from '../../Styles/NavbarStyles'
+import MainStyles from '../../Styles/UniversalStyles/MainStyles'
+import NavbarStyles from '../../Styles/NavbarStyles/NavbarStyles'
 
 export default class Navbar extends Component {
 

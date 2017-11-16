@@ -11,8 +11,8 @@ import {
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import MainStyles from 'battleCraftMobile/App/Styles/MainStyles';
-import BattleInspectorStyle from 'battleCraftMobile/App/Styles/BattleInspectorStyle';
+import MainStyles from 'battleCraftMobile/App/Styles/UniversalStyles/MainStyles';
+import BattleInspectorStyle from 'battleCraftMobile/App/Styles/BattlePanelStyles/BattleInspectorStyle';
 
 export default class PlayerCard extends Component {
 

@@ -6,7 +6,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import BaseColours from "battleCraftMobile/App/main/consts/BaseColours"
-import ValidationStyles from 'battleCraftMobile/App/Styles/ValidationStyles'
+import ValidationStyles from 'battleCraftMobile/App/Styles/UniversalStyles/ValidationStyles'
 
 export default class ValidationErrorMessage extends React.Component{
 

@@ -13,8 +13,8 @@ import {
     PickerField
 } from 'react-native-form-generator';
 
-import MainStyles from '../../../Styles/MainStyles'
-import SearchStyles from '../../../Styles/SearchStyles'
+import MainStyles from '../../../Styles/UniversalStyles/MainStyles'
+import SearchStyles from '../../../Styles/CollectionPanelStyles/SearchStyles'
 
 
 import {fieldsOfObjects} from '../../../main/consts/fieldsOfObject'
@@ -121,7 +121,7 @@ class PagePanel extends Component {
 
     render() {
         return (
-            <View style={[MainStyles.contentStyle, MainStyles.centering]}>
+            <View style={[MainStyles.contentStyle, MainStyles.stretch]}>
                 <ScrollView keyboardShouldPersistTaps='always' style={{paddingLeft:10,paddingRight:10}}>
                     <View style={SearchStyles.headerStyle}>
                         <Text style={[MainStyles.textStyle, {fontSize: 26,}]}>Get page</Text>

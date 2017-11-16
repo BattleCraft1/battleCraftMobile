@@ -6,17 +6,15 @@ import {
     StyleSheet,
     Dimensions,
 } from 'react-native';
-import BaseColours from "../main/consts/BaseColours"
+import BaseColours from "../../main/consts/BaseColours"
 
 const styles = StyleSheet.create({
     modal: {
-        width: Dimensions.get('window').width*0.9,
         minHeight:300,
         maxHeight:800,
         padding: 10,
         flex:1,
         position: 'absolute',
-        marginLeft: ((Dimensions.get('window').width*0.1-50)/2),
 
         backgroundColor: BaseColours.background.mediumBrown,
         borderColor: BaseColours.background.darkBrown,
@@ -40,8 +38,6 @@ const styles = StyleSheet.create({
         flex:1
     },
     positionNumber:{
-        width:43,
-        height:43,
         backgroundColor: BaseColours.misc.deepRed,
         padding:3,
         borderWidth: 3,
@@ -52,9 +48,13 @@ const styles = StyleSheet.create({
         borderBottomColor: BaseColours.border.bottom,
         borderLeftColor: BaseColours.border.left,
     },
-    positionNumber2x2:{
+    numberSize1:{
         width:43,
-        height:86,
+        height:43,
+    },
+    numberSize2:{
+        width:60,
+        height:60,
     },
     dataCard:{
         flex:1,

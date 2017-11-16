@@ -12,8 +12,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../../redux/actions';
 
-import MainStyles from '../../../Styles/MainStyles'
-import SearchStyles from '../../../Styles/SearchStyles'
+import MainStyles from '../../../Styles/UniversalStyles/MainStyles'
+import SearchStyles from '../../../Styles/CollectionPanelStyles/SearchStyles'
 
 import isNotEmpty from '../../../main/functions/checkIfObjectIsNotEmpty'
 
@@ -74,7 +74,7 @@ class SearchPanel extends React.Component{
 
         let searchInputs = this.createSearchFormInputs();
 
-        return (<View style={[MainStyles.contentStyle, MainStyles.centering]}>
+        return (<View style={[MainStyles.contentStyle, MainStyles.stretch]}>
             <ScrollView keyboardShouldPersistTaps='always' style={{paddingLeft:10,paddingRight:10}}>
                 <View style={SearchStyles.headerStyle}>
                     <Text style={[MainStyles.textStyle, {fontSize: 26}]}>Search</Text>

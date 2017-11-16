@@ -11,8 +11,8 @@ import Checkbox from '../../../../commonComponents/checkBox/Checkbox'
 import MultiCheckbox from '../../../../commonComponents/checkBox/MultiCheckbox'
 import ListColours from '../../../../../main/consts/ListColours'
 
-import TableStyles from '../../../../../Styles/TableStyles'
-import MainStyles from '../../../../../Styles/MainStyles'
+import TableStyles from '../../../../../Styles/CollectionPanelStyles/TableStyles'
+import MainStyles from '../../../../../Styles/UniversalStyles/MainStyles'
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

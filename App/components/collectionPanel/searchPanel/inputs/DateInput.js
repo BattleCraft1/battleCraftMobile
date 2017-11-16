@@ -7,9 +7,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import dateFormat from 'dateformat';
 
-import DateInputStyles from '../../../../Styles/DateInputStyles'
-import MainStyles from 'battleCraftMobile/App/Styles/MainStyles'
-import InputStyles from 'battleCraftMobile/App/Styles/InputStyles'
+import DateInputStyles from '../../../../Styles/UniversalStyles/DateInputStyles'
+import MainStyles from 'battleCraftMobile/App/Styles/UniversalStyles/MainStyles'
+import InputStyles from 'battleCraftMobile/App/Styles/UniversalStyles/InputStyles'
 
 export default class DateInput extends React.Component{
     constructor(props) {

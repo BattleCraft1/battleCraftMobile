@@ -11,8 +11,8 @@ import { ActionCreators } from '../../redux/actions';
 import {serverName} from "../../main/consts/serverName";
 import axios from 'axios';
 
-import MainStyles from '../../Styles/MainStyles'
-import DrawerStyles from '../../Styles/DrawerStyles'
+import MainStyles from '../../Styles/UniversalStyles/MainStyles'
+import DrawerStyles from '../../Styles/CollectionPanelStyles/DrawerStyles'
 
 import Drawer from 'react-native-drawer'
 

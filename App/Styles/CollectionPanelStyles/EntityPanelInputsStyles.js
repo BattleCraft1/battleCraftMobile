@@ -1,4 +1,4 @@
-import BaseColours from "../main/consts/BaseColours"
+import BaseColours from "../../main/consts/BaseColours"
 
 const styles = {
     inputStyle: {

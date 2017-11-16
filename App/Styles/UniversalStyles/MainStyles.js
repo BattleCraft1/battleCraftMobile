@@ -5,16 +5,20 @@
 import {
     StyleSheet,
 } from 'react-native';
-import BaseColours from "../main/consts/BaseColours"
+import BaseColours from "../../main/consts/BaseColours"
 
 const styles = StyleSheet.create({
     background: {
         flex: 1,
         backgroundColor: '#000',
     },
-    centering:{
+    stretch:{
         flexDirection: 'column',
         alignItems: 'stretch',
+    },
+    center:{
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     textStyle:{
         fontFamily:'arial',

@@ -3,7 +3,7 @@ import {
     Text,
     View,
 } from 'react-native';
-import MainStyles from '../../Styles/MainStyles'
+import MainStyles from '../../Styles/UniversalStyles/MainStyles'
 
 export default class AccountPanel extends Component {
 

@@ -11,9 +11,9 @@ import {
 
 import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 
-import MainStyle from "../../../../Styles/MainStyles";
-import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
-import InputStyles from "../../../../Styles/InputStyles";
+import MainStyle from "../../../../Styles/UniversalStyles/MainStyles";
+import EntityPanelStyle from "../../../../Styles/CollectionPanelStyles/EntityPanelStyle";
+import InputStyles from "../../../../Styles/UniversalStyles/InputStyles";
 
 import { ActionCreators } from '../../../../redux/actions/index';
 import { bindActionCreators } from 'redux';

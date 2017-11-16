@@ -10,8 +10,8 @@ import {
     ScrollView
 } from 'react-native';
 
-import DropdownStyles from '../../../Styles/DropdownStyles'
-import MainStyles from '../../../Styles/MainStyles'
+import DropdownStyles from '../../../Styles/NavbarStyles/DropdownStyles'
+import MainStyles from '../../../Styles/UniversalStyles/MainStyles'
 
 import { ActionCreators } from '../../../redux/actions/index';
 import { bindActionCreators } from 'redux';

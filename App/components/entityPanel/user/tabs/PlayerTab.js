@@ -11,9 +11,9 @@ import {
 
 import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 
-import MainStyles from "../../../../Styles/MainStyles";
-import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
-import InputStyles from "../../../../Styles/InputStyles";
+import MainStyles from "../../../../Styles/UniversalStyles/MainStyles";
+import EntityPanelStyle from "../../../../Styles/CollectionPanelStyles/EntityPanelStyle";
+import InputStyles from "../../../../Styles/UniversalStyles/InputStyles";
 
 import NumberOutput from "../../outputs/NumberOutput";
 

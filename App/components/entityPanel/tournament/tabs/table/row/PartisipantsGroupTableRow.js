@@ -8,7 +8,7 @@ import {
 import UserInGroupRow from './ParticipantInGroupRow'
 import EmptyUserInGroupRow from './EmptyUserInGroupRow'
 
-import EntityPanelStyle from '../../../../../../Styles/EntityPanelStyle'
+import EntityPanelStyle from '../../../../../../Styles/CollectionPanelStyles/EntityPanelStyle'
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

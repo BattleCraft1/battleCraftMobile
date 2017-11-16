@@ -18,7 +18,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../../redux/actions';
 
-import OptionsStyles from '../../../Styles/OptionsStyles'
+import OptionsStyles from '../../../Styles/CollectionPanelStyles/OptionsStyles'
 
 const mapOfOperations = {
     "Ban":BanOperation,

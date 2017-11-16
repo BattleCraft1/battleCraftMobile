@@ -10,7 +10,7 @@ import Navbar from '../components/navbar/Navbar';
 import Navigator from '../components/navigator/Navigator'
 import Dropdown from '../components/navbar/dropdown/Dropdown'
 import SplashScreen from '../components/commonComponents/SplashScreen';
-import MainStyles from '../Styles/MainStyles'
+import MainStyles from '../Styles/UniversalStyles/MainStyles'
 import FadeView from '../components/commonComponents/FadeView'
 import ConfirmDialog from '../components/commonComponents/confirmationDialog/ConfirmDialog'
 import EntityPanel from '../components/entityPanel/EntityPanel'

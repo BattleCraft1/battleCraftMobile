@@ -7,22 +7,32 @@ import {
     View,
     Text,
     Image,
-    Button
+    Button,
+    ScrollView
 } from 'react-native';
 import PlayerCard from './PlayerCard';
 
 import Modal from 'react-native-modal';
 
-import MainStyles from 'battleCraftMobile/App/Styles/MainStyles';
-import BattleInspectorStyle from 'battleCraftMobile/App/Styles/BattleInspectorStyle';
+import MainStyles from 'battleCraftMobile/App/Styles/UniversalStyles/MainStyles';
+import BattleInspectorStyle from 'battleCraftMobile/App/Styles/BattlePanelStyles/BattleInspectorStyle';
 
 import BaseColours from "battleCraftMobile/App/main/consts/BaseColours"
 import ListColours from "battleCraftMobile/App/main/consts/ListColours"
 
-export default class BattleInspector extends Component {
+import { ActionCreators } from '../../../redux/actions/index';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+class BattleInspector extends Component {
 
     constructor(props) {
         super(props);
+    }
+
+    calculatePanelHeight(){
+        return this.props.dimension.orientation === 'portrait'?
+            this.props.dimension.height*0.70:this.props.dimension.height*0.75;
     }
 
     render() {
@@ -44,9 +54,12 @@ export default class BattleInspector extends Component {
         }
         else totalBackground={P1: ListColours.battle.LOSE, P2: ListColours.battle.WIN};
 
+        let panelHeight = this.calculatePanelHeight();
+
         return (
             <Modal isVisible={this.props.isVisible} backdropOpacity={0.3}>
-                <View style={BattleInspectorStyle.modal}>
+                <View style={[BattleInspectorStyle.modal, {width:this.props.dimension.width*0.9, height: panelHeight}]}>
+                    <ScrollView>
                     <View style={[BattleInspectorStyle.battleHeader, MainStyles.borderStyle]}><Text style={[MainStyles.textStyle, {fontSize: 24}]}>Battle name</Text></View>
                     <PlayerCard playerData={this.props.battleData.player1}
                                 colour={BaseColours.misc.greyBlue}
@@ -64,10 +77,18 @@ export default class BattleInspector extends Component {
                                 colour={BaseColours.misc.deepRed}
                                 scoreBackground={scoreBackground.P2}
                                 totalBackground={totalBackground.P2}/>
-
+                    </ScrollView>
                     <View><Button title={"Close"} color='#4b371b' onPress={() => this.props.onClosePanel()}/></View>
                 </View>
             </Modal>
         );
     }
 }
+
+function mapStateToProps( state ) {
+    return {
+        dimension: state.dimension
+    };
+}
+
+export default connect( mapStateToProps)( BattleInspector );

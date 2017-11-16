@@ -21,9 +21,9 @@ import TextOutput from '../../outputs/TextOutput'
 import {serverName} from '../../../../main/consts/serverName';
 import axios from 'axios';
 
-import MainStyles from "../../../../Styles/MainStyles";
-import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
-import InputStyles from "../../../../Styles/InputStyles";
+import MainStyles from "../../../../Styles/UniversalStyles/MainStyles";
+import EntityPanelStyle from "../../../../Styles/CollectionPanelStyles/EntityPanelStyle";
+import InputStyles from "../../../../Styles/UniversalStyles/InputStyles";
 
 import convertArrayToObject from "../../../../main/functions/convertArrayToObjectWithoutEmptyField";
 import {type} from "../../../../main/consts/tournamentTypeWithoutEmptyOption";

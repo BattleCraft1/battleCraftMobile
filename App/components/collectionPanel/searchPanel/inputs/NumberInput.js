@@ -4,8 +4,8 @@ import {
     Text,
     View
 } from 'react-native';
-import MainStyles from 'battleCraftMobile/App/Styles/MainStyles'
-import InputStyles from 'battleCraftMobile/App/Styles/InputStyles'
+import MainStyles from 'battleCraftMobile/App/Styles/UniversalStyles/MainStyles'
+import InputStyles from 'battleCraftMobile/App/Styles/UniversalStyles/InputStyles'
 
 export default class NumberInput extends React.Component{
     constructor(props) {

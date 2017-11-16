@@ -7,8 +7,8 @@ import {
 
 import Modal from 'react-native-modal';
 
-import MainStyle from '../../../Styles/MainStyles';
-import EntityPanelStyle from '../../../Styles/EntityPanelStyle'
+import MainStyle from '../../../Styles/UniversalStyles/MainStyles';
+import EntityPanelStyle from '../../../Styles/CollectionPanelStyles/EntityPanelStyle'
 
 import BaseColours from 'battleCraftMobile/App/main/consts/BaseColours'
 

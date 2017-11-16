@@ -5,8 +5,8 @@ import {
     Text
 } from 'react-native';
 
-import MainStyles from '../../../../Styles/MainStyles'
-import EntityPanelStyle from '../../../../Styles/EntityPanelStyle'
+import MainStyles from '../../../../Styles/UniversalStyles/MainStyles'
+import EntityPanelStyle from '../../../../Styles/CollectionPanelStyles/EntityPanelStyle'
 
 export default class Navigation extends Component {
 
