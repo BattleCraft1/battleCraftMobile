@@ -13,6 +13,7 @@ import axios from 'axios';
 
 import MainStyles from '../../Styles/UniversalStyles/MainStyles'
 import DrawerStyles from '../../Styles/CollectionPanelStyles/DrawerStyles'
+import BaseColours from 'battleCraftMobile/App/main/consts/BaseColours'
 
 import Drawer from 'react-native-drawer'
 
@@ -41,7 +42,8 @@ class CollectionPanel extends Component {
         this.state = {
             collectionType:"tournaments",
             formDrawer: "",
-            optionsVisible: false
+            optionsVisible: false,
+            isFiltered: false,
         }
     }
 
@@ -178,7 +180,8 @@ class CollectionPanel extends Component {
                 {
                     getPage:this.getPage.bind(this),
                     collectionType:this.props.collectionType,
-                    onClosePanel:() => this._drawer.close()
+                    onClosePanel:() => this._drawer.close(),
+                    changeFilterColour:(value) => this.setState({isFiltered: value})
                 },
                 null
             );
@@ -228,7 +231,7 @@ class CollectionPanel extends Component {
                                     this._drawer.open()}}/>
                     </View>
                     <View style={{flex:1}}>
-                        <Button title="Open search tab" color='#4b371b'
+                        <Button title="Open search tab" color={this.state.isFiltered===false?BaseColours.background.darkBrown:BaseColours.border.bottom}
                                 onPress={()=>{
                                     this.setState({formDrawer:'search'});
                                     this._drawer.open()}}/>

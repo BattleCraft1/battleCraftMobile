@@ -55,6 +55,7 @@ class SearchPanel extends React.Component{
         pageRequest.pageRequest.size = 10;
         this.props.setPageRequest(pageRequest);
         this.props.getPage(this.props.collectionType);
+        this.props.changeFilterColour(true);
         this.props.onClosePanel();
     }
 
