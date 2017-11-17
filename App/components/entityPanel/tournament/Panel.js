@@ -265,7 +265,7 @@ class Panel extends Component {
 
     calculatePanelHeight(){
         return this.props.dimension.orientation === 'portrait'?
-            this.props.dimension.height*0.85:this.props.dimension.height*0.75;
+            this.props.dimension.height*0.85:this.props.dimension.height*0.77;
     }
 
     render() {

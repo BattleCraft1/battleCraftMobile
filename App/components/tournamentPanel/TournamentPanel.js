@@ -121,11 +121,11 @@ class TournamentPanel extends Component {
     }
 
     onSwipeLeft(gestureState) {
-        if(this.state.currentTab>1) this.setState({currentTab: this.state.currentTab-1});
+        if(this.state.currentTab<this.state.turnMax) this.setState({currentTab: this.state.currentTab+1});
     }
 
     onSwipeRight(gestureState) {
-        if(this.state.currentTab<this.state.turnMax) this.setState({currentTab: this.state.currentTab+1});
+        if(this.state.currentTab>1) this.setState({currentTab: this.state.currentTab-1});
     }
 
     openInspector(battleId){

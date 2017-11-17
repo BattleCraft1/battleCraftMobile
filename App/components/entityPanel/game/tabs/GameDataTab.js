@@ -39,7 +39,7 @@ class GameDataTab extends Component{
 
     calculateHeight(){
         return this.props.orientation === 'portrait'?
-            this.props.height*0.8-145:this.props.height*0.7-115;
+            this.props.height*0.8-145:this.props.height*0.7;
     }
 
     render(){
@@ -49,7 +49,6 @@ class GameDataTab extends Component{
             <ScrollView
                 style={{height:height}}
                 contentContainerStyle={EntityPanelStyle.scrollView}>
-
                 <View style={InputStyles.inputCard}>
                     <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Game name:</Text></View>
                     <TextInput
@@ -82,7 +81,6 @@ class GameDataTab extends Component{
                     <TextOutput
                         value={setDate(this.props.entity["dateOfCreation"])}/>
                 </View>
-
                 {!this.props.inputsDisabled &&
                 <GameRulesInput
                     fieldName="gameRules"

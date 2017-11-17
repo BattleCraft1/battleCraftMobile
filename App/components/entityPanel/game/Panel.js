@@ -206,7 +206,7 @@ class Panel extends Component {
 
     calculatePanelHeight(){
         return this.props.dimension.orientation === 'portrait'?
-            this.props.dimension.height*0.8:this.props.dimension.height*0.7;
+            this.props.dimension.height*0.75:this.props.dimension.height*0.8;
     }
 
     render() {
@@ -217,8 +217,7 @@ class Panel extends Component {
             <Modal isVisible={!this.props.hidden} backdropOpacity={0.3}>
                 <View style={[EntityPanelStyle.modal,{
                     width: this.props.dimension.width*0.9,
-                    height: this.calculatePanelHeight()
-                }]}>
+                    height: this.calculatePanelHeight()}]}>
                     <View style={[EntityPanelStyle.title,{alignItems:'center'}]}>
                         <Text style={[MainStyle.textStyle,{fontSize: 22}]}>
                             {this.props.mode.charAt(0).toUpperCase()+this.props.mode.slice(1)+" game"}

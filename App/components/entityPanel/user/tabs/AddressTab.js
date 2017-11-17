@@ -19,7 +19,11 @@ import EntityPanelStyle from "../../../../Styles/CollectionPanelStyles/EntityPan
 import MainStyles from "../../../../Styles/UniversalStyles/MainStyles";
 import InputStyles from "../../../../Styles/UniversalStyles/InputStyles";
 
-export default class AddressTab extends Component{
+import { ActionCreators } from '../../../../redux/actions/index';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+class AddressTab extends Component{
 
     calculateHeight(){
         return this.props.orientation === 'portrait'?
@@ -96,3 +100,12 @@ export default class AddressTab extends Component{
     }
 }
 
+function mapDispatchToProps( dispatch ) {
+    return bindActionCreators( ActionCreators, dispatch );
+}
+
+function mapStateToProps( state ) {
+    return {};
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( AddressTab );
