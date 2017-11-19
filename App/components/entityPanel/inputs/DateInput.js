@@ -5,8 +5,8 @@ import {View,TouchableHighlight,Text} from 'react-native';
 
 import dateFormat from 'dateformat';
 
-import DateInputStyles from '../../../Styles/DateInputStyles'
-import EntityPanelInputsStyles from '../../../Styles/EntityPanelInputsStyles'
+import DateInputStyles from '../../../Styles/UniversalStyles/DateInputStyles'
+import EntityPanelInputsStyles from '../../../Styles/CollectionPanelStyles/EntityPanelInputsStyles'
 
 export default class DateInput extends React.Component{
     constructor(props) {

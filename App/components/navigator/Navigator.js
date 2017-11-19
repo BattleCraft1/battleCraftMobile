@@ -2,33 +2,34 @@ import React, { Component } from 'react';
 import CollectionPanel from '../collectionPanel/CollectionPanel'
 import AccountPanel from '../account/AccountPanel'
 import SplashScreen from '../commonComponents/SplashScreen'
-import TournamentPanel from '../tournamentPanel/TournamentPanel'
+import TournamentManagePanel from '../tournamentPanel/TournamentManagePanel'
 
 export default class Navigator extends Component {
 
     displayResultOfNavigation(){
-        switch(this.props.navigValue){
-            case 'Tournaments':
-                return <CollectionPanel collectionType={"tournaments"}/>;
-                break;
-            case 'Games':
-                return <CollectionPanel collectionType={"games"}/>;
-                break;
-            case 'Ranking':
-                return <CollectionPanel collectionType={"ranking"}/>;
-                break;
-            case 'Users':
-                return <CollectionPanel collectionType={"users"}/>;
-                break;
-            case 'My account':
-                return <AccountPanel/>;
-                break;
-            case 'Tournament battles':
-                return <TournamentPanel/>;
-                break;
-            default:
-                return <SplashScreen/>;
+        if(this.props.navigValue === 'Tournaments'){
+            return <CollectionPanel collectionType={"tournaments"}/>;
         }
+        else if(this.props.navigValue === 'Games'){
+            return <CollectionPanel collectionType={"games"}/>;
+        }
+        else if(this.props.navigValue === 'Ranking'){
+            return <CollectionPanel collectionType={"ranking"}/>;
+        }
+        else if(this.props.navigValue === 'Users'){
+            return <CollectionPanel collectionType={"users"}/>;
+        }
+        else if(this.props.navigValue === 'My account'){
+            return <AccountPanel/>;
+        }
+        else if(this.props.navigValue.includes('Progress/')){
+            let tournamentName = this.props.navigValue.substr(this.props.navigValue.indexOf('/')+1);
+            if(tournamentName!==undefined)
+                return <TournamentManagePanel tournamentName={tournamentName}/>;
+            else
+                return <SplashScreen/>
+        }
+        return <SplashScreen/>
     }
 
     render(){

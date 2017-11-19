@@ -11,8 +11,8 @@ import Checkbox from '../../../../commonComponents/checkBox/Checkbox'
 import MultiCheckbox from '../../../../commonComponents/checkBox/MultiCheckbox'
 import ListColours from '../../../../../main/consts/ListColours'
 
-import TableStyles from '../../../../../Styles/TableStyles'
-import MainStyles from '../../../../../Styles/MainStyles'
+import TableStyles from '../../../../../Styles/CollectionPanelStyles/TableStyles'
+import MainStyles from '../../../../../Styles/UniversalStyles/MainStyles'
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -117,15 +117,13 @@ class Rows extends Component{
 
     render(){
         return(
-            <View style={{marginBottom:35}}>
-                <View style={TableStyles.header}>
-                    <Text style={[MainStyles.textStyle, {fontSize: 24}]}>Games list</Text>
-                    <MultiCheckbox/>
-                </View>
                 <ScrollView styles={TableStyles.table}>
+                    <View style={TableStyles.header}>
+                        <Text style={[MainStyles.textStyle, {fontSize: 24}]}>Games</Text>
+                        <MultiCheckbox/>
+                    </View>
                     {this.createGamesList()}
                 </ScrollView>
-            </View>
         );
     }
 }

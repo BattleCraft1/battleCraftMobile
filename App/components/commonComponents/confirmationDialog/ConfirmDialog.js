@@ -9,8 +9,8 @@ import { ActionCreators } from '../../../redux/actions/index';
 import { bindActionCreators } from 'redux';
 
 import Modal from 'react-native-modal';
-import MainStyles from '../../../Styles/MainStyles'
-import MessageStyle from '../../../Styles/MessageStyle'
+import MainStyles from '../../../Styles/UniversalStyles/MainStyles'
+import MessageStyle from '../../../Styles/UniversalStyles/MessageStyle'
 import {dimension} from "../../../redux/reducers/dimension";
 
 class ConfirmDialog extends React.Component {
@@ -41,7 +41,7 @@ class ConfirmDialog extends React.Component {
                                     this.props.confirmation.onConfirmFunction();
                                     this.props.hideConfirmationDialog();
                                 }}>
-                                    <Text style={[MainStyles.smallWhiteStyle, MainStyles.centering]}>Confirm</Text>
+                                    <Text style={[MainStyles.smallWhiteStyle, MainStyles.stretch]}>Confirm</Text>
                             </TouchableHighlight>
                         </View>
                         <View style={MessageStyle.modalFooterButton}>
@@ -49,7 +49,7 @@ class ConfirmDialog extends React.Component {
                                 onPress={() => {
                                     this.props.hideConfirmationDialog();
                                 }}>
-                                    <Text style={[MainStyles.smallWhiteStyle, MainStyles.centering]}>Cancel</Text>
+                                    <Text style={[MainStyles.smallWhiteStyle, MainStyles.stretch]}>Cancel</Text>
                             </TouchableHighlight>
                         </View>
                     </View>

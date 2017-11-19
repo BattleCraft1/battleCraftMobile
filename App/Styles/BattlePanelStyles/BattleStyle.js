@@ -5,7 +5,7 @@
 import {
     StyleSheet
 } from 'react-native';
-import BaseColours from "../main/consts/BaseColours"
+import BaseColours from "../../main/consts/BaseColours"
 
 const styles = StyleSheet.create({
     turnHeader:{
@@ -18,53 +18,60 @@ const styles = StyleSheet.create({
         padding:5
     },
     battleWindow:{
-        minWidth:460,
-        maxWidth:500,
         borderWidth:5,
         borderColor: BaseColours.background.darkBrown,
         marginBottom: 3,
     },
     scoreRow:{
-            flexDirection:'row',
+            flexDirection:'column',
     },
     scoreContainer: {
-        flex:1,
-        flexDirection:'row',
+        flex:2,
+        flexDirection:'column',
         backgroundColor: BaseColours.background.lightBrown,
         alignItems:'center',
         justifyContent:'center'
     },
 
     scoreboard:{
-        width:80,
-        height:80,
+        alignSelf: "stretch",
+        flex:1,
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 3,
     },
 
     playerHeader:{
+        flexDirection:'row',
         padding:3,
         borderWidth:3,
     },
+    playerHeaderScoreboard:{
+        alignSelf: "stretch",
+        flex:1,
+        padding:2,
+        borderWidth:2,
+    },
     player1Text:{
+        flex:1,
         paddingLeft: 5,
         textAlign:"left",
     },
     player2Text:{
+        flex:1,
         paddingRight: 5,
         textAlign:"right",
     },
-    avatarContener:{
-        width:110,
-        height:110,
-        backgroundColor: BaseColours.misc.deepRed,
+    userContainer:{
+        padding:5,
+        flexDirection:'row',
+        flex:1,
         alignItems:'center',
         justifyContent:'center'
     },
     avatarSize:{
-        width: 100,
-        height: 100
+        flex:1,
+        maxHeight:150
     },
 
 });

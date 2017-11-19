@@ -1,5 +1,11 @@
 import React from 'react';
 import {PickerField} from 'react-native-form-generator';
+import {
+    Text,
+    View
+} from 'react-native';
+import MainStyles from 'battleCraftMobile/App/Styles/UniversalStyles/MainStyles'
+import InputStyles from 'battleCraftMobile/App/Styles/UniversalStyles/InputStyles'
 
 export default class TournamentStatus extends React.Component{
     constructor(props) {
@@ -31,10 +37,12 @@ export default class TournamentStatus extends React.Component{
 
     render(){
         return(
-            <PickerField
-                onValueChange={(value)=>this.changeInput(value)}
-                label='Status:'
-                options={this.props.options}/>
+            <View style={InputStyles.inputCard}>
+                <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Status:</Text></View>
+                <PickerField
+                    onValueChange={(value)=>this.changeInput(value)}
+                    options={this.props.options}/>
+            </View>
         )
     }
 }

@@ -7,8 +7,8 @@ import {
     Image
 } from 'react-native';
 
-import TableStyles from '../../../../../Styles/TableStyles'
-import MainStyles from '../../../../../Styles/MainStyles'
+import TableStyles from '../../../../../Styles/CollectionPanelStyles/TableStyles'
+import MainStyles from '../../../../../Styles/UniversalStyles/MainStyles'
 import ListColours from '../../../../../main/consts/ListColours'
 
 import Checkbox from '../../../../commonComponents/checkBox/Checkbox'
@@ -123,15 +123,13 @@ class Rows extends Component{
 
     render(){
         return(
-            <View style={{marginBottom:35}}>
-                <View style={TableStyles.header}>
-                    <Text style={[MainStyles.textStyle, {fontSize: 24}]}>User list</Text>
-                    <MultiCheckbox/>
-                </View>
                 <ScrollView styles={TableStyles.table}>
+                    <View style={TableStyles.header}>
+                        <Text style={[MainStyles.textStyle, {fontSize: 24}]}>Users</Text>
+                        <MultiCheckbox/>
+                    </View>
                     {this.createUsersList()}
                 </ScrollView>
-            </View>
         );
     }
 }

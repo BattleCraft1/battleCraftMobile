@@ -1,18 +1,17 @@
 import {
     StyleSheet,
-    Dimensions
 } from 'react-native';
-import BaseColours from "../main/consts/BaseColours"
+import BaseColours from "../../main/consts/BaseColours"
 
 const styles = StyleSheet.create({
     modal: {
         flex:1,
         position: 'absolute',
-        justifyContent: 'center',
-        alignItems: 'center',
+
         backgroundColor: BaseColours.background.mediumBrown,
         borderColor: BaseColours.background.darkBrown,
         borderWidth: 5,
+        padding: 3,
         flexDirection: 'column'
     },
     icon: {
@@ -25,14 +24,17 @@ const styles = StyleSheet.create({
         borderLeftColor: BaseColours.border.left,
         borderWidth: 3,
         margin: 2,
+        padding:2,
         alignItems:'center'
     },
-    iconsRow:{
-        flexDirection: 'row'
-    },
     buttonRow:{
-        flex: 1,
-        flexDirection: 'row',
+        flexDirection:'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    button:{
+        marginTop:5,
+        flex:1,
     },
     iconText:{
         color: '#ffffff',

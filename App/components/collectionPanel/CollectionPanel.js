@@ -11,8 +11,9 @@ import { ActionCreators } from '../../redux/actions';
 import {serverName} from "../../main/consts/serverName";
 import axios from 'axios';
 
-import MainStyles from '../../Styles/MainStyles'
-import DrawerStyles from '../../Styles/DrawerStyles'
+import MainStyles from '../../Styles/UniversalStyles/MainStyles'
+import DrawerStyles from '../../Styles/CollectionPanelStyles/DrawerStyles'
+import BaseColours from 'battleCraftMobile/App/main/consts/BaseColours'
 
 import Drawer from 'react-native-drawer'
 
@@ -41,7 +42,8 @@ class CollectionPanel extends Component {
         this.state = {
             collectionType:"tournaments",
             formDrawer: "",
-            optionsVisible: false
+            optionsVisible: false,
+            isFiltered: false,
         }
     }
 
@@ -151,19 +153,17 @@ class CollectionPanel extends Component {
                 .catch(async (error) => {
                     this.props.stopLoading();
 
-                    if(this.props.entityPanel.mode !== 'disabled')
-                    {
-                        this.props.setEmptyPage();
-                        this.props.setPageRequest({
-                            searchCriteria:this.props.pageRequest.searchCriteria,
-                            pageRequest:{
-                                direction : this.props.pageRequest.pageRequest.direction,
-                                property : this.props.pageRequest.pageRequest.property,
-                                size : 0,
-                                page : 0
-                            }
-                        });
-                    }
+                    this.props.setEmptyPage();
+                    this.props.setPageRequest({
+                        searchCriteria:this.props.pageRequest.searchCriteria,
+                        pageRequest:{
+                            direction : this.props.pageRequest.pageRequest.direction,
+                            property : this.props.pageRequest.pageRequest.property,
+                            size : 0,
+                            page : 0
+                        }
+                    });
+
                     this.props.showNetworkErrorMessage(error,getPageOfDataOperation);
                 });
         };
@@ -178,7 +178,8 @@ class CollectionPanel extends Component {
                 {
                     getPage:this.getPage.bind(this),
                     collectionType:this.props.collectionType,
-                    onClosePanel:() => this._drawer.close()
+                    onClosePanel:() => this._drawer.close(),
+                    changeFilterColour:(value) => this.setState({isFiltered: value})
                 },
                 null
             );
@@ -219,7 +220,7 @@ class CollectionPanel extends Component {
             tweenHandler={(ratio) => ({main: { opacity:(2-ratio)/2 }})}
             content={formDrawer}
         >
-            <View style={[MainStyles.contentStyle, MainStyles.centering, {flex: 1}]}>
+            <View style={[MainStyles.contentStyle]}>
                 <View style={{marginBottom:3, flexDirection:'row'}}>
                     <View style={{flex:1, marginRight: 3}}>
                         <Button title="Open page tab" color='#4b371b'
@@ -228,7 +229,7 @@ class CollectionPanel extends Component {
                                     this._drawer.open()}}/>
                     </View>
                     <View style={{flex:1}}>
-                        <Button title="Open search tab" color='#4b371b'
+                        <Button title="Open search tab" color={this.state.isFiltered===false?BaseColours.background.darkBrown:BaseColours.border.bottom}
                                 onPress={()=>{
                                     this.setState({formDrawer:'search'});
                                     this._drawer.open()}}/>

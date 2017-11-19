@@ -7,11 +7,11 @@ import {
     View,
     TouchableHighlight,
     Text,
-    TouchableWithoutFeedback
+    ScrollView
 } from 'react-native';
 
-import DropdownStyles from '../../../Styles/DropdownStyles'
-import MainStyles from '../../../Styles/MainStyles'
+import DropdownStyles from '../../../Styles/NavbarStyles/DropdownStyles'
+import MainStyles from '../../../Styles/UniversalStyles/MainStyles'
 
 import { ActionCreators } from '../../../redux/actions/index';
 import { bindActionCreators } from 'redux';
@@ -37,7 +37,11 @@ class Dropdown extends Component {
         return (
 
             <TouchableHighlight style={DropdownStyles.dropdownOptionStyle} key={elementText}  onPress={()=>{this.menuSelect(elementText)}}>
-                    <Text style={MainStyles.bigWhiteStyle}>{elementText}</Text>
+                <View style={DropdownStyles.outerBorder}>
+                    <View style={DropdownStyles.innerBorder}>
+                        <Text style={MainStyles.bigWhiteStyle}>{elementText}</Text>
+                    </View>
+                </View>
             </TouchableHighlight>
         );
     }
@@ -53,11 +57,12 @@ class Dropdown extends Component {
 
         return(
             <View style={[DropdownStyles.dropdownContainerStyle,
-                {height: this.props.dimension.height-60},
+                {height: isPortrait?470:this.props.dimension.height-60},
                 {width: isPortrait?250:400}]}>
                 {dropdownContent}
             </View>
         );
+
     }
 }
 

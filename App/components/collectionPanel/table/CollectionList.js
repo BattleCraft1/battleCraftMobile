@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../../redux/actions';
 
+
 import TournamentsRows from './rows/tournament/Rows'
 import UsersRows from './rows/user/Rows'
 import RankingRows from './rows/ranking/Rows'

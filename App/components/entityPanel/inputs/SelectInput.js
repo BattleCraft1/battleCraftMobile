@@ -4,7 +4,7 @@ import {
     Text,
     View
 } from 'react-native';
-import EntityPanelInputsStyles from '../../../Styles/EntityPanelInputsStyles'
+import EntityPanelInputsStyles from '../../../Styles/CollectionPanelStyles/EntityPanelInputsStyles'
 
 export default class SelectInput extends React.Component{
 

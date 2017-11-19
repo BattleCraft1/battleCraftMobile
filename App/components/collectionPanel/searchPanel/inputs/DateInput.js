@@ -7,7 +7,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import dateFormat from 'dateformat';
 
-import DateInputStyles from '../../../../Styles/DateInputStyles'
+import DateInputStyles from '../../../../Styles/UniversalStyles/DateInputStyles'
+import MainStyles from 'battleCraftMobile/App/Styles/UniversalStyles/MainStyles'
+import InputStyles from 'battleCraftMobile/App/Styles/UniversalStyles/InputStyles'
 
 export default class DateInput extends React.Component{
     constructor(props) {
@@ -44,8 +46,8 @@ export default class DateInput extends React.Component{
 
     render(){
         return(
-            <View>
-                <Text>{this.props.name}</Text>
+            <View style={InputStyles.inputCard}>
+                <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>{this.props.name}</Text></View>
                 <View style={DateInputStyles.dateInputMainView}>
                     <TouchableHighlight style={DateInputStyles.dateInputButton} onPress={() => this.setState({ isDateTimePickerVisible: true })}>
                         <Text style={{fontSize: 20}}>{this.state.value}</Text>

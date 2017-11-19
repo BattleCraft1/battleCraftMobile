@@ -1,5 +1,5 @@
 import React from 'react';
-import EntityPanelInputsStyles from '../../../Styles/EntityPanelInputsStyles'
+import EntityPanelInputsStyles from '../../../Styles/CollectionPanelStyles/EntityPanelInputsStyles'
 import {
     View,
     Image,

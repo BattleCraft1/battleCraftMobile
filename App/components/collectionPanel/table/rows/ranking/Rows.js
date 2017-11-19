@@ -7,8 +7,8 @@ import {
     TouchableHighlight
 } from 'react-native';
 
-import TableStyles from '../../../../../Styles/TableStyles'
-import MainStyles from '../../../../../Styles/MainStyles'
+import TableStyles from '../../../../../Styles/CollectionPanelStyles/TableStyles'
+import MainStyles from '../../../../../Styles/UniversalStyles/MainStyles'
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -82,14 +82,12 @@ class Rows extends Component{
 
     render(){
         return(
-            <View style={{marginBottom:35}}>
-                <View style={TableStyles.header}>
-                    <Text numberOfLines={1} style={[MainStyles.textStyle, {fontSize: 24}]}>{findGameName(this.props.pageRequest.searchCriteria)}</Text>
-                </View>
                 <ScrollView styles={TableStyles.table}>
+                    <View style={TableStyles.header}>
+                        <Text numberOfLines={1} style={[MainStyles.textStyle, {fontSize: 24}]}>{findGameName(this.props.pageRequest.searchCriteria)}</Text>
+                    </View>
                     {this.createRanking()}
                 </ScrollView>
-            </View>
         );
     }
 }

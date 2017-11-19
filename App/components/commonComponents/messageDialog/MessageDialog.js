@@ -9,8 +9,8 @@ import { ActionCreators } from '../../../redux/actions/index';
 import { bindActionCreators } from 'redux';
 
 import Modal from 'react-native-modal';
-import MessageStyles from '../../../Styles/MessageStyle'
-import MainStyles from '../../../Styles/MainStyles'
+import MessageStyles from '../../../Styles/UniversalStyles/MessageStyle'
+import MainStyles from '../../../Styles/UniversalStyles/MainStyles'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class MessageDialog extends React.Component {
@@ -24,7 +24,7 @@ class MessageDialog extends React.Component {
         if(this.props.message.messageType==="Network error"){
             operationButton=
                 <TouchableHighlight
-                    style={MainStyles.centering}
+                    style={MainStyles.stretch}
                     onPress={() => {
                         this.props.hideMessageBox();
                         this.props.message.failedOperation();
@@ -55,7 +55,7 @@ class MessageDialog extends React.Component {
                         <Text style={MainStyles.smallWhiteStyle}>{this.props.message.messageText}</Text>
                     </View>
                     <View style={MessageStyles.modalFooter} >
-                        <View style={[MessageStyles.modalFooterButton, MainStyles.centering]}>
+                        <View style={[MessageStyles.modalFooterButton, MainStyles.stretch]}>
                             {operationButton}
                         </View>
                     </View>

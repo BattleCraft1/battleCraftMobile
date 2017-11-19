@@ -5,13 +5,14 @@ import React, { Component } from 'react';
 import {
     View,
     ScrollView,
-    Button
+    Button,
+    Text
 } from 'react-native';
 
 import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 
-import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
-
+import MainStyle from '../../../../Styles/UniversalStyles/MainStyles';
+import EntityPanelStyle from "../../../../Styles/CollectionPanelStyles/EntityPanelStyle";
 
 import { ActionCreators } from '../../../../redux/actions/index';
 import { bindActionCreators } from 'redux';
@@ -42,9 +43,9 @@ class OrganizersTab extends Component{
     calculateHeight(inputsDisabled){
         let disabledInputHeight = inputsDisabled?35:0;
         return this.props.orientation === 'portrait'?
-            this.props.height*0.8-180+disabledInputHeight
+            this.props.height*0.85-225+disabledInputHeight
             :
-            this.props.height*0.7-150+disabledInputHeight;
+            this.props.height*0.77-185+disabledInputHeight;
     }
 
     render(){
@@ -55,6 +56,7 @@ class OrganizersTab extends Component{
                     style={{height:height}}
                     contentContainerStyle={EntityPanelStyle.scrollView}>
                     <ValidationErrorMessage validationErrorMessage={this.props.validationErrors["organizers"]}/>
+                    <View style={EntityPanelStyle.playerHeader}><Text style={[MainStyle.smallWhiteStyle, {fontWeight:'bold'}]}>Organizers</Text></View>
                     <OrganizersTable
                         shouldActualizeRelatedEntities={this.props.shouldActualizeRelatedEntities}
                         shouldActualizeRelatedEntitiesCallBack={this.props.shouldActualizeRelatedEntitiesCallBack}
@@ -63,8 +65,7 @@ class OrganizersTab extends Component{
                         disabled = {this.props.inputsDisabled}
                         changeEntity={this.props.changeEntity}
                         relatedEntity={this.props.relatedEntity}
-                        hidden={this.props.hidden}
-                        name="Organizers" />
+                        hidden={this.props.hidden}/>
                 </ScrollView>
                 {!this.props.inputsDisabled &&
                 <Button title={"Invite"} color='#4b371b'

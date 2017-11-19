@@ -7,8 +7,8 @@ import {
 	TouchableHighlight,
 } from 'react-native';
 
-import MainStyles from '../../Styles/MainStyles'
-import NavbarStyles from '../../Styles/NavbarStyles'
+import MainStyles from '../../Styles/UniversalStyles/MainStyles'
+import NavbarStyles from '../../Styles/NavbarStyles/NavbarStyles'
 
 export default class Navbar extends Component {
 
@@ -25,7 +25,10 @@ export default class Navbar extends Component {
 	};
 
 	render() {
-
+        let menuText = this.props.menuText;
+        if(menuText.includes('Progress/')){
+            menuText = menuText.substr(menuText.indexOf('/')+1)
+		}
 		return (
 			<View style={[NavbarStyles.navbarStyle, MainStyles.borderStyle]}>
 				<View>
@@ -36,8 +39,8 @@ export default class Navbar extends Component {
 					</TouchableHighlight>
 				</View>
 
-				<View>
-					<Text style={[MainStyles.textStyle,NavbarStyles.navbarTextStyle]}>{this.props.menuText}</Text>
+				<View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
+					<Text  numberOfLines={1} style={[MainStyles.textStyle,NavbarStyles.navbarTextStyle]}>{menuText}</Text>
 				</View>
 
 				<View>

@@ -18,7 +18,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../../redux/actions';
 
-import OptionsStyles from '../../../Styles/OptionsStyles'
+import OptionsStyles from '../../../Styles/CollectionPanelStyles/OptionsStyles'
 
 const mapOfOperations = {
     "Ban":BanOperation,
@@ -39,7 +39,7 @@ class OptionPanel extends Component {
             if(i*3+1<operations.length) operationsGroup.push(operations[i*3+1]);
             if(i*3+2<operations.length) operationsGroup.push(operations[i*3+2]);
             groupedOperations.push(
-                <View style={OptionsStyles.iconsRow} key={i}>
+                <View style={OptionsStyles.buttonRow} key={i}>
                     {operationsGroup}
                 </View>
             )
@@ -56,7 +56,7 @@ class OptionPanel extends Component {
             if(i*4+2<operations.length) operationsGroup.push(operations[i*4+2]);
             if(i*4+3<operations.length) operationsGroup.push(operations[i*4+3]);
             groupedOperations.push(
-                <View style={OptionsStyles.iconsRow} key={i}>
+                <View style={OptionsStyles.buttonRow} key={i}>
                     {operationsGroup}
                 </View>
             )
@@ -100,12 +100,10 @@ class OptionPanel extends Component {
         return (
             <Modal isVisible={this.props.isVisible} backdropOpacity={0.3}>
                 <View style={[OptionsStyles.modal,{marginLeft: this.calculateLeftMargin(isPortrait,operations.length)}]}>
+                    <View>
                     {isPortrait? this.groupOperationsThreeInRows(operations):this.groupOperationsFourInRows(operations)}
-                    <Button
-                        onPress={() => this.props.onClosePanel()}
-                        title="Close"
-                        color="#4b371b"
-                    />
+                    </View>
+                    <View style={OptionsStyles.button}><Button onPress={() => this.props.onClosePanel()} title="Close" color="#4b371b"/></View>
                 </View>
             </Modal>
         );

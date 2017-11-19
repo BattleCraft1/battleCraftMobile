@@ -6,11 +6,13 @@ import {
     View,
     ScrollView,
     Button,
+    Text
 } from 'react-native';
 
 import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 
-import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
+import MainStyle from '../../../../Styles/UniversalStyles/MainStyles';
+import EntityPanelStyle from "../../../../Styles/CollectionPanelStyles/EntityPanelStyle";
 
 import { ActionCreators } from '../../../../redux/actions/index';
 import { bindActionCreators } from 'redux';
@@ -78,8 +80,7 @@ class ParticipantsTab extends Component{
                     disabled = {this.props.inputsDisabled}
                     changeEntity={this.props.changeEntity}
                     relatedEntity={this.props.relatedEntity}
-                    hidden={this.props.hidden}
-                    name="Participants" />
+                    hidden={this.props.hidden}/>
         }
         else{
             return <ParticipantsGroupsTable
@@ -91,8 +92,7 @@ class ParticipantsTab extends Component{
                     disabled = {this.props.inputsDisabled}
                     changeEntity={this.props.changeEntity}
                     relatedEntity={this.props.relatedEntity}
-                    hidden={this.props.hidden}
-                    name="Participants" />
+                    hidden={this.props.hidden}/>
 
         }
     }
@@ -112,9 +112,9 @@ class ParticipantsTab extends Component{
     calculateHeight(inputsDisabled){
         let disabledInputHeight = inputsDisabled?35:0;
         return this.props.orientation === 'portrait'?
-            this.props.height*0.8-180+disabledInputHeight
+            this.props.height*0.85-225+disabledInputHeight
             :
-            this.props.height*0.7-150+disabledInputHeight;
+            this.props.height*0.77-185+disabledInputHeight;
     }
 
     render(){
@@ -125,6 +125,7 @@ class ParticipantsTab extends Component{
                     style={{height:height}}
                     contentContainerStyle={EntityPanelStyle.scrollView}>
                     <ValidationErrorMessage validationErrorMessage={this.props.validationErrors["participants"]}/>
+                    <View style={EntityPanelStyle.playerHeader}><Text style={[MainStyle.smallWhiteStyle, {fontWeight:'bold'}]}>Participants</Text></View>
                     {this.chooseUserTableByTournamentType()}
                 </ScrollView>
                 {this.createButton()}

@@ -5,7 +5,7 @@
 import {
     StyleSheet,
 } from 'react-native';
-import BaseColours from "../main/consts/BaseColours"
+import BaseColours from "../../main/consts/BaseColours"
 
 const styles = StyleSheet.create({
     table:{
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     },
     header:{
         flexDirection: 'row',
+        justifyContent:'center',
         alignItems:'center',
         backgroundColor: BaseColours.misc.deepRed,
         borderColor:BaseColours.border.top,

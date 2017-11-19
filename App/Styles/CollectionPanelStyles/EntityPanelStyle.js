@@ -6,7 +6,7 @@ import {
     StyleSheet,
     Dimensions
 } from 'react-native';
-import BaseColours from "../main/consts/BaseColours"
+import BaseColours from "../../main/consts/BaseColours"
 
 const styles = StyleSheet.create({
     modal: {
@@ -33,8 +33,10 @@ const styles = StyleSheet.create({
 
     formWindow:{
         borderColor: BaseColours.border.top,
-        borderWidth: 3
+        borderWidth: 3,
+        padding: 5,
     },
+
     formHeader:{
         backgroundColor: BaseColours.background.darkBrown,
         borderColor: BaseColours.border.top,
@@ -43,14 +45,25 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
 
+    playerHeader:{
+        alignItems: 'center',
+        justifyContent:'center',
+        padding:3,
+        margin:3,
+        backgroundColor: BaseColours.background.darkBrown,
+        borderTopColor: BaseColours.border.top,
+        borderRightColor: BaseColours.border.right,
+        borderBottomColor: BaseColours.border.bottom,
+        borderLeftColor: BaseColours.border.left,
+        borderWidth: 3,
+    },
+
     button:{
         alignItems: 'center',
         justifyContent:'center',
-        padding:1,
-        paddingTop:2,
-        paddingBottom:2,
+        padding:5,
         flex: 1,
-        margin: 1
+        margin: 2
     },
     participantsGroupButton:{
         alignItems: 'center',
@@ -68,7 +81,7 @@ const styles = StyleSheet.create({
     buttonText:{
         color:'white',
         fontSize:15
-    }
+    },
 });
 
 export default styles;

@@ -1,6 +1,6 @@
 import React from 'react';
 import {InputField} from 'react-native-form-generator';
-import EntityPanelInputsStyles from '../../../Styles/EntityPanelInputsStyles'
+import EntityPanelInputsStyles from '../../../Styles/CollectionPanelStyles/EntityPanelInputsStyles'
 import {
     Text,
     View

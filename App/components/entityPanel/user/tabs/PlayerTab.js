@@ -5,12 +5,15 @@ import React, { Component } from 'react';
 import {
     View,
     ScrollView,
-    Button
+    Button,
+    Text
 } from 'react-native';
 
 import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
 
-import EntityPanelStyle from "../../../../Styles/EntityPanelStyle";
+import MainStyles from "../../../../Styles/UniversalStyles/MainStyles";
+import EntityPanelStyle from "../../../../Styles/CollectionPanelStyles/EntityPanelStyle";
+import InputStyles from "../../../../Styles/UniversalStyles/InputStyles";
 
 import NumberOutput from "../../outputs/NumberOutput";
 
@@ -80,9 +83,9 @@ class PlayerTab extends Component{
     calculateHeight(inputsDisabled){
         let disabledInputHeight = inputsDisabled?35:0;
         return this.props.orientation === 'portrait'?
-            this.props.height*0.8-180+disabledInputHeight
+            this.props.height*0.85-225+disabledInputHeight
             :
-            this.props.height*0.7-150+disabledInputHeight;
+            this.props.height*0.77-185+disabledInputHeight;
     }
 
     render(){
@@ -93,31 +96,40 @@ class PlayerTab extends Component{
                     style={{height:height}}
                     contentContainerStyle={EntityPanelStyle.scrollView}>
 
+                    <View style={InputStyles.inputCard}>
+                        <View style={EntityPanelStyle.playerHeader}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Participated tournaments</Text></View>
                     <ValidationErrorMessage validationErrorMessage={this.props.validationErrors["participatedTournaments"]}/>
-                    <TournamentsTable
-                        shouldActualizeRelatedEntities={this.props.shouldActualizeRelatedEntities}
-                        shouldActualizeRelatedEntitiesCallBack={this.props.shouldActualizeRelatedEntitiesCallBack}
-                        inviteSecondPlayer={this.startInviteSecondPlayerToGroup.bind(this)}
-                        relatedEntity={this.props.relatedEntity}
-                        hidden={this.props.hidden}
-                        value={this.props.entity["participatedTournaments"]}
-                        fieldName="participatedTournaments"
-                        disabled = {this.props.inputsDisabled}
-                        changeEntity={this.props.changeEntity}
-                        name="Participated tournaments"
-                    />
+                        <TournamentsTable
+                            shouldActualizeRelatedEntities={this.props.shouldActualizeRelatedEntities}
+                            shouldActualizeRelatedEntitiesCallBack={this.props.shouldActualizeRelatedEntitiesCallBack}
+                            inviteSecondPlayer={this.startInviteSecondPlayerToGroup.bind(this)}
+                            relatedEntity={this.props.relatedEntity}
+                            hidden={this.props.hidden}
+                            value={this.props.entity["participatedTournaments"]}
+                            fieldName="participatedTournaments"
+                            disabled = {this.props.inputsDisabled}
+                            changeEntity={this.props.changeEntity}/>
+                    </View>
 
-                    <TournamentsTableOutput
-                        value={this.props.entity["finishedParticipatedTournaments"]}
-                        name="Finished tournaments"
-                    />
+                    <View style={InputStyles.inputCard}>
+                        <View style={EntityPanelStyle.playerHeader}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Finished tournaments</Text></View>
+                        <TournamentsTableOutput
+                            value={this.props.entity["finishedParticipatedTournaments"]}
+                        />
+                    </View>
 
+                    <View style={InputStyles.inputCard}>
+                        <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Points:</Text></View>
                     <NumberOutput
-                        value={this.props.entity["points"]}
-                        name="Points"/>
+                        value={this.props.entity["points"]}/>
+                    </View>
+
+                    <View style={InputStyles.inputCard}>
+                        <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Battles Count:</Text></View>
                     <NumberOutput
-                        value={this.props.entity["numberOfBattles"]}
-                        name="Battles Count"/>
+                        value={this.props.entity["numberOfBattles"]}/>
+                    </View>
+
                 </ScrollView>
                 {!this.props.inputsDisabled &&
                 <Button title={"ADD TOURNAMENT"} color='#4b371b'
