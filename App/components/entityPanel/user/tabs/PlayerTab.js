@@ -37,6 +37,10 @@ class PlayerTab extends Component{
                 "keys": ["status"],
                 "operation": ":",
                 "value": ["NEW","ACCEPTED"]
+            },{
+                "keys": ["banned"],
+                "operation": ":",
+                "value": [false]
             }],
             Number.POSITIVE_INFINITY);
         this.props.navigate('Tournaments');
@@ -52,6 +56,11 @@ class PlayerTab extends Component{
                     "keys": ["status"],
                     "operation": ":",
                     "value": ["ACCEPTED","ORGANIZER"]
+                },
+                {
+                "keys": ["banned"],
+                "operation": ":",
+                "value": [false]
                 },
                 {
                     "keys": ["name"],

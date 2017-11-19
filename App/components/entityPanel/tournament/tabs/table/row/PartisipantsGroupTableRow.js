@@ -41,6 +41,12 @@ class ParticipantsGroupTableRow extends React.Component{
             "value": ["ORGANIZER","ACCEPTED"]
         });
 
+        searchCriteria.push({
+            "keys": ["banned"],
+            "operation": ":",
+            "value": [false]
+        });
+
         if(invitedParticipantsNames.length>0)
             searchCriteria.push({
                 "keys": ["name"],

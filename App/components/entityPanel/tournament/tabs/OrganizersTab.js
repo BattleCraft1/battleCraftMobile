@@ -30,6 +30,10 @@ class OrganizersTab extends Component{
                 "keys": ["status"],
                 "operation": ":",
                 "value": ["ORGANIZER"]
+            }, {
+                "keys": ["banned"],
+                "operation": ":",
+                "value": [false]
             }]
             ,10);
         this.props.navigate('Users');

@@ -30,6 +30,10 @@ class OrganizerTab extends Component{
                 "keys": ["status"],
                 "operation": ":",
                 "value": ["NEW","ACCEPTED"]
+            }, {
+                "keys": ["banned"],
+                "operation": ":",
+                "value": [false]
             }],
             Number.POSITIVE_INFINITY);
         this.props.navigate('Tournaments');

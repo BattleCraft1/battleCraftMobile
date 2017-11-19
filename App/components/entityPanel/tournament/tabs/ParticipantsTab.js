@@ -36,6 +36,10 @@ class ParticipantsTab extends Component{
                 "keys": ["status"],
                 "operation": ":",
                 "value": ["ORGANIZER","ACCEPTED"]
+            }, {
+                "keys": ["banned"],
+                "operation": ":",
+                "value": [false]
             }],
             this.props.entity["tablesCount"]*this.props.entity["playersOnTableCount"]);
         this.props.navigate('Users');

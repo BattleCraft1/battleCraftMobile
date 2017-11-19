@@ -51,7 +51,7 @@ class Rows extends Component{
     editEntity(element){
         if(this.props.entityPanel.mode!=='disabled')
             this.props.showAdditionalEntityPanel("tournament",element.name);
-        else if(element.status!=='NEW' && element.status!=='ACCEPTED'){
+        else if((element.status!=='NEW' && element.status!=='ACCEPTED') || element.banned === true){
             this.props.getEntity("tournament",element.name);
         }
         else
