@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
         padding:5
     },
     battleWindow:{
-        minWidth:460,
-        maxWidth:500,
+        minWidth:300,
+        maxWidth:700,
         borderWidth:5,
         borderColor: BaseColours.background.darkBrown,
         marginBottom: 3,

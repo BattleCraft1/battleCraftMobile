@@ -17,7 +17,11 @@ import BattleStyle from 'battleCraftMobile/App/Styles/BattlePanelStyles/BattleSt
 import BaseColours from "battleCraftMobile/App/main/consts/BaseColours"
 import ListColours from "battleCraftMobile/App/main/consts/ListColours"
 
-export default class Battle extends Component {
+import { ActionCreators } from '../../../redux/actions/index';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+class Battle extends Component {
 
 
     constructor(props) {
@@ -29,6 +33,12 @@ export default class Battle extends Component {
         this.state = {
             dataSource: dataSource.cloneWithRows(['Placeholder']),
         };
+    }
+
+
+    calculateBattleWidth(){
+        return this.props.dimension.orientation === 'portrait'?
+            this.props.dimension.width*0.95:this.props.dimension.width*0.70;
     }
 
 
@@ -44,7 +54,7 @@ export default class Battle extends Component {
         else scoreBackground={P1: ListColours.battle.LOSE, P2: ListColours.battle.WIN};
 
         return (
-            <View key={rowData.table} style={BattleStyle.battleWindow}>
+            <View key={rowData.table} style={[BattleStyle.battleWindow, {width: this.calculateBattleWidth()}]}>
                 <View style={[BattleStyle.playerHeader, MainStyles.borderStyle]}>
                     <Icon style={{padding:3}} name={"bookmark"} size={24} color={BaseColours.misc.greyBlue}/>
                     <Text style={[BattleStyle.player1Text, MainStyles.bigWhiteStyle]}>{rowData.player1.nick} </Text>
@@ -77,11 +87,21 @@ export default class Battle extends Component {
 
 
     render() {
+        let elementWidth = this.calculateBattleWidth()
         return (
                  <ListView
                   dataSource={this.state.dataSource.cloneWithRows(this.props.content)}
                   renderHeader={(headerData) => <View style={[BattleStyle.turnHeader]}><Text style={[MainStyles.textStyle, {fontSize:22}]}>Turn {this.props.currentTab}</Text></View>}
-                  renderRow={this.renderRow.bind(this)}/>
+                  renderRow={this.renderRow.bind(this)}
+                  calculateBattleWidth={this.calculateBattleWidth.bind(this)}/>
         );
     }
 }
+
+function mapStateToProps( state ) {
+    return {
+        dimension: state.dimension
+    };
+}
+
+export default connect( mapStateToProps)( Battle );
