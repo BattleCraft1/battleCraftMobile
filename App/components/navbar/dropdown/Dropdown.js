@@ -33,10 +33,9 @@ class Dropdown extends Component {
         this.props.navigate(val);
     }
 
-    renderListElement(elementText){
+    renderListElement(elementText, isPortrait){
         return (
-
-            <TouchableHighlight style={DropdownStyles.dropdownOptionStyle} key={elementText}  onPress={()=>{this.menuSelect(elementText)}}>
+            <TouchableHighlight style={[DropdownStyles.dropdownOptionStyle,{padding: isPortrait===true?10:3}]} key={elementText}  onPress={()=>{this.menuSelect(elementText)}}>
                 <View style={DropdownStyles.outerBorder}>
                     <View style={DropdownStyles.innerBorder}>
                         <Text style={MainStyles.bigWhiteStyle}>{elementText}</Text>
@@ -47,14 +46,12 @@ class Dropdown extends Component {
     }
 
     render(){
+        let isPortrait = this.props.dimension.orientation==='portrait';
         let dropdownContent=[];
         for (let i=0;i<this.props.listElements.length;i++)
         {
-            dropdownContent.push(this.renderListElement(this.props.listElements[i]));
+            dropdownContent.push(this.renderListElement(this.props.listElements[i], isPortrait));
         }
-
-        let isPortrait = this.props.dimension.orientation==='portrait';
-
         return(
             <View style={[DropdownStyles.dropdownContainerStyle,
                 {height: isPortrait?600:this.props.dimension.height-60},
