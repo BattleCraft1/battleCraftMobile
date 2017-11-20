@@ -1,10 +1,14 @@
 import React from 'react';
+import {Dimensions} from 'react-native';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
-import reducer from './App/Redux/reducers/index'
+import reducer from './App/redux/reducers/index'
 
-import AppContent from './App/Main/AppContent'
+import {entityPanelModes} from './App/main/consts/entityPanelModes'
+import {entityPanelTypes} from './App/main/consts/entityPanelTypes'
+
+import AppContent from './App/main/AppContent'
 
 function configureStore( initialState ) {
     const enhancer = compose(
@@ -20,12 +24,26 @@ const store = configureStore( {
         dataFetched:false,
         message:""
     },
-    message:{
-        isShown: false,
-        messageText: "",
-        messageType: "",
-        failedOperation: function () {
+    dimension:{
+        height: Dimensions.get('screen').height,
+        width: Dimensions.get('screen').width,
+        orientation: Dimensions.get('screen').height >= Dimensions.get('screen').width?'portrait':'landscape'
+    },
+    possibleOperations:[],
+    entityPanel: {
+        mode:entityPanelModes.disabled,
+        entityType:entityPanelTypes.none,
+        entityName:"",
+        hidden:true,
+        relatedEntity:{
+            relatedEntityNames:[],
+            relatedEntityType:"",
+            relatedEntityCriteria:[]
         }
+    },
+    additionalEntityPanel:{
+        additionalEntityType:entityPanelTypes.none,
+        additionalEntityName:""
     },
     confirmation: {
         header:"",
@@ -34,8 +52,16 @@ const store = configureStore( {
         },
         isShown: false
     },
+    message:{
+        isShown: false,
+        messageText: "",
+        messageType: "",
+        failedOperation: function () {
+        }
+    },
     page: {
-        content: []
+        content: [],
+        checkedElementsNames: []
     },
     pageRequest: {pageRequest:{
         size:10,
