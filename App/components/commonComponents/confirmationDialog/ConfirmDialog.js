@@ -28,10 +28,10 @@ class ConfirmDialog extends React.Component {
             >
                 <View style={ [MessageStyle.modalContainer,{marginLeft: ((this.props.dimension.width-340)/2),}] }>
                     <View style={ MessageStyle.modalHeader }>
-                        <Text style={[MainStyles.textStyle,{fontSize: 21, justifyContent:'center'}]}>{this.props.confirmation.message}</Text>
+                        <Text style={[MainStyles.textStyle,{fontSize: 21, justifyContent:'center'}]}>{this.props.confirmation.header}</Text>
                     </View>
                     <View style={MessageStyle.modalBody}>
-                        <Text style={MainStyles.smallWhiteStyle }>{this.props.confirmation.header}</Text>
+                        <Text style={MainStyles.smallWhiteStyle }>{this.props.confirmation.message}</Text>
                     </View>
                     <View style={MessageStyle.modalFooter} >
 

@@ -42,12 +42,14 @@ const styles = StyleSheet.create({
     },
 
     infoCard:{
+        justifyContent: 'center',
+        alignItems: 'center',
         flex:1,
         flexDirection:'row' ,
         backgroundColor: BaseColours.background.lightBrown
     },
     dataColumn:{
-        flex:2,
+        flex:1,
         borderColor: BaseColours.border.top,
         borderWidth:3,
         borderBottomWidth:0,
@@ -58,9 +60,9 @@ const styles = StyleSheet.create({
         borderBottomColor: BaseColours.border.top,
         borderBottomWidth:3,
         padding:3,
+        flex:1
     },
     playerHeader:{
-        flex:1,
         flexDirection:'row',
         backgroundColor: BaseColours.background.mediumBrown,
         justifyContent: 'center',
@@ -68,10 +70,28 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         padding:2,
     },
-
+    avatarContainerStyle:{
+        justifyContent:'center',
+        alignItems:'center',
+        borderTopColor: BaseColours.border.top,
+        borderRightColor: BaseColours.border.right,
+        borderBottomColor: BaseColours.border.bottom,
+        borderLeftColor: BaseColours.border.left,
+        backgroundColor:BaseColours.misc.deepRed,
+        borderWidth:5,
+        padding: 3,
+        width:130,
+        height:130
+    },
+    avatarInList:{
+        resizeMode:'contain',
+        width:90,
+        height:90,
+    },
     avatar:{
-        maxHeight:135,
-        flex:1
+        resizeMode:'contain',
+        width:120,
+        height:120,
     },
     avatar2x2:{
         width:68,

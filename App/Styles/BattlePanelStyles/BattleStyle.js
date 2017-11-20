@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height:55,
-        backgroundColor: BaseColours.misc.deepRed,
         borderWidth: 3,
         borderColor: BaseColours.border.top,
         padding:5
@@ -21,36 +20,39 @@ const styles = StyleSheet.create({
         borderWidth:5,
         borderColor: BaseColours.background.darkBrown,
         marginBottom: 3,
+        alignSelf:'stretch'
     },
     scoreRow:{
-            flexDirection:'column',
+            flexDirection:'row',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     scoreContainer: {
-        flex:2,
-        flexDirection:'column',
+        flex:1,
+        flexDirection:'row',
         backgroundColor: BaseColours.background.lightBrown,
         alignItems:'center',
         justifyContent:'center'
     },
 
+    scoreContainer2x2: {
+        flex:1,
+        flexDirection:'column',
+        backgroundColor: BaseColours.background.lightBrown,
+        alignItems:'center',
+        justifyContent:'center'
+    },
     scoreboard:{
-        alignSelf: "stretch",
+        padding:5,
         flex:1,
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 3,
     },
-
     playerHeader:{
         flexDirection:'row',
         padding:3,
         borderWidth:3,
-    },
-    playerHeaderScoreboard:{
-        alignSelf: "stretch",
-        flex:1,
-        padding:2,
-        borderWidth:2,
     },
     player1Text:{
         flex:1,
@@ -62,16 +64,17 @@ const styles = StyleSheet.create({
         paddingRight: 5,
         textAlign:"right",
     },
-    userContainer:{
+    avatarContainer:{
+        height:120,
         padding:5,
-        flexDirection:'row',
         flex:1,
         alignItems:'center',
         justifyContent:'center'
     },
     avatarSize:{
-        flex:1,
-        maxHeight:150
+        width:110,
+        height:110,
+        resizeMode:'contain',
     },
 
 });
