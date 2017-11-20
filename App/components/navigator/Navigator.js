@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CollectionPanel from '../collectionPanel/CollectionPanel'
 import AccountPanel from '../account/AccountPanel'
 import SplashScreen from '../commonComponents/SplashScreen'
-import TournamentManagePanel from '../tournamentPanel/TournamentManagePanel'
+import TournamentManagePanel from '../tournamentManage/TournamentManagePanel'
 
 export default class Navigator extends Component {
 

@@ -76,11 +76,8 @@ class BasicDataTab extends Component{
     }
 
     calculateHeight(inputsDisabled){
-        let disabledInputHeight = inputsDisabled?35:0;
         return this.props.orientation === 'portrait'?
-            this.props.height*0.85-225+disabledInputHeight
-            :
-            this.props.height*0.77-185+disabledInputHeight;
+            this.props.height*0.85-225 : this.props.height*0.77-175;
     }
 
     render(){
@@ -189,12 +186,11 @@ class BasicDataTab extends Component{
                     </View>
 
                 </ScrollView>
-                {!this.props.inputsDisabled &&
                 <Button title={"Progress"} color='#4b371b'
                         onPress={()=>{
                             this.props.navigate('Progress/'+this.props.entity["name"]);
                             this.props.disable();
-                        }}/>}
+                        }}/>
             </View>
         );
     }
