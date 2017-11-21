@@ -51,7 +51,7 @@ class Battle extends Component {
         return this.props.battleData.finished?require("battleCraftMobile/img/vsIconFinished.png"):require("battleCraftMobile/img/vsIcon.png");
     }
 
-    renderBattle(rowData) {
+    renderBattle(dimensions) {
         let scoreBackground;
         if(this.props.battleData.firstPlayersGroup.playersPoints===this.props.battleData.secondPlayersGroup.playersPoints){
             scoreBackground={P1: ListColours.battle.DRAW, P2: ListColours.battle.DRAW};
@@ -62,54 +62,54 @@ class Battle extends Component {
         else scoreBackground={P1: ListColours.battle.LOSE, P2: ListColours.battle.WIN};
 
         return (
-            <View style={[BattleStyle.battleWindow,{width:this.props.dimension.width*0.9}]}>
+            <View style={[BattleStyle.battleWindow,{width:this.props.dimension.width*0.95,  maxWidth:600}]}>
                 <View style={{flexDirection:'row'}}>
-                    <View style={[BattleStyle.playerHeader, MainStyles.borderStyle,{flex:1}]}>
+                    <View style={[BattleStyle.playerHeader, MainStyles.borderStyle]}>
                         <Icon style={{padding:3}} name={"bookmark"} size={24} color={BaseColours.misc.greyBlue}/>
                         <Text numberOfLines={1}  style={[BattleStyle.player1Text, MainStyles.smallWhiteStyle]}>
                             {this.props.battleData.firstPlayersGroup.playersNames[0]}</Text>
                     </View>
-                    <View style={[BattleStyle.playerHeader, MainStyles.borderStyle,{flex:1}]}>
+                    <View style={[BattleStyle.playerHeader, MainStyles.borderStyle]}>
                         <Text numberOfLines={1}  style={[BattleStyle.player2Text, MainStyles.smallWhiteStyle]}>
                             {this.props.battleData.firstPlayersGroup.playersNames[1]}</Text>
                         <Icon style={{padding:3}} name={"bookmark"} size={24} color={BaseColours.misc.greyBlue}/>
                     </View>
                 </View>
                 <View style={BattleStyle.scoreRow}>
-                    <View style={{flex:1}}>
-                        <View style={[BattleStyle.avatarContainer, {backgroundColor:BaseColours.misc.greyBlue}]}>
-                            <Image style={BattleStyle.avatarSize} source={this.generateURL(this.props.battleData.firstPlayersGroup.playersNames[0])}/>
+                    <View>
+                        <View style={[BattleStyle.avatarContainer, {backgroundColor:BaseColours.misc.greyBlue, height: dimensions.window, width: dimensions.window}]}>
+                            <Image style={[BattleStyle.avatarSize, {height: dimensions.avatar, width: dimensions.avatar}]} source={this.generateURL(this.props.battleData.firstPlayersGroup.playersNames[0])}/>
                         </View>
-                        <View style={[BattleStyle.avatarContainer, {backgroundColor:BaseColours.misc.deepRed}]}>
-                            <Image style={BattleStyle.avatarSize} source={this.generateURL(this.props.battleData.secondPlayersGroup.playersNames[0])}/>
+                        <View style={[BattleStyle.avatarContainer, {backgroundColor:BaseColours.misc.deepRed, height: dimensions.window, width: dimensions.window}]}>
+                            <Image style={[BattleStyle.avatarSize, {height: dimensions.avatar, width: dimensions.avatar}]} source={this.generateURL(this.props.battleData.secondPlayersGroup.playersNames[0])}/>
                         </View>
                     </View>
                     <TouchableHighlight style={{flex:1, height:240}} onPress={()=>{this.showBattlePopup()}}>
                         <View style={BattleStyle.scoreContainer2x2}>
-                            <View style={[BattleStyle.scoreboard, MainStyles.borderStyle, {width: 80,backgroundColor: scoreBackground.P1}]}>
-                                <Text numberOfLines={1}  style={[MainStyles.textStyle,{fontSize: 32}]}>{this.props.battleData.firstPlayersGroup.playersPoints}</Text>
+                            <View style={[BattleStyle.scoreboard, MainStyles.borderStyle, {width: dimensions.scoreSize, height: dimensions.scoreSize, backgroundColor: scoreBackground.P1}]}>
+                                <Text numberOfLines={1}  style={[MainStyles.textStyle,{fontSize: dimensions.fontSize}]}>{this.props.battleData.firstPlayersGroup.playersPoints}</Text>
                             </View>
-                            <Image style={{flex:1, padding:5, resizeMode:'contain'}} source={this.getVSIcon()}/>
-                            <View style={[BattleStyle.scoreboard, MainStyles.borderStyle, {width: 80,backgroundColor: scoreBackground.P2}]}>
-                                <Text numberOfLines={1}  style={[MainStyles.textStyle,{fontSize: 32}]}>{this.props.battleData.secondPlayersGroup.playersPoints}</Text>
+                            <Image style={BattleStyle.iconVS} source={this.getVSIcon()}/>
+                            <View style={[BattleStyle.scoreboard, MainStyles.borderStyle, {width: dimensions.scoreSize, height: dimensions.scoreSize, backgroundColor: scoreBackground.P2}]}>
+                                <Text numberOfLines={1}  style={[MainStyles.textStyle,{fontSize: dimensions.fontSize}]}>{this.props.battleData.secondPlayersGroup.playersPoints}</Text>
                             </View>
                         </View>
                     </TouchableHighlight>
-                    <View style={{flex:1}}>
-                        <View style={[BattleStyle.avatarContainer, {backgroundColor:BaseColours.misc.greyBlue}]}>
-                            <Image style={BattleStyle.avatarSize} source={this.generateURL(this.props.battleData.firstPlayersGroup.playersNames[1])}/>
+                    <View>
+                        <View style={[BattleStyle.avatarContainer, {backgroundColor:BaseColours.misc.greyBlue, height: dimensions.window, width: dimensions.window}]}>
+                            <Image style={[BattleStyle.avatarSize, {height: dimensions.avatar, width: dimensions.avatar}]} source={this.generateURL(this.props.battleData.firstPlayersGroup.playersNames[1])}/>
                         </View>
-                        <View style={[BattleStyle.avatarContainer, {backgroundColor:BaseColours.misc.deepRed}]}>
-                            <Image style={BattleStyle.avatarSize} source={this.generateURL(this.props.battleData.secondPlayersGroup.playersNames[1])}/>
+                        <View style={[BattleStyle.avatarContainer, {backgroundColor:BaseColours.misc.deepRed, height: dimensions.window, width: dimensions.window}]}>
+                            <Image style={[BattleStyle.avatarSize, {height: dimensions.avatar, width: dimensions.avatar}]} source={this.generateURL(this.props.battleData.secondPlayersGroup.playersNames[1])}/>
                         </View>
                     </View>
                 </View>
                 <View style={{flexDirection:'row'}}>
-                    <View style={[BattleStyle.playerHeader, MainStyles.borderStyle,{flex:1}]}>
+                    <View style={[BattleStyle.playerHeader, MainStyles.borderStyle]}>
                         <Icon style={{padding:3}} name={"bookmark"} size={24} color={BaseColours.misc.deepRed}/>
                         <Text numberOfLines={1}  style={[BattleStyle.player1Text, MainStyles.smallWhiteStyle]}>{this.props.battleData.secondPlayersGroup.playersNames[0]}</Text>
                     </View>
-                    <View style={[BattleStyle.playerHeader, MainStyles.borderStyle,{flex:1}]}>
+                    <View style={[BattleStyle.playerHeader, MainStyles.borderStyle]}>
                         <Text numberOfLines={1}  style={[BattleStyle.player2Text, MainStyles.smallWhiteStyle]}>{this.props.battleData.secondPlayersGroup.playersNames[1]}</Text>
                         <Icon style={{padding:3}} name={"bookmark"} size={24} color={BaseColours.misc.deepRed}/>
                     </View>
@@ -119,8 +119,15 @@ class Battle extends Component {
 
 
     render() {
+        let dimensions;
+        if(this.props.dimension.width>=450) {
+            dimensions = {scoreSize: 60, fontSize: 32, window:120, avatar:110};
+        }
+        else {
+            dimensions={scoreSize: 40, fontSize: 26, window:80, avatar:70};
+        }
         return (
-            <View>{this.renderBattle()}</View>
+            <View>{this.renderBattle(dimensions)}</View>
         );
     }
 }

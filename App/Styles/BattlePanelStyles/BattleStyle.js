@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         alignSelf:'stretch'
     },
     scoreRow:{
-            flexDirection:'row',
+        flexDirection:'row',
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -32,9 +32,9 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         backgroundColor: BaseColours.background.lightBrown,
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        padding:10,
     },
-
     scoreContainer2x2: {
         flex:1,
         flexDirection:'column',
@@ -44,13 +44,14 @@ const styles = StyleSheet.create({
     },
     scoreboard:{
         padding:5,
-        flex:1,
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 3,
     },
     playerHeader:{
+        flex:1,
         flexDirection:'row',
+        alignItems: 'center',
         padding:3,
         borderWidth:3,
     },
@@ -65,17 +66,21 @@ const styles = StyleSheet.create({
         textAlign:"right",
     },
     avatarContainer:{
-        height:120,
         padding:5,
-        flex:1,
         alignItems:'center',
         justifyContent:'center'
     },
     avatarSize:{
-        width:110,
-        height:110,
+        backgroundColor: BaseColours.background.lightBrown,
         resizeMode:'contain',
     },
+    iconVS:{
+        flex:1,
+        maxHeight: 80,
+        maxWidth: 80,
+        padding:5,
+        resizeMode:'contain'
+    }
 
 });
 

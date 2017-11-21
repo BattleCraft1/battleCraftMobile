@@ -7,7 +7,8 @@ import {
     View,
     Text,
     ScrollView,
-    Button
+    Button,
+    Image,
 } from 'react-native';
 
 import Modal from 'react-native-modal';
