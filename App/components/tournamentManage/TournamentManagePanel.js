@@ -8,7 +8,6 @@ import {
     View,
     Text,
     Button,
-
 } from 'react-native';
 import GestureRecognizer from 'react-native-swipe-gestures';
 
@@ -232,6 +231,7 @@ class TournamentManagePanel extends Component {
             });
     }
 
+
     finishTournament(){
         let haveAlonePlayer = this.state.tournamentData.playersCount%2===0;
 
@@ -270,7 +270,6 @@ class TournamentManagePanel extends Component {
     }
 
     showScoreBoard(){
-
     }
 
     showNextTour(){
@@ -310,7 +309,7 @@ class TournamentManagePanel extends Component {
                     config={config}
                     style={{flex: 1, alignItems:'center'}}>
                     <View style={{flex: 1}}>
-                        <View style={[TournamentStyles.pageWindow, MainStyles.borderStyle]}>
+                        <View style={[TournamentStyles.staticWindow, TournamentStyles.pageWindow, MainStyles.borderStyle]}>
                             <Text style={MainStyles.smallWhiteStyle}>{this.state.tourNumber+1}/{this.state.tournamentData.tours.length}</Text>
                         </View>
                         {

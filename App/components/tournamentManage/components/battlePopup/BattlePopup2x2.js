@@ -8,7 +8,8 @@ import {
     Text,
     Image,
     Button,
-    ScrollView
+    ScrollView,
+    TouchableHighlight
 } from 'react-native';
 import PlayerCard from './playerCard/PlayerCard2x2';
 
@@ -17,6 +18,7 @@ import PlayerList from '../playerList/GroupPlayerList'
 
 import MainStyles from 'battleCraftMobile/App/Styles/UniversalStyles/MainStyles';
 import BattleInspectorStyle from 'battleCraftMobile/App/Styles/BattlePanelStyles/BattleInspectorStyle';
+import TournamentStyles from 'battleCraftMobile/App/Styles/BattlePanelStyles/TournamentStyles';
 
 import BaseColours from "battleCraftMobile/App/main/consts/BaseColours"
 import ListColours from "battleCraftMobile/App/main/consts/ListColours"
@@ -188,6 +190,10 @@ class BattleInspector extends Component {
         return this.props.battleData.finished?require("battleCraftMobile/img/vsIconFinished.png"):require("battleCraftMobile/img/vsIcon.png");
     }
 
+    randomizeBattle(){
+
+    }
+
     render() {
         let scoreBackground;
         if(this.state.battleData.firstPlayersGroup.playersPoints===this.state.battleData.secondPlayersGroup.playersPoints){
@@ -217,6 +223,11 @@ class BattleInspector extends Component {
                     <View style={[BattleInspectorStyle.modal, {width:this.props.dimension.width*0.9, height: panelHeight}]}>
                         <ScrollView>
                             <View style={[BattleInspectorStyle.battleHeader, MainStyles.borderStyle]}><Text style={[MainStyles.textStyle, {fontSize: 24}]}>Battle</Text></View>
+                            <View style={[TournamentStyles.staticWindow, TournamentStyles.randomizeWindow, MainStyles.borderStyle]}>
+                                <TouchableHighlight onPress={this.randomizeBattle()}>
+                                    <Image style={TournamentStyles.diceIcon} source={require('battleCraftMobile/img/diceIcon.png')}/>
+                                </TouchableHighlight>
+                            </View>
                             <PlayerCard playersNames={this.state.battleData.firstPlayersGroup.playersNames}
                                         playersPoints={this.state.battleData.firstPlayersGroup.playersPoints}
                                         changeData={this.changePointsOfFirstPlayersGroup.bind(this)}
