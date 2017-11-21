@@ -4,14 +4,6 @@ import BaseColours from "../../main/consts/BaseColours"
 
 const styles = {
 
-    tournamentHeader:{
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor:  BaseColours.background.darkBrown,
-        borderWidth: 3,
-        padding:5,
-        marginBottom:3
-    },
     pageWindow:{
         flexDirection: 'row',
         position:'absolute',

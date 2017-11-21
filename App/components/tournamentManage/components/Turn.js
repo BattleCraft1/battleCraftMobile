@@ -57,10 +57,9 @@ class Turn extends React.Component{
 
 
     render(){
-        let tourActiveColor = this.props.currentTourNumber===this.props.tourNumber? BaseColours.misc.green : BaseColours.misc.deepRed
+        let tourActiveColor = this.props.currentTourNumber===this.props.tourNumber? BaseColours.misc.deepGreen : BaseColours.misc.deepRed
         return(
-            <ScrollView
-                contentContainerStyle={EntityPanelStyle.scrollView}>
+            <ScrollView>
                 <View style={[BattleStyle.turnHeader,{backgroundColor: tourActiveColor}]}>
                     <Text style={[MainStyles.textStyle, {fontSize:22}]}>Turn {this.props.tourNumber+1}</Text></View>
                 {this.createBattles()}

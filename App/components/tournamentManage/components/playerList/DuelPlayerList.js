@@ -4,7 +4,7 @@ import Modal from 'react-native-modal';
 import BattleInspectorStyle from 'battleCraftMobile/App/Styles/BattlePanelStyles/BattleInspectorStyle';
 import {serverName} from "../../../../main/consts/serverName";
 import MainStyles from 'battleCraftMobile/App/Styles/UniversalStyles/MainStyles';
-import EntityPanelInputsStyles from '../../../../Styles/CollectionPanelStyles/EntityPanelInputsStyles'
+import BaseColours from 'battleCraftMobile/App/main/consts/BaseColours';
 
 export default class DuelPlayerList extends Component {
     constructor(props) {
@@ -45,11 +45,11 @@ export default class DuelPlayerList extends Component {
                     }
                     keyExtractor={(item, index) => index}
                 />
-                <View style={MainStyles.buttonsPanelStyle}>
-                    <View style={{flex:1}}>
-                        <Button title={"Close"} color='#4b371b' onPress={this.props.hideList.bind(this)}/>
+                    <View style={[BattleInspectorStyle.buttonStyle, MainStyles.borderStyle]}>
+                        <View style={{flex:1}}>
+                            <Button title={"Close"} color={BaseColours.misc.deepRed} onPress={this.props.hideList.bind(this)}/>
+                        </View>
                     </View>
-                </View>
                 </View>
             </Modal>
         );

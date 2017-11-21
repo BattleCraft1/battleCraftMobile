@@ -143,7 +143,7 @@ class TournamentManagePanel extends Component {
                                    sendBattleData={this.sendBattleData.bind(this)}/>
         }
         else{
-            return <div/>
+            return <View/>
         }
     }
 
@@ -157,7 +157,7 @@ class TournamentManagePanel extends Component {
                                   hidePopup={()=>{this.setState({showScoreBoard:false})}}/>
         }
         else{
-            return <div/>
+            return <View/>
         }
     }
 
