@@ -114,16 +114,16 @@ class TournamentManagePanel extends Component {
     createTour(){
         let tour = this.state.tournamentData.tours[this.state.tourNumber];
         return <Turn
-                key={this.state.tourNumber}
-                tourData={tour}
-                tourNumber={this.state.tourNumber}
-                haveAlonePlayer={this.state.tournamentData.playersCount%2!==0}
-                showBattlePopup={this.showBattlePopup.bind(this)}
-                playersOnTableCount={this.state.playersOnTableCount}
-                tournamentStatus={this.state.tournamentData.tournamentStatus}
-                disabled={this.state.tourNumber>this.state.tournamentData.currentTourNumber || this.state.tournamentData.tournamentStatus==="FINISHED"}
-                currentTourNumber={this.state.tournamentData.currentTourNumber}
-            />
+            key={this.state.tourNumber}
+            tourData={tour}
+            tourNumber={this.state.tourNumber}
+            haveAlonePlayer={this.state.tournamentData.playersCount%2!==0}
+            showBattlePopup={this.showBattlePopup.bind(this)}
+            playersOnTableCount={this.state.playersOnTableCount}
+            tournamentStatus={this.state.tournamentData.tournamentStatus}
+            disabled={this.state.tourNumber>this.state.tournamentData.currentTourNumber || this.state.tournamentData.tournamentStatus==="FINISHED"}
+            currentTourNumber={this.state.tournamentData.currentTourNumber}
+        />
     }
 
 
@@ -154,7 +154,7 @@ class TournamentManagePanel extends Component {
         }
         else if(this.state.playersOnTableCount===4){
             return <Scoreboard2x2 playersNamesWithPoints={this.state.tournamentData.playersNamesWithPoints}
-                                   hidePopup={()=>{this.setState({showScoreBoard:false})}}/>
+                                  hidePopup={()=>{this.setState({showScoreBoard:false})}}/>
         }
         else{
             return <div/>
@@ -294,16 +294,18 @@ class TournamentManagePanel extends Component {
             directionalOffsetThreshold: 30
         };
 
+        let buttonsDisabled = this.state.tournamentData.tournamentStatus === "FINISHED";
+
         return (
             <View style={MainStyles.contentStyle}>
-                <View style={{marginBottom:3, flexDirection:'row'}}>
+                {!buttonsDisabled && <View style={{marginBottom:3, flexDirection:'row'}}>
                     <View style={{flex:1, marginRight: 3}}>
                         <Button title="Previous" color='#4b371b' onPress={this.previousTour.bind(this)}/>
                     </View>
                     <View style={{flex:1}}>
                         <Button title="Next" color='#4b371b' onPress={this.nextTour.bind(this)}/>
                     </View>
-                </View>
+                </View>}
                 <GestureRecognizer
                     onSwipeLeft={this.showPreviousTour.bind(this)}
                     onSwipeRight={this.showNextTour.bind(this)}
@@ -320,11 +322,11 @@ class TournamentManagePanel extends Component {
                 </GestureRecognizer>
                 <View style={MainStyles.buttonsPanelStyle}>
                     <View style={{flex:1, marginRight: 3}}>
-                    <Button title={"Score"} color='#4b371b' onPress={this.showScoreBoard.bind(this)}/>
+                        <Button title={"Score"} color='#4b371b' onPress={this.showScoreBoard.bind(this)}/>
                     </View>
-                    <View style={{flex:1}}>
-                    <Button title={"Finish"} color='#4b371b' onPress={this.finishTournament.bind(this)}/>
-                    </View>
+                    {!buttonsDisabled && <View style={{flex:1}}>
+                        <Button title={"Finish"} color='#4b371b' onPress={this.finishTournament.bind(this)}/>
+                    </View>}
                 </View>
                 {this.state.showBattlePopup && this.createPopup()}
                 {this.state.showScoreBoard && this.createScoreBoard()}
