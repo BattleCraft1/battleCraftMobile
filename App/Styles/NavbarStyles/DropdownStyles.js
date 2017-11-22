@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
     dropdownOptionStyle:{
         flex: 1,
         marginTop:2,
-        padding:10,
         minHeight:50,
         backgroundColor: BaseColours.background.darkBrown,
     },

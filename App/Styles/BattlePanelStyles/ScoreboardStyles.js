@@ -65,7 +65,6 @@ const styles = StyleSheet.create({
     avatarContainer:{
         width:37,
         height:37,
-        backgroundColor: BaseColours.background.lightBrown,
         borderColor: BaseColours.border.top,
         borderRightWidth: 3,
     },

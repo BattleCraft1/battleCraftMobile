@@ -73,20 +73,25 @@ const styles = StyleSheet.create({
     avatarContainerStyle:{
         justifyContent:'center',
         alignItems:'center',
-        borderTopColor: BaseColours.border.top,
-        borderRightColor: BaseColours.border.right,
-        borderBottomColor: BaseColours.border.bottom,
-        borderLeftColor: BaseColours.border.left,
-        backgroundColor:BaseColours.misc.deepRed,
         borderWidth:5,
-        padding: 3,
-        width:130,
-        height:130
+        borderColor: BaseColours.border.top,
+        backgroundColor: BaseColours.misc.deepRed,
+        padding: 5,
+        width:140,
+        height:140
     },
     avatarInList:{
+        flex: 1,
+        backgroundColor:BaseColours.background.lightBrown,
         resizeMode:'contain',
         width:90,
-        height:90,
+        height:90
+    },
+    buttonStyle: {
+        flexDirection:'row',
+        borderWidth: 3,
+        backgroundColor: BaseColours.misc.deepRed,
+        padding: 3,
     },
     avatar:{
         resizeMode:'contain',

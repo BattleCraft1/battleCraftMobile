@@ -8,7 +8,8 @@ import {
     Text,
     Image,
     Button,
-    ScrollView
+    ScrollView,
+    TouchableHighlight
 } from 'react-native';
 import PlayerCard from './playerCard/PlayerCard2x2';
 
@@ -17,6 +18,7 @@ import PlayerList from '../playerList/GroupPlayerList'
 
 import MainStyles from 'battleCraftMobile/App/Styles/UniversalStyles/MainStyles';
 import BattleInspectorStyle from 'battleCraftMobile/App/Styles/BattlePanelStyles/BattleInspectorStyle';
+import TournamentStyles from 'battleCraftMobile/App/Styles/BattlePanelStyles/TournamentStyles';
 
 import BaseColours from "battleCraftMobile/App/main/consts/BaseColours"
 import ListColours from "battleCraftMobile/App/main/consts/ListColours"
@@ -78,6 +80,24 @@ class BattleInspector extends Component {
             this.props.dimension.height*0.70:this.props.dimension.height*0.75;
     }
 
+    chooseRandomPlayers(){
+        let battleData = this.state.battleData;
+        let playersGroupsNames = this.state.playersWithoutBattles;
+        playersGroupsNames.splice(playersGroupsNames.indexOf(["",""]),1);
+        playersGroupsNames.sort(() => { return 0.5 - Math.random() });
+
+        this.changePlayersWithoutBattles(battleData.firstPlayersGroup.playersNames,playersGroupsNames[0]);
+        battleData.firstPlayersGroup = {
+            playersNames:playersGroupsNames[0],
+            playersPoints:0
+        };
+        this.changePlayersWithoutBattles(battleData.secondPlayersGroup.playersNames,playersGroupsNames[0]);
+        battleData.secondPlayersGroup = {
+            playersNames:playersGroupsNames[0],
+            playersPoints:0
+        };
+        this.setState({battleData:battleData})
+    }
 
     changePlayersData(changedPlayersNames){
         let battleData = this.state.battleData;
@@ -211,16 +231,31 @@ class BattleInspector extends Component {
 
         let panelHeight = this.calculatePanelHeight();
 
+        let firstPlayersNamesGroupWithPoints = this.props.playersNamesWithPoints.find(
+            playersGroupNamesWithPoints => compareArrays(playersGroupNamesWithPoints.playersInGroupNames,
+                              this.props.battleData.firstPlayersGroup.playersNames));
+        let firstPlayersGroupTotalPoints = firstPlayersNamesGroupWithPoints?firstPlayersNamesGroupWithPoints.points:0;
+
+        let secondPlayersNamesGroupWithPoints = this.props.playersNamesWithPoints.find(
+            playersGroupNamesWithPoints => compareArrays(playersGroupNamesWithPoints.playersInGroupNames,
+                              this.props.battleData.secondPlayersGroup.playersNames));
+        let secondPlayersGroupTotalPoints = secondPlayersNamesGroupWithPoints?secondPlayersNamesGroupWithPoints.points:0;
+
         return (
             <View>
                 <Modal isVisible={true} backdropOpacity={0.3}>
                     <View style={[BattleInspectorStyle.modal, {width:this.props.dimension.width*0.9, height: panelHeight}]}>
                         <ScrollView>
                             <View style={[BattleInspectorStyle.battleHeader, MainStyles.borderStyle]}><Text style={[MainStyles.textStyle, {fontSize: 24}]}>Battle</Text></View>
+                            <TouchableHighlight
+                                onPress={this.chooseRandomPlayers.bind(this)}
+                                style={[TournamentStyles.staticWindow, TournamentStyles.randomizeWindow, MainStyles.borderStyle]}>
+                                <Image style={TournamentStyles.diceIcon} source={require('battleCraftMobile/img/diceIcon.png')}/>
+                            </TouchableHighlight>
                             <PlayerCard playersNames={this.state.battleData.firstPlayersGroup.playersNames}
                                         playersPoints={this.state.battleData.firstPlayersGroup.playersPoints}
                                         changeData={this.changePointsOfFirstPlayersGroup.bind(this)}
-                                        totalPoints={this.props.playersNamesWithPoints[this.props.battleData.firstPlayersGroup.playersNames[0]]}
+                                        totalPoints={firstPlayersGroupTotalPoints}
                                         colour={BaseColours.misc.greyBlue}
                                         showUsersList={() => this.showUsersList(0)}
                                         scoreBackground={scoreBackground.P1}
@@ -236,7 +271,7 @@ class BattleInspector extends Component {
                             <PlayerCard playersNames={this.state.battleData.secondPlayersGroup.playersNames}
                                         playersPoints={this.state.battleData.secondPlayersGroup.playersPoints}
                                         changeData={this.changePointsOfSecondPlayersGroup.bind(this)}
-                                        totalPoints={this.props.playersNamesWithPoints[this.props.battleData.secondPlayersGroup.playersNames[0]]}
+                                        totalPoints={secondPlayersGroupTotalPoints}
                                         colour={BaseColours.misc.deepRed}
                                         showUsersList={() => this.showUsersList(1)}
                                         scoreBackground={scoreBackground.P2}

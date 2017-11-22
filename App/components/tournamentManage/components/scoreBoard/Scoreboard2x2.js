@@ -7,7 +7,8 @@ import {
     View,
     Text,
     ScrollView,
-    Button
+    Button,
+    Image
 } from 'react-native';
 
 import Modal from 'react-native-modal';
@@ -21,6 +22,7 @@ import ListColours from "battleCraftMobile/App/main/consts/ListColours"
 import { ActionCreators } from '../../../../redux/actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import {serverName} from "../../../../main/consts/serverName";
 
 class Scoreboard extends Component {
 
@@ -42,36 +44,41 @@ class Scoreboard extends Component {
             return(ListColours.battle.DRAW)
         }
         else{
-            return(BaseColours.battle.lightBrown)
+            return(BaseColours.background.lightBrown)
         }
     }
 
-    renderRow(rowData){
-        let backgroundColour = this.checkPosition(rowData.position);
+    renderRow(firstPlayerName,secondPlayerName,points,index){
+        let backgroundColour = this.checkPosition(index+1);
 
         return(
-            <View style={ScoreboardStyles.scoreboardRow}>
+            <View key={index} style={ScoreboardStyles.scoreboardRow}>
                 <View style={MainStyles.center}>
                     <View style={[ScoreboardStyles.positionNumber, ScoreboardStyles.numberSize2]}>
-                        <Text style={[MainStyles.bigWhiteStyle, {fontSize:24}]}>{rowData.position}.</Text>
+                        <Text style={[MainStyles.bigWhiteStyle]}>{index+1}.</Text>
                     </View>
                 </View>
                 <View style={{flex:1}}>
                     <View style={[ScoreboardStyles.dataCard ,{backgroundColor: backgroundColour}]}>
                         <View style={ScoreboardStyles.avatarContainer}>
-                            {rowData.avatar}
+                            <Image style={{flex:1}} source={{uri:`${serverName}/get/user/avatar?username=${firstPlayerName}`}}/>
                         </View>
                         <View style={ScoreboardStyles.textContainer}>
-                            <Text style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}>{rowData.name}</Text>
+                            <Text style={[MainStyles.smallWhiteStyle]}>{firstPlayerName}</Text>
                         </View>
                     </View>
                     <View style={[ScoreboardStyles.dataCard ,{backgroundColor: backgroundColour}]}>
                         <View style={ScoreboardStyles.avatarContainer}>
-                            {rowData.avatar}
+                            <Image style={{flex:1}} source={{uri:`${serverName}/get/user/avatar?username=${secondPlayerName}`}}/>
                         </View>
                         <View style={ScoreboardStyles.textContainer}>
-                            <Text style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}>{rowData.name}</Text>
+                            <Text style={[MainStyles.smallWhiteStyle]}>{secondPlayerName}</Text>
                         </View>
+                    </View>
+                </View>
+                <View style={MainStyles.center}>
+                    <View style={[ScoreboardStyles.positionNumber, ScoreboardStyles.numberSize2]}>
+                        <Text style={[MainStyles.bigWhiteStyle]}>{points}</Text>
                     </View>
                 </View>
             </View>
@@ -81,20 +88,27 @@ class Scoreboard extends Component {
     render() {
 
         let panelHeight = this.calculatePanelHeight();
-
+        let playersNamesWithPoints = this.props.playersNamesWithPoints;
 
         return (
-            <Modal isVisible={this.props.isVisible} backdropOpacity={0.3}>
+            <Modal isVisible={true} backdropOpacity={0.3}>
                 <View style={[ScoreboardStyles.modal, {width:this.props.dimension.width*0.9, height: panelHeight}]}>
                     <View style={ScoreboardStyles.scoreboardHeader}>
                         <Text numberOfLines={1}  style={MainStyles.bigWhiteStyle}>Scoreboard</Text>
                     </View>
 
                     <ScrollView style={{flex:1, marginTop:10}}>
-                        {this.renderRow({name: 'temp', position: 1,})}
+                        {
+                            playersNamesWithPoints.sort((playersGroupNamesWithPoints1,playersGroupNamesWithPoints2) =>
+                                playersGroupNamesWithPoints2.points - playersGroupNamesWithPoints1.points)
+                                .map((playersGroupNamesWithPoints,index) => this.renderRow(
+                                        playersGroupNamesWithPoints.playersInGroupNames[0],
+                                        playersGroupNamesWithPoints.playersInGroupNames[1],
+                                        playersGroupNamesWithPoints.points,index))
+                        }
                     </ScrollView>
 
-                    <View><Button title={"Close"} color={BaseColours.background.darkBrown}  onPress={() => this.props.onClosePanel()}/></View>
+                    <View><Button title={"Close"} color={BaseColours.background.darkBrown}  onPress={() => this.props.hidePopup()}/></View>
                 </View>
             </Modal>
         );

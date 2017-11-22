@@ -5,7 +5,7 @@ export default (entity) => {
     let validationErrors = {};
     let fieldErrors = {};
 
-    if(!entity.name.match(new RegExp("^[A-ZĄĆĘŁŃÓŚŹŻa-zzżźćńółęąś1-9]{3,30}$")))
+    if(!entity.nameChange.match(new RegExp("^[A-ZĄĆĘŁŃÓŚŹŻa-zzżźćńółęąś1-9]{3,30}$")))
         fieldErrors.nameChange = "Name must start with big letter and have between 3 to 30 chars";
 
     if(!entity.firstname.match(new RegExp("^[A-ZĄĆĘŁŃÓŚŹŻ][a-zzżźćńółęąś]{2,19}$")))

@@ -4,6 +4,7 @@ import Modal from 'react-native-modal';
 import BattleInspectorStyle from 'battleCraftMobile/App/Styles/BattlePanelStyles/BattleInspectorStyle';
 import {serverName} from "../../../../main/consts/serverName";
 import MainStyles from 'battleCraftMobile/App/Styles/UniversalStyles/MainStyles';
+import BaseColours from 'battleCraftMobile/App/main/consts/BaseColours';
 
 export default class GroupPlayerList extends Component {
     constructor(props) {
@@ -32,16 +33,16 @@ export default class GroupPlayerList extends Component {
                         horizontal={true}
                         dataSource={this.state.dataSource.cloneWithRows(this.props.playersWithoutBattles)}
                         renderRow={(players) => <TouchableHighlight onPress={()=>this.props.changePlayersData(players)}>
-                            <View style={{alignItems:'center',justifyContent:'center',margin:3}}>
+                            <View style={{alignItems:'center',justifyContent:'center',margin:5}}>
                                 <View style={BattleInspectorStyle.avatarContainerStyle}>
                                     <Image style={BattleInspectorStyle.avatarInList} source={this.generateURL(players[0])}/>
-                                    <Text numberOfLines={1} style={MainStyles.smallWhiteStyle}>
+                                    <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle, {fontWeight: 'bold'}]}>
                                         {players[0]===""?"NO NAME":players[0]}
                                     </Text>
                                 </View>
-                                <View style={BattleInspectorStyle.avatarContainerStyle}>
+                                <View style={[BattleInspectorStyle.avatarContainerStyle,{marginTop:5}]}>
                                     <Image style={BattleInspectorStyle.avatarInList} source={this.generateURL(players[1])}/>
-                                    <Text numberOfLines={1} style={MainStyles.smallWhiteStyle}>
+                                    <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle, {fontWeight: 'bold'}]}>
                                         {players[1]===""?"NO NAME":players[1]}
                                     </Text>
                                 </View>
@@ -50,9 +51,9 @@ export default class GroupPlayerList extends Component {
                         }
                         keyExtractor={(players, index) => index}
                     />
-                    <View style={MainStyles.buttonsPanelStyle}>
+                    <View style={[BattleInspectorStyle.buttonStyle, MainStyles.borderStyle]}>
                         <View style={{flex:1}}>
-                            <Button title={"Close"} color='#4b371b' onPress={this.props.hideList.bind(this)}/>
+                            <Button title={"Close"} color={BaseColours.misc.deepRed} onPress={this.props.hideList.bind(this)}/>
                         </View>
                     </View>
                 </View>

@@ -4,18 +4,9 @@ import BaseColours from "../../main/consts/BaseColours"
 
 const styles = {
 
-    tournamentHeader:{
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor:  BaseColours.background.darkBrown,
-        borderWidth: 3,
-        padding:5,
-        marginBottom:3
-    },
-    pageWindow:{
+    staticWindow:{
         flexDirection: 'row',
         position:'absolute',
-        right:0,
         top:0,
         justifyContent: 'center',
         alignItems: 'center',
@@ -26,6 +17,20 @@ const styles = {
         zIndex: 1000,
         padding:1
     },
+    pageWindow:{
+        right:0,
+    },
+    randomizeWindow:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        right:0,
+        width:45,
+        height:45,
+    },
+    diceIcon:{
+        width:35,
+        height:35
+    }
 
 };
 
