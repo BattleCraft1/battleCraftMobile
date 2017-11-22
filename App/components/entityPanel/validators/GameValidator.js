@@ -4,10 +4,10 @@ export default (entity,isEditMode) => {
     let validationErrors = {};
     let fieldErrors = {};
 
-    if(entity.name.length<1 || entity.name.length>50)
+    if(entity.nameChange.length<1 || entity.nameChange.length>50)
         fieldErrors.nameChange = "Game name must have between 1 to 50 chars";
 
-    if(entity.gameRules!=="")
+    if(entity.gameRules!==undefined)
         validateGameRules(entity.gameRules,fieldErrors);
     else if(!isEditMode)
         fieldErrors.gameRules = "Please choose pdf file with game rules";

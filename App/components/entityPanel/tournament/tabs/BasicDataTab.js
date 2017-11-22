@@ -104,7 +104,7 @@ class BasicDataTab extends Component{
                     <View style={InputStyles.inputCard}>
                         <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Tournament status:</Text></View>
                         <TextOutput
-                            value={this.props.entity["status"]}/>
+                            value={this.props.entity["status"].replace("_"," ")}/>
                     </View>
 
                     <View style={InputStyles.inputCard}>

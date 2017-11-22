@@ -8,7 +8,8 @@ import {
     Text,
     Image,
     Button,
-    ScrollView
+    ScrollView,
+    TouchableHighlight
 } from 'react-native';
 import PlayerCard from './playerCard/PlayerCard1x1';
 
@@ -17,6 +18,7 @@ import PlayerList from '../playerList/DuelPlayerList'
 
 import MainStyles from 'battleCraftMobile/App/Styles/UniversalStyles/MainStyles';
 import BattleInspectorStyle from 'battleCraftMobile/App/Styles/BattlePanelStyles/BattleInspectorStyle';
+import TournamentStyles from 'battleCraftMobile/App/Styles/BattlePanelStyles/TournamentStyles';
 
 import BaseColours from "battleCraftMobile/App/main/consts/BaseColours"
 import ListColours from "battleCraftMobile/App/main/consts/ListColours"
@@ -59,6 +61,25 @@ class BattleInspector extends Component {
     {
         this.setState({numberOfPlayerToChange:numberOfPlayerToChange});
         this.setState({usersListVisible:true})
+    }
+
+    chooseRandomPlayers(){
+        let battleData = this.state.battleData;
+        let playersNames = this.state.playersWithoutBattles;
+        playersNames.splice(playersNames.indexOf(""),1);
+        playersNames.sort(() => { return 0.5 - Math.random() });
+
+        this.changePlayersWithoutBattles(battleData.firstPlayer.name,playersNames[0]);
+        battleData.firstPlayer = {
+            name:playersNames[0],
+            points:0
+        };
+        this.changePlayersWithoutBattles(battleData.secondPlayer.name,playersNames[0]);
+        battleData.secondPlayer = {
+            name:playersNames[0],
+            points:0
+        };
+        this.setState({battleData:battleData})
     }
 
     changePlayerData(changedPlayerName){
@@ -200,6 +221,12 @@ class BattleInspector extends Component {
                     <View style={[BattleInspectorStyle.modal, {width:this.props.dimension.width*0.9, height: panelHeight}]}>
                         <ScrollView>
                             <View style={[BattleInspectorStyle.battleHeader, MainStyles.borderStyle]}><Text style={[MainStyles.textStyle, {fontSize: 24}]}>Battle</Text></View>
+                            <TouchableHighlight onPress={this.chooseRandomPlayers.bind(this)}
+                                                style={[TournamentStyles.staticWindow,
+                                                    TournamentStyles.randomizeWindow,
+                                                    MainStyles.borderStyle]}>
+                                <Image style={TournamentStyles.diceIcon} source={require('battleCraftMobile/img/diceIcon.png')}/>
+                            </TouchableHighlight>
                             <PlayerCard playerName={this.state.battleData.firstPlayer.name}
                                         playerPoints={this.state.battleData.firstPlayer.points}
                                         changeData={this.changePointsOfFirstPlayer.bind(this)}

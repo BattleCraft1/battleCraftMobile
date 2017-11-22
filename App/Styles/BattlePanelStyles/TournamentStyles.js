@@ -4,10 +4,9 @@ import BaseColours from "../../main/consts/BaseColours"
 
 const styles = {
 
-    pageWindow:{
+    staticWindow:{
         flexDirection: 'row',
         position:'absolute',
-        right:0,
         top:0,
         justifyContent: 'center',
         alignItems: 'center',
@@ -18,6 +17,20 @@ const styles = {
         zIndex: 1000,
         padding:1
     },
+    pageWindow:{
+        right:0,
+    },
+    randomizeWindow:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        right:0,
+        width:45,
+        height:45,
+    },
+    diceIcon:{
+        width:35,
+        height:35
+    }
 
 };
 

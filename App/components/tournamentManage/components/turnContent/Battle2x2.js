@@ -124,7 +124,7 @@ class Battle extends Component {
             dimensions = {scoreSize: 60, fontSize: 32, window:120, avatar:110};
         }
         else {
-            dimensions={scoreSize: 40, fontSize: 26, window:80, avatar:70};
+            dimensions={scoreSize: 40, fontSize: 20, window:80, avatar:70};
         }
         return (
             <View>{this.renderBattle(dimensions)}</View>

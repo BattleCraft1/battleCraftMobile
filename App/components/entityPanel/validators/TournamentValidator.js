@@ -7,7 +7,7 @@ import {factorial} from "../../../main/functions/factorial"
 export default (entity) => {
     let validationErrors = {};
     let fieldErrors = {};
-    if(!entity.name.match(new RegExp("^[A-Z][A-Za-zzżźćńółęąśŻŹĆĄŚĘŁÓŃ0-9 ]{1,29}$")))
+    if(!entity.nameChange.match(new RegExp("^[A-Z][A-Za-zzżźćńółęąśŻŹĆĄŚĘŁÓŃ0-9 ]{1,29}$")))
         fieldErrors.nameChange = "Tournament name must start with big letter and have between 2 to 30 chars";
 
     if(entity.playersOnTableCount!==2 && entity.playersOnTableCount!==4)

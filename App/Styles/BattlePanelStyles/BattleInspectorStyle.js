@@ -81,13 +81,11 @@ const styles = StyleSheet.create({
         height:140
     },
     avatarInList:{
+        flex: 1,
+        backgroundColor:BaseColours.background.lightBrown,
         resizeMode:'contain',
-        margin:3,
-        borderWidth:3,
-        borderColor: BaseColours.border.top,
-        backgroundColor: BaseColours.background.lightBrown,
         width:90,
-        height:90,
+        height:90
     },
     buttonStyle: {
         flexDirection:'row',

@@ -19,8 +19,6 @@ import ScoreboardStyles from 'battleCraftMobile/App/Styles/BattlePanelStyles/Sco
 import BaseColours from "battleCraftMobile/App/main/consts/BaseColours"
 import ListColours from "battleCraftMobile/App/main/consts/ListColours"
 
-import { ActionCreators } from '../../../../redux/actions/index';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {serverName} from "../../../../main/consts/serverName";
 
@@ -44,7 +42,7 @@ class Scoreboard extends Component {
             return(ListColours.battle.DRAW)
         }
         else{
-            return(BaseColours.battle.lightBrown)
+            return(BaseColours.background.lightBrown)
         }
     }
 
@@ -52,20 +50,20 @@ class Scoreboard extends Component {
         let backgroundColour = this.checkPosition(index+1);
 
         return(
-            <View style={ScoreboardStyles.scoreboardRow}>
+            <View key={index} style={ScoreboardStyles.scoreboardRow}>
                 <View style={[ScoreboardStyles.positionNumber, ScoreboardStyles.numberSize1]}>
-                    <Text style={MainStyles.bigWhiteStyle}>{index+1}.</Text>
+                    <Text style={MainStyles.smallWhiteStyle}>{index+1}.</Text>
                 </View>
                 <View style={[ScoreboardStyles.dataCard ,{backgroundColor: backgroundColour}]}>
                     <View style={ScoreboardStyles.avatarContainer}>
-                        <Image style={{}} source={require(`${serverName}get/user/avatar?username=${name}`)}/>
+                        <Image style={{flex:1}} source={{uri:`${serverName}/get/user/avatar?username=${name}`}}/>
                     </View>
                     <View style={ScoreboardStyles.textContainer}>
-                        <Text style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}>{name}</Text>
+                        <Text style={MainStyles.smallWhiteStyle}>{name}</Text>
                     </View>
                 </View>
                 <View style={[ScoreboardStyles.positionNumber, ScoreboardStyles.numberSize1]}>
-                    <Text style={MainStyles.bigWhiteStyle}>{points}.</Text>
+                    <Text style={MainStyles.smallWhiteStyle}>{points}</Text>
                 </View>
             </View>
         )
@@ -74,24 +72,24 @@ class Scoreboard extends Component {
     render() {
 
         let panelHeight = this.calculatePanelHeight();
-
+        let playersNamesWithPoints = this.props.playersNamesWithPoints;
 
         return (
-            <Modal isVisible={this.props.isVisible} backdropOpacity={0.3}>
+            <Modal isVisible={true} backdropOpacity={0.3}>
                 <View style={[ScoreboardStyles.modal, {width:this.props.dimension.width*0.9, height: panelHeight}]}>
                     <View style={ScoreboardStyles.scoreboardHeader}>
                         <Text numberOfLines={1}  style={MainStyles.bigWhiteStyle}>Scoreboard</Text>
                     </View>
 
                     <ScrollView style={{flex:1, marginTop:10}}>
-                        {this.props.playersNamesWithPoints
-                            .sort(
-                            (playerWithPoints1,playerWithPoints2) => playerWithPoints1[0] - playerWithPoints2[0])
-                            .map((key,index) => this.renderRow(key,this.props.playersNamesWithPoints[key],index))
+                        {
+                            Object.keys(playersNamesWithPoints)
+                            .sort((playerName1,playerName2) => playersNamesWithPoints[playerName2] - playersNamesWithPoints[playerName1])
+                            .map((playerName,index) => this.renderRow(playerName,playersNamesWithPoints[playerName],index))
                         }
                     </ScrollView>
 
-                    <View><Button title={"Close"} color={BaseColours.background.darkBrown}  onPress={() => this.props.onClosePanel()}/></View>
+                    <View><Button title={"Close"} color={BaseColours.background.darkBrown}  onPress={() => this.props.hidePopup()}/></View>
                 </View>
             </Modal>
         );
