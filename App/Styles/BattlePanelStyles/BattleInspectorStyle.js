@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
     },
     avatarInList:{
         resizeMode:'contain',
-        margin:3,
         borderWidth:3,
         borderColor: BaseColours.border.top,
         backgroundColor: BaseColours.background.lightBrown,
