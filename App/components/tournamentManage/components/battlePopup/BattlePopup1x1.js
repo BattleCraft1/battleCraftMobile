@@ -64,22 +64,43 @@ class BattleInspector extends Component {
     }
 
     chooseRandomPlayers(){
-        let battleData = this.state.battleData;
         let playersNames = this.state.playersWithoutBattles;
         playersNames.splice(playersNames.indexOf(""),1);
-        playersNames.sort(() => { return 0.5 - Math.random() });
+        let battleData = this.state.battleData;
 
-        this.changePlayersWithoutBattles(battleData.firstPlayer.name,playersNames[0]);
+        if(battleData.firstPlayer.name!=="" && playersNames.indexOf(battleData.firstPlayer.name) === -1){
+            playersNames.unshift(battleData.firstPlayer.name);
+        }
+        if(battleData.secondPlayer.name!=="" && playersNames.indexOf(battleData.secondPlayer.name) === -1) {
+            playersNames.unshift(battleData.secondPlayer.name);
+        }
+
+        let firstRandomName = playersNames[Math.floor(Math.random()*playersNames.length)];
+        let secondRandomName = playersNames[Math.floor(Math.random()*playersNames.length)];
+        if(secondRandomName === firstRandomName){
+            let indexOfFirstName = playersNames.indexOf(firstRandomName);
+            if(indexOfFirstName > 0){
+                secondRandomName = playersNames[indexOfFirstName-1];
+            }
+            else{
+                secondRandomName = playersNames[indexOfFirstName+1];
+            }
+        }
+
+        playersNames.splice(playersNames.indexOf(firstRandomName),1);
         battleData.firstPlayer = {
-            name:playersNames[0],
+            name:firstRandomName,
             points:0
         };
-        this.changePlayersWithoutBattles(battleData.secondPlayer.name,playersNames[0]);
+
+        playersNames.splice(playersNames.indexOf(secondRandomName),1);
         battleData.secondPlayer = {
-            name:playersNames[0],
+            name:secondRandomName,
             points:0
         };
-        this.setState({battleData:battleData})
+
+        playersNames.push("");
+        this.setState({battleData:battleData,playersWithoutBattles:playersNames});
     }
 
     changePlayerData(changedPlayerName){

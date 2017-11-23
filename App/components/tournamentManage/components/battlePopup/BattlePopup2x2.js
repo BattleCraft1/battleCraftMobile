@@ -81,22 +81,46 @@ class BattleInspector extends Component {
     }
 
     chooseRandomPlayers(){
-        let battleData = this.state.battleData;
-        let playersGroupsNames = this.state.playersWithoutBattles;
-        playersGroupsNames.splice(playersGroupsNames.indexOf(["",""]),1);
-        playersGroupsNames.sort(() => { return 0.5 - Math.random() });
+        let playersNames = this.state.playersWithoutBattles;
 
-        this.changePlayersWithoutBattles(battleData.firstPlayersGroup.playersNames,playersGroupsNames[0]);
+        playersNames.splice(playersNames.indexOf(["",""]),1);
+        let battleData = this.state.battleData;
+
+        if(!compareArrays(battleData.firstPlayersGroup.playersNames,["",""]) &&
+            playersNames.indexOf(battleData.firstPlayersGroup.playersNames) === -1){
+            playersNames.unshift(battleData.firstPlayersGroup.playersNames);
+        }
+        if(!compareArrays(battleData.secondPlayersGroup.playersNames,["",""]) &&
+            playersNames.indexOf(battleData.secondPlayersGroup.playersNames) === -1) {
+            playersNames.unshift(battleData.secondPlayersGroup.playersNames);
+        }
+
+        let firstRandomNames = playersNames[Math.floor(Math.random()*playersNames.length)];
+        let secondRandomNames = playersNames[Math.floor(Math.random()*playersNames.length)];
+        if(compareArrays(firstRandomNames,secondRandomNames)){
+            let indexOfFirstNames = playersNames.indexOf(firstRandomNames);
+            if(indexOfFirstNames > 0){
+                secondRandomNames = playersNames[indexOfFirstNames-1];
+            }
+            else{
+                secondRandomNames = playersNames[indexOfFirstNames+1];
+            }
+        }
+
+        playersNames.splice(playersNames.indexOf(firstRandomNames),1);
         battleData.firstPlayersGroup = {
-            playersNames:playersGroupsNames[0],
+            playersNames:firstRandomNames,
             playersPoints:0
         };
-        this.changePlayersWithoutBattles(battleData.secondPlayersGroup.playersNames,playersGroupsNames[0]);
+
+        playersNames.splice(playersNames.indexOf(secondRandomNames),1);
         battleData.secondPlayersGroup = {
-            playersNames:playersGroupsNames[0],
+            playersNames:secondRandomNames,
             playersPoints:0
         };
-        this.setState({battleData:battleData})
+
+        playersNames.push(["",""]);
+        this.setState({battleData:battleData,playersWithoutBattles:playersNames});
     }
 
     changePlayersData(changedPlayersNames){
