@@ -82,8 +82,10 @@ const styles = StyleSheet.create({
     },
     avatarInList:{
         flex: 1,
-        backgroundColor:BaseColours.background.lightBrown,
         resizeMode:'contain',
+        borderWidth:3,
+        borderColor: BaseColours.border.top,
+        backgroundColor: BaseColours.background.lightBrown,
         width:90,
         height:90
     },
