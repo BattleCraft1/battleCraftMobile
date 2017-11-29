@@ -48,9 +48,10 @@ class CollectionPanel extends Component {
     }
 
     async componentDidMount() {
+        this.setState({isFiltered:false});
         this.setPossibleOperations(this.props.collectionType);
+        this.createPageRequest(this.props.collectionType);
         await this.setState({collectionType: this.props.collectionType});
-        this.createPageRequest(this.state.collectionType);
         await this.getPage(this.props.collectionType);
     }
 
@@ -65,6 +66,7 @@ class CollectionPanel extends Component {
         else if (nextProps.collectionType !== this.state.collectionType ||
             (nextProps.entityPanel.mode === 'disabled' &&
                 this.props.entityPanel.mode !== 'disabled')) {
+            this.setState({isFiltered:false});
             this.createPageRequest(nextProps.collectionType);
             this.setPossibleOperations(nextProps.collectionType);
             await this.setState({collectionType: nextProps.collectionType});
@@ -229,7 +231,7 @@ class CollectionPanel extends Component {
                                     this._drawer.open()}}/>
                     </View>
                     <View style={{flex:1}}>
-                        <Button title="Open search tab" color={this.state.isFiltered===false?BaseColours.background.darkBrown:BaseColours.border.bottom}
+                        <Button title="Open search tab" color={this.state.isFiltered?BaseColours.border.bottom:BaseColours.background.darkBrown}
                                 onPress={()=>{
                                     this.setState({formDrawer:'search'});
                                     this._drawer.open()}}/>

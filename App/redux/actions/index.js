@@ -5,6 +5,7 @@ import * as LoadingActions from './loading'
 import * as MessagesActions from './messages'
 import * as PageActions from './page'
 import * as PageRequestActions from './pageRequest'
+import * as SecurityActions from './security'
 import * as PossibleOperationsActions from './possibleOperations'
 import * as DimensionActions from './dimension'
 
@@ -17,5 +18,6 @@ export const ActionCreators = Object.assign( {},
     ConfirmationActions,
     MessagesActions,
     LoadingActions,
-    DimensionActions
+    DimensionActions,
+    SecurityActions
 );

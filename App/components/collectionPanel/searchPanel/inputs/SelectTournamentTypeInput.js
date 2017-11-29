@@ -14,9 +14,6 @@ const typeMap = {
 };
 
 export default class SelectInput extends React.Component{
-    constructor(props) {
-        super(props);
-    }
 
     changeInput(value){
         let result = {};
