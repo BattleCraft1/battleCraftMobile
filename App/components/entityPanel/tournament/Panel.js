@@ -172,7 +172,7 @@ class Panel extends Component {
                     changeEntity: this.changeEntity.bind(this),
                     validationErrors: this.state.validationErrors
                 },
-                null)
+                null);
         else
             return <View/>
     }

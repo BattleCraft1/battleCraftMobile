@@ -72,6 +72,11 @@ const store = configureStore( {
         searchCriteria:[
         ]
     },
+    security:{
+        token:"",
+        role:"",
+        dateOfAuthentication: ""
+    }
 } );
 
 export default class App extends React.Component {

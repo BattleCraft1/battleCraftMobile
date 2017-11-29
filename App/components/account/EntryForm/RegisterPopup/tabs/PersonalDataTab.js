@@ -1,3 +1,7 @@
+/**
+ * Created by FBegiello on 20.10.2017.
+ */
+
 import React, { Component } from 'react';
 import {
     ScrollView,
@@ -5,17 +9,16 @@ import {
     Text
 } from 'react-native';
 
-import AvatarInput from '../../inputs/AvatarInput'
-import TextInput from '../../inputs/TextInput'
-import TextOutput from '../../outputs/TextOutput'
+import TextInput from '../../../../entityPanel/inputs/TextInput'
+import PasswordInput from '../../../../entityPanel/inputs/PasswordInput'
 
-import ValidationErrorMessage from '../../outputs/ValidationErrorMessage'
+import ValidationErrorMessage from '../../../../entityPanel/outputs/ValidationErrorMessage'
 
-import EntityPanelStyle from "../../../../Styles/CollectionPanelStyles/EntityPanelStyle";
-import MainStyles from "../../../../Styles/UniversalStyles/MainStyles";
-import InputStyles from "../../../../Styles/UniversalStyles/InputStyles";
+import EntityPanelStyle from "../../../../../Styles/CollectionPanelStyles/EntityPanelStyle";
+import MainStyles from "../../../../../Styles/UniversalStyles/MainStyles";
+import InputStyles from "../../../../../Styles/UniversalStyles/InputStyles";
 
-import { ActionCreators } from '../../../../redux/actions/index';
+import { ActionCreators } from '../../../../../redux/actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -33,11 +36,6 @@ class PersonalDataTab extends Component{
             <ScrollView
                 style={{height:height}}
                 contentContainerStyle={EntityPanelStyle.scrollView}>
-                <View style={{margin:5}}>
-                    <AvatarInput
-                        disabled = {this.props.inputsDisabled}
-                        name={this.props.entity["name"]}/>
-                </View>
 
                 <View style={InputStyles.inputCard}>
                     <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Name:</Text></View>
@@ -49,6 +47,30 @@ class PersonalDataTab extends Component{
                         placeholder = "jarek2123"/>
                     <ValidationErrorMessage
                         validationErrorMessage={this.props.validationErrors["nameChange"]}/>
+                </View>
+
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Password:</Text></View>
+                    <PasswordInput
+                        value={this.props.entity["password"]}
+                        fieldName="password"
+                        changeEntity={this.props.changeEntity}
+                        disabled = {this.props.inputsDisabled}
+                        placeholder = ""/>
+                    <ValidationErrorMessage
+                        validationErrorMessage={this.props.validationErrors["password"]}/>
+                </View>
+
+                <View style={InputStyles.inputCard}>
+                    <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Confirm password:</Text></View>
+                    <PasswordInput
+                        value={this.props.entity["passwordConfirm"]}
+                        fieldName="passwordConfirm"
+                        changeEntity={this.props.changeEntity}
+                        disabled = {this.props.inputsDisabled}
+                        placeholder = ""/>
+                    <ValidationErrorMessage
+                        validationErrorMessage={this.props.validationErrors["passwordConfirm"]}/>
                 </View>
 
                 <View style={InputStyles.inputCard}>
@@ -84,7 +106,7 @@ class PersonalDataTab extends Component{
                         disabled = {this.props.inputsDisabled}
                         placeholder = "jarek2123@gmail.com"/>
                     <ValidationErrorMessage
-                    validationErrorMessage={this.props.validationErrors["email"]}/>
+                        validationErrorMessage={this.props.validationErrors["email"]}/>
                 </View>
 
                 <View style={InputStyles.inputCard}>
@@ -98,10 +120,6 @@ class PersonalDataTab extends Component{
                     <ValidationErrorMessage
                         validationErrorMessage={this.props.validationErrors["phoneNumber"]}/>
                 </View>
-
-                <TextOutput
-                    value={this.props.entity["status"]}
-                    name="User role"/>
             </ScrollView>
         );
     }
