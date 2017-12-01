@@ -22,8 +22,7 @@ export default (entity) => {
             fieldErrors.tablesCount = "Tables count must be between 1 and 15";
     }
 
-    let maxPlayers = entity.playersOnTableCount*entity.tablesCount;
-    let maxToursNumber = factorial(maxPlayers-1)/factorial(maxPlayers-2);
+    let maxToursNumber = (entity.tablesCount*2);
     if(entity.toursCount>maxToursNumber)
         fieldErrors.toursCount = "Max tours number in this tournament is: "+maxToursNumber;
 
@@ -57,7 +56,7 @@ export default (entity) => {
 
     if(entity.tablesCount*entity.playersOnTableCount!==0 &&
         participantsFlatTable.length*entity.playersOnTableCount/2>entity.tablesCount*entity.playersOnTableCount)
-        fieldErrors.participants = "Participants count must be less than "+entity.maxPlayers;
+        fieldErrors.participants = "Participants count must be less than "+entity.tablesCount*entity.playersOnTableCount;
 
     if(!checkIfObjectIsNotEmpty(fieldErrors)){
         validationErrors.message = "Invalid tournament data";

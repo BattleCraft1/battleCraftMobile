@@ -37,7 +37,12 @@ class UnlockOperation extends React.Component {
             let operationFunction = () => {
                 startLoading("Unlocking...");
 
-                axios.post(serverName+`unlock/`+collectionType, GetPageAndModifyDataDTO)
+                axios.post(serverName+`unlock/`+collectionType, GetPageAndModifyDataDTO,
+                    {
+                        headers: {
+                            "X-Auth-Token":this.props.security.token
+                        }
+                    })
                     .then(res => {
                         stopLoading();
                         checkPreviouslyCheckedElements(res.data);
@@ -82,7 +87,8 @@ function mapDispatchToProps( dispatch ) {
 function mapStateToProps( state ) {
     return {
         page: state.page,
-        pageRequest: state.pageRequest
+        pageRequest: state.pageRequest,
+        security: state.security
     };
 }
 

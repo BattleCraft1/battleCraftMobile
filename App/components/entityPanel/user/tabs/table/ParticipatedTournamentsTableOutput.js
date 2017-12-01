@@ -61,7 +61,6 @@ export default class ParticipatedTournamentsTableOutput extends Component{
     render(){
         return(
             <View>
-                <Text>Finished participated tournaments</Text>
                 {this.createTableRows()}
             </View>
         );

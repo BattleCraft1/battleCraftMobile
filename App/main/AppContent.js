@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-    AppRegistry,
     StyleSheet,
     View,
     TouchableWithoutFeedback,
@@ -18,6 +17,7 @@ import AdditionalEntityPanel from '../components/entityPanel/AdditionalEntityPan
 import MessageDialog from '../components/commonComponents/messageDialog/MessageDialog'
 import LoadingSpinner from '../components/commonComponents/loading/LoadingSpinner'
 import DimensionChangeListener from '../components/commonComponents/dimensionChangeListener/DimensionChangeListener'
+import AuthManager from '../components/commonComponents/auth/AuthManager'
 import { Font } from 'expo';
 
 import { connect } from 'react-redux';
@@ -69,7 +69,8 @@ class App extends Component {
                         <View style={{flex:1}}>
                             <Navbar navigate={this.navigate.bind(this)} menuText={this.state.navigValue} toggleMenu={this.toggleMenu.bind(this)}/>
                             <FadeView style={{flex:1}}>
-                                <Navigator navigValue={this.state.navigValue}/>
+                                <Navigator navigate={this.navigate.bind(this)} navigValue={this.state.navigValue}/>
+                                <AuthManager/>
                                 <ConfirmDialog/>
                                 <MessageDialog/>
                                 <LoadingSpinner/>

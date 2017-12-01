@@ -1,8 +1,7 @@
 /**
  * Created by FBegiello on 23.11.2017.
  */
-
-
+import Expo, { SQLite } from 'expo';
 import React, { Component } from 'react';
 import {
     Text,
@@ -27,6 +26,8 @@ import {InputField} from 'react-native-form-generator';
 import ValidationErrorMessage from '../../../entityPanel/outputs/ValidationErrorMessage'
 import CheckBox from 'react-native-check-box'
 
+const db = SQLite.openDatabase({ name: 'tokens2.db' });
+
 class LoginForm extends Component {
 
     constructor(props) {
@@ -38,6 +39,20 @@ class LoginForm extends Component {
             passwordError:"",
             rememberMe:false
         }
+    }
+
+    componentDidMount(){
+        db.transaction(tx => {
+            tx.executeSql(
+                'create table if not exists tokens2 (id integer primary key not null, token text, role text, date date);',
+                [],
+                (ts,success) => console.log(success),
+                (ts,error) => {
+                    console.log("error: ");
+                    console.log(error)
+                }
+            );
+        })
     }
 
     login(){
@@ -69,12 +84,62 @@ class LoginForm extends Component {
                 this.props.stopLoading();
                 let role = res.data.role.replace("ROLE_","");
                 role = role.toLocaleLowerCase();
+                if(role === 'accepted'){
+                    role = 'player'
+                }
+                else if(role === 'new'){
+                    role = 'new user'
+                }
+                let date = new Date();
+                this.props.setTokenAndRole(res.data.token,res.data.role);
+                db.transaction(
+                    tx => {
+                        tx.executeSql(
+                            'delete from tokens2 where id = 1',
+                            [],
+                            (ts,success) => {
+                                if(this.state.rememberMe){
+                                    this.updateTokenInDatabase(res.data.token,res.data.role,date);
+                                }
+                            },
+                            (ts,error) => {
+                                console.log("error: ");
+                                console.log(error)
+                            }
+                        );
+                    }
+                );
                 this.props.showSuccessMessage("You successfully log in with "+role+" permissions");
             })
             .catch(error => {
                 this.props.stopLoading();
                 this.props.showNetworkErrorMessage(error);
             });
+    }
+
+    updateTokenInDatabase(token,role,date){
+        db.transaction(
+            tx => {
+                this.insertNewToken(tx,token,role,date);
+            },
+            (ts,error)  => {
+                console.log("error: ");
+                console.log(error)
+            },
+            (ts,success) => console.log(success))
+
+    }
+
+    insertNewToken(tx,token,role,date){
+        tx.executeSql(
+            `insert into tokens2 (id,token,role,date)  values (1,?,?,?)`,
+            [token,role,date],
+            (ts,success) => console.log(success),
+            (ts,error) => {
+                console.log("error: ");
+                console.log(error)
+            }
+        );
     }
 
     render() {

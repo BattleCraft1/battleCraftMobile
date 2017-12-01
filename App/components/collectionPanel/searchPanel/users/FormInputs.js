@@ -11,7 +11,7 @@ import StatusInput from '../inputs/StatusInput'
 import convertArrayToObject from '../../../../main/functions/convertArrayToObject'
 
 import {provinces} from "../../../../main/consts/provinces";
-import {userStatus} from "../../../../main/consts/status";
+import {tournamentStatus, userStatus} from "../../../../main/consts/status";
 
 export default class FormInputs extends Component{
     constructor(props) {
@@ -35,6 +35,14 @@ export default class FormInputs extends Component{
         let searchFormFields = this.state.searchFormField;
         searchFormFields[index] = value;
         this.setState({searchFormField:searchFormFields});
+    }
+
+    getUserStatus(){
+        let userStat = userStatus;
+        if(this.props.security.role==="ROLE_ADMIN"){
+            userStat["BANNED"] = "BANNED";
+        }
+        return userStat;
     }
 
     render(){
@@ -92,7 +100,7 @@ export default class FormInputs extends Component{
                     this.props.entityPanelDisabled &&
                     <StatusInput
                         key="status"
-                        options={userStatus}
+                        options={this.getUserStatus()}
                         changeSearchForm={this.changeSearchForm.bind(this)}/>
                 }
                 <Button title="Search"  color='#4b371b' onPress={()=>this.props.search(this.state.searchFormField)}/>

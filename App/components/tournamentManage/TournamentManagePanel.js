@@ -48,6 +48,7 @@ class TournamentManagePanel extends Component {
                 playersOnTableCount:0,
                 playersCount:0
             },
+            canCurrentUserMenageTournament:false
         };
     }
 
@@ -57,14 +58,23 @@ class TournamentManagePanel extends Component {
     }
 
     async fetchTournamentProgressData(tournamentName){
-        await axios.get(`${serverName}progress/tournament?name=${tournamentName}`)
+        this.props.startLoading("Fetching tournament progress...");
+        await axios.get(`${serverName}progress/tournament?name=${tournamentName}`,
+            {
+                headers: {
+                    "X-Auth-Token":this.props.security.token
+                }
+            })
             .then(async res => {
+                this.props.stopLoading();
                 console.log("tournament data:");
                 console.log(res.data);
                 await this.prepareToursData(res.data);
             })
             .catch(error => {
+                this.props.stopLoading();
                 this.props.showNetworkErrorMessage(error);
+                this.props.navigate('Tournaments')
             });
     }
 
@@ -74,7 +84,12 @@ class TournamentManagePanel extends Component {
         let tournamentTypeString = this.state.playersOnTableCount === 4?"group":"duel";
         console.log("battle before send: ");
         console.log(battleData);
-        axios.post(`${serverName}set/points/${tournamentTypeString}/tournament?name=${this.state.tournamentName}`,battleDataToSend)
+        axios.post(`${serverName}set/points/${tournamentTypeString}/tournament?name=${this.state.tournamentName}`,battleDataToSend,
+            {
+                headers: {
+                    "X-Auth-Token":this.props.security.token
+                }
+            })
             .then(res => {
                 console.log("tournament data:");
                 console.log(res.data);
@@ -114,7 +129,7 @@ class TournamentManagePanel extends Component {
             showBattlePopup={this.showBattlePopup.bind(this)}
             playersOnTableCount={this.state.playersOnTableCount}
             tournamentStatus={this.state.tournamentData.tournamentStatus}
-            disabled={this.state.tourNumber>this.state.tournamentData.currentTourNumber || this.state.tournamentData.tournamentStatus==="FINISHED"}
+            disabled={this.state.tourNumber>this.state.tournamentData.currentTourNumber || !this.state.tournamentData.canCurrentUserMenageTournament}
             currentTourNumber={this.state.tournamentData.currentTourNumber}
         />
     }
@@ -183,7 +198,12 @@ class TournamentManagePanel extends Component {
 
     nextTourRequest(){
         let tournamentTypeString = this.state.playersOnTableCount === 4?"group":"duel";
-        axios.get(`${serverName}next/tour/${tournamentTypeString}/tournament?name=${this.state.tournamentName}`)
+        axios.get(`${serverName}next/tour/${tournamentTypeString}/tournament?name=${this.state.tournamentName}`,
+            {
+                headers: {
+                    "X-Auth-Token":this.props.security.token
+                }
+            })
             .then(res => {
                 console.log("tournament data:");
                 console.log(res.data);
@@ -212,7 +232,12 @@ class TournamentManagePanel extends Component {
 
     previousTourRequest(){
         let tournamentTypeString = this.state.playersOnTableCount === 4?"group":"duel";
-        axios.get(`${serverName}previous/tour/${tournamentTypeString}/tournament?name=${this.state.tournamentName}`)
+        axios.get(`${serverName}previous/tour/${tournamentTypeString}/tournament?name=${this.state.tournamentName}`,
+            {
+                headers: {
+                    "X-Auth-Token":this.props.security.token
+                }
+            })
             .then(res => {
                 console.log("tournament data:");
                 console.log(res.data);
@@ -250,7 +275,12 @@ class TournamentManagePanel extends Component {
     finishTournamentRequest(){
         let tournamentTypeString = this.state.playersOnTableCount === 4?"group":"duel";
 
-        axios.get(`${serverName}finish/${tournamentTypeString}/tournament?name=${this.state.tournamentName}`)
+        axios.get(`${serverName}finish/${tournamentTypeString}/tournament?name=${this.state.tournamentName}`,
+            {
+                headers: {
+                    "X-Auth-Token":this.props.security.token
+                }
+            })
             .then(res => {
                 console.log("tournament data:");
                 console.log(res.data);
@@ -294,7 +324,9 @@ class TournamentManagePanel extends Component {
             directionalOffsetThreshold: 30
         };
 
-        let buttonsDisabled = this.state.tournamentData.tournamentStatus === "FINISHED";
+        let buttonsDisabled = this.state.tournamentData.tournamentStatus === "FINISHED" ||
+                              this.props.security.role==="ROLE_ADMIN" ||
+                              !this.state.tournamentData.canCurrentUserMenageTournament;
 
         return (
             <View style={MainStyles.contentStyle}>
@@ -341,6 +373,7 @@ function mapDispatchToProps( dispatch ) {
 
 function mapStateToProps( state ) {
     return {
+        security: state.security
     };
 }
 
