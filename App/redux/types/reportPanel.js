@@ -1,0 +1,1 @@
+export const SHOW_REPORT_PANEL = 'SHOW_REPORT_PANEL';

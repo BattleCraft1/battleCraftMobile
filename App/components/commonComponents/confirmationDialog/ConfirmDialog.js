@@ -11,14 +11,11 @@ import { bindActionCreators } from 'redux';
 import Modal from 'react-native-modal';
 import MainStyles from '../../../Styles/UniversalStyles/MainStyles'
 import MessageStyle from '../../../Styles/UniversalStyles/MessageStyle'
-import {dimension} from "../../../redux/reducers/dimension";
 
 class ConfirmDialog extends React.Component {
     constructor(props) {
         super(props);
     }
-
-    calculateLeftMargin(){}
 
     render(){
         return (

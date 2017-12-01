@@ -75,6 +75,11 @@ const store = configureStore( {
     security:{
         token:"",
         role:""
+    },
+    reportPanel:{
+        isShown:false,
+        objectType:"",
+        objectNames:[]
     }
 } );
 
