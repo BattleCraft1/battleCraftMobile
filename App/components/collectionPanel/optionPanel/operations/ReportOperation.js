@@ -15,7 +15,16 @@ class ReportOperation extends React.Component {
             <OperationButton
                 name = "Report"
                 icon = {"envelope-open"}
-                operation = {() => {}}
+                operation = {() => {
+                    console.log(this.props.page.checkedElementsNames);
+                    if(this.props.page.checkedElementsNames.length>0){
+                        this.props.onClosePanel();
+                        this.props.showReportPanel(true,this.props.collectionType,this.props.page.checkedElementsNames)
+                    }
+                    else{
+                        this.props.showFailureMessage("Nothing to report");
+                    }
+                }}
             />
         );
     }
@@ -27,8 +36,7 @@ function mapDispatchToProps( dispatch ) {
 
 function mapStateToProps( state ) {
     return {
-        page: state.page,
-        pageRequest: state.pageRequest
+        page:state.page
     };
 }
 

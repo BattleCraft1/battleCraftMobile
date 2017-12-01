@@ -15,6 +15,7 @@ import ConfirmDialog from '../components/commonComponents/confirmationDialog/Con
 import EntityPanel from '../components/entityPanel/EntityPanel'
 import AdditionalEntityPanel from '../components/entityPanel/AdditionalEntityPanel'
 import MessageDialog from '../components/commonComponents/messageDialog/MessageDialog'
+import ReportPanel from '../components/commonComponents/reportPanel/ReportPanel'
 import LoadingSpinner from '../components/commonComponents/loading/LoadingSpinner'
 import DimensionChangeListener from '../components/commonComponents/dimensionChangeListener/DimensionChangeListener'
 import AuthManager from '../components/commonComponents/auth/AuthManager'
@@ -71,6 +72,7 @@ class App extends Component {
                             <FadeView style={{flex:1}}>
                                 <Navigator navigate={this.navigate.bind(this)} navigValue={this.state.navigValue}/>
                                 <AuthManager/>
+                                <ReportPanel/>
                                 <ConfirmDialog/>
                                 <MessageDialog/>
                                 <LoadingSpinner/>

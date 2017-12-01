@@ -39,6 +39,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
 
+    reportModalBody: {
+        height: 70,
+        width:290,
+        borderColor: BaseColours.background.darkBrown,
+        backgroundColor: BaseColours.background.mediumBrown,
+        borderLeftWidth:5,
+        borderRightWidth:5,
+        borderTopWidth:5,
+        justifyContent: 'space-between'
+    },
+
     modalFooter: {
         flex: 1,
         flexDirection: 'row',

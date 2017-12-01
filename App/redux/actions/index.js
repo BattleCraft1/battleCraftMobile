@@ -8,6 +8,7 @@ import * as PageRequestActions from './pageRequest'
 import * as SecurityActions from './security'
 import * as PossibleOperationsActions from './possibleOperations'
 import * as DimensionActions from './dimension'
+import * as ReportPanelActions from './reportPanel'
 
 export const ActionCreators = Object.assign( {},
     AdditionalEntityPanelActions,
@@ -19,5 +20,6 @@ export const ActionCreators = Object.assign( {},
     MessagesActions,
     LoadingActions,
     DimensionActions,
-    SecurityActions
+    SecurityActions,
+    ReportPanelActions
 );
