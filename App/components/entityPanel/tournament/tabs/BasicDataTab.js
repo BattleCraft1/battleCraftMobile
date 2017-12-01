@@ -50,7 +50,12 @@ class BasicDataTab extends Component{
     async getGameSelectData(){
         let getGameOperation = async () => {
             this.props.startLoading("Fetching games...");
-            await axios.get(serverName + `get/allGames/names`)
+            await axios.get(serverName + `get/allGames/names`,
+                {
+                    headers: {
+                        "X-Auth-Token":this.props.security.token
+                    }
+                })
                 .then(res => {
                     console.log("games: ");
                     console.log(res.data);
@@ -187,6 +192,7 @@ class BasicDataTab extends Component{
 
                 </ScrollView>
                 <Button title={"Progress"} color='#4b371b'
+                        disabled={this.props.mode==='add'}
                         onPress={()=>{
                             this.props.navigate('Progress/'+this.props.entity["name"]);
                             this.props.disable();
@@ -201,7 +207,9 @@ function mapDispatchToProps( dispatch ) {
 }
 
 function mapStateToProps( state ) {
-    return {};
+    return {
+        security: state.security
+    };
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( BasicDataTab );

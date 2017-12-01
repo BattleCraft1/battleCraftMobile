@@ -20,7 +20,11 @@ import axios from 'axios'
 
 import convertArrayToObject from '../../../../main/functions/convertArrayToObject'
 
-export default class FormInputs extends Component{
+import { ActionCreators } from '../../../../redux/actions/index';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+class FormInputs extends Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -44,7 +48,12 @@ export default class FormInputs extends Component{
 
     async componentDidMount() {
         let getGameOperation = async () => {
-            await axios.get(serverName + `get/allGames/names`)
+            await axios.get(serverName + `get/allGames/names`,
+                {
+                    headers: {
+                        "X-Auth-Token":this.props.security.token
+                    }
+                })
                 .then(res => {
                     this.setState({tournamentsGames: convertArrayToObject(res.data)});
                 })
@@ -59,6 +68,14 @@ export default class FormInputs extends Component{
         let searchFormFields = this.state.searchFormField;
         searchFormFields[index] = value;
         this.setState({searchFormField:searchFormFields});
+    }
+
+    getTournamentStatus(){
+        let tournamentStat = tournamentStatus;
+        if(this.props.security.role==="ROLE_ADMIN"){
+            tournamentStat["BANNED"] = "BANNED";
+        }
+        return tournamentStat;
     }
 
     render(){
@@ -86,7 +103,7 @@ export default class FormInputs extends Component{
                 this.props.entityPanelDisabled &&
                 <StatusInput
                     key="status"
-                    options={tournamentStatus}
+                    options={this.getTournamentStatus()}
                     changeSearchForm={this.changeSearchForm.bind(this)}
                 />
             }
@@ -164,3 +181,15 @@ export default class FormInputs extends Component{
         </View>);
     }
 }
+
+function mapDispatchToProps( dispatch ) {
+    return bindActionCreators( ActionCreators, dispatch );
+}
+
+function mapStateToProps( state ) {
+    return {
+        security: state.security
+    };
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( FormInputs );

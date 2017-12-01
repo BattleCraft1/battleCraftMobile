@@ -36,7 +36,8 @@ class Panel extends Component {
                 "dateOfCreation": new Date(),
                 "tournamentsNumber":0,
                 "status":"NEW",
-                "gameRules":""
+                "gameRules":"",
+                "canCurrentUserEdit":false
             },
             validationErrors:{
                 "name": "",
@@ -52,7 +53,12 @@ class Panel extends Component {
         {
             let getEntityOperation = async () => {
                 this.props.startLoading("Fetching game...");
-                await axios.get(serverName+`get/game?name=`+this.props.name)
+                await axios.get(serverName+`get/game?name=`+this.props.name,
+                    {
+                        headers: {
+                            "X-Auth-Token":this.props.security.token
+                        }
+                    })
                     .then(res => {
                         this.setState({entity:res.data});
                         this.setState({entityReady:true});
@@ -69,6 +75,9 @@ class Panel extends Component {
             await getEntityOperation();
         }
         else {
+            let entity = this.state.entity;
+            entity.canCurrentUserEdit = true;
+            this.setState({entity:entity});
             this.setState({entityReady:true});
         }
 
@@ -82,7 +91,7 @@ class Panel extends Component {
                     width: this.props.dimension.width,
                     height:this.props.dimension.height,
                     entity:this.state.entity,
-                    inputsDisabled: this.props.mode === 'get',
+                    inputsDisabled: this.props.mode === 'get' || !this.state.entity.canCurrentUserEdit,
                     changeEntity: this.changeEntity.bind(this),
                     validationErrors: this.state.validationErrors
                 },
@@ -111,6 +120,7 @@ class Panel extends Component {
         delete entityToSend["dateOfCreation"];
         delete entityToSend["tournamentsNumber"];
         delete entityToSend["status"];
+        delete entityToSend["canCurrentUserEdit"];
 
         let isEditMode = this.props.mode === 'edit';
 
@@ -120,7 +130,12 @@ class Panel extends Component {
             delete entityToSend["gameRules"];
             console.log("output entity:");
             console.log(entityToSend);
-            axios.post(serverName+this.props.mode+'/'+this.props.type, entityToSend)
+            axios.post(serverName+this.props.mode+'/'+this.props.type, entityToSend,
+                {
+                    headers: {
+                        "X-Auth-Token":this.props.security.token
+                    }
+                })
                 .then(res => {
                     let newEntity = res.data;
                     if(gameRules===undefined && isEditMode){
@@ -152,7 +167,8 @@ class Panel extends Component {
         fetch(url, {
             method: 'POST',
             body: formData,
-            header: {
+            headers: {
+                "X-Auth-Token":this.props.security.token,
                 'content-type': 'multipart/form-data',
             },
         }).then(res => {
@@ -165,6 +181,9 @@ class Panel extends Component {
                 this.props.showFailureMessage('Upload failed');
             }
         }).catch(error => {
+            let entity = this.state.entity;
+            entity.canCurrentUserEdit = true;
+            this.setState({entity:entity});
             this.props.showNetworkErrorMessage(error);
         });
     }
@@ -187,7 +206,7 @@ class Panel extends Component {
     }
 
     createButtons(){
-        if(this.props.mode!=='get'){
+        if(this.props.mode!=='get' && this.state.entity.canCurrentUserEdit){
             return [
                 <TouchableHighlight key="save" style={[EntityPanelStyle.button,{backgroundColor: BaseColours.misc.deepRed }]} onPress={() => this.sendEntity()}>
                     <Text style={MainStyle.bigWhiteStyle}>Save</Text>
@@ -243,7 +262,8 @@ function mapDispatchToProps( dispatch ) {
 
 function mapStateToProps( state ) {
     return {
-        dimension: state.dimension
+        dimension: state.dimension,
+        security: state.security
     };
 }
 

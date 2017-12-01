@@ -74,8 +74,7 @@ const store = configureStore( {
     },
     security:{
         token:"",
-        role:"",
-        dateOfAuthentication: ""
+        role:""
     }
 } );
 

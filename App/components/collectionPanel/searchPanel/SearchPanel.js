@@ -65,6 +65,7 @@ class SearchPanel extends React.Component{
             {
                 search:this.search.bind(this),
                 hide:this.props.onClosePanel.bind(this),
+                security:this.props.security,
                 entityPanelDisabled: this.props.entityPanel.mode === 'disabled'
             },
             null
@@ -97,7 +98,8 @@ function mapStateToProps( state ) {
     return {
         page: state.page,
         pageRequest: state.pageRequest,
-        entityPanel: state.entityPanel
+        entityPanel: state.entityPanel,
+        security: state.security
     };
 }
 

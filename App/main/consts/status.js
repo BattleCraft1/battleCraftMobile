@@ -2,22 +2,19 @@ export const gameStatus =
     {
         "":"",
         "NEW":"NEW",
-        "ACCEPTED":"ACCEPTED",
-        "BANNED":"BANNED"
+        "ACCEPTED":"ACCEPTED"
     };
 export const userStatus = {
     "":"",
     "NEW":"NEW",
     "ACCEPTED":"ACCEPTED",
     "ORGANIZER":"ORGANIZER",
-    "ADMIN":"ADMIN",
-    "BANNED":"BANNED"
+    "ADMIN":"ADMIN"
 };
 export const tournamentStatus = {
     "":"",
     "NEW":"NEW",
     "ACCEPTED":"ACCEPTED",
     "IN_PROGRESS":"IN PROGRESS",
-    "FINISHED":"FINISHED",
-    "BANNED":"BANNED"
+    "FINISHED":"FINISHED"
 };

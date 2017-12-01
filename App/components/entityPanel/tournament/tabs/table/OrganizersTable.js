@@ -17,6 +17,7 @@ export default class OrganizersTable extends React.Component{
     }
 
     actualizeRelatedEntityObjects(relatedEntities){
+        console.log("praticipants");
         let organizers = this.props.value;
         let relatedEntitiesNames = organizers.map(entity => entity.name);
         relatedEntities.forEach(

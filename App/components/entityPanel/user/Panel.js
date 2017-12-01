@@ -49,7 +49,8 @@ class Panel extends Component {
                 "organizedTournaments": [],
                 "finishedOrganizedTournaments": [],
                 "createdGames":[],
-                "banned":false
+                "banned":false,
+                "canCurrentUserEdit":false
             },
             validationErrors:{
                 "name": "",
@@ -76,7 +77,12 @@ class Panel extends Component {
 
         let getEntityOperation = async () => {
             this.props.startLoading("Fetching user...");
-            await axios.get(serverName+`get/user?name=`+this.props.name)
+            await axios.get(serverName+`get/user?name=`+this.props.name,
+                {
+                    headers: {
+                        "X-Auth-Token":this.props.security.token
+                    }
+                })
                 .then(res => {
                     this.setAccessToTabsByStatus(res.data.status);
                     this.setState({entity:res.data});
@@ -132,7 +138,7 @@ class Panel extends Component {
     }
 
     shouldActualizeRelatedEntitiesCallBack(){
-        this.setState({shouldActualizeRelatedEntities:true});
+        this.setState({shouldActualizeRelatedEntities:false});
     }
 
     createContent(){
@@ -147,7 +153,7 @@ class Panel extends Component {
                     orientation:this.props.dimension.orientation,
                     navigate:this.props.navigate,
                     entity:this.state.entity,
-                    inputsDisabled: this.props.mode === 'get',
+                    inputsDisabled: this.props.mode === 'get' || !this.state.entity.canCurrentUserEdit,
                     changeEntity: this.changeEntity.bind(this),
                     validationErrors: this.state.validationErrors,
                     relatedEntity: this.props.relatedEntity,
@@ -187,13 +193,19 @@ class Panel extends Component {
         delete entityToSend["finishedOrganizedTournaments"];
         delete entityToSend["createdGames"];
         delete entityToSend["banned"];
+        delete entityToSend["canCurrentUserEdit"];
         console.log("entity");
         console.log(entityToSend);
         let validationErrors = validateUser(entityToSend);
         if(checkIfObjectIsNotEmpty(validationErrors)){
             console.log("output entity:");
             console.log(entityToSend);
-            axios.post(serverName+this.props.mode+'/user', entityToSend)
+            axios.post(serverName+this.props.mode+'/user', entityToSend,
+                {
+                    headers: {
+                        "X-Auth-Token":this.props.security.token
+                    }
+                })
                 .then(res => {
                     this.setAccessToTabsByStatus(res.data.status);
                     this.setState({entity:res.data});
@@ -210,6 +222,9 @@ class Panel extends Component {
                 });
         }
         else{
+            let entity = this.state.entity;
+            entity.canCurrentUserEdit = true;
+            this.setState({entity:entity});
             this.setValidationErrors(validationErrors);
         }
     }
@@ -233,7 +248,7 @@ class Panel extends Component {
     }
 
     createButtons(){
-        if(this.props.mode!=='get'){
+        if(this.props.mode!=='get'  && this.state.entity.canCurrentUserEdit){
             return [
                 <TouchableHighlight key="save" style={[EntityPanelStyle.button,{backgroundColor:BaseColours.misc.deepRed  }]} onPress={() => this.sendEntity()}>
                     <Text style={MainStyle.bigWhiteStyle}>Save</Text>
@@ -295,7 +310,8 @@ function mapDispatchToProps( dispatch ) {
 
 function mapStateToProps( state ) {
     return {
-        dimension: state.dimension
+        dimension: state.dimension,
+        security: state.security
     };
 }
 

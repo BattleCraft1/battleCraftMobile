@@ -40,7 +40,12 @@ class FormInputs extends Component{
 
     async componentDidMount(){
         let getGameOperation = async () => {
-            await axios.get(serverName + `get/allGames/names`)
+            await axios.get(serverName + `get/allGames/names`,
+                {
+                    headers: {
+                        "X-Auth-Token":this.props.security.token
+                    }
+                })
                 .then(res => {
                     this.setState({tournamentsGames: convertArrayToObject(res.data)});
                 })
@@ -137,7 +142,8 @@ function mapDispatchToProps( dispatch ) {
 
 function mapStateToProps( state ) {
     return {
-        pageRequest: state.pageRequest
+        pageRequest: state.pageRequest,
+        security: state.security
     };
 }
 

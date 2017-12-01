@@ -13,6 +13,8 @@ import DeleteOperation from './operations/DeleteOperation'
 import UnlockOperation from './operations/UnlockOperation'
 import AdvanceOperation from './operations/AdvanceOperation'
 import DegradeOperation from './operations/DegradeOperation'
+import AddEntityOperation from './operations/AddEntityOperation'
+import ReportOperation from './operations/ReportOperation'
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -28,6 +30,8 @@ const mapOfOperations = {
     "Accept":AcceptOperation,
     "Advance":AdvanceOperation,
     "Degrade":DegradeOperation,
+    "Add":AddEntityOperation,
+    "Report":ReportOperation
 };
 
 class OptionPanel extends Component {
@@ -66,13 +70,18 @@ class OptionPanel extends Component {
 
     calculateLeftMargin(isPortrait, numberOfElements){
         let elementWidth = 90;
-        if(isPortrait){
-            let numberOfElementsInRow = 3;
-            return (this.props.dimension.width - numberOfElementsInRow*elementWidth)/2;
+        if(numberOfElements>2){
+            if(isPortrait){
+                let numberOfElementsInRow = 3;
+                return (this.props.dimension.width - numberOfElementsInRow*elementWidth)/2;
+            }
+            else{
+                let numberOfElementsInRow = 4;
+                return (this.props.dimension.width -numberOfElementsInRow*elementWidth)/2;
+            }
         }
         else{
-            let numberOfElementsInRow = 4;
-            return (this.props.dimension.width -numberOfElementsInRow*elementWidth)/2;
+            return (this.props.dimension.width - numberOfElements*elementWidth)/2;
         }
     }
 

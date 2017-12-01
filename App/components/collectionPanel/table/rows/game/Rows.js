@@ -104,9 +104,6 @@ class Rows extends Component{
                     <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Tournaments number: {rowData.tournamentsNumber}</Text>
                 </View>
                 <View style={[TableStyles.row]}>
-                    <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Creator: {rowData.creatorName}</Text>
-                </View>
-                <View style={[TableStyles.row]}>
                     <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle]}> Creation date: {dateFormat(rowData.dateOfStart,"dd-MM-yyyy hh:mm")}</Text>
                 </View>
                 <View style={[TableStyles.row, {backgroundColor: backgroundColour}]}>

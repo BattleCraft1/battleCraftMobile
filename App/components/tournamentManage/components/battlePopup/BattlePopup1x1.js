@@ -262,7 +262,7 @@ class BattleInspector extends Component {
                                 <View>
                                     <View style={BattleInspectorStyle.dataRow}><Text numberOfLines={1}  style={MainStyles.bigWhiteStyle}>Table number:</Text></View>
                                     <View style={[BattleInspectorStyle.dataRow,{borderBottomWidth:0}]}>
-                                        <Text numberOfLines={1}  style={MainStyles.bigWhiteStyle}>{this.state.battleData.tableNumber}</Text>
+                                        <Text numberOfLines={1}  style={MainStyles.bigWhiteStyle}>{this.state.battleData.tableNumber+1}</Text>
                                     </View>
                                 </View>
                             </View>

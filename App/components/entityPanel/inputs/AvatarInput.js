@@ -57,7 +57,8 @@ class AvatarInput extends React.Component{
         return await fetch(url, {
             method: 'POST',
             body: formData,
-            header: {
+            headers: {
+                "X-Auth-Token":this.props.security.token,
                 'content-type': 'multipart/form-data',
             },
         }).then(res => {
@@ -95,7 +96,8 @@ function mapDispatchToProps( dispatch ) {
 
 function mapStateToProps( state ) {
     return {
-        message: state.message
+        message: state.message,
+        security: state.security
     };
 }
 

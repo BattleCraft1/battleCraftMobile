@@ -52,7 +52,7 @@ class Panel extends Component {
         let tomorrow = new Date();
         let dayAfterTomorrow = new Date();
         tomorrow.setDate(today.getDate()+1);
-        dayAfterTomorrow.setDate(tomorrow.getDate()+1);
+        dayAfterTomorrow.setDate(today.getDate()+2);
         this.state = {
             activeTab : "",
             entity:{
@@ -71,7 +71,8 @@ class Panel extends Component {
                 "description": "",
                 "organizers": [],
                 "participants": [],
-                "status":"NEW"
+                "status":"NEW",
+                "canCurrentUserEdit":false
             },
             validationErrors:{
                 "name": "",
@@ -100,7 +101,12 @@ class Panel extends Component {
         {
             let getEntityOperation = async () => {
                 this.props.startLoading("Fetching tournament...");
-                await axios.get(serverName+`get/tournament?name=`+this.props.name)
+                await axios.get(serverName+`get/tournament?name=`+this.props.name,
+                    {
+                        headers: {
+                            "X-Auth-Token":this.props.security.token
+                        }
+                    })
                 .then(res => {
                     this.setState({entity:res.data});
                     this.setState({activeTab:"basicData"});
@@ -117,6 +123,9 @@ class Panel extends Component {
             await getEntityOperation();
         }
         else {
+            let entity = this.state.entity;
+            entity.canCurrentUserEdit = true;
+            this.setState({entity:entity});
             this.setState({activeTab:"basicData"});
         }
     }
@@ -137,7 +146,7 @@ class Panel extends Component {
     }
 
     shouldActualizeRelatedEntitiesCallBack(){
-        this.setState({shouldActualizeRelatedEntities:true});
+        this.setState({shouldActualizeRelatedEntities:false});
     }
 
     createContent(){
@@ -153,7 +162,7 @@ class Panel extends Component {
                     navigate:this.props.navigate,
                     entity:this.state.entity,
                     relatedEntity: this.props.relatedEntity,
-                    inputsDisabled: this.props.mode === 'get',
+                    inputsDisabled: this.props.mode === 'get' || !this.state.entity.canCurrentUserEdit,
                     changeEntity: this.changeEntity.bind(this),
                     validationErrors: this.state.validationErrors
                 },
@@ -168,7 +177,8 @@ class Panel extends Component {
                     navigate:this.props.navigate,
                     disable:this.props.disable,
                     entity:this.state.entity,
-                    inputsDisabled: this.props.mode === 'get',
+                    mode:this.props.mode,
+                    inputsDisabled: this.props.mode === 'get' || !this.state.entity.canCurrentUserEdit,
                     changeEntity: this.changeEntity.bind(this),
                     validationErrors: this.state.validationErrors
                 },
@@ -192,6 +202,7 @@ class Panel extends Component {
         }
 
         let entityToSend = JSON.parse(JSON.stringify(this.state.entity));
+
         entityToSend.organizers = this.state.entity.organizers.map(element => element.name);
         entityToSend.participants = [];
         this.state.entity.participants.map(participantGroup => {
@@ -203,11 +214,17 @@ class Panel extends Component {
                 entityToSend.participants.push(participantGroupToSend);
         });
         delete entityToSend["status"];
+        delete entityToSend["canCurrentUserEdit"];
         let validationErrors = validateTournament(entityToSend);
         if(checkIfObjectIsNotEmpty(validationErrors)){
             console.log("output entity:");
             console.log(entityToSend);
-            axios.post(serverName+this.props.mode+'/'+this.props.type, entityToSend)
+            axios.post(serverName+this.props.mode+'/'+this.props.type, entityToSend,
+                {
+                    headers: {
+                        "X-Auth-Token":this.props.security.token
+                    }
+                })
                 .then(res => {
                     this.setState({entity:res.data});
                     this.props.showSuccessMessage("Tournament: "+res.data.name+" successfully "+this.props.mode+"ed");
@@ -246,7 +263,7 @@ class Panel extends Component {
     }
 
     createButtons(){
-        if(this.props.mode!=='get'){
+        if(this.props.mode!=='get' && this.state.entity.canCurrentUserEdit){
             return [
                 <TouchableHighlight key="save" style={[EntityPanelStyle.button,{backgroundColor: BaseColours.misc.deepRed }]} onPress={() => this.sendEntity()}>
                     <Text style={MainStyle.bigWhiteStyle}>Save</Text>
@@ -306,7 +323,8 @@ function mapDispatchToProps( dispatch ) {
 
 function mapStateToProps( state ) {
     return {
-        dimension: state.dimension
+        dimension: state.dimension,
+        security: state.security
     };
 }
 

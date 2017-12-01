@@ -16,6 +16,7 @@ export default class ParticipantsTable extends React.Component{
     }
 
     actualizeRelatedEntityObjects(relatedEntities){
+        console.log("organizers");
         let participants = this.props.value;
         let invitedParticipantsNames = [];
 

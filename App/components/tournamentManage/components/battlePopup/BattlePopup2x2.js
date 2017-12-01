@@ -289,7 +289,7 @@ class BattleInspector extends Component {
                                 <Image style={{alignSelf:'center', width:60, height:60}} source={this.getVSIcon()}/>
                                 <View>
                                     <View style={BattleInspectorStyle.dataRow}><Text style={MainStyles.bigWhiteStyle}>Table number:</Text></View>
-                                    <View style={[BattleInspectorStyle.dataRow,{borderBottomWidth:0}]}><Text numberOfLines={1}  style={MainStyles.bigWhiteStyle}>{this.state.battleData.tableNumber}</Text></View>
+                                    <View style={[BattleInspectorStyle.dataRow,{borderBottomWidth:0}]}><Text numberOfLines={1}  style={MainStyles.bigWhiteStyle}>{this.state.battleData.tableNumber+1}</Text></View>
                                 </View>
                             </View>
                             <PlayerCard playersNames={this.state.battleData.secondPlayersGroup.playersNames}

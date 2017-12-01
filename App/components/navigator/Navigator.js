@@ -25,7 +25,7 @@ export default class Navigator extends Component {
         else if(this.props.navigValue.includes('Progress/')){
             let tournamentName = this.props.navigValue.substr(this.props.navigValue.indexOf('/')+1);
             if(tournamentName!==undefined)
-                return <TournamentManagePanel tournamentName={tournamentName}/>;
+                return <TournamentManagePanel navigate={this.props.navigate} tournamentName={tournamentName}/>;
             else
                 return <SplashScreen/>
         }

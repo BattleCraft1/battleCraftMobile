@@ -9,7 +9,7 @@ import NumberInput from '../inputs/NumberInput'
 import StatusInput from '../inputs/StatusInput'
 import DateInput from '../inputs/DateInput'
 
-import {gameStatus} from '../../../../main/consts/status'
+import {gameStatus, tournamentStatus} from '../../../../main/consts/status'
 
 export default class FormInputs extends Component{
     constructor(props) {
@@ -29,6 +29,14 @@ export default class FormInputs extends Component{
         let searchFormFields = this.state.searchFormField;
         searchFormFields[index] = value;
         this.setState({searchFormField:searchFormFields});
+    }
+
+    getGameStatus(){
+        let gameStat = gameStatus;
+        if(this.props.security.role==="ROLE_ADMIN"){
+            gameStat["BANNED"] = "BANNED";
+        }
+        return gameStat;
     }
 
     render(){
@@ -71,7 +79,7 @@ export default class FormInputs extends Component{
                 />
                 <StatusInput
                     key="status"
-                    options = {gameStatus}
+                    options = {this.getGameStatus()}
                     changeSearchForm = {this.changeSearchForm.bind(this)}
                 />
                 <Button title="Search"  color='#4b371b' onPress={()=>this.props.search(this.state.searchFormField)}/>

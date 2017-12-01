@@ -22,11 +22,10 @@ import PageDrawer from './pagePanel/PagePanel'
 import PanelOptions from './optionPanel/OptionPanel'
 import CollectionList from './table/CollectionList'
 
-import {possibleOperationsForCollections} from "../../main/consts/possibleOperationsForCollections";
+import possibleOperationsForCollections from "../../main/functions/possibleOperationsForCollections";
 import compareArrays from "../../main/functions/compareArrays";
 
 import OpenOperationsButton from "./buttons/OpenOperationsButton";
-import AddEntityButton from "./buttons/AddEntityButton";
 import InviteButton from "./buttons/InviteButton";
 import CancelInviteButton from "./buttons/CancelInviteButton";
 
@@ -128,7 +127,7 @@ class CollectionPanel extends Component {
     }
 
     setPossibleOperations(collectionType){
-        this.props.setOperations(possibleOperationsForCollections[collectionType])
+        this.props.setOperations(possibleOperationsForCollections(collectionType,this.props.security.role))
     }
 
     async getPage(collectionType){
@@ -136,7 +135,12 @@ class CollectionPanel extends Component {
         console.log(this.props.pageRequest);
         let getPageOfDataOperation=async () => {
             this.props.startLoading("Fetching page of data...");
-            await axios.post(serverName+`page/`+collectionType,this.props.pageRequest)
+            await axios.post(serverName+`page/`+collectionType,this.props.pageRequest,
+                {
+                    headers: {
+                        "X-Auth-Token":this.props.security.token
+                    }
+                })
                 .then(async (res) => {
                     console.log("page of data:");
                     console.log(res.data);
@@ -197,11 +201,9 @@ class CollectionPanel extends Component {
                 <CancelInviteButton key="cancelInvite"/>
             ]
         }
-        else if(this.props.collectionType!=='ranking') {
+        else if(this.props.collectionType!=='ranking' && this.props.security.role!=="") {
+            if(this.props.security.role!=="")
             buttons.push(<OpenOperationsButton key="openOperations" action={() => this.setState({optionsVisible:true})}/>);
-            if (this.props.collectionType !== 'users') {
-                buttons.push(<AddEntityButton key="addEntity" entityType={this.props.collectionType.slice(0, -1)}/>);
-            }
         }
         return buttons;
     }
@@ -270,7 +272,8 @@ function mapStateToProps( state ) {
         page: state.page,
         pageRequest: state.pageRequest,
         entityPanel: state.entityPanel,
-        possibleOperations: state.possibleOperations
+        possibleOperations: state.possibleOperations,
+        security: state.security
     };
 }
 
