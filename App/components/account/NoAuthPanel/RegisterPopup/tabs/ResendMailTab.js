@@ -46,17 +46,21 @@ class ResendMailTab extends Component{
             return;
         }
 
-        this.props.startLoading("Resending email...");
-        axios.post(serverName+"registration/resendToken",{email:this.state.value})
-            .then(res => {
-                this.props.stopLoading();
-                this.props.showSuccessMessage("Verification email resubmitted. Please check your mail box.");
-                this.props.disable();
-            })
-            .catch(error => {
-                this.props.stopLoading();
-                this.props.showNetworkErrorMessage(error);
-            });
+        let resendTokenOperation = () => {
+            this.props.startLoading("Resending email...");
+            axios.post(serverName + "registration/resendToken", {email: this.state.value})
+                .then(res => {
+                    this.props.stopLoading();
+                    this.props.showSuccessMessage("Verification email resubmitted. Please check your mail box.");
+                    this.props.disable();
+                })
+                .catch(error => {
+                    this.props.stopLoading();
+                    this.props.showNetworkErrorMessage(error,resendTokenOperation);
+                });
+        };
+
+        resendTokenOperation()
     }
 
     calculateHeight(){

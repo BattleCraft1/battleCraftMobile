@@ -219,25 +219,33 @@ class Panel extends Component {
         if(checkIfObjectIsNotEmpty(validationErrors)){
             console.log("output entity:");
             console.log(entityToSend);
-            axios.post(serverName+this.props.mode+'/'+this.props.type, entityToSend,
-                {
-                    headers: {
-                        "X-Auth-Token":this.props.security.token
-                    }
-                })
-                .then(res => {
-                    this.setState({entity:res.data});
-                    this.props.showSuccessMessage("Tournament: "+res.data.name+" successfully "+this.props.mode+"ed");
-                    this.props.disable();
-                })
-                .catch(error => {
-                    if(error.response.data.fieldErrors===undefined){
-                        this.props.showNetworkErrorMessage(error);
-                    }
-                    else{
-                        this.setValidationErrors(error.response.data);
-                    }
-                });
+
+            let sendEntityOperation = () => {
+                this.props.startLoading("Sending data...");
+                axios.post(serverName + this.props.mode + '/' + this.props.type, entityToSend,
+                    {
+                        headers: {
+                            "X-Auth-Token": this.props.security.token
+                        }
+                    })
+                    .then(res => {
+                        this.props.stopLoading();
+                        this.setState({entity: res.data});
+                        this.props.showSuccessMessage("Tournament: " + res.data.name + " successfully " + this.props.mode + "ed");
+                        this.props.disable();
+                    })
+                    .catch(error => {
+                        this.props.stopLoading();
+                        if (error.response.data.fieldErrors === undefined) {
+                            this.props.showNetworkErrorMessage(error,sendEntityOperation);
+                        }
+                        else {
+                            this.setValidationErrors(error.response.data);
+                        }
+                    });
+            };
+
+            sendEntityOperation();
         }
         else{
             this.setValidationErrors(validationErrors);
@@ -284,7 +292,7 @@ class Panel extends Component {
 
     calculatePanelHeight(){
         return this.props.dimension.orientation === 'portrait'?
-            this.props.dimension.height*0.85:this.props.dimension.height*0.77;
+            this.props.dimension.height*0.80:this.props.dimension.height*0.77;
     }
 
     render() {

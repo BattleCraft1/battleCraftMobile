@@ -83,7 +83,7 @@ class PlayerTab extends Component{
     calculateHeight(inputsDisabled){
         let disabledInputHeight = inputsDisabled?35:0;
         return this.props.orientation === 'portrait'?
-            this.props.height*0.85-225+disabledInputHeight
+            this.props.height*0.80-225+disabledInputHeight
             :
             this.props.height*0.77-185+disabledInputHeight;
     }

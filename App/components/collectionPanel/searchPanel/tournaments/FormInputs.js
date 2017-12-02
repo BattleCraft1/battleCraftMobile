@@ -48,6 +48,7 @@ class FormInputs extends Component{
 
     async componentDidMount() {
         let getGameOperation = async () => {
+            this.props.startLoading("Fetching games...");
             await axios.get(serverName + `get/allGames/names`,
                 {
                     headers: {
@@ -55,9 +56,11 @@ class FormInputs extends Component{
                     }
                 })
                 .then(res => {
+                    this.props.stopLoading();
                     this.setState({tournamentsGames: convertArrayToObject(res.data)});
                 })
                 .catch(error => {
+                    this.props.stopLoading();
                     this.props.showNetworkErrorMessage(error,getGameOperation);
                 });
         };

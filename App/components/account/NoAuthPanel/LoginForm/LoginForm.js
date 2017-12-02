@@ -64,6 +64,7 @@ class LoginForm extends Component {
             password: this.state.password
         };
 
+        let loginOperation = () => {
         this.props.startLoading("Log in...");
         axios.post(serverName+"auth",authDTO)
             .then(res => {
@@ -99,8 +100,11 @@ class LoginForm extends Component {
             })
             .catch(error => {
                 this.props.stopLoading();
-                this.props.showNetworkErrorMessage(error);
+                this.props.showNetworkErrorMessage(error,loginOperation);
             });
+        };
+
+        loginOperation();
     }
 
     updateTokenInDatabase(token,role,date){

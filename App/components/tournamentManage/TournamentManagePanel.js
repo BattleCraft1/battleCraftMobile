@@ -58,7 +58,8 @@ class TournamentManagePanel extends Component {
     }
 
     async fetchTournamentProgressData(tournamentName){
-        this.props.startLoading("Fetching tournament progress...");
+        let fetchTournamentProgressOperation = async () => {
+            this.props.startLoading("Fetching tournament progress...");
         await axios.get(`${serverName}progress/tournament?name=${tournamentName}`,
             {
                 headers: {
@@ -73,31 +74,40 @@ class TournamentManagePanel extends Component {
             })
             .catch(error => {
                 this.props.stopLoading();
-                this.props.showNetworkErrorMessage(error);
+                this.props.showNetworkErrorMessage(error,fetchTournamentProgressOperation);
                 this.props.navigate('Tournaments')
             });
+        };
+
+        fetchTournamentProgressOperation();
     }
 
-    sendBattleData(battleData){
+    sendBattleData(battleData) {
         let battleDataToSend = JSON.parse(JSON.stringify(battleData));
         delete battleDataToSend["finished"];
-        let tournamentTypeString = this.state.playersOnTableCount === 4?"group":"duel";
+        let tournamentTypeString = this.state.playersOnTableCount === 4 ? "group" : "duel";
         console.log("battle before send: ");
         console.log(battleData);
-        axios.post(`${serverName}set/points/${tournamentTypeString}/tournament?name=${this.state.tournamentName}`,battleDataToSend,
-            {
-                headers: {
-                    "X-Auth-Token":this.props.security.token
-                }
-            })
-            .then(res => {
-                console.log("tournament data:");
-                console.log(res.data);
-                this.prepareToursData(res.data);
-            })
-            .catch(error => {
-                this.props.showNetworkErrorMessage(error);
-            });
+        let sendBattleDataOperation = () => {
+            this.props.startLoading("Sending battle...");
+            axios.post(`${serverName}set/points/${tournamentTypeString}/tournament?name=${this.state.tournamentName}`, battleDataToSend,
+                {
+                    headers: {
+                        "X-Auth-Token": this.props.security.token
+                    }
+                })
+                .then(res => {
+                    this.props.stopLoading();
+                    console.log("tournament data:");
+                    console.log(res.data);
+                    this.prepareToursData(res.data);
+                })
+                .catch(error => {
+                    this.props.stopLoading();
+                    this.props.showNetworkErrorMessage(error, sendBattleDataOperation);
+                });
+        };
+        sendBattleDataOperation();
     }
 
     async prepareToursData(tournamentData){
@@ -198,6 +208,8 @@ class TournamentManagePanel extends Component {
 
     nextTourRequest(){
         let tournamentTypeString = this.state.playersOnTableCount === 4?"group":"duel";
+        let nextTourOperation = () => {
+            this.props.startLoading("Confirming tour...");
         axios.get(`${serverName}next/tour/${tournamentTypeString}/tournament?name=${this.state.tournamentName}`,
             {
                 headers: {
@@ -205,6 +217,7 @@ class TournamentManagePanel extends Component {
                 }
             })
             .then(res => {
+                this.props.stopLoading();
                 console.log("tournament data:");
                 console.log(res.data);
                 this.setState({playersOnTableCount:res.data.playersOnTableCount});
@@ -212,8 +225,11 @@ class TournamentManagePanel extends Component {
                 this.setState({tournamentData:res.data});
             })
             .catch(error => {
-                this.props.showNetworkErrorMessage(error);
+                this.props.stopLoading();
+                this.props.showNetworkErrorMessage(error,nextTourOperation);
             });
+        };
+        nextTourOperation();
     }
 
     previousTour(){
@@ -232,22 +248,29 @@ class TournamentManagePanel extends Component {
 
     previousTourRequest(){
         let tournamentTypeString = this.state.playersOnTableCount === 4?"group":"duel";
-        axios.get(`${serverName}previous/tour/${tournamentTypeString}/tournament?name=${this.state.tournamentName}`,
-            {
-                headers: {
-                    "X-Auth-Token":this.props.security.token
-                }
-            })
-            .then(res => {
-                console.log("tournament data:");
-                console.log(res.data);
-                this.setState({playersOnTableCount:res.data.playersOnTableCount});
-                this.prepareToursData(res.data);
-                this.setState({tournamentData:res.data});
-            })
-            .catch(error => {
-                this.props.showNetworkErrorMessage(error);
-            });
+        let previousTourOperation = () => {
+            this.props.startLoading("Coming back to previous tour...");
+            axios.get(`${serverName}previous/tour/${tournamentTypeString}/tournament?name=${this.state.tournamentName}`,
+                {
+                    headers: {
+                        "X-Auth-Token": this.props.security.token
+                    }
+                })
+                .then(res => {
+                    this.props.stopLoading();
+                    console.log("tournament data:");
+                    console.log(res.data);
+                    this.setState({playersOnTableCount: res.data.playersOnTableCount});
+                    this.prepareToursData(res.data);
+                    this.setState({tournamentData: res.data});
+                })
+                .catch(error => {
+                    this.props.stopLoading();
+                    this.props.showNetworkErrorMessage(error,previousTourOperation);
+                });
+        };
+
+        previousTourOperation()
     }
 
 
@@ -275,22 +298,29 @@ class TournamentManagePanel extends Component {
     finishTournamentRequest(){
         let tournamentTypeString = this.state.playersOnTableCount === 4?"group":"duel";
 
-        axios.get(`${serverName}finish/${tournamentTypeString}/tournament?name=${this.state.tournamentName}`,
-            {
-                headers: {
-                    "X-Auth-Token":this.props.security.token
-                }
-            })
-            .then(res => {
-                console.log("tournament data:");
-                console.log(res.data);
-                this.setState({playersOnTableCount:res.data.playersOnTableCount});
-                this.prepareToursData(res.data);
-                this.setState({tournamentData:res.data});
-            })
-            .catch(error => {
-                this.props.showNetworkErrorMessage(error);
-            });
+        let finishTournamentOperation = () => {
+            this.props.startLoading("Finishing tournament...");
+            axios.get(`${serverName}finish/${tournamentTypeString}/tournament?name=${this.state.tournamentName}`,
+                {
+                    headers: {
+                        "X-Auth-Token": this.props.security.token
+                    }
+                })
+                .then(res => {
+                    this.props.stopLoading();
+                    console.log("tournament data:");
+                    console.log(res.data);
+                    this.setState({playersOnTableCount: res.data.playersOnTableCount});
+                    this.prepareToursData(res.data);
+                    this.setState({tournamentData: res.data});
+                })
+                .catch(error => {
+                    this.props.stopLoading();
+                    this.props.showNetworkErrorMessage(error,finishTournamentOperation);
+                });
+        }
+
+        finishTournamentOperation()
     }
 
     showBattlePopup(battleData)
