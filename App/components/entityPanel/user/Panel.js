@@ -28,6 +28,11 @@ import axios from 'axios';
 
 import checkIfObjectIsNotEmpty from '../../../main/functions/checkIfObjectIsNotEmpty'
 import validateUser from '../validators/UserValidator'
+import loginUserWithChangedUsername from "../../../main/functions/loginUserWithChangedUsername";
+import getDatesDifferenceInDays from "../../../main/functions/getDatesDifferenceInDays";
+import {SQLite} from "expo";
+
+const db = SQLite.openDatabase({ name: 'tokens2.db' });
 
 class Panel extends Component {
     constructor(props) {
@@ -209,6 +214,9 @@ class Panel extends Component {
                 .then(res => {
                     this.setAccessToTabsByStatus(res.data.status);
                     this.setState({entity:res.data});
+                    if(res.data.newToken!==""){
+                        this.loginUserWithChangedUsername(res.data.newToken);
+                    }
                     this.props.showSuccessMessage("User: "+res.data.name+" successfully "+this.props.mode+"ed");
                     this.props.disable();
                 })
@@ -227,6 +235,39 @@ class Panel extends Component {
             this.setState({entity:entity});
             this.setValidationErrors(validationErrors);
         }
+    }
+
+    loginUserWithChangedUsername(token){
+        this.props.setTokenAndRole(token,this.props.security.role);
+        let date = new Date();
+        db.transaction(
+            tx => {
+                tx.executeSql(
+                    'select * from tokens2 where id=1',
+                    [],
+                    (ts,result) =>{
+                        console.log("result array: ");
+                        let rows = result.rows._array;
+                        console.log(JSON.stringify(rows));
+                        if(rows.length !== 0){
+                            tx.executeSql(
+                                `update tokens2 set token = ? ,date = ? where id = 1;`,
+                                [token,date],
+                                (ts,success) => console.log(success),
+                                (ts,error) => {
+                                    console.log("error: ");
+                                    console.log(error)
+                                }
+                            );
+                        }
+                    },
+                    (ts,error)  => {
+                        console.log("error: ");
+                        console.log(error)
+                    }
+                );
+            }
+        );
     }
 
 

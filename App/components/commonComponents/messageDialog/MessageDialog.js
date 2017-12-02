@@ -12,12 +12,34 @@ import Modal from 'react-native-modal';
 import MessageStyles from '../../../Styles/UniversalStyles/MessageStyle'
 import MainStyles from '../../../Styles/UniversalStyles/MainStyles'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {SQLite} from "expo";
+
+const db = SQLite.openDatabase({ name: 'tokens2.db' });
 
 class MessageDialog extends React.Component {
     constructor(props) {
         super(props);
     }
 
+    logout(){
+        this.props.setTokenAndRole("","");
+        db.transaction(
+            tx => {
+                tx.executeSql(
+                    'delete from tokens2 where id = 1',
+                    [],
+                    (ts,success) => {
+                        console.log("success: ");
+                        console.log(success)
+                    },
+                    (ts,error) => {
+                        console.log("error: ");
+                        console.log(error)
+                    }
+                );
+            }
+        );
+    }
 
     render(){
         let operationButton;
@@ -34,6 +56,9 @@ class MessageDialog extends React.Component {
 
         }
         else{
+            if(this.props.message.messageType==="Unauthorized"){
+                this.logout();
+            }
             operationButton=
                 <TouchableHighlight
                     onPress={() => {

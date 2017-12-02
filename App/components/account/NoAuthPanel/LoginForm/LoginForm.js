@@ -41,20 +41,6 @@ class LoginForm extends Component {
         }
     }
 
-    componentDidMount(){
-        db.transaction(tx => {
-            tx.executeSql(
-                'create table if not exists tokens2 (id integer primary key not null, token text, role text, date date);',
-                [],
-                (ts,success) => console.log(success),
-                (ts,error) => {
-                    console.log("error: ");
-                    console.log(error)
-                }
-            );
-        })
-    }
-
     login(){
         this.setState({usernameError:""});
         this.setState({passwordError:""});

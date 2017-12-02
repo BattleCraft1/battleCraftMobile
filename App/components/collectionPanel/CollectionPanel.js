@@ -160,6 +160,7 @@ class CollectionPanel extends Component {
                     this.props.stopLoading();
 
                     this.props.setEmptyPage();
+                    this.props.showNetworkErrorMessage(error,getPageOfDataOperation);
                     this.props.setPageRequest({
                         searchCriteria:this.props.pageRequest.searchCriteria,
                         pageRequest:{
@@ -170,7 +171,6 @@ class CollectionPanel extends Component {
                         }
                     });
 
-                    this.props.showNetworkErrorMessage(error,getPageOfDataOperation);
                 });
         };
         await getPageOfDataOperation();
@@ -202,7 +202,6 @@ class CollectionPanel extends Component {
             ]
         }
         else if(this.props.collectionType!=='ranking' && this.props.security.role!=="") {
-            if(this.props.security.role!=="")
             buttons.push(<OpenOperationsButton key="openOperations" action={() => this.setState({optionsVisible:true})}/>);
         }
         return buttons;

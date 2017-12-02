@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CollectionPanel from '../collectionPanel/CollectionPanel'
-import AccountPanel from '../account/AccountPanel'
+import AccountPanel from '../account/AuthPanel'
 import SplashScreen from '../commonComponents/SplashScreen'
 import TournamentManagePanel from '../tournamentManage/TournamentManagePanel'
 
@@ -9,6 +9,12 @@ export default class Navigator extends Component {
     displayResultOfNavigation(){
         if(this.props.navigValue === 'Tournaments'){
             return <CollectionPanel collectionType={"tournaments"}/>;
+        }
+        else if(this.props.navigValue === 'Played'){
+            return <CollectionPanel collectionType={"participated/tournaments"}/>;
+        }
+        else if(this.props.navigValue === 'Organized'){
+            return <CollectionPanel collectionType={"organized/tournaments"}/>;
         }
         else if(this.props.navigValue === 'Games'){
             return <CollectionPanel collectionType={"games"}/>;
@@ -20,7 +26,7 @@ export default class Navigator extends Component {
             return <CollectionPanel collectionType={"users"}/>;
         }
         else if(this.props.navigValue === 'My account'){
-            return <AccountPanel/>;
+            return <AccountPanel navigate={this.props.navigate}/>;
         }
         else if(this.props.navigValue.includes('Progress/')){
             let tournamentName = this.props.navigValue.substr(this.props.navigValue.indexOf('/')+1);
