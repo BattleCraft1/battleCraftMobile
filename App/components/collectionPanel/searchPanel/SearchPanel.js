@@ -25,6 +25,8 @@ import RankingFormInputs from './ranking/FormInputs'
 
 const searchFormInputsTypeMap = {
     "tournaments":TournamentsFormInputs,
+    "participated/tournaments":TournamentsFormInputs,
+    "organized/tournaments":TournamentsFormInputs,
     "users": UsersFormInputs,
     "games":GamesFormInputs,
     "ranking":RankingFormInputs

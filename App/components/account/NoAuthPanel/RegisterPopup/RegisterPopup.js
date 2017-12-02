@@ -34,7 +34,6 @@ const tabsMap = {
     "resendMail":ResendMailTab
 };
 
-
 const tabsNamesMap = {
     "personalData":"Personal data",
     "address":"Address",
@@ -118,9 +117,28 @@ class Panel extends Component {
             console.log("output entity:");
             console.log(entityToSend);
             this.props.startLoading("Registering user...");
-            axios.post(serverName+'registration', entityToSend)
+            let url;
+            let config;
+            if(this.props.userKind === "normal"){
+                url = 'registration';
+                config = {}
+            }
+            else{
+                url = '/create/admin';
+                config = {
+                    headers: {
+                        "X-Auth-Token":this.props.security.token
+                    }
+                }
+            }
+            axios.post(serverName+ url, entityToSend,config)
                 .then(res => {
-                    this.props.showSuccessMessage("You are successfully registered. Please check your mail box to verify you account. If you do not have any mail from us please try to rensend mail.");
+                    if(this.props.userKind === "normal") {
+                        this.props.showSuccessMessage("You are successfully registered. Please check your mail box to verify you account. If you do not have any mail from us please try to rensend mail.");
+                    }
+                    else{
+                        this.props.showSuccessMessage("Admin account is created");
+                    }
                     this.props.stopLoading();
                     this.props.disable();
                 })
@@ -162,6 +180,15 @@ class Panel extends Component {
             this.props.dimension.height*0.85:this.props.dimension.height*0.77;
     }
 
+    createTitle(){
+        if(this.props.userKind === "normal"){
+            return 'Registration'
+        }
+        else{
+            return 'Create administrator'
+        }
+    }
+
     render() {
 
         return (
@@ -171,9 +198,10 @@ class Panel extends Component {
                     height: this.calculatePanelHeight()
                 }]}>
                     <View style={[EntityPanelStyle.title,{alignItems:'center'}]}>
-                        <Text style={[MainStyle.textStyle,{fontSize: 22}]}>Register</Text>
+                        <Text style={[MainStyle.textStyle,{fontSize: 22}]}>{this.createTitle()}</Text>
                     </View>
                     <Navigation
+                        userKind = {this.props.userKind}
                         orientation={this.props.dimension.orientation}
                         tabsNamesMap={tabsNamesMap}
                         setActiveTab={this.setActiveTab.bind(this)}
@@ -201,7 +229,8 @@ function mapDispatchToProps( dispatch ) {
 
 function mapStateToProps( state ) {
     return {
-        dimension: state.dimension
+        dimension: state.dimension,
+        security: state.security
     };
 }
 

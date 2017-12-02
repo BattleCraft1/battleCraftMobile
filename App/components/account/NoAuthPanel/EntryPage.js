@@ -56,7 +56,7 @@ class EntryPage extends Component {
                             </TouchableHighlight>
                         </View>
                     </View>
-                    {this.state.showRegisterPopup && <RegisterPopup disable={() => this.setState({showRegisterPopup: false})}/>}
+                    {this.state.showRegisterPopup && <RegisterPopup userKind={"normal"} disable={() => this.setState({showRegisterPopup: false})}/>}
                     {this.state.showResetPasswordPopup && <ResetPasswordPopup disable={() => this.setState({showResetPasswordPopup: false})}/>}
                 </View>
         );

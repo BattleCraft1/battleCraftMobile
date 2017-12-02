@@ -16,6 +16,8 @@ import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 const rowTypeMap = {
     "tournaments":TournamentsRows,
+    "participated/tournaments":TournamentsRows,
+    "organized/tournaments":TournamentsRows,
     "games":GamesRows,
     "ranking":RankingRows,
     "users":UsersRows

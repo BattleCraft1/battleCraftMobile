@@ -23,12 +23,12 @@ export default class Navigation extends Component {
                         <Text style={[MainStyles.smallWhiteStyle, {fontWeight: 'bold'}]}>Address</Text>
                     </TouchableHighlight>
                 </View>
-                <View style={EntityPanelStyle.buttonRow}>
+                {this.props.userKind === 'normal' && <View style={EntityPanelStyle.buttonRow}>
                     <TouchableHighlight style={[EntityPanelStyle.button,{backgroundColor: this.props.isTabActive("resendMail")}]}
                                         onPress={() => {this.props.setActiveTab("resendMail")}}>
                         <Text style={[MainStyles.smallWhiteStyle, {fontWeight: 'bold'}]}>Resend mail</Text>
                     </TouchableHighlight>
-                </View>
+                </View>}
             </View>;
         else
             return <View style={EntityPanelStyle.navigation}>
@@ -41,14 +41,11 @@ export default class Navigation extends Component {
                                         onPress={() => {this.props.setActiveTab("address")}}>
                         <Text style={[MainStyles.smallWhiteStyle, {fontWeight: 'bold'}]}>Address</Text>
                     </TouchableHighlight>
-                    <TouchableHighlight style={[EntityPanelStyle.button,{backgroundColor: this.props.isTabActive("resendMail")}]}
+                    {this.props.userKind === 'normal' && <TouchableHighlight
+                        style={[EntityPanelStyle.button,{backgroundColor: this.props.isTabActive("resendMail")}]}
                                         onPress={() => {this.props.setActiveTab("resendMail")}}>
                         <Text style={[MainStyles.smallWhiteStyle, {fontWeight: 'bold'}]}>Resend mail</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight style={[EntityPanelStyle.button,{backgroundColor: this.props.isTabActive("resendMail")}]}
-                                        onPress={() => {this.props.setActiveTab("resendMail")}}>
-                        <Text style={[MainStyles.smallWhiteStyle, {fontWeight: 'bold'}]}>Forgot password</Text>
-                    </TouchableHighlight>
+                    </TouchableHighlight>}
                 </View>
             </View>;
     }
