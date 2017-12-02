@@ -34,23 +34,27 @@ class ReportPanel extends React.Component {
             objectType:this.props.reportPanel.objectType,
             reportMessage:this.state.reportContent
         };
-        this.props.startLoading("Sending report...");
-        axios.post(serverName+`report`,reportDTO,
-            {
-                headers: {
-                    "X-Auth-Token":this.props.security.token
-                }
-            })
-            .then(res => {
-                this.props.stopLoading();
-                this.props.showReportPanel(false,"",[]);
-                this.props.showSuccessMessage(this.getSuccessMessage(this.props.reportPanel.objectNames));
-            })
-            .catch(error => {
-                this.props.stopLoading();
-                this.props.showReportPanel(false,"",[]);
-                this.props.showNetworkErrorMessage(error);
-            });
+        let reportOperation = () => {
+            this.props.startLoading("Sending report...");
+            axios.post(serverName+`report`,reportDTO,
+                {
+                    headers: {
+                        "X-Auth-Token":this.props.security.token
+                    }
+                })
+                .then(res => {
+                    this.props.stopLoading();
+                    this.props.showReportPanel(false,"",[]);
+                    this.props.showSuccessMessage(this.getSuccessMessage(this.props.reportPanel.objectNames));
+                })
+                .catch(error => {
+                    this.props.stopLoading();
+                    this.props.showReportPanel(false,"",[]);
+                    this.props.showNetworkErrorMessage(error,reportOperation);
+                });
+        };
+
+        reportOperation();
     }
 
     getSuccessMessage(reportedElementsNames){

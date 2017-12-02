@@ -82,7 +82,7 @@ class BasicDataTab extends Component{
 
     calculateHeight(inputsDisabled){
         return this.props.orientation === 'portrait'?
-            this.props.height*0.85-225 : this.props.height*0.77-175;
+            this.props.height*0.80-225 : this.props.height*0.77-180;
     }
 
     render(){

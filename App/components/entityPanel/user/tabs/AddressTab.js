@@ -27,7 +27,7 @@ class AddressTab extends Component{
 
     calculateHeight(){
         return this.props.orientation === 'portrait'?
-            this.props.height*0.85-190:this.props.height*0.77-150;
+            this.props.height*0.80-190:this.props.height*0.77-150;
     }
 
     render(){

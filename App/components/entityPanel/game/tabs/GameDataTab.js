@@ -39,7 +39,7 @@ class GameDataTab extends Component{
 
     calculateHeight(){
         return this.props.orientation === 'portrait'?
-            this.props.height*0.85-160:this.props.height*0.77-115;
+            this.props.height*0.80-160:this.props.height*0.77-115;
     }
 
     render(){

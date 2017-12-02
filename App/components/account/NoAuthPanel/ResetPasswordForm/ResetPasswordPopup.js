@@ -45,17 +45,21 @@ class ResetPasswordPopup extends Component {
             return;
         }
 
-        this.props.startLoading("Reseting password...");
-        axios.post(serverName+"auth/reset/password",{email:this.state.email})
-            .then(res => {
-                this.props.stopLoading();
-                this.props.showSuccessMessage("Username and new password were sent to you e-mail address");
-                this.props.disable();
-            })
-            .catch(error => {
-                this.props.stopLoading();
-                this.props.showNetworkErrorMessage(error);
-            });
+        let resetPasswordOperation = () => {
+            this.props.startLoading("Reseting password...");
+            axios.post(serverName+"auth/reset/password",{email:this.state.email})
+                .then(res => {
+                    this.props.stopLoading();
+                    this.props.showSuccessMessage("Username and new password were sent to you e-mail address");
+                    this.props.disable();
+                })
+                .catch(error => {
+                    this.props.stopLoading();
+                    this.props.showNetworkErrorMessage(error,resetPasswordOperation);
+                });
+        };
+
+        resetPasswordOperation();
     }
 
     calculatePanelHeight(){

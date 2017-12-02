@@ -131,26 +131,31 @@ class Panel extends Component {
                     }
                 }
             }
-            axios.post(serverName+ url, entityToSend,config)
-                .then(res => {
-                    if(this.props.userKind === "normal") {
-                        this.props.showSuccessMessage("You are successfully registered. Please check your mail box to verify you account. If you do not have any mail from us please try to rensend mail.");
-                    }
-                    else{
-                        this.props.showSuccessMessage("Admin account is created");
-                    }
-                    this.props.stopLoading();
-                    this.props.disable();
-                })
-                .catch(error => {
-                    this.props.stopLoading();
-                    if(error.response.data.fieldErrors===undefined){
-                        this.props.showNetworkErrorMessage(error);
-                    }
-                    else{
-                        this.setValidationErrors(error.response.data);
-                    }
-                });
+            let registerOperation = () => {
+                this.props.startLoading("Registering account...");
+                axios.post(serverName + url, entityToSend, config)
+                    .then(res => {
+                        this.props.stopLoading();
+                        if (this.props.userKind === "normal") {
+                            this.props.showSuccessMessage("You are successfully registered. Please check your mail box to verify you account. If you do not have any mail from us please try to rensend mail.");
+                        }
+                        else {
+                            this.props.showSuccessMessage("Admin account is created");
+                        }
+                        this.props.disable();
+                    })
+                    .catch(error => {
+                        this.props.stopLoading();
+                        if (error.response.data.fieldErrors === undefined) {
+                            this.props.showNetworkErrorMessage(error,registerOperation);
+                        }
+                        else {
+                            this.setValidationErrors(error.response.data);
+                        }
+                    });
+            };
+
+            registerOperation();
         }
         else{
             this.setValidationErrors(validationErrors);
