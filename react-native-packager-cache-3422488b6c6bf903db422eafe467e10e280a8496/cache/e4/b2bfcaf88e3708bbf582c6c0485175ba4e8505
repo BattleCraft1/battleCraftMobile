@@ -1,0 +1,71 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _checkIfObjectIsNotEmpty = require("../../../main/functions/checkIfObjectIsNotEmpty");
+
+var _checkIfObjectIsNotEmpty2 = babelHelpers.interopRequireDefault(_checkIfObjectIsNotEmpty);
+
+var _AddressValidator = require("./AddressValidator");
+
+var _AddressValidator2 = babelHelpers.interopRequireDefault(_AddressValidator);
+
+var _getDatesDifferenceInDays = require("../../../main/functions/getDatesDifferenceInDays");
+
+var _getDatesDifferenceInDays2 = babelHelpers.interopRequireDefault(_getDatesDifferenceInDays);
+
+var _dateformat = require("dateformat");
+
+var _dateformat2 = babelHelpers.interopRequireDefault(_dateformat);
+
+var _factorial = require("../../../main/functions/factorial");
+
+exports.default = function (entity) {
+    var validationErrors = {};
+    var fieldErrors = {};
+    if (!entity.nameChange.match(new RegExp("^[A-Z][A-Za-zzżźćńółęąśŻŹĆĄŚĘŁÓŃ0-9 ]{1,29}$"))) fieldErrors.nameChange = "Tournament name must start with big letter and have between 2 to 30 chars";
+
+    if (entity.playersOnTableCount !== 2 && entity.playersOnTableCount !== 4) fieldErrors.playersOnTableCount = "You can choose only 2 or 4 players count on table";
+
+    if (entity.playersOnTableCount === 2) {
+        if (entity.tablesCount < 1 || entity.tablesCount > 30) fieldErrors.tablesCount = "Tables count must be between 1 and 30";
+    } else if (entity.playersOnTableCount === 4) {
+        if (entity.tablesCount < 1 || entity.tablesCount > 15) fieldErrors.tablesCount = "Tables count must be between 1 and 15";
+    }
+
+    var maxToursNumber = entity.tablesCount * 2;
+    if (entity.toursCount > maxToursNumber) fieldErrors.toursCount = "Max tours number in this tournament is: " + maxToursNumber;
+
+    if (entity.dateOfStart === undefined || (0, _getDatesDifferenceInDays2.default)(new Date(), new Date(entity.dateOfStart)) < 0) fieldErrors.dateOfStart = "You cannot start tournament at " + (0, _dateformat2.default)(entity.dateOfStart, "yyyy-mm-dd HH:MM") + " because this date is outdated";
+
+    if (entity.dateOfEnd === undefined || (0, _getDatesDifferenceInDays2.default)(new Date(entity.dateOfStart), new Date(entity.dateOfEnd)) < 0) fieldErrors.dateOfEnd = "End date must be later than " + (0, _dateformat2.default)(entity.dateOfStart, "yyyy-mm-dd HH:MM");
+
+    if ((0, _getDatesDifferenceInDays2.default)(new Date(entity.dateOfStart), new Date(entity.dateOfEnd)) > 3) fieldErrors.dateOfEnd = "Duration of tournament cannnot be longer than 3 days";
+
+    (0, _AddressValidator2.default)(entity, fieldErrors);
+
+    if (entity.organizers.length > 10) fieldErrors.organizers = "Count of organizers must be less than 10";
+
+    if (new Set(entity.organizers).size !== entity.organizers.length) fieldErrors.organizers = "You can invite organizer only once";
+
+    var participantsFlatTable = [];
+
+    entity.participants.map(function (participantGroup) {
+        var participantGroupToValidate = [];
+        participantGroup.forEach(function (participant) {
+            return participantGroupToValidate.push(participant.name);
+        });
+        participantsFlatTable.push(participantGroupToValidate);
+    });
+
+    if (new Set(participantsFlatTable).size !== participantsFlatTable.length) fieldErrors.organizers = "You can invite player only once";
+
+    if (entity.tablesCount * entity.playersOnTableCount !== 0 && participantsFlatTable.length * entity.playersOnTableCount / 2 > entity.tablesCount * entity.playersOnTableCount) fieldErrors.participants = "Participants count must be less than " + entity.tablesCount * entity.playersOnTableCount;
+
+    if (!(0, _checkIfObjectIsNotEmpty2.default)(fieldErrors)) {
+        validationErrors.message = "Invalid tournament data";
+        validationErrors.fieldErrors = fieldErrors;
+    }
+
+    return validationErrors;
+};

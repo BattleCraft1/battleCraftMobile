@@ -1,0 +1,326 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/App/components/account/NoAuthPanel/LoginForm/LoginForm.js';
+
+var _expo = require('expo');
+
+var _expo2 = babelHelpers.interopRequireDefault(_expo);
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _reactRedux = require('react-redux');
+
+var _redux = require('redux');
+
+var _actions = require('../../../../redux/actions');
+
+var _serverName = require('../../../../main/consts/serverName');
+
+var _axios = require('axios');
+
+var _axios2 = babelHelpers.interopRequireDefault(_axios);
+
+var _MainStyles = require('../../../../Styles/UniversalStyles/MainStyles');
+
+var _MainStyles2 = babelHelpers.interopRequireDefault(_MainStyles);
+
+var _InputStyles = require('../../../../Styles/UniversalStyles/InputStyles');
+
+var _InputStyles2 = babelHelpers.interopRequireDefault(_InputStyles);
+
+var _BaseColours = require('battleCraftMobile/App/main/consts/BaseColours');
+
+var _BaseColours2 = babelHelpers.interopRequireDefault(_BaseColours);
+
+var _EntityPanelInputsStyles = require('../../../../Styles/CollectionPanelStyles/EntityPanelInputsStyles');
+
+var _EntityPanelInputsStyles2 = babelHelpers.interopRequireDefault(_EntityPanelInputsStyles);
+
+var _reactNativeFormGenerator = require('react-native-form-generator');
+
+var _ValidationErrorMessage = require('../../../entityPanel/outputs/ValidationErrorMessage');
+
+var _ValidationErrorMessage2 = babelHelpers.interopRequireDefault(_ValidationErrorMessage);
+
+var _reactNativeCheckBox = require('react-native-check-box');
+
+var _reactNativeCheckBox2 = babelHelpers.interopRequireDefault(_reactNativeCheckBox);
+
+var db = _expo.SQLite.openDatabase({ name: 'tokens2.db' });
+
+var LoginForm = function (_Component) {
+    babelHelpers.inherits(LoginForm, _Component);
+
+    function LoginForm(props) {
+        babelHelpers.classCallCheck(this, LoginForm);
+
+        var _this = babelHelpers.possibleConstructorReturn(this, (LoginForm.__proto__ || Object.getPrototypeOf(LoginForm)).call(this, props));
+
+        _this.state = {
+            username: "",
+            usernameError: "",
+            password: "",
+            passwordError: "",
+            rememberMe: false
+        };
+        return _this;
+    }
+
+    babelHelpers.createClass(LoginForm, [{
+        key: 'login',
+        value: function login() {
+            var _this2 = this;
+
+            this.setState({ usernameError: "" });
+            this.setState({ passwordError: "" });
+
+            var usernameError = "";
+            var passwordError = "";
+
+            if (!this.state.username.match(new RegExp("^[A-ZĄĆĘŁŃÓŚŹŻa-zzżźćńółęąś0-9]{3,30}$"))) usernameError = "Name must have between 3 to 30 chars";
+            if (this.state.password.length < 8 || this.state.password.length > 32) passwordError = "Password should have more than 8 characters and less than 32";
+
+            if (usernameError !== "" || passwordError !== "") {
+                this.setState({ usernameError: usernameError });
+                this.setState({ passwordError: passwordError });
+                return;
+            }
+
+            var authDTO = {
+                username: this.state.username,
+                password: this.state.password
+            };
+
+            var loginOperation = function loginOperation() {
+                _this2.props.startLoading("Log in...");
+                _axios2.default.post(_serverName.serverName + "auth", authDTO).then(function (res) {
+                    _this2.props.stopLoading();
+                    var role = res.data.role.replace("ROLE_", "");
+                    role = role.toLocaleLowerCase();
+                    if (role === 'accepted') {
+                        role = 'player';
+                    } else if (role === 'new') {
+                        role = 'new user';
+                    }
+                    var date = new Date();
+                    _this2.props.setTokenAndRole(res.data.token, res.data.role);
+                    db.transaction(function (tx) {
+                        tx.executeSql('delete from tokens2 where id = 1', [], function (ts, success) {
+                            if (_this2.state.rememberMe) {
+                                _this2.updateTokenInDatabase(res.data.token, res.data.role, date);
+                            }
+                        }, function (ts, error) {
+                            console.log("error: ");
+                            console.log(error);
+                        });
+                    });
+                    _this2.props.showSuccessMessage("You successfully log in with " + role + " permissions");
+                }).catch(function (error) {
+                    _this2.props.stopLoading();
+                    _this2.props.showNetworkErrorMessage(error, loginOperation);
+                });
+            };
+
+            loginOperation();
+        }
+    }, {
+        key: 'updateTokenInDatabase',
+        value: function updateTokenInDatabase(token, role, date) {
+            var _this3 = this;
+
+            db.transaction(function (tx) {
+                _this3.insertNewToken(tx, token, role, date);
+            }, function (ts, error) {
+                console.log("error: ");
+                console.log(error);
+            }, function (ts, success) {
+                return console.log(success);
+            });
+        }
+    }, {
+        key: 'insertNewToken',
+        value: function insertNewToken(tx, token, role, date) {
+            tx.executeSql('insert into tokens2 (id,token,role,date)  values (1,?,?,?)', [token, role, date], function (ts, success) {
+                return console.log(success);
+            }, function (ts, error) {
+                console.log("error: ");
+                console.log(error);
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this4 = this;
+
+            return _react2.default.createElement(
+                _reactNative.ScrollView,
+                { style: { flex: 1 }, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 137
+                    }
+                },
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: _InputStyles2.default.inputCard, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 138
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.View,
+                        { style: _InputStyles2.default.inputText, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 139
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            { style: _MainStyles2.default.smallWhiteStyle, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 140
+                                }
+                            },
+                            'Username'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        _reactNative.View,
+                        { style: _EntityPanelInputsStyles2.default.inputStyle, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 143
+                            }
+                        },
+                        _react2.default.createElement(_reactNativeFormGenerator.InputField, {
+                            onValueChange: function onValueChange(value) {
+                                _this4.setState({ username: value });
+                            },
+                            value: this.state.username,
+                            placeholder: "jarek123",
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 144
+                            }
+                        })
+                    ),
+                    _react2.default.createElement(_ValidationErrorMessage2.default, {
+                        validationErrorMessage: this.state.usernameError, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 150
+                        }
+                    })
+                ),
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: _InputStyles2.default.inputCard, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 154
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.View,
+                        { style: _InputStyles2.default.inputText, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 155
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            { style: _MainStyles2.default.smallWhiteStyle, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 156
+                                }
+                            },
+                            'Password'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        _reactNative.View,
+                        { style: _EntityPanelInputsStyles2.default.inputStyle, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 159
+                            }
+                        },
+                        _react2.default.createElement(_reactNativeFormGenerator.InputField, {
+                            secureTextEntry: true,
+                            onValueChange: function onValueChange(value) {
+                                _this4.setState({ password: value });
+                            },
+                            value: this.state.password,
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 160
+                            }
+                        })
+                    ),
+                    _react2.default.createElement(_ValidationErrorMessage2.default, {
+                        validationErrorMessage: this.state.passwordError, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 166
+                        }
+                    })
+                ),
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: [_InputStyles2.default.inputCard, { flexDirection: 'row', alignItems: 'center' }], __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 171
+                        }
+                    },
+                    _react2.default.createElement(_reactNativeCheckBox2.default, {
+                        style: { width: 55, height: 55, justifyContent: 'center', alignItems: 'center' },
+                        isChecked: this.state.rememberMe,
+                        onClick: function onClick() {
+                            var checked = !_this4.state.rememberMe;
+                            _this4.setState({ rememberMe: checked });
+                        },
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 172
+                        }
+                    }),
+                    _react2.default.createElement(
+                        _reactNative.Text,
+                        { style: _MainStyles2.default.smallWhiteStyle, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 180
+                            }
+                        },
+                        ' Remember me'
+                    )
+                ),
+                _react2.default.createElement(
+                    _reactNative.View,
+                    {
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 183
+                        }
+                    },
+                    _react2.default.createElement(_reactNative.Button, { title: 'Submit', color: _BaseColours2.default.background.darkBrown, style: {}, onPress: function onPress() {
+                            _this4.login();
+                        }, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 184
+                        }
+                    })
+                )
+            );
+        }
+    }]);
+    return LoginForm;
+}(_react.Component);
+
+function mapDispatchToProps(dispatch) {
+    return (0, _redux.bindActionCreators)(_actions.ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+    return {};
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LoginForm);

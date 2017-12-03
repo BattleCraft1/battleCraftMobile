@@ -1,0 +1,21 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.startLoading = startLoading;
+exports.stopLoading = stopLoading;
+
+var _loading = require('../types/loading');
+
+var types = babelHelpers.interopRequireWildcard(_loading);
+function startLoading(message) {
+    return {
+        type: types.START_LOADING,
+        message: message
+    };
+}
+
+function stopLoading() {
+    return {
+        type: types.STOP_LOADING
+    };
+}

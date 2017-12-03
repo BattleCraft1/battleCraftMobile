@@ -1,0 +1,216 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = undefined;
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/App/components/entityPanel/user/tabs/table/ParticipatedTournamentsTable.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _DuelTournamentTableRow = require('./row/DuelTournamentTableRow');
+
+var _DuelTournamentTableRow2 = babelHelpers.interopRequireDefault(_DuelTournamentTableRow);
+
+var _EmptyTournamentTableRow = require('./row/EmptyTournamentTableRow');
+
+var _EmptyTournamentTableRow2 = babelHelpers.interopRequireDefault(_EmptyTournamentTableRow);
+
+var _TournamentDataInGroupTournamentRow = require('./row/TournamentDataInGroupTournamentRow');
+
+var _TournamentDataInGroupTournamentRow2 = babelHelpers.interopRequireDefault(_TournamentDataInGroupTournamentRow);
+
+var _EmptySecondPlayerInGroupRow = require('./row/EmptySecondPlayerInGroupRow');
+
+var _EmptySecondPlayerInGroupRow2 = babelHelpers.interopRequireDefault(_EmptySecondPlayerInGroupRow);
+
+var _SecondPlayerDataInGroupTournamentRow = require('./row/SecondPlayerDataInGroupTournamentRow');
+
+var _SecondPlayerDataInGroupTournamentRow2 = babelHelpers.interopRequireDefault(_SecondPlayerDataInGroupTournamentRow);
+
+var ParticipatedTournamentsTable = function (_Component) {
+    babelHelpers.inherits(ParticipatedTournamentsTable, _Component);
+
+    function ParticipatedTournamentsTable() {
+        babelHelpers.classCallCheck(this, ParticipatedTournamentsTable);
+        return babelHelpers.possibleConstructorReturn(this, (ParticipatedTournamentsTable.__proto__ || Object.getPrototypeOf(ParticipatedTournamentsTable)).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(ParticipatedTournamentsTable, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            if (this.props.shouldActualizeRelatedEntities === true) {
+                this.props.shouldActualizeRelatedEntitiesCallBack();
+                if (this.props.relatedEntity.relatedEntityType === 'participatedTournaments') this.actualizeParticipants(this.props.relatedEntity.relatedEntities);else this.actualizeSecondPlayerInGroup(this.props.relatedEntity.relatedEntityType, this.props.relatedEntity.relatedEntities);
+            }
+        }
+    }, {
+        key: 'actualizeParticipants',
+        value: function actualizeParticipants(relatedEntities) {
+            var participatedTournaments = this.props.value;
+            var participatedTournamentsNames = participatedTournaments.map(function (entity) {
+                return entity.name;
+            });
+            var relatedEntitiesNames = relatedEntities.map(function (entity) {
+                return entity.name;
+            });
+            relatedEntities.forEach(function (element) {
+                if (participatedTournamentsNames.indexOf(element.name) === -1) {
+                    if (element.playersOnTableCount === 4) participatedTournaments.push({
+                        secondPlayerName: "",
+                        secondPlayerAccept: false,
+                        name: element.name,
+                        accepted: false
+                    });else participatedTournaments.push({
+                        name: element.name,
+                        accepted: false
+                    });
+                }
+            });
+            participatedTournamentsNames.forEach(function (elementName) {
+                if (relatedEntitiesNames.indexOf(elementName) === -1) {
+                    participatedTournaments = participatedTournaments.filter(function (element) {
+                        return element.name !== elementName;
+                    });
+                }
+            });
+            this.props.changeEntity(this.props.fieldName, participatedTournaments);
+        }
+    }, {
+        key: 'actualizeSecondPlayerInGroup',
+        value: function actualizeSecondPlayerInGroup(tournamentNameMarker, secondPlayerName) {
+            var tournamentName = tournamentNameMarker.replace("secondPlayerFor", "");
+            var tournament = this.props.value.find(function (tournament) {
+                return tournament.name === tournamentName;
+            });
+            if (tournament.hasOwnProperty("secondPlayerName")) ;
+            tournament.secondPlayerName = secondPlayerName[0];
+            this.props.changeEntity(this.props.fieldName, this.props.value);
+        }
+    }, {
+        key: 'deletePlayerFromGroupTournament',
+        value: function deletePlayerFromGroupTournament(tournamentName) {
+            var participatedTournaments = this.props.value;
+            for (var index in participatedTournaments) {
+                if (participatedTournaments[index].name === tournamentName) {
+                    participatedTournaments[index].secondPlayerName = "";
+                    participatedTournaments[index].secondPlayerAccept = false;
+                }
+            }
+            this.props.changeEntity(this.props.fieldName, participatedTournaments);
+        }
+    }, {
+        key: 'createTableRows',
+        value: function createTableRows() {
+            if (this.props.value.length === 0) {
+                return _react2.default.createElement(_EmptyTournamentTableRow2.default, {
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 81
+                    }
+                });
+            } else {
+                var outputTable = [];
+                for (var i = 0; i < this.props.value.length; i++) {
+                    if (this.props.value[i].secondPlayerName === undefined) {
+                        outputTable.push(_react2.default.createElement(_DuelTournamentTableRow2.default, { key: this.props.value[i].name,
+                            disabled: this.props.disabled,
+                            'delete': this.deleteElement.bind(this),
+                            accept: this.acceptElement.bind(this),
+                            accepted: this.props.value[i].accepted,
+                            name: this.props.value[i].name, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 88
+                            }
+                        }));
+                    } else {
+                        outputTable.push(_react2.default.createElement(_TournamentDataInGroupTournamentRow2.default, {
+                            key: this.props.value[i].name,
+                            disabled: this.props.disabled,
+                            'delete': this.deleteElement.bind(this),
+                            accept: this.acceptElement.bind(this),
+                            accepted: this.props.value[i].accepted,
+                            name: this.props.value[i].name, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 98
+                            }
+                        }));
+                        if (this.props.value[i].secondPlayerName === "") {
+                            outputTable.push(_react2.default.createElement(_EmptySecondPlayerInGroupRow2.default, {
+                                invite: this.props.inviteSecondPlayer,
+                                key: 'empty' + i,
+                                tournament: this.props.value[i].name,
+                                disabled: this.props.disabled, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 107
+                                }
+                            }));
+                        } else {
+                            outputTable.push(_react2.default.createElement(_SecondPlayerDataInGroupTournamentRow2.default, {
+                                deleteElement: this.deletePlayerFromGroupTournament.bind(this),
+                                tournament: this.props.value[i].name,
+                                key: this.props.value[i].secondPlayerName,
+                                name: this.props.value[i].secondPlayerName,
+                                accepted: this.props.value[i].secondPlayerAccept,
+                                disabled: this.props.disabled,
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 115
+                                }
+                            }));
+                        }
+                    }
+                }
+                return outputTable;
+            }
+        }
+    }, {
+        key: 'deleteElement',
+        value: function deleteElement(name) {
+            var elements = this.props.value;
+            elements = elements.filter(function (tournament) {
+                return tournament.name !== name;
+            });
+            this.props.changeEntity(this.props.fieldName, elements);
+        }
+    }, {
+        key: 'acceptElement',
+        value: function acceptElement(name) {
+            var elements = this.props.value;
+            var element = elements.find(function (tournament) {
+                return tournament.name === name;
+            });
+            element.accepted = !element.accepted;
+            this.props.changeEntity(this.props.fieldName, elements);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                _reactNative.View,
+                {
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 149
+                    }
+                },
+                _react2.default.createElement(
+                    _reactNative.Text,
+                    {
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 150
+                        }
+                    },
+                    this.props.name
+                ),
+                this.createTableRows()
+            );
+        }
+    }]);
+    return ParticipatedTournamentsTable;
+}(_react.Component);
+
+exports.default = ParticipatedTournamentsTable;

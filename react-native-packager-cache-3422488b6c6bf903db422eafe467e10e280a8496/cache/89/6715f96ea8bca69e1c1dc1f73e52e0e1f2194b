@@ -1,0 +1,131 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = undefined;
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/App/components/entityPanel/tournament/tabs/table/ParticipantsTable.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _UserTableRow = require('./row/UserTableRow');
+
+var _UserTableRow2 = babelHelpers.interopRequireDefault(_UserTableRow);
+
+var _EmptyUserTableRow = require('./row/EmptyUserTableRow');
+
+var _EmptyUserTableRow2 = babelHelpers.interopRequireDefault(_EmptyUserTableRow);
+
+var ParticipantsTable = function (_React$Component) {
+    babelHelpers.inherits(ParticipantsTable, _React$Component);
+
+    function ParticipantsTable() {
+        babelHelpers.classCallCheck(this, ParticipantsTable);
+        return babelHelpers.possibleConstructorReturn(this, (ParticipantsTable.__proto__ || Object.getPrototypeOf(ParticipantsTable)).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(ParticipantsTable, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            if (this.props.shouldActualizeRelatedEntities === true) {
+                this.props.shouldActualizeRelatedEntitiesCallBack();
+                this.actualizeRelatedEntityObjects(this.props.relatedEntity.relatedEntities);
+            }
+        }
+    }, {
+        key: 'actualizeRelatedEntityObjects',
+        value: function actualizeRelatedEntityObjects(relatedEntities) {
+            console.log("organizers");
+            var participants = this.props.value;
+            var invitedParticipantsNames = [];
+
+            for (var i = 0; i < participants.length; i++) {
+                invitedParticipantsNames.push(participants[i][0].name);
+            }
+            relatedEntities.forEach(function (elementName) {
+                if (invitedParticipantsNames.indexOf(elementName) === -1) {
+                    participants.push([{
+                        name: elementName,
+                        accepted: false
+                    }]);
+                }
+            });
+            invitedParticipantsNames.forEach(function (elementName) {
+                if (relatedEntities.indexOf(elementName) === -1) {
+                    for (var _i = 0; _i < participants.length; _i++) {
+                        if (participants[_i][0].name === elementName) {
+                            participants.splice(_i, 1);
+                        }
+                    }
+                }
+            });
+            this.props.changeEntity(this.props.fieldName, participants);
+        }
+    }, {
+        key: 'createTableRows',
+        value: function createTableRows() {
+            var _this2 = this;
+
+            if (this.props.value.length === 0) {
+                return _react2.default.createElement(_EmptyUserTableRow2.default, {
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 53
+                    }
+                });
+            } else {
+                return this.props.value.map(function (user) {
+                    return _react2.default.createElement(_UserTableRow2.default, { key: user[0].name,
+                        disabled: _this2.props.disabled,
+                        'delete': _this2.deleteElement.bind(_this2),
+                        accepted: user[0].accepted,
+                        name: user[0].name, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 57
+                        }
+                    });
+                });
+            }
+        }
+    }, {
+        key: 'deleteElement',
+        value: function deleteElement(name) {
+            var elements = this.props.value;
+            for (var i = 0; i < elements.length; i++) {
+                if (elements[i][0].name === name) {
+                    elements.splice(i, 1);
+                }
+            }
+            this.props.changeEntity(this.props.fieldName, elements);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                _reactNative.View,
+                {
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 78
+                    }
+                },
+                _react2.default.createElement(
+                    _reactNative.Text,
+                    {
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 79
+                        }
+                    },
+                    this.props.name
+                ),
+                this.createTableRows()
+            );
+        }
+    }]);
+    return ParticipantsTable;
+}(_react2.default.Component);
+
+exports.default = ParticipantsTable;

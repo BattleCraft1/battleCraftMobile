@@ -1,0 +1,14 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.setPageRequest = setPageRequest;
+
+var _pageRequest = require('../types/pageRequest');
+
+var types = babelHelpers.interopRequireWildcard(_pageRequest);
+function setPageRequest(pageRequest) {
+    return {
+        type: types.SET_PAGE_REQUEST,
+        pageRequest: pageRequest
+    };
+}

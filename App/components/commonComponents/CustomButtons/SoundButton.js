@@ -19,10 +19,8 @@ class SoundButton extends Component {
         };
     }
 
-
-
     playButtonPressed(){
-        this.props.playSound('toggle');
+        this.props.playSound('fanfare');
         this.props.onPress();
     };
 

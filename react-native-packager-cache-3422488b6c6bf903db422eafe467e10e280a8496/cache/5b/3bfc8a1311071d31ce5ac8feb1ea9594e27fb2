@@ -1,0 +1,12 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = setDate;
+
+var _dateformat = require("dateformat");
+
+var _dateformat2 = babelHelpers.interopRequireDefault(_dateformat);
+
+function setDate(date) {
+    if (date !== undefined) return (0, _dateformat2.default)(new Date(date), "dd-MM-yyyy HH:MM");else return "no date";
+}

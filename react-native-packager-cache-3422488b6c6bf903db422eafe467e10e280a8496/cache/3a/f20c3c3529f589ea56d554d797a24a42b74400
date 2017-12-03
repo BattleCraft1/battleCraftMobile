@@ -1,0 +1,134 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = undefined;
+
+var _class,
+    _temp,
+    _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/node_modules/react-native-check-box/index.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var CheckBox = (_temp = _class = function (_Component) {
+    babelHelpers.inherits(CheckBox, _Component);
+
+    function CheckBox() {
+        babelHelpers.classCallCheck(this, CheckBox);
+        return babelHelpers.possibleConstructorReturn(this, (CheckBox.__proto__ || Object.getPrototypeOf(CheckBox)).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(CheckBox, [{
+        key: '_renderLeft',
+        value: function _renderLeft() {
+            if (this.props.leftTextView) return this.props.leftTextView;
+            if (!this.props.leftText) return null;
+            return _react2.default.createElement(
+                _reactNative.Text,
+                { style: [styles.leftText, this.props.leftTextStyle], __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 45
+                    }
+                },
+                this.props.leftText
+            );
+        }
+    }, {
+        key: '_renderRight',
+        value: function _renderRight() {
+            if (this.props.rightTextView) return this.props.rightTextView;
+            if (!this.props.rightText) return null;
+            return _react2.default.createElement(
+                _reactNative.Text,
+                { style: [styles.rightText, this.props.rightTextStyle], __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 52
+                    }
+                },
+                this.props.rightText
+            );
+        }
+    }, {
+        key: '_renderImage',
+        value: function _renderImage() {
+            if (this.props.isChecked) {
+                return this.props.checkedImage ? this.props.checkedImage : this.genCheckedImage();
+            } else {
+                return this.props.unCheckedImage ? this.props.unCheckedImage : this.genCheckedImage();
+            }
+        }
+    }, {
+        key: 'genCheckedImage',
+        value: function genCheckedImage() {
+            var source = this.props.isChecked ? require('./img/ic_check_box.png') : require('./img/ic_check_box_outline_blank.png');
+
+            return _react2.default.createElement(_reactNative.Image, { source: source, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 68
+                }
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                _reactNative.TouchableHighlight,
+                {
+                    style: this.props.style,
+                    onPress: this.props.onClick,
+                    underlayColor: 'transparent',
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 74
+                    }
+                },
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: styles.container, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 79
+                        }
+                    },
+                    this._renderLeft(),
+                    this._renderImage(),
+                    this._renderRight()
+                )
+            );
+        }
+    }]);
+    return CheckBox;
+}(_react.Component), _class.propTypes = babelHelpers.extends({}, _reactNative.View.propTypes, {
+    leftText: _react2.default.PropTypes.string,
+    leftTextView: _react2.default.PropTypes.element,
+    rightText: _react2.default.PropTypes.string,
+    leftTextStyle: _reactNative.Text.propTypes.style,
+    rightTextView: _react2.default.PropTypes.element,
+    rightTextStyle: _reactNative.Text.propTypes.style,
+    checkedImage: _react2.default.PropTypes.element,
+    unCheckedImage: _react2.default.PropTypes.element,
+    onClick: _react2.default.PropTypes.func.isRequired,
+    isChecked: _react2.default.PropTypes.bool.isRequired
+
+}), _class.defaultProps = {
+    isChecked: false,
+    leftTextStyle: {},
+    rightTextStyle: {}
+}, _temp);
+exports.default = CheckBox;
+
+var styles = _reactNative.StyleSheet.create({
+    container: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    leftText: {
+        flex: 1
+    },
+    rightText: {
+        flex: 1,
+        marginLeft: 10
+    }
+});

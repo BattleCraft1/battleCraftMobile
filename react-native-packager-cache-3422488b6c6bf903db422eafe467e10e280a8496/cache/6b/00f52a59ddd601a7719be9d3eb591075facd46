@@ -1,0 +1,18 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.security = undefined;
+
+var _createReducer2 = require('../lib/createReducer');
+
+var _createReducer3 = babelHelpers.interopRequireDefault(_createReducer2);
+
+var _security = require('../types/security');
+
+var types = babelHelpers.interopRequireWildcard(_security);
+var security = exports.security = (0, _createReducer3.default)({}, babelHelpers.defineProperty({}, types.SET_TOKEN_AND_ROLE, function (state, action) {
+    return {
+        token: action.token,
+        role: action.role
+    };
+}));

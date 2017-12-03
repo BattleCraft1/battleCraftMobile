@@ -1,0 +1,16 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.showReportPanel = showReportPanel;
+
+var _reportPanel = require('../types/reportPanel');
+
+var types = babelHelpers.interopRequireWildcard(_reportPanel);
+function showReportPanel(isShown, objectType, objectNames) {
+    return {
+        type: types.SHOW_REPORT_PANEL,
+        isShown: isShown,
+        objectType: objectType,
+        objectNames: objectNames
+    };
+}

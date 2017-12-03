@@ -1,0 +1,44 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _reactNative = require('react-native');
+
+var _BaseColours = require('../../main/consts/BaseColours');
+
+var _BaseColours2 = babelHelpers.interopRequireDefault(_BaseColours);
+
+var styles = _reactNative.StyleSheet.create({
+    dropdownContainerStyle: {
+        position: 'absolute',
+        zIndex: 10000,
+        top: 60,
+        right: 0,
+        backgroundColor: _BaseColours2.default.background.mediumBrown,
+        borderColor: _BaseColours2.default.border.top,
+        borderWidth: 3
+    },
+    dropdownOptionStyle: {
+        flex: 1,
+        marginTop: 2,
+        minHeight: 50,
+        backgroundColor: _BaseColours2.default.background.darkBrown
+    },
+    outerBorder: {
+        flex: 1,
+        borderColor: _BaseColours2.default.border.top,
+        backgroundColor: _BaseColours2.default.misc.deepRed,
+        borderWidth: 3,
+        padding: 3
+    },
+    innerBorder: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderColor: _BaseColours2.default.border.top,
+        borderWidth: 3,
+        padding: 5
+    }
+});
+
+exports.default = styles;

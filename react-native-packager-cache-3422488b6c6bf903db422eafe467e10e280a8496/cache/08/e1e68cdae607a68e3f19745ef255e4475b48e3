@@ -1,0 +1,14 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.setOperations = setOperations;
+
+var _possibleOperations = require('../types/possibleOperations');
+
+var types = babelHelpers.interopRequireWildcard(_possibleOperations);
+function setOperations(operations) {
+    return {
+        type: types.SET_OPERATIONS,
+        operations: operations
+    };
+}

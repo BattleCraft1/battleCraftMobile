@@ -81,7 +81,7 @@ const store = configureStore( {
         objectType:"",
         objectNames:[]
     },
-    playSound:{
+    sound:{
       name:""
     }
 } );

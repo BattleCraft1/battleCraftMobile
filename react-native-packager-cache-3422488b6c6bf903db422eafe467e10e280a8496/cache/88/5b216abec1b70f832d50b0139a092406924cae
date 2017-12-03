@@ -1,0 +1,222 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.PickerComponent = undefined;
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/node_modules/react-native-form-generator/src/lib/PickerComponent.android.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _reactNative2 = babelHelpers.interopRequireDefault(_reactNative);
+
+var _Field = require('../lib/Field');
+
+var View = _reactNative2.default.View,
+    StyleSheet = _reactNative2.default.StyleSheet,
+    TextInput = _reactNative2.default.TextInput,
+    Text = _reactNative2.default.Text,
+    Picker = _reactNative2.default.Picker;
+
+
+var PickerItem = Picker.Item;
+
+var PickerComponent = exports.PickerComponent = function (_React$Component) {
+  babelHelpers.inherits(PickerComponent, _React$Component);
+
+  function PickerComponent(props) {
+    babelHelpers.classCallCheck(this, PickerComponent);
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (PickerComponent.__proto__ || Object.getPrototypeOf(PickerComponent)).call(this, props));
+
+    _this.state = {
+      value: props.value || props.label
+    };
+    _this.pickerMeasures = {};
+    return _this;
+  }
+
+  babelHelpers.createClass(PickerComponent, [{
+    key: 'setValue',
+    value: function setValue(value) {
+      this.setState({ value: value });
+      if (this.props.onChange) this.props.onChange(value);
+      if (this.props.onValueChange) this.props.onValueChange(value);
+    }
+  }, {
+    key: 'handleLayoutChange',
+    value: function handleLayoutChange(e) {
+      var _e$nativeEvent$layout = babelHelpers.extends({}, e.nativeEvent.layout),
+          x = _e$nativeEvent$layout.x,
+          y = _e$nativeEvent$layout.y,
+          width = _e$nativeEvent$layout.width,
+          height = _e$nativeEvent$layout.height;
+
+      this.setState(e.nativeEvent.layout);
+    }
+  }, {
+    key: 'handleValueChange',
+    value: function handleValueChange(value) {
+
+      this.setState({ value: value && value != '' ? value : this.props.label });
+
+      if (this.props.onChange) this.props.onChange(value);
+      if (this.props.onValueChange) this.props.onValueChange(value);
+    }
+  }, {
+    key: '_scrollToInput',
+    value: function _scrollToInput(event) {
+
+      if (this.props.onFocus) {
+        var handle = _reactNative2.default.findNodeHandle(this.refs.inputBox);
+
+        this.props.onFocus(event, handle);
+      }
+    }
+  }, {
+    key: '_togglePicker',
+    value: function _togglePicker(event) {}
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        View,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 58
+          }
+        },
+        _react2.default.createElement(
+          _Field.Field,
+          babelHelpers.extends({}, this.props, {
+            ref: 'inputBox',
+            onPress: this.props.onPress,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 58
+            }
+          }),
+          _react2.default.createElement(
+            View,
+            { style: [this.props.containerStyle],
+              onLayout: this.handleLayoutChange.bind(this), __source: {
+                fileName: _jsxFileName,
+                lineNumber: 63
+              }
+            },
+            _react2.default.createElement(
+              Text,
+              { style: this.props.labelStyle, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 67
+                }
+              },
+              this.props.label
+            ),
+            _react2.default.createElement(
+              Picker,
+              babelHelpers.extends({ ref: 'picker'
+              }, this.props.pickerProps, {
+                selectedValue: this.state.value,
+                onValueChange: this.handleValueChange.bind(this),
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 68
+                }
+              }),
+              Object.keys(this.props.options).map(function (value) {
+                return _react2.default.createElement(PickerItem, {
+                  key: value,
+                  value: value,
+                  label: _this2.props.options[value],
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 74
+                  }
+                });
+              }, this)
+            )
+          )
+        )
+      );
+    }
+  }]);
+  return PickerComponent;
+}(_react2.default.Component);
+
+var formStyles = StyleSheet.create({
+  form: {},
+  alignRight: {
+    marginTop: 7, position: 'absolute', right: 10
+  },
+  noBorder: {
+    borderTopWidth: 0,
+    borderBottomWidth: 0
+  },
+  separatorContainer: {
+    paddingTop: 35,
+    borderBottomColor: '#C8C7CC',
+    borderBottomWidth: 1
+
+  },
+  separator: {
+
+    paddingLeft: 10,
+    paddingRight: 10,
+    color: '#6D6D72',
+    paddingBottom: 7
+
+  },
+  fieldsWrapper: {},
+  horizontalContainer: {
+    flexDirection: 'row',
+
+    justifyContent: 'flex-start'
+  },
+  fieldContainer: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#C8C7CC',
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    height: 45
+  },
+  fieldValue: {
+    fontSize: 34 / 2,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginRight: 10,
+    paddingTop: 4,
+    justifyContent: 'center',
+
+    color: '#C7C7CC'
+  },
+  fieldText: {
+    fontSize: 34 / 2,
+    paddingLeft: 10,
+    paddingRight: 10,
+    justifyContent: 'center',
+    lineHeight: 32
+  },
+  input: {
+    paddingLeft: 10,
+    paddingRight: 10
+
+  },
+  helpTextContainer: {
+    marginTop: 9,
+    marginBottom: 25,
+    paddingLeft: 20,
+    paddingRight: 20
+
+  },
+  helpText: {
+    color: '#7a7a7a'
+  }
+});

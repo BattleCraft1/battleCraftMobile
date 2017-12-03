@@ -9,7 +9,7 @@ import * as possibleOperationsReducer from './possibleOperations'
 import * as additionalEntityPanelReducer from './additionalEntityPanel'
 import * as reportPanelReducer from './reportPanel'
 import * as securityReducer from './security'
-import * as soundReducer from './playSound'
+import * as soundReducer from './sound'
 import * as orientationReducer from './dimension'
 
 export default combineReducers( Object.assign(

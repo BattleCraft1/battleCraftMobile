@@ -1,0 +1,67 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = undefined;
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/App/components/commonComponents/FadeView.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var FadeView = function (_React$Component) {
+    babelHelpers.inherits(FadeView, _React$Component);
+
+    function FadeView() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        babelHelpers.classCallCheck(this, FadeView);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = FadeView.__proto__ || Object.getPrototypeOf(FadeView)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+            fadeAnim: new _reactNative.Animated.Value(0)
+        }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
+    }
+
+    babelHelpers.createClass(FadeView, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            _reactNative.Animated.timing(this.state.fadeAnim, {
+                toValue: 1,
+                duration: 1000
+            }).start();
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var fadeAnim = this.state.fadeAnim;
+
+
+            return _react2.default.createElement(
+                _reactNative.Animated.View,
+                {
+                    style: babelHelpers.extends({}, this.props.style, {
+                        opacity: fadeAnim
+                    }),
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 23
+                    }
+                },
+                this.props.children
+            );
+        }
+    }]);
+    return FadeView;
+}(_react2.default.Component);
+
+exports.default = FadeView;
+
+
+module.export = FadeView;

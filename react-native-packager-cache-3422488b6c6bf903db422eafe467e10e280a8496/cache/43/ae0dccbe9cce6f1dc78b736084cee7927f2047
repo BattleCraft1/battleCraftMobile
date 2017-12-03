@@ -1,0 +1,496 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/App/components/entityPanel/tournament/Panel.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _reactNativeModal = require('react-native-modal');
+
+var _reactNativeModal2 = babelHelpers.interopRequireDefault(_reactNativeModal);
+
+var _MainStyles = require('../../../Styles/UniversalStyles/MainStyles');
+
+var _MainStyles2 = babelHelpers.interopRequireDefault(_MainStyles);
+
+var _EntityPanelStyle = require('../../../Styles/CollectionPanelStyles/EntityPanelStyle');
+
+var _EntityPanelStyle2 = babelHelpers.interopRequireDefault(_EntityPanelStyle);
+
+var _BasicDataTab = require('./tabs/BasicDataTab');
+
+var _BasicDataTab2 = babelHelpers.interopRequireDefault(_BasicDataTab);
+
+var _AddressTab = require('./tabs/AddressTab');
+
+var _AddressTab2 = babelHelpers.interopRequireDefault(_AddressTab);
+
+var _ParticipantsTab = require('./tabs/ParticipantsTab');
+
+var _ParticipantsTab2 = babelHelpers.interopRequireDefault(_ParticipantsTab);
+
+var _OrganizersTab = require('./tabs/OrganizersTab');
+
+var _OrganizersTab2 = babelHelpers.interopRequireDefault(_OrganizersTab);
+
+var _BaseColours = require('battleCraftMobile/App/main/consts/BaseColours');
+
+var _BaseColours2 = babelHelpers.interopRequireDefault(_BaseColours);
+
+var _Navigation = require('./navigation/Navigation');
+
+var _Navigation2 = babelHelpers.interopRequireDefault(_Navigation);
+
+var _index = require('../../../redux/actions/index');
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _serverName = require('../../../main/consts/serverName');
+
+var _axios = require('axios');
+
+var _axios2 = babelHelpers.interopRequireDefault(_axios);
+
+var _checkIfObjectIsNotEmpty = require('../../../main/functions/checkIfObjectIsNotEmpty');
+
+var _checkIfObjectIsNotEmpty2 = babelHelpers.interopRequireDefault(_checkIfObjectIsNotEmpty);
+
+var _TournamentValidator = require('../validators/TournamentValidator');
+
+var _TournamentValidator2 = babelHelpers.interopRequireDefault(_TournamentValidator);
+
+var regeneratorRuntime = require('regenerator-runtime');
+
+var tabsMap = {
+    "basicData": _BasicDataTab2.default,
+    "address": _AddressTab2.default,
+    "organizers": _OrganizersTab2.default,
+    "participants": _ParticipantsTab2.default
+};
+
+var tabsNamesMap = {
+    "basicData": "Basic data",
+    "address": "Address",
+    "organizers": "Organizers",
+    "participants": "Participants"
+};
+
+var Panel = function (_Component) {
+    babelHelpers.inherits(Panel, _Component);
+
+    function Panel(props) {
+        babelHelpers.classCallCheck(this, Panel);
+
+        var _this = babelHelpers.possibleConstructorReturn(this, (Panel.__proto__ || Object.getPrototypeOf(Panel)).call(this, props));
+
+        var today = new Date();
+        var tomorrow = new Date();
+        var dayAfterTomorrow = new Date();
+        tomorrow.setDate(today.getDate() + 1);
+        dayAfterTomorrow.setDate(today.getDate() + 2);
+        _this.state = {
+            activeTab: "",
+            entity: {
+                "name": "",
+                "nameChange": "",
+                "tablesCount": 0,
+                "playersOnTableCount": 2,
+                "toursCount": 0,
+                "game": "Warhammer",
+                "dateOfStart": tomorrow,
+                "dateOfEnd": dayAfterTomorrow,
+                "province": "lubelskie",
+                "city": "",
+                "street": "",
+                "zipCode": "",
+                "description": "",
+                "organizers": [],
+                "participants": [],
+                "status": "NEW",
+                "canCurrentUserEdit": false
+            },
+            validationErrors: {
+                "name": "",
+                "nameChange": "",
+                "tablesCount": "",
+                "playersOnTableCount": "",
+                "toursCount": "",
+                "maxPlayers": "",
+                "game": "",
+                "dateOfStart": "",
+                "dateOfEnd": "",
+                "province": "",
+                "city": "",
+                "street": "",
+                "zipCode": "",
+                "description": "",
+                "organizers": "",
+                "participants": ""
+            },
+            shouldActualizeRelatedEntities: false
+        };
+        return _this;
+    }
+
+    babelHelpers.createClass(Panel, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            var getEntityOperation, entity;
+            return regeneratorRuntime.async(function componentDidMount$(_context2) {
+                while (1) {
+                    switch (_context2.prev = _context2.next) {
+                        case 0:
+                            if (!(this.props.mode === 'edit' || this.props.mode === 'get')) {
+                                _context2.next = 6;
+                                break;
+                            }
+
+                            getEntityOperation = function getEntityOperation() {
+                                return regeneratorRuntime.async(function getEntityOperation$(_context) {
+                                    while (1) {
+                                        switch (_context.prev = _context.next) {
+                                            case 0:
+                                                _this2.props.startLoading("Fetching tournament...");
+                                                _context.next = 3;
+                                                return regeneratorRuntime.awrap(_axios2.default.get(_serverName.serverName + 'get/tournament?name=' + _this2.props.name, {
+                                                    headers: {
+                                                        "X-Auth-Token": _this2.props.security.token
+                                                    }
+                                                }).then(function (res) {
+                                                    _this2.setState({ entity: res.data });
+                                                    _this2.setState({ activeTab: "basicData" });
+                                                    _this2.props.stopLoading();
+                                                    console.log("input entity: ");
+                                                    console.log(res.data);
+                                                }).catch(function (error) {
+                                                    _this2.props.showNetworkErrorMessage(error, getEntityOperation);
+                                                    _this2.props.stopLoading();
+                                                }));
+
+                                            case 3:
+                                            case 'end':
+                                                return _context.stop();
+                                        }
+                                    }
+                                }, null, _this2);
+                            };
+
+                            _context2.next = 4;
+                            return regeneratorRuntime.awrap(getEntityOperation());
+
+                        case 4:
+                            _context2.next = 10;
+                            break;
+
+                        case 6:
+                            entity = this.state.entity;
+
+                            entity.canCurrentUserEdit = true;
+                            this.setState({ entity: entity });
+                            this.setState({ activeTab: "basicData" });
+
+                        case 10:
+                        case 'end':
+                            return _context2.stop();
+                    }
+                }
+            }, null, this);
+        }
+    }, {
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            if (nextProps.hidden === false && this.props.hidden === true && nextProps.relatedEntity.operationCanceled === false) {
+                this.setState({ shouldActualizeRelatedEntities: true });
+            }
+        }
+    }, {
+        key: 'setActiveTab',
+        value: function setActiveTab(activeTabName) {
+            this.setState({ activeTab: activeTabName });
+        }
+    }, {
+        key: 'isTabActive',
+        value: function isTabActive(activeTabName) {
+            return this.state.activeTab === activeTabName ? _BaseColours2.default.border.bottom : _BaseColours2.default.background.darkBrown;
+        }
+    }, {
+        key: 'shouldActualizeRelatedEntitiesCallBack',
+        value: function shouldActualizeRelatedEntitiesCallBack() {
+            this.setState({ shouldActualizeRelatedEntities: false });
+        }
+    }, {
+        key: 'createContent',
+        value: function createContent() {
+            if (this.state.activeTab === "organizers" || this.state.activeTab === "participants") return _react2.default.createElement(tabsMap[this.state.activeTab], {
+                shouldActualizeRelatedEntities: this.state.shouldActualizeRelatedEntities,
+                shouldActualizeRelatedEntitiesCallBack: this.shouldActualizeRelatedEntitiesCallBack.bind(this),
+                width: this.props.dimension.width,
+                height: this.props.dimension.height,
+                orientation: this.props.dimension.orientation,
+                navigate: this.props.navigate,
+                entity: this.state.entity,
+                relatedEntity: this.props.relatedEntity,
+                inputsDisabled: this.props.mode === 'get' || !this.state.entity.canCurrentUserEdit,
+                changeEntity: this.changeEntity.bind(this),
+                validationErrors: this.state.validationErrors
+            }, null);else if (this.state.activeTab !== "") return _react2.default.createElement(tabsMap[this.state.activeTab], {
+                width: this.props.dimension.width,
+                height: this.props.dimension.height,
+                orientation: this.props.dimension.orientation,
+                navigate: this.props.navigate,
+                disable: this.props.disable,
+                entity: this.state.entity,
+                mode: this.props.mode,
+                inputsDisabled: this.props.mode === 'get' || !this.state.entity.canCurrentUserEdit,
+                changeEntity: this.changeEntity.bind(this),
+                validationErrors: this.state.validationErrors
+            }, null);else return _react2.default.createElement(_reactNative.View, {
+                __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 187
+                }
+            });
+        }
+    }, {
+        key: 'changeEntity',
+        value: function changeEntity(fieldName, value) {
+            var entity = this.state.entity;
+            entity[fieldName] = value;
+            this.setState({ entity: entity });
+        }
+    }, {
+        key: 'sendEntity',
+        value: function sendEntity() {
+            var _this3 = this;
+
+            if (this.props.mode === 'add') {
+                var entity = this.state.entity;
+                entity.name = entity.nameChange;
+                this.setState({ entity: entity });
+            }
+
+            var entityToSend = JSON.parse(JSON.stringify(this.state.entity));
+
+            entityToSend.organizers = this.state.entity.organizers.map(function (element) {
+                return element.name;
+            });
+            entityToSend.participants = [];
+            this.state.entity.participants.map(function (participantGroup) {
+                var participantGroupToSend = [];
+                participantGroup.forEach(function (participant) {
+                    if (participant.name !== undefined) participantGroupToSend.push(participant.name);
+                });
+                if (participantGroupToSend.length !== 0) entityToSend.participants.push(participantGroupToSend);
+            });
+            delete entityToSend["status"];
+            delete entityToSend["canCurrentUserEdit"];
+            var validationErrors = (0, _TournamentValidator2.default)(entityToSend);
+            if ((0, _checkIfObjectIsNotEmpty2.default)(validationErrors)) {
+                console.log("output entity:");
+                console.log(entityToSend);
+
+                var sendEntityOperation = function sendEntityOperation() {
+                    _this3.props.startLoading("Sending data...");
+                    _axios2.default.post(_serverName.serverName + _this3.props.mode + '/' + _this3.props.type, entityToSend, {
+                        headers: {
+                            "X-Auth-Token": _this3.props.security.token
+                        }
+                    }).then(function (res) {
+                        _this3.props.stopLoading();
+                        _this3.setState({ entity: res.data });
+                        _this3.props.showSuccessMessage("Tournament: " + res.data.name + " successfully " + _this3.props.mode + "ed");
+                        _this3.props.disable();
+                    }).catch(function (error) {
+                        _this3.props.stopLoading();
+                        if (error.response.data.fieldErrors === undefined) {
+                            _this3.props.showNetworkErrorMessage(error, sendEntityOperation);
+                        } else {
+                            _this3.setValidationErrors(error.response.data);
+                        }
+                    });
+                };
+
+                sendEntityOperation();
+            } else {
+                this.setValidationErrors(validationErrors);
+            }
+        }
+    }, {
+        key: 'setValidationErrors',
+        value: function setValidationErrors(validationException) {
+            this.props.showFailureMessage(validationException.message);
+            var validationErrors = validationException.fieldErrors;
+            console.log("validation errors: ");
+            console.log(validationErrors);
+            var validationErrorsState = this.state.validationErrors;
+            for (var field in validationErrorsState) {
+                if (validationErrors.hasOwnProperty(field)) {
+                    validationErrorsState[field] = validationErrors[field];
+                } else {
+                    validationErrorsState[field] = "";
+                }
+            }
+            this.setState({ validationErrors: validationErrorsState });
+        }
+    }, {
+        key: 'createButtons',
+        value: function createButtons() {
+            var _this4 = this;
+
+            if (this.props.mode !== 'get' && this.state.entity.canCurrentUserEdit) {
+                return [_react2.default.createElement(
+                    _reactNative.TouchableHighlight,
+                    { key: 'save', style: [_EntityPanelStyle2.default.button, { backgroundColor: _BaseColours2.default.misc.deepRed }], onPress: function onPress() {
+                            return _this4.sendEntity();
+                        }, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 276
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.Text,
+                        { style: _MainStyles2.default.bigWhiteStyle, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 277
+                            }
+                        },
+                        'Save'
+                    )
+                ), _react2.default.createElement(
+                    _reactNative.TouchableHighlight,
+                    { key: 'close', style: [_EntityPanelStyle2.default.button, { backgroundColor: _BaseColours2.default.misc.deepRed }], onPress: function onPress() {
+                            return _this4.props.disable();
+                        }, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 279
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.Text,
+                        { style: _MainStyles2.default.bigWhiteStyle, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 280
+                            }
+                        },
+                        'Close'
+                    )
+                )];
+            } else {
+                return [_react2.default.createElement(
+                    _reactNative.TouchableHighlight,
+                    { key: 'ok', style: [_EntityPanelStyle2.default.button, { backgroundColor: _BaseColours2.default.misc.deepRed }], onPress: function onPress() {
+                            return _this4.props.disable();
+                        }, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 286
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.Text,
+                        { style: _MainStyles2.default.bigWhiteStyle, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 287
+                            }
+                        },
+                        'Ok'
+                    )
+                )];
+            }
+        }
+    }, {
+        key: 'calculatePanelHeight',
+        value: function calculatePanelHeight() {
+            return this.props.dimension.orientation === 'portrait' ? this.props.dimension.height * 0.80 : this.props.dimension.height * 0.77;
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var content = this.createContent();
+            var buttons = this.createButtons();
+
+            return _react2.default.createElement(
+                _reactNativeModal2.default,
+                { isVisible: !this.props.hidden, backdropOpacity: 0.3, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 303
+                    }
+                },
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: [_EntityPanelStyle2.default.modal, {
+                            width: this.props.dimension.width * 0.9,
+                            height: this.calculatePanelHeight() }], __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 304
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.View,
+                        { style: [_EntityPanelStyle2.default.title, { alignItems: 'center' }], __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 307
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            { style: [_MainStyles2.default.textStyle, { fontSize: 22 }], __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 308
+                                }
+                            },
+                            this.props.mode.charAt(0).toUpperCase() + this.props.mode.slice(1) + " tournament"
+                        )
+                    ),
+                    _react2.default.createElement(_Navigation2.default, {
+                        orientation: this.props.dimension.orientation,
+                        setActiveTab: this.setActiveTab.bind(this),
+                        isTabActive: this.isTabActive.bind(this), __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 312
+                        }
+                    }),
+                    _react2.default.createElement(
+                        _reactNative.View,
+                        { style: [_EntityPanelStyle2.default.formWindow], __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 316
+                            }
+                        },
+                        content
+                    ),
+                    _react2.default.createElement(
+                        _reactNative.View,
+                        { style: _EntityPanelStyle2.default.buttonRow, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 319
+                            }
+                        },
+                        buttons
+                    )
+                )
+            );
+        }
+    }]);
+    return Panel;
+}(_react.Component);
+
+function mapDispatchToProps(dispatch) {
+    return (0, _redux.bindActionCreators)(_index.ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+    return {
+        dimension: state.dimension,
+        security: state.security
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Panel);

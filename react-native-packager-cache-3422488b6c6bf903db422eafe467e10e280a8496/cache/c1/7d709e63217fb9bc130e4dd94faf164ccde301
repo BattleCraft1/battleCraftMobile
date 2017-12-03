@@ -1,0 +1,485 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/App/components/tournamentManage/components/battlePopup/BattlePopup1x1.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _PlayerCard1x = require('./playerCard/PlayerCard1x1');
+
+var _PlayerCard1x2 = babelHelpers.interopRequireDefault(_PlayerCard1x);
+
+var _reactNativeModal = require('react-native-modal');
+
+var _reactNativeModal2 = babelHelpers.interopRequireDefault(_reactNativeModal);
+
+var _DuelPlayerList = require('../playerList/DuelPlayerList');
+
+var _DuelPlayerList2 = babelHelpers.interopRequireDefault(_DuelPlayerList);
+
+var _MainStyles = require('battleCraftMobile/App/Styles/UniversalStyles/MainStyles');
+
+var _MainStyles2 = babelHelpers.interopRequireDefault(_MainStyles);
+
+var _BattleInspectorStyle = require('battleCraftMobile/App/Styles/BattlePanelStyles/BattleInspectorStyle');
+
+var _BattleInspectorStyle2 = babelHelpers.interopRequireDefault(_BattleInspectorStyle);
+
+var _TournamentStyles = require('battleCraftMobile/App/Styles/BattlePanelStyles/TournamentStyles');
+
+var _TournamentStyles2 = babelHelpers.interopRequireDefault(_TournamentStyles);
+
+var _BaseColours = require('battleCraftMobile/App/main/consts/BaseColours');
+
+var _BaseColours2 = babelHelpers.interopRequireDefault(_BaseColours);
+
+var _ListColours = require('battleCraftMobile/App/main/consts/ListColours');
+
+var _ListColours2 = babelHelpers.interopRequireDefault(_ListColours);
+
+var _index = require('../../../../redux/actions/index');
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var BattleInspector = function (_Component) {
+    babelHelpers.inherits(BattleInspector, _Component);
+
+    function BattleInspector(props) {
+        babelHelpers.classCallCheck(this, BattleInspector);
+
+        var _this = babelHelpers.possibleConstructorReturn(this, (BattleInspector.__proto__ || Object.getPrototypeOf(BattleInspector)).call(this, props));
+
+        _this.state = {
+            battleData: {
+                tableNumber: 0,
+                firstPlayer: {
+                    name: "",
+                    points: 0
+                },
+                secondPlayer: {
+                    name: "",
+                    points: 0
+                },
+                finished: false
+            },
+            playersWithoutBattles: [],
+            usersListVisible: false,
+            numberOfPlayerToChange: -1,
+            componentReady: false
+        };
+        return _this;
+    }
+
+    babelHelpers.createClass(BattleInspector, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.setState({ battleData: JSON.parse(JSON.stringify(this.props.battleData)) });
+            this.setState({ playersWithoutBattles: JSON.parse(JSON.stringify(this.props.playersWithoutBattles[this.props.battleData.tourNumber])) });
+            this.setState({ componentReady: true });
+        }
+    }, {
+        key: 'showUsersList',
+        value: function showUsersList(numberOfPlayerToChange) {
+            this.setState({ numberOfPlayerToChange: numberOfPlayerToChange });
+            this.setState({ usersListVisible: true });
+        }
+    }, {
+        key: 'chooseRandomPlayers',
+        value: function chooseRandomPlayers() {
+            var playersNames = this.state.playersWithoutBattles;
+            playersNames.splice(playersNames.indexOf(""), 1);
+            var battleData = this.state.battleData;
+
+            if (battleData.firstPlayer.name !== "" && playersNames.indexOf(battleData.firstPlayer.name) === -1) {
+                playersNames.unshift(battleData.firstPlayer.name);
+            }
+            if (battleData.secondPlayer.name !== "" && playersNames.indexOf(battleData.secondPlayer.name) === -1) {
+                playersNames.unshift(battleData.secondPlayer.name);
+            }
+
+            var firstRandomName = playersNames[Math.floor(Math.random() * playersNames.length)];
+            var secondRandomName = playersNames[Math.floor(Math.random() * playersNames.length)];
+            if (secondRandomName === firstRandomName) {
+                var indexOfFirstName = playersNames.indexOf(firstRandomName);
+                if (indexOfFirstName > 0) {
+                    secondRandomName = playersNames[indexOfFirstName - 1];
+                } else {
+                    secondRandomName = playersNames[indexOfFirstName + 1];
+                }
+            }
+
+            playersNames.splice(playersNames.indexOf(firstRandomName), 1);
+            battleData.firstPlayer = {
+                name: firstRandomName,
+                points: 0
+            };
+
+            playersNames.splice(playersNames.indexOf(secondRandomName), 1);
+            battleData.secondPlayer = {
+                name: secondRandomName,
+                points: 0
+            };
+
+            playersNames.push("");
+            this.setState({ battleData: battleData, playersWithoutBattles: playersNames });
+        }
+    }, {
+        key: 'changePlayerData',
+        value: function changePlayerData(changedPlayerName) {
+            var battleData = this.state.battleData;
+            if (this.state.numberOfPlayerToChange === 0) {
+                this.changePlayersWithoutBattles(battleData.firstPlayer.name, changedPlayerName);
+                battleData.firstPlayer = {
+                    name: changedPlayerName,
+                    points: 0
+                };
+            } else if (this.state.numberOfPlayerToChange === 1) {
+                this.changePlayersWithoutBattles(battleData.secondPlayer.name, changedPlayerName);
+                battleData.secondPlayer = {
+                    name: changedPlayerName,
+                    points: 0
+                };
+            }
+
+            this.setState({ usersListVisible: false, battleData: battleData });
+        }
+    }, {
+        key: 'clearBattleData',
+        value: function clearBattleData() {
+            var _this2 = this;
+
+            this.props.showConfirmationDialog({
+                header: "Clear data for battle",
+                message: "Are you sure?",
+                onConfirmFunction: function onConfirmFunction() {
+                    return _this2.clearBattleDataFunction();
+                }
+            });
+        }
+    }, {
+        key: 'clearBattleDataFunction',
+        value: function clearBattleDataFunction() {
+            this.state.battleData.firstPlayer.name = "";
+            this.state.battleData.secondPlayer.name = "";
+            this.state.battleData.firstPlayer.points = 0;
+            this.state.battleData.secondPlayer.points = 0;
+            this.props.sendBattleData(this.state.battleData);
+            this.props.hidePopup();
+        }
+    }, {
+        key: 'changePlayersWithoutBattles',
+        value: function changePlayersWithoutBattles(playerNameToPush, playerNameToPop) {
+            var playersWithoutBattles = this.state.playersWithoutBattles;
+            if (playerNameToPush !== "") {
+                playersWithoutBattles.unshift(playerNameToPush);
+            }
+            if (playerNameToPop !== "") {
+                playersWithoutBattles.splice(playersWithoutBattles.indexOf(playerNameToPop), 1);
+            }
+            this.setState({ playersWithoutBattles: playersWithoutBattles });
+        }
+    }, {
+        key: 'changePointsOfFirstPlayer',
+        value: function changePointsOfFirstPlayer(points) {
+            var battleData = this.state.battleData;
+            battleData.firstPlayer.points = isNaN(points) ? "" : points;
+            this.setState({ battleData: battleData });
+        }
+    }, {
+        key: 'changePointsOfSecondPlayer',
+        value: function changePointsOfSecondPlayer(points) {
+            var battleData = this.state.battleData;
+            battleData.secondPlayer.points = isNaN(points) ? "" : points;
+            this.setState({ battleData: battleData });
+        }
+    }, {
+        key: 'getVSIcon',
+        value: function getVSIcon() {
+            return this.props.battleData.finished ? require('battleCraftMobile/img/vsIconFinished.png') : require('battleCraftMobile/img/vsIcon.png');
+        }
+    }, {
+        key: 'sendBattleData',
+        value: function sendBattleData() {
+            if (isNaN(this.state.battleData.firstPlayer.points) || this.state.battleData.firstPlayer.points === undefined) {
+                this.props.showFailureMessage("First player points cannot be empty");
+            } else if (isNaN(this.state.battleData.secondPlayer.points) || this.state.battleData.secondPlayer.points === undefined) {
+                this.props.showFailureMessage("Second player points cannot be empty");
+            } else if (this.state.battleData.firstPlayer.points + this.state.battleData.secondPlayer.points > 20 || this.state.battleData.firstPlayer.points < 0 || this.state.battleData.secondPlayer.points < 0) {
+                this.props.showFailureMessage("Points number should be between 0 to 20 and summary of points should not be greater than 20");
+            } else if (this.state.battleData.firstPlayer.name === "") {
+                this.props.showFailureMessage("First player slot cannot be empty");
+            } else if (this.state.battleData.secondPlayer.name === "") {
+                this.props.showFailureMessage("Second player slot cannot be empty");
+            } else {
+                var sendBattleData = this.props.sendBattleData;
+                var hidePopup = this.props.hidePopup;
+                var battleData = this.state.battleData;
+
+                this.props.showConfirmationDialog({
+                    header: "Save data for battle",
+                    message: "Are you sure?",
+                    onConfirmFunction: function onConfirmFunction() {
+                        sendBattleData(battleData);
+                        hidePopup();
+                    }
+                });
+            }
+        }
+    }, {
+        key: 'hideUsersList',
+        value: function hideUsersList() {
+            this.setState({ usersListVisible: false });
+        }
+    }, {
+        key: 'calculatePanelHeight',
+        value: function calculatePanelHeight() {
+            return this.props.dimension.orientation === 'portrait' ? this.props.dimension.height * 0.70 : this.props.dimension.height * 0.75;
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this3 = this;
+
+            var scoreBackground = void 0;
+            if (this.state.battleData.firstPlayer.points === this.state.battleData.secondPlayer.points) {
+                scoreBackground = { P1: _ListColours2.default.battle.DRAW, P2: _ListColours2.default.battle.DRAW };
+            } else if (this.state.battleData.firstPlayer.points > this.state.battleData.secondPlayer.points) {
+                scoreBackground = { P1: _ListColours2.default.battle.WIN, P2: _ListColours2.default.battle.LOSE };
+            } else scoreBackground = { P1: _ListColours2.default.battle.LOSE, P2: _ListColours2.default.battle.WIN };
+
+            var totalBackground = void 0;
+            if (this.props.playersNamesWithPoints[this.state.battleData.firstPlayer.name] === this.props.playersNamesWithPoints[this.state.battleData.secondPlayer.name]) {
+                totalBackground = { P1: _ListColours2.default.battle.DRAW, P2: _ListColours2.default.battle.DRAW };
+            } else if (this.props.playersNamesWithPoints[this.state.battleData.firstPlayer.name] > this.props.playersNamesWithPoints[this.state.battleData.secondPlayer.name]) {
+                totalBackground = { P1: _ListColours2.default.battle.WIN, P2: _ListColours2.default.battle.LOSE };
+            } else totalBackground = { P1: _ListColours2.default.battle.LOSE, P2: _ListColours2.default.battle.WIN };
+
+            var panelHeight = this.calculatePanelHeight();
+
+            return _react2.default.createElement(
+                _reactNative.View,
+                {
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 240
+                    }
+                },
+                _react2.default.createElement(
+                    _reactNativeModal2.default,
+                    { isVisible: true, backdropOpacity: 0.3, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 241
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.View,
+                        { style: [_BattleInspectorStyle2.default.modal, { width: this.props.dimension.width * 0.9, height: panelHeight }], __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 242
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.ScrollView,
+                            {
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 243
+                                }
+                            },
+                            _react2.default.createElement(
+                                _reactNative.View,
+                                { style: [_BattleInspectorStyle2.default.battleHeader, _MainStyles2.default.borderStyle], __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 244
+                                    }
+                                },
+                                _react2.default.createElement(
+                                    _reactNative.Text,
+                                    { style: [_MainStyles2.default.textStyle, { fontSize: 24 }], __source: {
+                                            fileName: _jsxFileName,
+                                            lineNumber: 244
+                                        }
+                                    },
+                                    'Battle'
+                                )
+                            ),
+                            _react2.default.createElement(
+                                _reactNative.TouchableHighlight,
+                                { onPress: this.chooseRandomPlayers.bind(this),
+                                    style: [_TournamentStyles2.default.staticWindow, _TournamentStyles2.default.randomizeWindow, _MainStyles2.default.borderStyle], __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 245
+                                    }
+                                },
+                                _react2.default.createElement(_reactNative.Image, { style: _TournamentStyles2.default.diceIcon, source: require('battleCraftMobile/img/diceIcon.png'), __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 249
+                                    }
+                                })
+                            ),
+                            _react2.default.createElement(_PlayerCard1x2.default, { playerName: this.state.battleData.firstPlayer.name,
+                                playerPoints: this.state.battleData.firstPlayer.points,
+                                changeData: this.changePointsOfFirstPlayer.bind(this),
+                                colour: _BaseColours2.default.misc.greyBlue,
+                                totalPoints: this.props.playersNamesWithPoints[this.props.battleData.firstPlayer.name],
+                                showUsersList: function showUsersList() {
+                                    return _this3.showUsersList(0);
+                                },
+                                scoreBackground: scoreBackground.P1,
+                                totalBackground: totalBackground.P1, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 251
+                                }
+                            }),
+                            _react2.default.createElement(
+                                _reactNative.View,
+                                { style: [_BattleInspectorStyle2.default.vsCard, _MainStyles2.default.borderStyle], __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 260
+                                    }
+                                },
+                                _react2.default.createElement(_reactNative.Image, { style: { alignSelf: 'center', width: 60, height: 60 }, source: this.getVSIcon(), __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 261
+                                    }
+                                }),
+                                _react2.default.createElement(
+                                    _reactNative.View,
+                                    {
+                                        __source: {
+                                            fileName: _jsxFileName,
+                                            lineNumber: 262
+                                        }
+                                    },
+                                    _react2.default.createElement(
+                                        _reactNative.View,
+                                        { style: _BattleInspectorStyle2.default.dataRow, __source: {
+                                                fileName: _jsxFileName,
+                                                lineNumber: 263
+                                            }
+                                        },
+                                        _react2.default.createElement(
+                                            _reactNative.Text,
+                                            { numberOfLines: 1, style: _MainStyles2.default.bigWhiteStyle, __source: {
+                                                    fileName: _jsxFileName,
+                                                    lineNumber: 263
+                                                }
+                                            },
+                                            'Table number:'
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        _reactNative.View,
+                                        { style: [_BattleInspectorStyle2.default.dataRow, { borderBottomWidth: 0 }], __source: {
+                                                fileName: _jsxFileName,
+                                                lineNumber: 264
+                                            }
+                                        },
+                                        _react2.default.createElement(
+                                            _reactNative.Text,
+                                            { numberOfLines: 1, style: _MainStyles2.default.bigWhiteStyle, __source: {
+                                                    fileName: _jsxFileName,
+                                                    lineNumber: 265
+                                                }
+                                            },
+                                            this.state.battleData.tableNumber + 1
+                                        )
+                                    )
+                                )
+                            ),
+                            _react2.default.createElement(_PlayerCard1x2.default, { playerName: this.state.battleData.secondPlayer.name,
+                                playerPoints: this.state.battleData.secondPlayer.points,
+                                changeData: this.changePointsOfSecondPlayer.bind(this),
+                                colour: _BaseColours2.default.misc.deepRed,
+                                totalPoints: this.props.playersNamesWithPoints[this.props.battleData.secondPlayer.name],
+                                showUsersList: function showUsersList() {
+                                    return _this3.showUsersList(1);
+                                },
+                                scoreBackground: scoreBackground.P2,
+                                totalBackground: totalBackground.P2, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 269
+                                }
+                            })
+                        ),
+                        _react2.default.createElement(
+                            _reactNative.View,
+                            { style: _MainStyles2.default.buttonsPanelStyle, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 278
+                                }
+                            },
+                            _react2.default.createElement(
+                                _reactNative.View,
+                                { style: { flex: 1, marginRight: 3 }, __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 279
+                                    }
+                                },
+                                _react2.default.createElement(_reactNative.Button, { title: "Close", color: '#4b371b', onPress: this.props.hidePopup.bind(this), __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 280
+                                    }
+                                })
+                            ),
+                            _react2.default.createElement(
+                                _reactNative.View,
+                                { style: { flex: 1, marginRight: 3 }, __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 282
+                                    }
+                                },
+                                _react2.default.createElement(_reactNative.Button, { title: "Clear", color: '#4b371b', onPress: this.clearBattleData.bind(this), __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 283
+                                    }
+                                })
+                            ),
+                            _react2.default.createElement(
+                                _reactNative.View,
+                                { style: { flex: 1 }, __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 285
+                                    }
+                                },
+                                _react2.default.createElement(_reactNative.Button, { title: "Save", color: '#4b371b', onPress: this.sendBattleData.bind(this), __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 286
+                                    }
+                                })
+                            )
+                        )
+                    )
+                ),
+                this.state.usersListVisible && _react2.default.createElement(_DuelPlayerList2.default, { hideList: function hideList() {
+                        return _this3.hideUsersList();
+                    },
+                    changePlayerData: this.changePlayerData.bind(this),
+                    playersWithoutBattles: this.state.playersWithoutBattles, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 292
+                    }
+                })
+            );
+        }
+    }]);
+    return BattleInspector;
+}(_react.Component);
+
+function mapDispatchToProps(dispatch) {
+    return (0, _redux.bindActionCreators)(_index.ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+    return {
+        dimension: state.dimension
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(BattleInspector);

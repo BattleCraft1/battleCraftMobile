@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import {
     View,
 } from 'react-native';
-import Expo, { Audio,} from 'expo';
+import Expo, {Audio} from 'expo';
 import { connect } from 'react-redux';
 import { ActionCreators } from '../../redux/actions/index';
 import { bindActionCreators } from 'redux';
@@ -22,7 +22,14 @@ class SoundManager extends Component {
             soundNotLoaded: true
         };
 
-        this.loadSound();
+    }
+
+    async componentDidMount(){
+        await this.loadSound();
+    }
+
+    componentWillReceiveProps(nextProps){
+        this.play(nextProps.sound.name);
     }
 
     loadSound = async () => {
@@ -52,10 +59,6 @@ class SoundManager extends Component {
         }
     };
 
-    componentWillReceiveProps(nextProps){
-        this.play(nextProps.playSound.name)
-    }
-
     play = async (name) =>{
         switch(name){
             case 'toggle':
@@ -83,7 +86,7 @@ function mapDispatchToProps( dispatch ) {
 
 function mapStateToProps( state ) {
     return {
-        playSound: state.playSound
+        sound: state.sound
     };
 }
 

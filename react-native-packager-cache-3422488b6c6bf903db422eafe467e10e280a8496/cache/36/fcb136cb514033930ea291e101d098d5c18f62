@@ -1,0 +1,18 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.possibleOperations = undefined;
+
+var _createReducer2 = require('../lib/createReducer');
+
+var _createReducer3 = babelHelpers.interopRequireDefault(_createReducer2);
+
+var _possibleOperations = require('../types/possibleOperations');
+
+var types = babelHelpers.interopRequireWildcard(_possibleOperations);
+var possibleOperations = exports.possibleOperations = (0, _createReducer3.default)({}, babelHelpers.defineProperty({}, types.SET_OPERATIONS, function (state, action) {
+
+    var newState = action.operations;
+
+    return newState;
+}));

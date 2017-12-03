@@ -1,0 +1,18 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.pageRequest = undefined;
+
+var _createReducer2 = require('../lib/createReducer');
+
+var _createReducer3 = babelHelpers.interopRequireDefault(_createReducer2);
+
+var _pageRequest = require('../types/pageRequest');
+
+var types = babelHelpers.interopRequireWildcard(_pageRequest);
+var pageRequest = exports.pageRequest = (0, _createReducer3.default)({}, babelHelpers.defineProperty({}, types.SET_PAGE_REQUEST, function (state, action) {
+
+    var newState = action.pageRequest;
+
+    return newState;
+}));

@@ -1,0 +1,88 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = undefined;
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/App/components/collectionPanel/searchPanel/inputs/GameInputForRanking.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNativeFormGenerator = require('react-native-form-generator');
+
+var _reactNative = require('react-native');
+
+var _MainStyles = require('battleCraftMobile/App/Styles/UniversalStyles/MainStyles');
+
+var _MainStyles2 = babelHelpers.interopRequireDefault(_MainStyles);
+
+var _InputStyles = require('battleCraftMobile/App/Styles/UniversalStyles/InputStyles');
+
+var _InputStyles2 = babelHelpers.interopRequireDefault(_InputStyles);
+
+var GameInput = function (_React$Component) {
+    babelHelpers.inherits(GameInput, _React$Component);
+
+    function GameInput(props) {
+        babelHelpers.classCallCheck(this, GameInput);
+        return babelHelpers.possibleConstructorReturn(this, (GameInput.__proto__ || Object.getPrototypeOf(GameInput)).call(this, props));
+    }
+
+    babelHelpers.createClass(GameInput, [{
+        key: 'changeInput',
+        value: function changeInput(value) {
+            var result = value;
+            if (value === "") result = this.props.value;
+
+            this.props.changeSearchForm(this.props.indexOfSearchFields, {
+                "keys": this.props.keys,
+                "operation": this.props.operation,
+                "value": [result]
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            return _react2.default.createElement(
+                _reactNative.View,
+                { style: _InputStyles2.default.inputCard, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 32
+                    }
+                },
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: _InputStyles2.default.inputText, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 33
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.Text,
+                        { style: [_MainStyles2.default.smallWhiteStyle, { fontWeight: 'bold' }], __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 33
+                            }
+                        },
+                        this.props.name
+                    )
+                ),
+                _react2.default.createElement(_reactNativeFormGenerator.PickerField, {
+                    value: this.props.value,
+                    onValueChange: function onValueChange(value) {
+                        return _this2.changeInput(value);
+                    },
+                    options: this.props.options, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 34
+                    }
+                })
+            );
+        }
+    }]);
+    return GameInput;
+}(_react2.default.Component);
+
+exports.default = GameInput;

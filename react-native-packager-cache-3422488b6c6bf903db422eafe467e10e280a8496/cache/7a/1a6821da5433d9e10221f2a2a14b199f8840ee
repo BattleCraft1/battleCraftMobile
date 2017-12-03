@@ -1,0 +1,643 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/App/components/tournamentManage/TournamentManagePanel.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _reactNativeSwipeGestures = require('react-native-swipe-gestures');
+
+var _reactNativeSwipeGestures2 = babelHelpers.interopRequireDefault(_reactNativeSwipeGestures);
+
+var _BattlePopup1x = require('./components/battlePopup/BattlePopup1x1');
+
+var _BattlePopup1x2 = babelHelpers.interopRequireDefault(_BattlePopup1x);
+
+var _BattlePopup2x = require('./components/battlePopup/BattlePopup2x2');
+
+var _BattlePopup2x2 = babelHelpers.interopRequireDefault(_BattlePopup2x);
+
+var _Scoreboard1x = require('./components/scoreBoard/Scoreboard1x1');
+
+var _Scoreboard1x2 = babelHelpers.interopRequireDefault(_Scoreboard1x);
+
+var _Scoreboard2x = require('./components/scoreBoard/Scoreboard2x2');
+
+var _Scoreboard2x2 = babelHelpers.interopRequireDefault(_Scoreboard2x);
+
+var _Turn = require('./components/Turn');
+
+var _Turn2 = babelHelpers.interopRequireDefault(_Turn);
+
+var _MainStyles = require('../../Styles/UniversalStyles/MainStyles');
+
+var _MainStyles2 = babelHelpers.interopRequireDefault(_MainStyles);
+
+var _TournamentStyles = require('../../Styles/BattlePanelStyles/TournamentStyles');
+
+var _TournamentStyles2 = babelHelpers.interopRequireDefault(_TournamentStyles);
+
+var _index = require('../../redux/actions/index');
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _axios = require('axios');
+
+var _axios2 = babelHelpers.interopRequireDefault(_axios);
+
+var _serverName = require('../../main/consts/serverName');
+
+var regeneratorRuntime = require('regenerator-runtime');
+
+var TournamentManagePanel = function (_Component) {
+    babelHelpers.inherits(TournamentManagePanel, _Component);
+
+    function TournamentManagePanel(props) {
+        babelHelpers.classCallCheck(this, TournamentManagePanel);
+
+        var _this = babelHelpers.possibleConstructorReturn(this, (TournamentManagePanel.__proto__ || Object.getPrototypeOf(TournamentManagePanel)).call(this, props));
+
+        _this.state = {
+            tournamentName: "",
+            playersOnTableCount: 0,
+            showBattlePopup: false,
+            showScoreBoard: false,
+            battlePopupUpData: {},
+            tourNumber: 0,
+            tournamentData: {
+                tours: [],
+                playersNamesWithPoints: {},
+                playersWithoutBattles: {},
+                currentTourNumber: 0,
+                tournamentStatus: "",
+                playersOnTableCount: 0,
+                playersCount: 0
+            },
+            canCurrentUserMenageTournament: false
+        };
+        return _this;
+    }
+
+    babelHelpers.createClass(TournamentManagePanel, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            return regeneratorRuntime.async(function componentDidMount$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            _context.next = 2;
+                            return regeneratorRuntime.awrap(this.fetchTournamentProgressData(this.props.tournamentName));
+
+                        case 2:
+                            this.setState({ tournamentName: this.props.tournamentName });
+
+                        case 3:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, null, this);
+        }
+    }, {
+        key: 'fetchTournamentProgressData',
+        value: function fetchTournamentProgressData(tournamentName) {
+            var _this2 = this;
+
+            var fetchTournamentProgressOperation;
+            return regeneratorRuntime.async(function fetchTournamentProgressData$(_context4) {
+                while (1) {
+                    switch (_context4.prev = _context4.next) {
+                        case 0:
+                            fetchTournamentProgressOperation = function fetchTournamentProgressOperation() {
+                                return regeneratorRuntime.async(function fetchTournamentProgressOperation$(_context3) {
+                                    while (1) {
+                                        switch (_context3.prev = _context3.next) {
+                                            case 0:
+                                                _this2.props.startLoading("Fetching tournament progress...");
+                                                _context3.next = 3;
+                                                return regeneratorRuntime.awrap(_axios2.default.get(_serverName.serverName + 'progress/tournament?name=' + tournamentName, {
+                                                    headers: {
+                                                        "X-Auth-Token": _this2.props.security.token
+                                                    }
+                                                }).then(function _callee(res) {
+                                                    return regeneratorRuntime.async(function _callee$(_context2) {
+                                                        while (1) {
+                                                            switch (_context2.prev = _context2.next) {
+                                                                case 0:
+                                                                    _this2.props.stopLoading();
+                                                                    console.log("tournament data:");
+                                                                    console.log(res.data);
+                                                                    _context2.next = 5;
+                                                                    return regeneratorRuntime.awrap(_this2.prepareToursData(res.data));
+
+                                                                case 5:
+                                                                case 'end':
+                                                                    return _context2.stop();
+                                                            }
+                                                        }
+                                                    }, null, _this2);
+                                                }).catch(function (error) {
+                                                    _this2.props.stopLoading();
+                                                    _this2.props.showNetworkErrorMessage(error, fetchTournamentProgressOperation);
+                                                    _this2.props.navigate('Tournaments');
+                                                }));
+
+                                            case 3:
+                                            case 'end':
+                                                return _context3.stop();
+                                        }
+                                    }
+                                }, null, _this2);
+                            };
+
+                            fetchTournamentProgressOperation();
+
+                        case 2:
+                        case 'end':
+                            return _context4.stop();
+                    }
+                }
+            }, null, this);
+        }
+    }, {
+        key: 'sendBattleData',
+        value: function sendBattleData(battleData) {
+            var _this3 = this;
+
+            var battleDataToSend = JSON.parse(JSON.stringify(battleData));
+            delete battleDataToSend["finished"];
+            var tournamentTypeString = this.state.playersOnTableCount === 4 ? "group" : "duel";
+            console.log("battle before send: ");
+            console.log(battleData);
+            var sendBattleDataOperation = function sendBattleDataOperation() {
+                _this3.props.startLoading("Sending battle...");
+                _axios2.default.post(_serverName.serverName + 'set/points/' + tournamentTypeString + '/tournament?name=' + _this3.state.tournamentName, battleDataToSend, {
+                    headers: {
+                        "X-Auth-Token": _this3.props.security.token
+                    }
+                }).then(function (res) {
+                    _this3.props.stopLoading();
+                    console.log("tournament data:");
+                    console.log(res.data);
+                    _this3.prepareToursData(res.data);
+                }).catch(function (error) {
+                    _this3.props.stopLoading();
+                    _this3.props.showNetworkErrorMessage(error, sendBattleDataOperation);
+                });
+            };
+            sendBattleDataOperation();
+        }
+    }, {
+        key: 'prepareToursData',
+        value: function prepareToursData(tournamentData) {
+            var tourNumber, _tourNumber;
+
+            return regeneratorRuntime.async(function prepareToursData$(_context5) {
+                while (1) {
+                    switch (_context5.prev = _context5.next) {
+                        case 0:
+                            this.setState({ playersOnTableCount: tournamentData.playersOnTableCount });
+                            if (tournamentData.playersOnTableCount === 4) {
+                                for (tourNumber in tournamentData.playersWithoutBattles) {
+                                    if (tournamentData.playersWithoutBattles.hasOwnProperty(tourNumber)) {
+                                        tournamentData.playersWithoutBattles[tourNumber].push(["", ""]);
+                                    }
+                                }
+                            } else {
+                                for (_tourNumber in tournamentData.playersWithoutBattles) {
+                                    if (tournamentData.playersWithoutBattles.hasOwnProperty(_tourNumber)) {
+                                        tournamentData.playersWithoutBattles[_tourNumber].push("");
+                                    }
+                                }
+                            }
+                            this.setState({ tournamentData: tournamentData });
+
+                        case 3:
+                        case 'end':
+                            return _context5.stop();
+                    }
+                }
+            }, null, this);
+        }
+    }, {
+        key: 'createTour',
+        value: function createTour() {
+            var tour = this.state.tournamentData.tours[this.state.tourNumber];
+            return _react2.default.createElement(_Turn2.default, {
+                key: this.state.tourNumber,
+                tourData: tour,
+                tourNumber: this.state.tourNumber,
+                haveAlonePlayer: this.state.tournamentData.playersCount % 2 !== 0,
+                showBattlePopup: this.showBattlePopup.bind(this),
+                playersOnTableCount: this.state.playersOnTableCount,
+                tournamentStatus: this.state.tournamentData.tournamentStatus,
+                disabled: this.state.tourNumber > this.state.tournamentData.currentTourNumber || !this.state.tournamentData.canCurrentUserMenageTournament,
+                currentTourNumber: this.state.tournamentData.currentTourNumber,
+                __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 134
+                }
+            });
+        }
+    }, {
+        key: 'createPopup',
+        value: function createPopup() {
+            var _this4 = this;
+
+            if (this.state.playersOnTableCount === 2) {
+                return _react2.default.createElement(_BattlePopup1x2.default, { battleData: this.state.battlePopupUpData,
+                    playersNamesWithPoints: this.state.tournamentData.playersNamesWithPoints,
+                    playersWithoutBattles: this.state.tournamentData.playersWithoutBattles,
+                    hidePopup: function hidePopup() {
+                        _this4.setState({ showBattlePopup: false, battlePopupUpData: {} });
+                    },
+                    sendBattleData: this.sendBattleData.bind(this), __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 150
+                    }
+                });
+            } else if (this.state.playersOnTableCount === 4) {
+                return _react2.default.createElement(_BattlePopup2x2.default, { battleData: this.state.battlePopupUpData,
+                    playersNamesWithPoints: this.state.tournamentData.playersNamesWithPoints,
+                    playersWithoutBattles: this.state.tournamentData.playersWithoutBattles,
+                    hidePopup: function hidePopup() {
+                        _this4.setState({ showBattlePopup: false, battlePopupUpData: {} });
+                    },
+                    sendBattleData: this.sendBattleData.bind(this), __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 157
+                    }
+                });
+            } else {
+                return _react2.default.createElement(_reactNative.View, {
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 164
+                    }
+                });
+            }
+        }
+    }, {
+        key: 'createScoreBoard',
+        value: function createScoreBoard() {
+            var _this5 = this;
+
+            if (this.state.playersOnTableCount === 2) {
+                return _react2.default.createElement(_Scoreboard1x2.default, { playersNamesWithPoints: this.state.tournamentData.playersNamesWithPoints,
+                    hidePopup: function hidePopup() {
+                        _this5.setState({ showScoreBoard: false });
+                    }, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 170
+                    }
+                });
+            } else if (this.state.playersOnTableCount === 4) {
+                return _react2.default.createElement(_Scoreboard2x2.default, { playersNamesWithPoints: this.state.tournamentData.playersNamesWithPoints,
+                    hidePopup: function hidePopup() {
+                        _this5.setState({ showScoreBoard: false });
+                    }, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 174
+                    }
+                });
+            } else {
+                return _react2.default.createElement(_reactNative.View, {
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 178
+                    }
+                });
+            }
+        }
+    }, {
+        key: 'nextTour',
+        value: function nextTour() {
+            var _this6 = this;
+
+            if (this.state.tournamentData.currentTourNumber === this.state.tournamentData.tours.length - 1) {
+                this.props.showFailureMessage("This tournament is finished");
+                return;
+            }
+
+            var notHaveAlonePlayer = this.state.tournamentData.playersCount % 2 === 0;
+            for (var i = 0; i <= this.state.tournamentData.currentTourNumber; i++) {
+                for (var j = 0; j < this.state.tournamentData.tours[i].length; j++) {
+                    if (!(notHaveAlonePlayer && this.state.tournamentData.tours[i][j].finished === true || !notHaveAlonePlayer && (this.state.tournamentData.tours[i][j].tableNumber === this.state.tournamentData.tours[i].length - 1 || this.state.tournamentData.tours[i][j].finished === true))) {
+                        this.props.showFailureMessage("Battle on table with number: " + (j + 1) + " in tour: " + (i + 1) + " is not finished yet");
+                        return;
+                    }
+                }
+            }
+
+            this.props.showConfirmationDialog({
+                header: "Start next tour",
+                message: "Are you sure?",
+                onConfirmFunction: function onConfirmFunction() {
+                    return _this6.nextTourRequest();
+                }
+            });
+        }
+    }, {
+        key: 'nextTourRequest',
+        value: function nextTourRequest() {
+            var _this7 = this;
+
+            var tournamentTypeString = this.state.playersOnTableCount === 4 ? "group" : "duel";
+            var nextTourOperation = function nextTourOperation() {
+                _this7.props.startLoading("Confirming tour...");
+                _axios2.default.get(_serverName.serverName + 'next/tour/' + tournamentTypeString + '/tournament?name=' + _this7.state.tournamentName, {
+                    headers: {
+                        "X-Auth-Token": _this7.props.security.token
+                    }
+                }).then(function (res) {
+                    _this7.props.stopLoading();
+                    console.log("tournament data:");
+                    console.log(res.data);
+                    _this7.setState({ playersOnTableCount: res.data.playersOnTableCount });
+                    _this7.prepareToursData(res.data);
+                    _this7.setState({ tournamentData: res.data });
+                }).catch(function (error) {
+                    _this7.props.stopLoading();
+                    _this7.props.showNetworkErrorMessage(error, nextTourOperation);
+                });
+            };
+            nextTourOperation();
+        }
+    }, {
+        key: 'previousTour',
+        value: function previousTour() {
+            var _this8 = this;
+
+            if (this.state.tournamentData.currentTourNumber === 0) this.props.showFailureMessage("This is first tour of tournament");else {
+
+                this.props.showConfirmationDialog({
+                    header: "Come back to previous tour",
+                    message: "Are you sure? If you come back to previous tour all data from this tour will be lost!",
+                    onConfirmFunction: function onConfirmFunction() {
+                        return _this8.previousTourRequest();
+                    }
+                });
+            }
+        }
+    }, {
+        key: 'previousTourRequest',
+        value: function previousTourRequest() {
+            var _this9 = this;
+
+            var tournamentTypeString = this.state.playersOnTableCount === 4 ? "group" : "duel";
+            var previousTourOperation = function previousTourOperation() {
+                _this9.props.startLoading("Coming back to previous tour...");
+                _axios2.default.get(_serverName.serverName + 'previous/tour/' + tournamentTypeString + '/tournament?name=' + _this9.state.tournamentName, {
+                    headers: {
+                        "X-Auth-Token": _this9.props.security.token
+                    }
+                }).then(function (res) {
+                    _this9.props.stopLoading();
+                    console.log("tournament data:");
+                    console.log(res.data);
+                    _this9.setState({ playersOnTableCount: res.data.playersOnTableCount });
+                    _this9.prepareToursData(res.data);
+                    _this9.setState({ tournamentData: res.data });
+                }).catch(function (error) {
+                    _this9.props.stopLoading();
+                    _this9.props.showNetworkErrorMessage(error, previousTourOperation);
+                });
+            };
+
+            previousTourOperation();
+        }
+    }, {
+        key: 'finishTournament',
+        value: function finishTournament() {
+            var _this10 = this;
+
+            var haveAlonePlayer = this.state.tournamentData.playersCount % 2 === 0;
+
+            for (var i = 0; i < this.state.tournamentData.tours.length; i++) {
+                for (var j = 0; j < this.state.tournamentData.tours[i].length; j++) {
+                    if (haveAlonePlayer && this.state.tournamentData.tours[i].tableNumber !== this.state.tournamentData.tours[i].length - 1 && this.state.tournamentData.tours[i][j].finished === false) {
+                        this.props.showFailureMessage("Battle on table with number: " + (j + 1) + " in tour: " + (i + 1) + " is not finished yet");
+                        return;
+                    }
+                }
+            }
+
+            this.props.showConfirmationDialog({
+                header: "Finish tournament",
+                message: "Are you sure?",
+                onConfirmFunction: function onConfirmFunction() {
+                    return _this10.finishTournamentRequest();
+                }
+            });
+        }
+    }, {
+        key: 'finishTournamentRequest',
+        value: function finishTournamentRequest() {
+            var _this11 = this;
+
+            var tournamentTypeString = this.state.playersOnTableCount === 4 ? "group" : "duel";
+
+            var finishTournamentOperation = function finishTournamentOperation() {
+                _this11.props.startLoading("Finishing tournament...");
+                _axios2.default.get(_serverName.serverName + 'finish/' + tournamentTypeString + '/tournament?name=' + _this11.state.tournamentName, {
+                    headers: {
+                        "X-Auth-Token": _this11.props.security.token
+                    }
+                }).then(function (res) {
+                    _this11.props.stopLoading();
+                    console.log("tournament data:");
+                    console.log(res.data);
+                    _this11.setState({ playersOnTableCount: res.data.playersOnTableCount });
+                    _this11.prepareToursData(res.data);
+                    _this11.setState({ tournamentData: res.data });
+                }).catch(function (error) {
+                    _this11.props.stopLoading();
+                    _this11.props.showNetworkErrorMessage(error, finishTournamentOperation);
+                });
+            };
+
+            finishTournamentOperation();
+        }
+    }, {
+        key: 'showBattlePopup',
+        value: function showBattlePopup(battleData) {
+            this.setState({ battlePopupUpData: battleData });
+            this.setState({ showBattlePopup: true });
+        }
+    }, {
+        key: 'showScoreBoard',
+        value: function showScoreBoard() {
+            this.setState({ showScoreBoard: true });
+        }
+    }, {
+        key: 'showNextTour',
+        value: function showNextTour() {
+            var tourNumber = this.state.tourNumber + 1;
+            if (tourNumber < this.state.tournamentData.tours.length) {
+                this.setState({ tourNumber: tourNumber });
+            }
+        }
+    }, {
+        key: 'showPreviousTour',
+        value: function showPreviousTour() {
+            var tourNumber = this.state.tourNumber - 1;
+            if (tourNumber >= 0) {
+                this.setState({ tourNumber: tourNumber });
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            var config = {
+                velocityThreshold: 0.1,
+                directionalOffsetThreshold: 30
+            };
+
+            var buttonsDisabled = this.state.tournamentData.tournamentStatus === "FINISHED" || this.props.security.role === "ROLE_ADMIN" || !this.state.tournamentData.canCurrentUserMenageTournament;
+
+            return _react2.default.createElement(
+                _reactNative.View,
+                { style: _MainStyles2.default.contentStyle, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 362
+                    }
+                },
+                !buttonsDisabled && _react2.default.createElement(
+                    _reactNative.View,
+                    { style: { marginBottom: 3, flexDirection: 'row' }, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 363
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.View,
+                        { style: { flex: 1, marginRight: 3 }, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 364
+                            }
+                        },
+                        _react2.default.createElement(_reactNative.Button, { title: 'Previous', color: '#4b371b', onPress: this.previousTour.bind(this), __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 365
+                            }
+                        })
+                    ),
+                    _react2.default.createElement(
+                        _reactNative.View,
+                        { style: { flex: 1 }, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 367
+                            }
+                        },
+                        _react2.default.createElement(_reactNative.Button, { title: 'Next', color: '#4b371b', onPress: this.nextTour.bind(this), __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 368
+                            }
+                        })
+                    )
+                ),
+                _react2.default.createElement(
+                    _reactNativeSwipeGestures2.default,
+                    {
+                        onSwipeLeft: this.showPreviousTour.bind(this),
+                        onSwipeRight: this.showNextTour.bind(this),
+                        config: config,
+                        style: { flex: 1, alignItems: 'center' }, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 371
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.View,
+                        { style: { flex: 1 }, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 376
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.View,
+                            { style: [_TournamentStyles2.default.staticWindow, _TournamentStyles2.default.pageWindow, _MainStyles2.default.borderStyle], __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 377
+                                }
+                            },
+                            _react2.default.createElement(
+                                _reactNative.Text,
+                                { style: _MainStyles2.default.smallWhiteStyle, __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 378
+                                    }
+                                },
+                                this.state.tourNumber + 1,
+                                '/',
+                                this.state.tournamentData.tours.length
+                            )
+                        ),
+                        this.state.tournamentName !== "" ? this.createTour() : _react2.default.createElement(_reactNative.View, {
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 381
+                            }
+                        })
+                    )
+                ),
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: _MainStyles2.default.buttonsPanelStyle, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 385
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.View,
+                        { style: { flex: 1, marginRight: 3 }, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 386
+                            }
+                        },
+                        _react2.default.createElement(_reactNative.Button, { title: "Score", color: '#4b371b', onPress: this.showScoreBoard.bind(this), __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 387
+                            }
+                        })
+                    ),
+                    !buttonsDisabled && _react2.default.createElement(
+                        _reactNative.View,
+                        { style: { flex: 1 }, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 389
+                            }
+                        },
+                        _react2.default.createElement(_reactNative.Button, { title: "Finish", color: '#4b371b', onPress: this.finishTournament.bind(this), __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 390
+                            }
+                        })
+                    )
+                ),
+                this.state.showBattlePopup && this.createPopup(),
+                this.state.showScoreBoard && this.createScoreBoard()
+            );
+        }
+    }]);
+    return TournamentManagePanel;
+}(_react.Component);
+
+function mapDispatchToProps(dispatch) {
+    return (0, _redux.bindActionCreators)(_index.ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+    return {
+        security: state.security
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(TournamentManagePanel);

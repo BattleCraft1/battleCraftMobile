@@ -1,0 +1,43 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _BaseColours = require('../../main/consts/BaseColours');
+
+var _BaseColours2 = babelHelpers.interopRequireDefault(_BaseColours);
+
+var styles = {
+    inputStyle: {
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+        borderColor: _BaseColours2.default.background.lightBrown,
+        paddingTop: 2,
+        paddingBottom: 2
+    },
+    outputTextStyle: {
+        marginTop: 2
+    },
+    avatarContainerStyle: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderTopColor: _BaseColours2.default.border.top,
+        borderRightColor: _BaseColours2.default.border.right,
+        borderBottomColor: _BaseColours2.default.border.bottom,
+        borderLeftColor: _BaseColours2.default.border.left,
+        backgroundColor: _BaseColours2.default.misc.deepRed,
+        borderWidth: 5,
+        padding: 3,
+        margin: 3,
+        width: 170,
+        height: 170
+    },
+    avatarStyle: {
+        flex: 1,
+        backgroundColor: _BaseColours2.default.background.lightBrown,
+        resizeMode: 'contain',
+        width: 155,
+        height: 155
+    }
+};
+
+exports.default = styles;

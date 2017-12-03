@@ -1,0 +1,50 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _reactNative = require('react-native');
+
+var _BaseColours = require('../../main/consts/BaseColours');
+
+var _BaseColours2 = babelHelpers.interopRequireDefault(_BaseColours);
+
+var styles = _reactNative.StyleSheet.create({
+    modal: {
+        flex: 1,
+        position: 'absolute',
+
+        backgroundColor: _BaseColours2.default.background.mediumBrown,
+        borderColor: _BaseColours2.default.background.darkBrown,
+        borderWidth: 5,
+        padding: 3,
+        flexDirection: 'column'
+    },
+    icon: {
+        width: 70,
+        height: 70,
+        backgroundColor: _BaseColours2.default.misc.deepRed,
+        borderTopColor: _BaseColours2.default.border.top,
+        borderRightColor: _BaseColours2.default.border.right,
+        borderBottomColor: _BaseColours2.default.border.bottom,
+        borderLeftColor: _BaseColours2.default.border.left,
+        borderWidth: 3,
+        margin: 2,
+        padding: 2,
+        alignItems: 'center'
+    },
+    buttonRow: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    button: {
+        marginTop: 5,
+        flex: 1
+    },
+    iconText: {
+        color: '#ffffff',
+        fontWeight: 'bold'
+    }
+});
+
+exports.default = styles;

@@ -1,0 +1,78 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/App/components/entityPanel/AdditionalEntityPanel.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _Panel = require('./tournament/Panel');
+
+var _Panel2 = babelHelpers.interopRequireDefault(_Panel);
+
+var _Panel3 = require('./user/Panel');
+
+var _Panel4 = babelHelpers.interopRequireDefault(_Panel3);
+
+var _index = require('../../redux/actions/index');
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var panelTypeMap = {
+    'tournament': _Panel2.default,
+    'user': _Panel4.default
+};
+
+var AdditionalEntityPanel = function (_Component) {
+    babelHelpers.inherits(AdditionalEntityPanel, _Component);
+
+    function AdditionalEntityPanel() {
+        babelHelpers.classCallCheck(this, AdditionalEntityPanel);
+        return babelHelpers.possibleConstructorReturn(this, (AdditionalEntityPanel.__proto__ || Object.getPrototypeOf(AdditionalEntityPanel)).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(AdditionalEntityPanel, [{
+        key: 'createPanel',
+        value: function createPanel() {
+            var panelType = panelTypeMap[this.props.additionalEntityPanel.additionalEntityType];
+
+            return panelType ? _react2.default.createElement(panelType, {
+                navigate: function navigate() {},
+                mode: 'get',
+                type: this.props.additionalEntityPanel.additionalEntityType,
+                name: this.props.additionalEntityPanel.additionalEntityName,
+                hidden: false,
+                relatedEntity: {},
+                disable: this.props.disableAdditionalEntityPanel.bind(this)
+            }, null) : _react2.default.createElement(_reactNative.View, {
+                __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 40
+                }
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return this.props.additionalEntityPanel.additionalEntityName !== "" && this.createPanel();
+        }
+    }]);
+    return AdditionalEntityPanel;
+}(_react.Component);
+
+function mapDispatchToProps(dispatch) {
+    return (0, _redux.bindActionCreators)(_index.ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+    return {
+        additionalEntityPanel: state.additionalEntityPanel
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AdditionalEntityPanel);

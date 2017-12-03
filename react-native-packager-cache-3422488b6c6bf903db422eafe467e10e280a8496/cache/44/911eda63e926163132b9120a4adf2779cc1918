@@ -1,0 +1,210 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/App/components/entityPanel/tournament/tabs/ParticipantsTab.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _ValidationErrorMessage = require('../../outputs/ValidationErrorMessage');
+
+var _ValidationErrorMessage2 = babelHelpers.interopRequireDefault(_ValidationErrorMessage);
+
+var _MainStyles = require('../../../../Styles/UniversalStyles/MainStyles');
+
+var _MainStyles2 = babelHelpers.interopRequireDefault(_MainStyles);
+
+var _EntityPanelStyle = require('../../../../Styles/CollectionPanelStyles/EntityPanelStyle');
+
+var _EntityPanelStyle2 = babelHelpers.interopRequireDefault(_EntityPanelStyle);
+
+var _index = require('../../../../redux/actions/index');
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _ParticipantsTable = require('./table/ParticipantsTable');
+
+var _ParticipantsTable2 = babelHelpers.interopRequireDefault(_ParticipantsTable);
+
+var _ParticipantsGroupsTable = require('./table/ParticipantsGroupsTable');
+
+var _ParticipantsGroupsTable2 = babelHelpers.interopRequireDefault(_ParticipantsGroupsTable);
+
+var ParticipantsTab = function (_Component) {
+    babelHelpers.inherits(ParticipantsTab, _Component);
+
+    function ParticipantsTab() {
+        babelHelpers.classCallCheck(this, ParticipantsTab);
+        return babelHelpers.possibleConstructorReturn(this, (ParticipantsTab.__proto__ || Object.getPrototypeOf(ParticipantsTab)).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(ParticipantsTab, [{
+        key: 'startInviteParticipants',
+        value: function startInviteParticipants() {
+            this.props.setOperations(["Invite"]);
+            var invitedParticipantsNames = [];
+
+            for (var i = 0; i < this.props.entity["participants"].length; i++) {
+                invitedParticipantsNames.push(this.props.entity["participants"][i][0].name);
+            }
+
+            this.props.setRelatedEntity(invitedParticipantsNames, "participants", [{
+                "keys": ["status"],
+                "operation": ":",
+                "value": ["ORGANIZER", "ACCEPTED"]
+            }, {
+                "keys": ["banned"],
+                "operation": ":",
+                "value": [false]
+            }], this.props.entity["tablesCount"] * this.props.entity["playersOnTableCount"]);
+            this.props.navigate('Users');
+        }
+    }, {
+        key: 'addNewGroupOfParticipants',
+        value: function addNewGroupOfParticipants() {
+            var participants = this.props.entity["participants"];
+            var maxPlayers = this.props.entity["tablesCount"] * this.props.entity["playersOnTableCount"];
+            if ((participants.length + 1) * 2 > maxPlayers) {
+                this.props.showFailureMessage("Participants count must be less than " + maxPlayers);
+            } else {
+                participants.push([{
+                    "name": undefined,
+                    "accepted": false
+                }, {
+                    "name": undefined,
+                    "accepted": false
+                }]);
+                this.props.changeEntity("participants", participants);
+            }
+        }
+    }, {
+        key: 'chooseUserTableByTournamentType',
+        value: function chooseUserTableByTournamentType() {
+            if (this.props.entity["playersOnTableCount"] === 2) {
+                return _react2.default.createElement(_ParticipantsTable2.default, {
+                    shouldActualizeRelatedEntities: this.props.shouldActualizeRelatedEntities,
+                    shouldActualizeRelatedEntitiesCallBack: this.props.shouldActualizeRelatedEntitiesCallBack,
+                    value: this.props.entity["participants"],
+                    fieldName: 'participants',
+                    disabled: this.props.inputsDisabled,
+                    changeEntity: this.props.changeEntity,
+                    relatedEntity: this.props.relatedEntity,
+                    hidden: this.props.hidden, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 75
+                    }
+                });
+            } else {
+                return _react2.default.createElement(_ParticipantsGroupsTable2.default, {
+                    shouldActualizeRelatedEntities: this.props.shouldActualizeRelatedEntities,
+                    shouldActualizeRelatedEntitiesCallBack: this.props.shouldActualizeRelatedEntitiesCallBack,
+                    navigate: this.props.navigate,
+                    value: this.props.entity["participants"],
+                    fieldName: 'participants',
+                    disabled: this.props.inputsDisabled,
+                    changeEntity: this.props.changeEntity,
+                    relatedEntity: this.props.relatedEntity,
+                    hidden: this.props.hidden, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 86
+                    }
+                });
+            }
+        }
+    }, {
+        key: 'createButton',
+        value: function createButton() {
+            var _this2 = this;
+
+            if (!this.props.inputsDisabled) if (this.props.entity["playersOnTableCount"] === 2) {
+                return _react2.default.createElement(_reactNative.Button, { title: "Invite", color: '#4b371b',
+                    onPress: function onPress() {
+                        return _this2.startInviteParticipants();
+                    }, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 103
+                    }
+                });
+            } else {
+                return _react2.default.createElement(_reactNative.Button, { title: "Add group", color: '#4b371b',
+                    onPress: function onPress() {
+                        return _this2.addNewGroupOfParticipants();
+                    }, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 107
+                    }
+                });
+            }
+        }
+    }, {
+        key: 'calculateHeight',
+        value: function calculateHeight(inputsDisabled) {
+            var disabledInputHeight = inputsDisabled ? 35 : 0;
+            return this.props.orientation === 'portrait' ? this.props.height * 0.80 - 225 + disabledInputHeight : this.props.height * 0.77 - 185 + disabledInputHeight;
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var height = this.calculateHeight(this.props.inputsDisabled);
+            return _react2.default.createElement(
+                _reactNative.View,
+                {
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 123
+                    }
+                },
+                _react2.default.createElement(
+                    _reactNative.ScrollView,
+                    {
+                        style: { height: height },
+                        contentContainerStyle: _EntityPanelStyle2.default.scrollView, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 124
+                        }
+                    },
+                    _react2.default.createElement(_ValidationErrorMessage2.default, { validationErrorMessage: this.props.validationErrors["participants"], __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 127
+                        }
+                    }),
+                    _react2.default.createElement(
+                        _reactNative.View,
+                        { style: _EntityPanelStyle2.default.playerHeader, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 128
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            { style: [_MainStyles2.default.smallWhiteStyle, { fontWeight: 'bold' }], __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 128
+                                }
+                            },
+                            'Participants'
+                        )
+                    ),
+                    this.chooseUserTableByTournamentType()
+                ),
+                this.createButton()
+            );
+        }
+    }]);
+    return ParticipantsTab;
+}(_react.Component);
+
+function mapDispatchToProps(dispatch) {
+    return (0, _redux.bindActionCreators)(_index.ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+    return {};
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ParticipantsTab);

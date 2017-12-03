@@ -1,0 +1,359 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/App/components/collectionPanel/table/rows/tournament/Rows.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _TableStyles = require('../../../../../Styles/CollectionPanelStyles/TableStyles');
+
+var _TableStyles2 = babelHelpers.interopRequireDefault(_TableStyles);
+
+var _MainStyles = require('../../../../../Styles/UniversalStyles/MainStyles');
+
+var _MainStyles2 = babelHelpers.interopRequireDefault(_MainStyles);
+
+var _ListColours = require('../../../../../main/consts/ListColours');
+
+var _ListColours2 = babelHelpers.interopRequireDefault(_ListColours);
+
+var _Checkbox = require('../../../../commonComponents/checkBox/Checkbox');
+
+var _Checkbox2 = babelHelpers.interopRequireDefault(_Checkbox);
+
+var _MultiCheckbox = require('../../../../commonComponents/checkBox/MultiCheckbox');
+
+var _MultiCheckbox2 = babelHelpers.interopRequireDefault(_MultiCheckbox);
+
+var _index = require('../../../../../redux/actions/index');
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _dateformat = require('dateformat');
+
+var _dateformat2 = babelHelpers.interopRequireDefault(_dateformat);
+
+var Rows = function (_Component) {
+    babelHelpers.inherits(Rows, _Component);
+
+    function Rows(props) {
+        babelHelpers.classCallCheck(this, Rows);
+
+        var _this = babelHelpers.possibleConstructorReturn(this, (Rows.__proto__ || Object.getPrototypeOf(Rows)).call(this, props));
+
+        _this.renderRow = _this.renderRow.bind(_this);
+        return _this;
+    }
+
+    babelHelpers.createClass(Rows, [{
+        key: 'printStatus',
+        value: function printStatus(data) {
+            if (data.banned === true) return "banned";else if (data.status !== undefined) return data.status.toLowerCase().split('_').join(' ');else return "";
+        }
+    }, {
+        key: 'backgroundColourCheck',
+        value: function backgroundColourCheck(rowData) {
+            switch (this.printStatus(rowData)) {
+                case 'new':
+                    return _ListColours2.default.tournaments.NEW;
+                case 'accepted':
+                    return _ListColours2.default.tournaments.ACCEPTED;
+                case 'in progress':
+                    return _ListColours2.default.tournaments.IN_PROGRESS;
+                case 'finished':
+                    return _ListColours2.default.tournaments.FINISHED;
+                case 'banned':
+                    return _ListColours2.default.tournaments.BANNED;
+                default:
+                    return _ListColours2.default.tournaments.NEW;
+            }
+        }
+    }, {
+        key: 'editEntity',
+        value: function editEntity(element) {
+            if (this.props.entityPanel.mode !== 'disabled') this.props.showAdditionalEntityPanel("tournament", element.name);else this.props.editEntity("tournament", element.name);
+        }
+    }, {
+        key: 'createTournamentsList',
+        value: function createTournamentsList() {
+            var _this2 = this;
+
+            if (this.props.content.length === 0) {
+                return _react2.default.createElement(
+                    _reactNative.View,
+                    { style: [_TableStyles2.default.row], __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 60
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.Text,
+                        { numberOfLines: 1, style: [_MainStyles2.default.smallWhiteStyle], __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 60
+                            }
+                        },
+                        'Empty'
+                    )
+                );
+            } else {
+                return this.props.content.map(function (tournament) {
+                    return _this2.renderRow(tournament);
+                });
+            }
+        }
+    }, {
+        key: 'renderRow',
+        value: function renderRow(rowData) {
+            var _this3 = this;
+
+            var backgroundColour = this.backgroundColourCheck(rowData);
+
+            return _react2.default.createElement(
+                _reactNative.View,
+                { key: rowData.name, style: [_TableStyles2.default.row], __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 72
+                    }
+                },
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: [_TableStyles2.default.sectionHeader], __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 73
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.TouchableHighlight,
+                        {
+                            style: { flex: 1 },
+                            onPress: function onPress() {
+                                return _this3.editEntity(rowData);
+                            }, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 74
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            { numberOfLines: 1, style: [_MainStyles2.default.smallWhiteStyle, { fontSize: 20 }], __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 77
+                                }
+                            },
+                            ' ',
+                            rowData.name
+                        )
+                    ),
+                    _react2.default.createElement(_Checkbox2.default, { element: rowData, checked: rowData.checked, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 79
+                        }
+                    })
+                ),
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: [_TableStyles2.default.row], __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 81
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.Text,
+                        { numberOfLines: 1, style: [_MainStyles2.default.smallWhiteStyle], __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 82
+                            }
+                        },
+                        ' Province: ',
+                        rowData.province
+                    )
+                ),
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: [_TableStyles2.default.row], __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 84
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.Text,
+                        { numberOfLines: 1, style: [_MainStyles2.default.smallWhiteStyle], __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 85
+                            }
+                        },
+                        ' City: ',
+                        rowData.city
+                    )
+                ),
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: [_TableStyles2.default.row], __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 87
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.Text,
+                        { numberOfLines: 1, style: [_MainStyles2.default.smallWhiteStyle], __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 88
+                            }
+                        },
+                        ' Game: ',
+                        rowData.game
+                    )
+                ),
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: [_TableStyles2.default.row], __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 90
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.Text,
+                        { numberOfLines: 1, style: [_MainStyles2.default.smallWhiteStyle], __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 91
+                            }
+                        },
+                        ' Players: ',
+                        rowData.playersNumber,
+                        '/',
+                        rowData.maxPlayers
+                    )
+                ),
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: [_TableStyles2.default.row], __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 93
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.Text,
+                        { numberOfLines: 1, style: [_MainStyles2.default.smallWhiteStyle], __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 94
+                            }
+                        },
+                        ' Type: ',
+                        rowData.playersOnTableCount === 2 ? "Duel" : "Group"
+                    )
+                ),
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: [_TableStyles2.default.row], __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 96
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.Text,
+                        { numberOfLines: 1, style: [_MainStyles2.default.smallWhiteStyle], __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 97
+                            }
+                        },
+                        ' Date start: ',
+                        (0, _dateformat2.default)(rowData.dateOfStart, "dd-MM-yyyy hh:mm")
+                    )
+                ),
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: [_TableStyles2.default.row], __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 99
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.Text,
+                        { numberOfLines: 1, style: [_MainStyles2.default.smallWhiteStyle], __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 100
+                            }
+                        },
+                        ' Date end: ',
+                        (0, _dateformat2.default)(rowData.dateOfEnd, "dd-MM-yyyy hh:mm")
+                    )
+                ),
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: [_TableStyles2.default.row, { backgroundColor: backgroundColour }], __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 102
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.Text,
+                        { numberOfLines: 1, style: [_MainStyles2.default.smallWhiteStyle], __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 103
+                            }
+                        },
+                        ' Status: ',
+                        this.printStatus(rowData)
+                    )
+                )
+            );
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                _reactNative.ScrollView,
+                { styles: _TableStyles2.default.table, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 110
+                    }
+                },
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: _TableStyles2.default.header, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 111
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.Text,
+                        { style: [_MainStyles2.default.textStyle, { fontSize: 24 }], __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 112
+                            }
+                        },
+                        'Tournaments'
+                    ),
+                    _react2.default.createElement(_MultiCheckbox2.default, {
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 113
+                        }
+                    })
+                ),
+                this.createTournamentsList()
+            );
+        }
+    }]);
+    return Rows;
+}(_react.Component);
+
+function mapDispatchToProps(dispatch) {
+    return (0, _redux.bindActionCreators)(_index.ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+    return {
+        entityPanel: state.entityPanel,
+        page: state.page
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Rows);

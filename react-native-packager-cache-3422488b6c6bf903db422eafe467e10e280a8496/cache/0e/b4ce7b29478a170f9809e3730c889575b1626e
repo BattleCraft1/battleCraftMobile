@@ -1,0 +1,9 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var entityPanelTypes = exports.entityPanelTypes = {
+    none: "none",
+    tournament: "tournament",
+    user: "user",
+    game: "game"
+};
