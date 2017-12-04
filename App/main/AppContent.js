@@ -53,6 +53,7 @@ class App extends Component {
     }
 
     toggleMenu(){
+        this.props.playSound('toggle');
         this.setState({dropdownVisible:!this.state.dropdownVisible})
     }
 
