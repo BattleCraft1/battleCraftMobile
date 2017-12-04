@@ -24,6 +24,6 @@ function validateGameRules(uri,fieldErrors){
     let fileType = uri.substr(uri.lastIndexOf(".") + 1);;
 
     if(fileType !== 'pdf'){
-        fieldErrors.gameRules = "Extension: "+fileType+" is not acceptable extension of user avatar. You should try with pdf";
+        fieldErrors.gameRules = "Extension: "+fileType+" is not acceptable extension of game rules. You should try with pdf";
     }
 }

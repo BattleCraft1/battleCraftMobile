@@ -162,6 +162,7 @@ class Panel extends Component {
                     navigate:this.props.navigate,
                     entity:this.state.entity,
                     relatedEntity: this.props.relatedEntity,
+                    mode:this.props.mode,
                     inputsDisabled: this.props.mode === 'get' || !this.state.entity.canCurrentUserEdit,
                     changeEntity: this.changeEntity.bind(this),
                     validationErrors: this.state.validationErrors

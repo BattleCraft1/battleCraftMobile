@@ -54,7 +54,7 @@ class TournamentManagePanel extends Component {
 
     async componentDidMount() {
         await this.fetchTournamentProgressData(this.props.tournamentName);
-        this.setState({tournamentName:this.props.tournamentName});
+
     }
 
     async fetchTournamentProgressData(tournamentName){
@@ -71,6 +71,7 @@ class TournamentManagePanel extends Component {
                 console.log("tournament data:");
                 console.log(res.data);
                 await this.prepareToursData(res.data);
+                this.setState({tournamentName:this.props.tournamentName});
             })
             .catch(error => {
                 this.props.stopLoading();

@@ -17,10 +17,11 @@ export default class SelectInput extends React.Component{
         return(
             <View style={EntityPanelInputsStyles.inputStyle}>
                 <PickerField
-                    onValueChange={(value)=>this.props.changeEntity(this.props.fieldName,typeMap[value])}
+                    onValueChange={(value)=>{
+                        if(this.props.disabled) return;
+                        this.props.changeEntity(this.props.fieldName,typeMap[value]);}}
                     label={this.props.name}
                     value = {this.props.value===2?"Duel":"Group"}
-                    editable={!this.props.disabled}
                     options={this.props.options}/>
             </View>
         )
