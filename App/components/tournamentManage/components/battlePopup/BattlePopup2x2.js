@@ -81,6 +81,7 @@ class BattleInspector extends Component {
     }
 
     chooseRandomPlayers(){
+        this.props.playSound('dice');
         let playersNames = this.state.playersWithoutBattles;
 
         playersNames.splice(playersNames.indexOf(["",""]),1);
@@ -303,13 +304,13 @@ class BattleInspector extends Component {
                         </ScrollView>
                         <View style={MainStyles.buttonsPanelStyle}>
                             <View style={{flex:1, marginRight: 3}}>
-                                <Button title={"Close"} color='#4b371b' onPress={this.props.hidePopup.bind(this)}/>
+                                <Button title={"Close"} color='#4b371b' onPress={()=>{this.props.playSound('toggle');this.props.hidePopup.bind(this)}}/>
                             </View>
                             <View style={{flex:1, marginRight: 3}}>
-                                <Button title={"Clear"} color='#4b371b' onPress={this.clearBattleData.bind(this)}/>
+                                <Button title={"Clear"} color='#4b371b' onPress={()=>{this.props.playSound('toggle');this.clearBattleData.bind(this)}}/>
                             </View>
                             <View style={{flex:1}}>
-                                <Button title={"Save"} color='#4b371b' onPress={this.sendBattleData.bind(this)}/>
+                                <Button title={"Save"} color='#4b371b' onPress={()=>{this.props.playSound('toggle');this.sendBattleData.bind(this)}}/>
                             </View>
                         </View>
                     </View>

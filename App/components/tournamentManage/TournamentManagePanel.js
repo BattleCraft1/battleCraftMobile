@@ -201,7 +201,7 @@ class TournamentManagePanel extends Component {
             {
                 header:"Start next tour",
                 message:"Are you sure?",
-                onConfirmFunction: () => this.nextTourRequest()
+                onConfirmFunction: () =>{this.props.playSound('battle'); this.nextTourRequest()}
             });
     }
 
@@ -241,7 +241,7 @@ class TournamentManagePanel extends Component {
                 {
                     header:"Come back to previous tour",
                     message:"Are you sure? If you come back to previous tour all data from this tour will be lost!",
-                    onConfirmFunction: () => this.previousTourRequest()
+                    onConfirmFunction: () =>{this.props.playSound('battle'); this.previousTourRequest()}
                 });
         }
     }
@@ -291,7 +291,7 @@ class TournamentManagePanel extends Component {
             {
                 header:"Finish tournament",
                 message:"Are you sure?",
-                onConfirmFunction: () => this.finishTournamentRequest()
+                onConfirmFunction: () =>{this.props.playSound('fanfare'); this.finishTournamentRequest()}
             });
     }
 
@@ -330,6 +330,7 @@ class TournamentManagePanel extends Component {
     }
 
     showScoreBoard(){
+        this.props.playSound('toggle');
         this.setState({showScoreBoard:true})
     }
 
@@ -364,10 +365,10 @@ class TournamentManagePanel extends Component {
             <View style={MainStyles.contentStyle}>
                 {!buttonsDisabled && <View style={{marginBottom:3, flexDirection:'row'}}>
                     <View style={{flex:1, marginRight: 3}}>
-                        <Button title="Previous" color='#4b371b' onPress={this.previousTour.bind(this)}/>
+                        <Button title="Previous" color='#4b371b' onPress={()=>{this.props.playSound('toggle'); this.previousTour.bind(this)}}/>
                     </View>
                     <View style={{flex:1}}>
-                        <Button title="Next" color='#4b371b' onPress={this.nextTour.bind(this)}/>
+                        <Button title="Next" color='#4b371b' onPress={()=>{this.props.playSound('toggle'); this.nextTour.bind(this)}}/>
                     </View>
                 </View>}
                 <GestureRecognizer
@@ -386,10 +387,10 @@ class TournamentManagePanel extends Component {
                 </GestureRecognizer>
                 <View style={MainStyles.buttonsPanelStyle}>
                     <View style={{flex:1, marginRight: 3}}>
-                        <Button title={"Score"} color='#4b371b' onPress={this.showScoreBoard.bind(this)}/>
+                        <Button title={"Score"} color='#4b371b' onPress={()=>{this.showScoreBoard.bind(this)}}/>
                     </View>
                     {!buttonsDisabled && <View style={{flex:1}}>
-                        <Button title={"Finish"} color='#4b371b' onPress={this.finishTournament.bind(this)}/>
+                        <Button title={"Finish"} color='#4b371b' onPress={()=>{this.props.playSound('toggle'); this.finishTournament.bind(this)}}/>
                     </View>}
                 </View>
                 {this.state.showBattlePopup && this.createPopup()}

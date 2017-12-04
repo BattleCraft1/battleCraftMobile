@@ -13,6 +13,8 @@ import { bindActionCreators } from 'redux';
 
 const soundToggle = new Expo.Audio.Sound();
 const soundFlip = new Expo.Audio.Sound();
+const soundDice = new Expo.Audio.Sound();
+const soundBattle = new Expo.Audio.Sound();
 const soundFanfare = new Expo.Audio.Sound();
 
 class SoundManager extends Component {
@@ -59,6 +61,26 @@ class SoundManager extends Component {
             }
 
             try{
+                await soundDice.loadAsync(require('battleCraftMobile/sounds/dice.wav'));
+                this.setState({soundNotLoaded: false});
+                console.log("Dice sound loaded");
+            }
+            catch(error){
+                console.log("Dice sound not loaded");
+                console.log(error);
+            }
+
+            try{
+                await soundBattle.loadAsync(require('battleCraftMobile/sounds/battle.wav'));
+                this.setState({soundNotLoaded: false});
+                console.log("Battle sound loaded");
+            }
+            catch(error){
+                console.log("Battle sound not loaded");
+                console.log(error);
+            }
+
+            try{
                 await soundFanfare.loadAsync(require('battleCraftMobile/sounds/fanfare.mp3'));
                 this.setState({soundNotLoaded: false});
                 console.log("Fanfare sound loaded");
@@ -79,6 +101,14 @@ class SoundManager extends Component {
             case 'flip':
                 await soundFlip.setPositionAsync(0);
                 await soundFlip.playAsync();
+                break;
+            case 'dice':
+                await soundDice.setPositionAsync(0);
+                await soundDice.playAsync();
+                break;
+            case 'battle':
+                await soundBattle.setPositionAsync(0);
+                await soundBattle.playAsync();
                 break;
             case 'fanfare':
                 await soundFanfare.setPositionAsync(0);
