@@ -1,0 +1,249 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _class,
+    _temp2,
+    _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/node_modules/react-native-modal-datetime-picker/src/CustomDatePickerIOS/index.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = babelHelpers.interopRequireDefault(_propTypes);
+
+var _reactNative = require('react-native');
+
+var _reactNativeModal = require('react-native-modal');
+
+var _reactNativeModal2 = babelHelpers.interopRequireDefault(_reactNativeModal);
+
+var _index = require('./index.style');
+
+var _index2 = babelHelpers.interopRequireDefault(_index);
+
+var CustomDatePickerIOS = (_temp2 = _class = function (_Component) {
+  babelHelpers.inherits(CustomDatePickerIOS, _Component);
+
+  function CustomDatePickerIOS() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    babelHelpers.classCallCheck(this, CustomDatePickerIOS);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = CustomDatePickerIOS.__proto__ || Object.getPrototypeOf(CustomDatePickerIOS)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      date: _this.props.date,
+      userIsInteractingWithPicker: false
+    }, _this._handleCancel = function () {
+      _this.confirmed = false;
+      _this.props.onCancel();
+    }, _this._handleConfirm = function () {
+      _this.confirmed = true;
+      _this.props.onConfirm(_this.state.date);
+    }, _this._handleOnModalHide = function () {
+      if (_this.confirmed) {
+        _this.props.onHideAfterConfirm(_this.state.date);
+      }
+    }, _this._handleDateChange = function (date) {
+      _this.setState({
+        date: date,
+        userIsInteractingWithPicker: false
+      });
+    }, _this._handleUserTouchInit = function () {
+      _this.setState({
+        userIsInteractingWithPicker: true
+      });
+      return false;
+    }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
+  }
+
+  babelHelpers.createClass(CustomDatePickerIOS, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      if (this.props.date !== nextProps.date) {
+        this.setState({
+          date: nextProps.date
+        });
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          isVisible = _props.isVisible,
+          mode = _props.mode,
+          titleIOS = _props.titleIOS,
+          confirmTextIOS = _props.confirmTextIOS,
+          cancelTextIOS = _props.cancelTextIOS,
+          customCancelButtonIOS = _props.customCancelButtonIOS,
+          customConfirmButtonIOS = _props.customConfirmButtonIOS,
+          neverDisableConfirmIOS = _props.neverDisableConfirmIOS,
+          customConfirmButtonWhileInteractingIOS = _props.customConfirmButtonWhileInteractingIOS,
+          contentContainerStyleIOS = _props.contentContainerStyleIOS,
+          customTitleContainerIOS = _props.customTitleContainerIOS,
+          datePickerContainerStyleIOS = _props.datePickerContainerStyleIOS,
+          reactNativeModalPropsIOS = _props.reactNativeModalPropsIOS,
+          date = _props.date,
+          titleStyle = _props.titleStyle,
+          confirmTextStyle = _props.confirmTextStyle,
+          cancelTextStyle = _props.cancelTextStyle,
+          otherProps = babelHelpers.objectWithoutProperties(_props, ['isVisible', 'mode', 'titleIOS', 'confirmTextIOS', 'cancelTextIOS', 'customCancelButtonIOS', 'customConfirmButtonIOS', 'neverDisableConfirmIOS', 'customConfirmButtonWhileInteractingIOS', 'contentContainerStyleIOS', 'customTitleContainerIOS', 'datePickerContainerStyleIOS', 'reactNativeModalPropsIOS', 'date', 'titleStyle', 'confirmTextStyle', 'cancelTextStyle']);
+
+
+      var titleContainer = _react2.default.createElement(
+        _reactNative.View,
+        { style: _index2.default.titleContainer, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 110
+          }
+        },
+        _react2.default.createElement(
+          _reactNative.Text,
+          { style: [_index2.default.title, titleStyle], __source: {
+              fileName: _jsxFileName,
+              lineNumber: 111
+            }
+          },
+          titleIOS
+        )
+      );
+      var confirmButton = void 0;
+
+      if (customConfirmButtonIOS) {
+        if (customConfirmButtonWhileInteractingIOS && this.state.userIsInteractingWithPicker) {
+          confirmButton = customConfirmButtonWhileInteractingIOS;
+        } else {
+          confirmButton = customConfirmButtonIOS;
+        }
+      } else {
+        confirmButton = _react2.default.createElement(
+          _reactNative.Text,
+          { style: [_index2.default.confirmText, confirmTextStyle], __source: {
+              fileName: _jsxFileName,
+              lineNumber: 131
+            }
+          },
+          confirmTextIOS
+        );
+      }
+      var cancelButton = _react2.default.createElement(
+        _reactNative.Text,
+        { style: [_index2.default.cancelText, cancelTextStyle], __source: {
+            fileName: _jsxFileName,
+            lineNumber: 133
+          }
+        },
+        cancelTextIOS
+      );
+      return _react2.default.createElement(
+        _reactNativeModal2.default,
+        babelHelpers.extends({
+          isVisible: isVisible,
+          style: [_index2.default.contentContainer, contentContainerStyleIOS],
+          onModalHide: this._handleOnModalHide,
+          backdropOpacity: 0.4
+        }, reactNativeModalPropsIOS, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 135
+          }
+        }),
+        _react2.default.createElement(
+          _reactNative.View,
+          { style: [_index2.default.datepickerContainer, datePickerContainerStyleIOS], __source: {
+              fileName: _jsxFileName,
+              lineNumber: 142
+            }
+          },
+          customTitleContainerIOS || titleContainer,
+          _react2.default.createElement(
+            _reactNative.View,
+            { onStartShouldSetResponderCapture: this._handleUserTouchInit, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 144
+              }
+            },
+            _react2.default.createElement(_reactNative.DatePickerIOS, babelHelpers.extends({
+              date: this.state.date,
+              mode: mode,
+              onDateChange: this._handleDateChange
+            }, otherProps, {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 145
+              }
+            }))
+          ),
+          _react2.default.createElement(
+            _reactNative.TouchableHighlight,
+            {
+              style: _index2.default.confirmButton,
+              underlayColor: '#ebebeb',
+              onPress: this._handleConfirm,
+              disabled: !neverDisableConfirmIOS && this.state.userIsInteractingWithPicker,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 152
+              }
+            },
+            confirmButton
+          )
+        ),
+        _react2.default.createElement(
+          _reactNative.TouchableHighlight,
+          {
+            style: _index2.default.cancelButton,
+            underlayColor: '#ebebeb',
+            onPress: this._handleCancel,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 162
+            }
+          },
+          customCancelButtonIOS || cancelButton
+        )
+      );
+    }
+  }]);
+  return CustomDatePickerIOS;
+}(_react.Component), _class.propTypes = {
+  cancelTextIOS: _propTypes2.default.string,
+  confirmTextIOS: _propTypes2.default.string,
+  customCancelButtonIOS: _propTypes2.default.node,
+  customConfirmButtonIOS: _propTypes2.default.node,
+  neverDisableConfirmIOS: _propTypes2.default.bool,
+  customConfirmButtonWhileInteractingIOS: _propTypes2.default.node,
+  customTitleContainerIOS: _propTypes2.default.node,
+  contentContainerStyleIOS: _propTypes2.default.any,
+  datePickerContainerStyleIOS: _propTypes2.default.any,
+  date: _propTypes2.default.instanceOf(Date),
+  mode: _propTypes2.default.oneOf(['date', 'time', 'datetime']),
+  onConfirm: _propTypes2.default.func.isRequired,
+  onHideAfterConfirm: _propTypes2.default.func,
+  onCancel: _propTypes2.default.func.isRequired,
+  titleIOS: _propTypes2.default.string,
+  isVisible: _propTypes2.default.bool,
+  reactNativeModalPropsIOS: _propTypes2.default.any,
+  titleStyle: _propTypes2.default.any,
+  confirmTextStyle: _propTypes2.default.any,
+  cancelTextStyle: _propTypes2.default.any
+}, _class.defaultProps = {
+  neverDisableConfirmIOS: false,
+  cancelTextIOS: 'Cancel',
+  confirmTextIOS: 'Confirm',
+  date: new Date(),
+  mode: 'date',
+  titleIOS: 'Pick a date',
+  isVisible: false,
+  onHideAfterConfirm: function onHideAfterConfirm() {},
+  reactNativeModalPropsIOS: {}
+}, _temp2);
+exports.default = CustomDatePickerIOS;

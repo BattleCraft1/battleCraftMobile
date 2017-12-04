@@ -1,0 +1,26 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.confirmation = undefined;
+
+var _createReducer;
+
+var _createReducer2 = require('../lib/createReducer');
+
+var _createReducer3 = babelHelpers.interopRequireDefault(_createReducer2);
+
+var _confirmation = require('../types/confirmation');
+
+var types = babelHelpers.interopRequireWildcard(_confirmation);
+var confirmation = exports.confirmation = (0, _createReducer3.default)({}, (_createReducer = {}, babelHelpers.defineProperty(_createReducer, types.SHOW_CONFIRMATION_DIALOG, function (state, action) {
+    action.confirmation.isShown = true;
+    var newState = action.confirmation;
+    return newState;
+}), babelHelpers.defineProperty(_createReducer, types.HIDE_CONFIRMATION_DIALOG, function (state, action) {
+    return {
+        isShown: false,
+        header: "",
+        message: "",
+        onConfirmFunction: function onConfirmFunction() {}
+    };
+}), _createReducer));

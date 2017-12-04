@@ -1,0 +1,16 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.changeDimension = changeDimension;
+
+var _dimension = require('../types/dimension');
+
+var types = babelHelpers.interopRequireWildcard(_dimension);
+function changeDimension(height, width, orientation) {
+    return {
+        type: types.CHANGE_DIMENSION,
+        height: height,
+        width: width,
+        orientation: orientation
+    };
+}

@@ -1,0 +1,88 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _reactNative = require('react-native');
+
+var _BaseColours = require('../../main/consts/BaseColours');
+
+var _BaseColours2 = babelHelpers.interopRequireDefault(_BaseColours);
+
+var styles = _reactNative.StyleSheet.create({
+    turnHeader: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 55,
+        borderWidth: 3,
+        borderColor: _BaseColours2.default.border.top,
+        padding: 5
+    },
+    battleWindow: {
+        borderWidth: 5,
+        borderColor: _BaseColours2.default.background.darkBrown,
+        marginBottom: 3,
+        alignSelf: 'stretch'
+    },
+    scoreRow: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    scoreContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        backgroundColor: _BaseColours2.default.background.lightBrown,
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 10
+    },
+    scoreContainer2x2: {
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor: _BaseColours2.default.background.lightBrown,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    scoreboard: {
+        padding: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 3
+    },
+    playerHeader: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 3,
+        borderWidth: 3
+    },
+    player1Text: {
+        flex: 1,
+        paddingLeft: 5,
+        textAlign: "left"
+    },
+    player2Text: {
+        flex: 1,
+        paddingRight: 5,
+        textAlign: "right"
+    },
+    avatarContainer: {
+        padding: 5,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    avatarSize: {
+        backgroundColor: _BaseColours2.default.background.lightBrown,
+        resizeMode: 'contain'
+    },
+    iconVS: {
+        flex: 1,
+        maxHeight: 80,
+        maxWidth: 80,
+        padding: 5,
+        resizeMode: 'contain'
+    }
+
+});
+
+exports.default = styles;

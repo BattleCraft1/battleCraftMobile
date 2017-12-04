@@ -1,0 +1,56 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.checkPreviouslyCheckedElements = checkPreviouslyCheckedElements;
+exports.setEmptyPage = setEmptyPage;
+exports.checkAllElements = checkAllElements;
+exports.checkElements = checkElements;
+exports.checkElement = checkElement;
+exports.clearCheckedElements = clearCheckedElements;
+exports.setElementsToCheck = setElementsToCheck;
+
+var _page = require('../types/page');
+
+var types = babelHelpers.interopRequireWildcard(_page);
+function checkPreviouslyCheckedElements(page) {
+    return {
+        type: types.CHECK_PREVIOUSLY_CHECKED_ELEMENTS,
+        page: page
+    };
+}
+function setEmptyPage() {
+    return {
+        type: types.SET_EMPTY_PAGE
+    };
+}
+function checkAllElements(checked) {
+    return {
+        type: types.CHECK_ALL_ELEMENTS,
+        checked: checked
+    };
+}
+function checkElements(elementsNames, checked) {
+    return {
+        type: types.CHECK_ELEMENTS,
+        checked: checked,
+        elementsNames: elementsNames
+    };
+}
+function checkElement(elementName, checked) {
+    return {
+        type: types.CHECK_ELEMENT,
+        checked: checked,
+        elementName: elementName
+    };
+}
+function clearCheckedElements() {
+    return {
+        type: types.CLEAR_CHECKED_ELEMENTS
+    };
+}
+function setElementsToCheck(elementsNames) {
+    return {
+        type: types.SET_ELEMENTS_TO_CHECK,
+        elementsNames: elementsNames
+    };
+}

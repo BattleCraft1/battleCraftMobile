@@ -1,0 +1,203 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/App/components/entityPanel/tournament/tabs/table/row/PartisipantsGroupTableRow.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _ParticipantInGroupRow = require('./ParticipantInGroupRow');
+
+var _ParticipantInGroupRow2 = babelHelpers.interopRequireDefault(_ParticipantInGroupRow);
+
+var _EmptyUserInGroupRow = require('./EmptyUserInGroupRow');
+
+var _EmptyUserInGroupRow2 = babelHelpers.interopRequireDefault(_EmptyUserInGroupRow);
+
+var _EntityPanelStyle = require('../../../../../../Styles/CollectionPanelStyles/EntityPanelStyle');
+
+var _EntityPanelStyle2 = babelHelpers.interopRequireDefault(_EntityPanelStyle);
+
+var _reactRedux = require('react-redux');
+
+var _redux = require('redux');
+
+var _index = require('../../../../../../redux/actions/index');
+
+var ParticipantsGroupTableRow = function (_React$Component) {
+    babelHelpers.inherits(ParticipantsGroupTableRow, _React$Component);
+
+    function ParticipantsGroupTableRow() {
+        babelHelpers.classCallCheck(this, ParticipantsGroupTableRow);
+        return babelHelpers.possibleConstructorReturn(this, (ParticipantsGroupTableRow.__proto__ || Object.getPrototypeOf(ParticipantsGroupTableRow)).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(ParticipantsGroupTableRow, [{
+        key: 'startInviteParticipantsToGroup',
+        value: function startInviteParticipantsToGroup() {
+            this.props.setOperations(["Invite"]);
+            var invitedParticipantsNames = [];
+            var invitedInThisGroup = [];
+
+            for (var i = 0; i < this.props.group.length; i++) {
+                if (this.props.group[i].name !== undefined) invitedInThisGroup.push(this.props.group[i].name);
+            }
+
+            for (var _i = 0; _i < this.props.invited.length; _i++) {
+                for (var j = 0; j < this.props.invited[_i].length; j++) {
+                    if (this.props.invited[_i][j].name !== undefined && invitedInThisGroup.indexOf(this.props.invited[_i][j].name) === -1) invitedParticipantsNames.push(this.props.invited[_i][j].name);
+                }
+            }
+
+            var searchCriteria = [];
+            searchCriteria.push({
+                "keys": ["status"],
+                "operation": ":",
+                "value": ["ORGANIZER", "ACCEPTED"]
+            });
+
+            searchCriteria.push({
+                "keys": ["banned"],
+                "operation": ":",
+                "value": [false]
+            });
+
+            if (invitedParticipantsNames.length > 0) searchCriteria.push({
+                "keys": ["name"],
+                "operation": "not in",
+                "value": invitedParticipantsNames
+            });
+
+            this.props.setRelatedEntity(invitedInThisGroup, "participantsGroup" + this.props.index, searchCriteria, 2);
+
+            this.props.navigate('Users');
+        }
+    }, {
+        key: 'createRows',
+        value: function createRows() {
+            var rows = [];
+            if (this.props.group.length === 1) {
+                rows.push(this.createRow(this.props.group[0], 0));
+                rows.push(_react2.default.createElement(_EmptyUserInGroupRow2.default, { disabled: this.props.disabled, key: 'empty', __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 70
+                    }
+                }));
+            } else {
+                rows.push(this.createRow(this.props.group[0], 0));
+                rows.push(this.createRow(this.props.group[1], 1));
+            }
+            return rows;
+        }
+    }, {
+        key: 'createRow',
+        value: function createRow(user, index) {
+            if (user.name !== undefined) {
+                return _react2.default.createElement(_ParticipantInGroupRow2.default, {
+                    index: this.props.index,
+                    disabled: this.props.disabled,
+                    key: user.name,
+                    name: user.name,
+                    accepted: user.accepted,
+                    deleteElement: this.props.deleteElement,
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 81
+                    }
+                });
+            } else {
+                return _react2.default.createElement(_EmptyUserInGroupRow2.default, { disabled: this.props.disabled, key: index, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 91
+                    }
+                });
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            return _react2.default.createElement(
+                _reactNative.View,
+                { style: { marginTop: 5 }, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 97
+                    }
+                },
+                _react2.default.createElement(
+                    _reactNative.View,
+                    {
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 98
+                        }
+                    },
+                    this.createRows()
+                ),
+                !this.props.disabled && _react2.default.createElement(
+                    _reactNative.View,
+                    { style: { flexDirection: 'row' }, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 102
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.TouchableHighlight,
+                        { style: [_EntityPanelStyle2.default.participantsGroupButton],
+                            onPress: function onPress() {
+                                _this2.props.deleteGroup(_this2.props.index);
+                            }, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 103
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            { style: _EntityPanelStyle2.default.buttonText, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 105
+                                }
+                            },
+                            'Delete group'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        _reactNative.TouchableHighlight,
+                        { style: [_EntityPanelStyle2.default.participantsGroupButton],
+                            onPress: function onPress() {
+                                _this2.startInviteParticipantsToGroup();
+                            }, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 107
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            { style: _EntityPanelStyle2.default.buttonText, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 109
+                                }
+                            },
+                            'Invite group'
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+    return ParticipantsGroupTableRow;
+}(_react2.default.Component);
+
+function mapDispatchToProps(dispatch) {
+    return (0, _redux.bindActionCreators)(_index.ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+    return {};
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ParticipantsGroupTableRow);

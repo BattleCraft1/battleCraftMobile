@@ -21,7 +21,7 @@ class CancelInviteButton extends React.Component {
                 <Button
                     title={"Cancel"}
                     color='#4b371b'
-                    onPress={()=>this.cancelInvite()}/>
+                    onPress={()=>{this.props.playSound('toggle'); this.cancelInvite()}}/>
             </View>
         );
     }

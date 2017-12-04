@@ -1,0 +1,84 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.LinkComponent = undefined;
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/node_modules/react-native-form-generator/src/lib/LinkComponent.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _Field = require('./Field');
+
+var _require = require('react-native'),
+    View = _require.View,
+    StyleSheet = _require.StyleSheet,
+    Text = _require.Text;
+
+var LinkComponent = exports.LinkComponent = function (_React$Component) {
+  babelHelpers.inherits(LinkComponent, _React$Component);
+
+  function LinkComponent(props) {
+    babelHelpers.classCallCheck(this, LinkComponent);
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (LinkComponent.__proto__ || Object.getPrototypeOf(LinkComponent)).call(this, props));
+
+    _this.state = {};
+    return _this;
+  }
+
+  babelHelpers.createClass(LinkComponent, [{
+    key: 'handleLayoutChange',
+    value: function handleLayoutChange(e) {
+      var _e$nativeEvent$layout = babelHelpers.extends({}, e.nativeEvent.layout),
+          x = _e$nativeEvent$layout.x,
+          y = _e$nativeEvent$layout.y,
+          width = _e$nativeEvent$layout.width,
+          height = _e$nativeEvent$layout.height;
+
+      this.setState(e.nativeEvent.layout);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        _Field.Field,
+        babelHelpers.extends({}, this.props, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 23
+          }
+        }),
+        _react2.default.createElement(
+          View,
+          { style: this.props.containerStyle,
+            onLayout: this.handleLayoutChange.bind(this), __source: {
+              fileName: _jsxFileName,
+              lineNumber: 24
+            }
+          },
+          this.props.iconLeft ? this.props.iconLeft : null,
+          _react2.default.createElement(
+            Text,
+            {
+              style: this.props.labelStyle, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 32
+              }
+            },
+            this.props.label
+          ),
+          this.props.iconRight ? this.props.iconRight : null
+        )
+      );
+    }
+  }]);
+  return LinkComponent;
+}(_react2.default.Component);
+
+LinkComponent.propTypes = {
+  labelStyle: Text.propTypes.style,
+  containerStyle: View.propTypes.style
+};

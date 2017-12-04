@@ -19,6 +19,7 @@ import ReportPanel from '../components/commonComponents/reportPanel/ReportPanel'
 import LoadingSpinner from '../components/commonComponents/loading/LoadingSpinner'
 import DimensionChangeListener from '../components/commonComponents/dimensionChangeListener/DimensionChangeListener'
 import AuthManager from '../components/commonComponents/auth/AuthManager'
+import SoundManager from '../components/commonComponents/SoundManager'
 import { Font } from 'expo';
 
 import { connect } from 'react-redux';
@@ -52,6 +53,7 @@ class App extends Component {
     }
 
     toggleMenu(){
+        this.props.playSound('toggle');
         this.setState({dropdownVisible:!this.state.dropdownVisible})
     }
 
@@ -72,6 +74,7 @@ class App extends Component {
                             <FadeView style={{flex:1}}>
                                 <Navigator navigate={this.navigate.bind(this)} navigValue={this.state.navigValue}/>
                                 <AuthManager/>
+                                <SoundManager/>
                                 <ReportPanel/>
                                 <ConfirmDialog/>
                                 <MessageDialog/>

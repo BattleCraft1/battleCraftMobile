@@ -1,0 +1,121 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/App/components/collectionPanel/optionPanel/operations/DegradeOperation.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _OperationButton = require('./operationButton/OperationButton');
+
+var _OperationButton2 = babelHelpers.interopRequireDefault(_OperationButton);
+
+var _serverName = require('../../../../main/consts/serverName');
+
+var _axios = require('axios');
+
+var _axios2 = babelHelpers.interopRequireDefault(_axios);
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _index = require('../../../../redux/actions/index');
+
+var DegradeOperation = function (_React$Component) {
+    babelHelpers.inherits(DegradeOperation, _React$Component);
+
+    function DegradeOperation() {
+        babelHelpers.classCallCheck(this, DegradeOperation);
+        return babelHelpers.possibleConstructorReturn(this, (DegradeOperation.__proto__ || Object.getPrototypeOf(DegradeOperation)).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(DegradeOperation, [{
+        key: 'getSuccessMessage',
+        value: function getSuccessMessage(degradedElementsNames) {
+            return "Users " + degradedElementsNames.join(", ") + " are degrade to Accepted";
+        }
+    }, {
+        key: 'degradeElements',
+        value: function degradeElements() {
+            var _this2 = this;
+
+            var checkedElementsNames = this.props.page.checkedElementsNames;
+            var collectionType = this.props.collectionType;
+            var checkPreviouslyCheckedElements = this.props.checkPreviouslyCheckedElements;
+
+            var showSuccessMessage = this.props.showSuccessMessage;
+            var showFailureMessage = this.props.showFailureMessage;
+            var showNetworkErrorMessage = this.props.showNetworkErrorMessage;
+            var getSuccessMessage = this.getSuccessMessage;
+
+            var startLoading = this.props.startLoading;
+            var stopLoading = this.props.stopLoading;
+            var closePanel = this.props.onClosePanel;
+
+            if (checkedElementsNames.length > 0) {
+                var GetPageAndModifyDataDTO = {
+                    namesOfObjectsToModify: checkedElementsNames,
+                    getPageObjectsDTO: this.props.pageRequest
+                };
+
+                var operationFunction = function operationFunction() {
+                    startLoading("Degrading...");
+
+                    _axios2.default.post(_serverName.serverName + 'degrade/organizers', GetPageAndModifyDataDTO, {
+                        headers: {
+                            "X-Auth-Token": _this2.props.security.token
+                        }
+                    }).then(function (res) {
+                        stopLoading();
+                        checkPreviouslyCheckedElements(res.data);
+                        showSuccessMessage(getSuccessMessage(checkedElementsNames));
+                        closePanel();
+                    }).catch(function (error) {
+                        stopLoading();
+                        showNetworkErrorMessage(error, operationFunction);
+                        closePanel();
+                    });
+                };
+
+                this.props.showConfirmationDialog({
+                    header: "Degrade checked elements",
+                    message: "Are you sure?",
+                    onConfirmFunction: operationFunction
+                });
+            } else {
+                showFailureMessage("Nothing to degrade.");
+                closePanel();
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(_OperationButton2.default, {
+                name: 'Degrade',
+                icon: 'arrow-down',
+                operation: this.degradeElements.bind(this),
+                __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 73
+                }
+            });
+        }
+    }]);
+    return DegradeOperation;
+}(_react2.default.Component);
+
+function mapDispatchToProps(dispatch) {
+    return (0, _redux.bindActionCreators)(_index.ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+    return {
+        page: state.page,
+        pageRequest: state.pageRequest,
+        security: state.security
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(DegradeOperation);

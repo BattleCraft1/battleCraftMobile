@@ -1,0 +1,8 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (date1, date2) {
+    var timeDiff = date2.getTime() - date1.getTime();
+    return timeDiff / (1000 * 3600 * 24);
+};

@@ -1,0 +1,226 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.InputComponent = undefined;
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/node_modules/react-native-form-generator/src/lib/InputComponent.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _reactNative2 = babelHelpers.interopRequireDefault(_reactNative);
+
+var _Field = require('./Field.js');
+
+var View = _reactNative2.default.View,
+    StyleSheet = _reactNative2.default.StyleSheet,
+    TextInput = _reactNative2.default.TextInput,
+    Text = _reactNative2.default.Text;
+
+
+function validateEmail(email) {
+  var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (re.test(email)) return true;
+  return 'Invalid email';
+}
+
+var InputComponent = exports.InputComponent = function (_React$Component) {
+  babelHelpers.inherits(InputComponent, _React$Component);
+
+  function InputComponent(props) {
+    babelHelpers.classCallCheck(this, InputComponent);
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (InputComponent.__proto__ || Object.getPrototypeOf(InputComponent)).call(this, props));
+
+    _this.triggerValidation = _this.triggerValidation.bind(_this);
+
+    _this.validate(props.value);
+    _this.validationErrors = [];
+    _this.state = {
+      labelWidth: 0,
+      value: props.value,
+      minFieldHeight: props.height || 44,
+      inputHeight: Math.max(props.height || 44)
+    };
+
+    return _this;
+  }
+
+  babelHelpers.createClass(InputComponent, [{
+    key: 'setValue',
+    value: function setValue(value) {
+      this.setState({ value: value });
+      if (this.props.onChange) this.props.onChange(value);
+      if (this.props.onValueChange) this.props.onValueChange(value);
+    }
+  }, {
+    key: 'focus',
+    value: function focus() {
+      this.refs.inputBox.focus();
+    }
+  }, {
+    key: 'triggerValidation',
+    value: function triggerValidation() {
+      this.setState({ isValid: this.validate(this.state.value) });
+    }
+  }, {
+    key: 'validate',
+    value: function validate(value) {
+      var _this2 = this;
+
+      var validationResult = void 0;
+      this.validationErrors = [];
+
+      if (!!this.props.validationFunction) {
+        if (this.props.validationFunction.constructor === Array) {
+          this.props.validationFunction.map(function (valFn, i) {
+
+            var validationResult = valFn(value, _this2);
+            if (validationResult === true) {
+              _this2.valid = _this2.valid !== false ? validationResult : _this2.valid;
+            } else {
+              _this2.validationErrors.push(validationResult);
+              _this2.valid = false;
+            }
+          });
+        } else {
+          var _validationResult = this.props.validationFunction(value, this);
+          if (_validationResult === true) {
+            this.valid = true;
+          } else {
+            this.validationErrors.push(_validationResult);
+            this.valid = false;
+          }
+        }
+      } else if (this.props.keyboardType) {
+        switch (this.props.keyboardType) {
+          case 'email-address':
+            validationResult = validateEmail(value);
+            break;
+        }
+        if (validationResult === true) {
+          this.valid = true;
+        } else {
+          this.validationErrors.push(validationResult);
+          this.valid = false;
+        }
+      }
+      this.props.onValidation(this.valid, this.validationErrors);
+      return this.valid;
+    }
+  }, {
+    key: 'handleLayoutChange',
+    value: function handleLayoutChange(e) {
+      var _e$nativeEvent$layout = babelHelpers.extends({}, e.nativeEvent.layout),
+          x = _e$nativeEvent$layout.x,
+          y = _e$nativeEvent$layout.y,
+          width = _e$nativeEvent$layout.width,
+          height = _e$nativeEvent$layout.height;
+
+      this.setState(e.nativeEvent.layout);
+    }
+  }, {
+    key: 'handleLabelLayoutChange',
+    value: function handleLabelLayoutChange(e) {
+      var _e$nativeEvent$layout2 = babelHelpers.extends({}, e.nativeEvent.layout),
+          x = _e$nativeEvent$layout2.x,
+          y = _e$nativeEvent$layout2.y,
+          width = _e$nativeEvent$layout2.width,
+          height = _e$nativeEvent$layout2.height;
+
+      this.setState({ labelWidth: width });
+    }
+  }, {
+    key: 'handleChange',
+    value: function handleChange(event) {
+      var value = event.nativeEvent.text;
+
+      this.validate(value);
+
+      this.setState({ value: value,
+        inputHeight: Math.max(this.state.minFieldHeight, event.nativeEvent.contentSize && this.props.multiline ? event.nativeEvent.contentSize.height : 0)
+      });
+
+      if (this.props.onChange) this.props.onChange(value, this.valid);
+      if (this.props.onValueChange) this.props.onValueChange(value, this.valid);
+    }
+  }, {
+    key: '_scrollToInput',
+    value: function _scrollToInput(event) {
+      if (this.props.onFocus) {
+        var handle = _reactNative2.default.findNodeHandle(this.refs.inputBox);
+        this.props.onFocus(event, handle);
+      }
+    }
+  }, {
+    key: 'handleFieldPress',
+    value: function handleFieldPress(event) {
+      this.refs.inputBox.focus();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        _Field.Field,
+        babelHelpers.extends({}, this.props, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 140
+          }
+        }),
+        _react2.default.createElement(
+          View,
+          {
+            onLayout: this.handleLayoutChange.bind(this),
+            style: [this.props.containerStyle], __source: {
+              fileName: _jsxFileName,
+              lineNumber: 141
+            }
+          },
+          this.props.iconLeft ? this.props.iconLeft : null,
+          this.props.label ? _react2.default.createElement(
+            Text,
+            { style: this.props.labelStyle,
+              onLayout: this.handleLabelLayoutChange.bind(this),
+              onPress: this.handleFieldPress.bind(this),
+              suppressHighlighting: true,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 153
+              }
+            },
+            this.props.label
+          ) : null,
+          _react2.default.createElement(TextInput, babelHelpers.extends({}, this.props, {
+            ref: 'inputBox',
+            keyboardType: this.props.keyboardType,
+            style: [this.props.inputStyle, { height: this.state.inputHeight }],
+
+            onChange: this.handleChange.bind(this),
+            onFocus: this._scrollToInput.bind(this),
+            placeholder: this.props.placeholder,
+            value: this.state.value,
+            width: this.state.width - this.state.labelWidth - (this.props.iconRight ? this.props.iconRight.props.size : 0) - (this.props.iconLeft ? this.props.iconLeft.props.size : 0),
+
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 160
+            }
+          })),
+          this.props.iconRight ? this.props.iconRight : null
+        )
+      );
+    }
+  }]);
+  return InputComponent;
+}(_react2.default.Component);
+
+InputComponent.propTypes = {
+  labelStyle: Text.propTypes.style,
+  inputStyle: TextInput.propTypes.style,
+  containerStyle: View.propTypes.style
+};

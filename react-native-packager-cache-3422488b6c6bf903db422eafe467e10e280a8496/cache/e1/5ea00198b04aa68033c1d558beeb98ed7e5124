@@ -1,0 +1,92 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Form = undefined;
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/node_modules/react-native-form-generator/src/Form.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _require = require('react-native'),
+    View = _require.View,
+    TextInput = _require.TextInput,
+    StyleSheet = _require.StyleSheet,
+    ScrollView = _require.ScrollView,
+    Text = _require.Text,
+    SliderIOS = _require.SliderIOS,
+    TouchableWithoutFeedback = _require.TouchableWithoutFeedback;
+
+var Form = exports.Form = function (_React$Component) {
+  babelHelpers.inherits(Form, _React$Component);
+
+  function Form(props) {
+    babelHelpers.classCallCheck(this, Form);
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).call(this));
+
+    _this.values = {};
+
+    return _this;
+  }
+
+  babelHelpers.createClass(Form, [{
+    key: 'handleFieldFocused',
+    value: function handleFieldFocused(event, inputHandle) {
+      this.props.onFocus && this.props.onFocus(event, inputHandle);
+    }
+  }, {
+    key: 'handleFieldChange',
+    value: function handleFieldChange(field_ref, value) {
+      this.values[field_ref] = value;
+      this.props.onChange && this.props.onChange(this.values);
+    }
+  }, {
+    key: 'getValues',
+    value: function getValues() {
+      return this.values;
+    }
+  }, {
+    key: 'underscoreToSpaced',
+    value: function underscoreToSpaced(str) {
+      var words = str.split('_');
+      var res = [];
+      words.map(function (word, i) {
+        res.push(word.charAt(0).toUpperCase() + word.slice(1));
+      });
+
+      return res.join(' ');
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var wrappedChildren = [];
+
+      _react2.default.Children.map(this.props.children, function (child, i) {
+        if (!child) {
+          return;
+        }
+        wrappedChildren.push(_react2.default.cloneElement(child, {
+          key: child.ref || child.type + i,
+          fieldRef: child.ref,
+          ref: child.ref,
+          onFocus: _this2.handleFieldFocused.bind(_this2),
+          onChange: _this2.handleFieldChange.bind(_this2, child.ref)
+        }));
+      }, this);
+
+      return _react2.default.createElement(
+        View,
+        { style: this.props.style, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 59
+          }
+        },
+        wrappedChildren
+      );
+    }
+  }]);
+  return Form;
+}(_react2.default.Component);

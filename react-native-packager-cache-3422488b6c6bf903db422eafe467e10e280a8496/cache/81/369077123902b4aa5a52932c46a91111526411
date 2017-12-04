@@ -1,0 +1,68 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.SwitchField = undefined;
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/node_modules/react-native-form-generator/src/fields/SwitchField.android.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _SwitchComponent = require('../lib/SwitchComponent');
+
+var _require = require('react-native'),
+    View = _require.View,
+    StyleSheet = _require.StyleSheet,
+    Text = _require.Text,
+    Switch = _require.Switch;
+
+var SwitchField = exports.SwitchField = function (_React$Component) {
+  babelHelpers.inherits(SwitchField, _React$Component);
+
+  function SwitchField() {
+    babelHelpers.classCallCheck(this, SwitchField);
+    return babelHelpers.possibleConstructorReturn(this, (SwitchField.__proto__ || Object.getPrototypeOf(SwitchField)).apply(this, arguments));
+  }
+
+  babelHelpers.createClass(SwitchField, [{
+    key: 'setValue',
+    value: function setValue(value) {
+      this.refs.fieldComponent.setValue(value);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      return _react2.default.createElement(_SwitchComponent.SwitchComponent, babelHelpers.extends({}, this.props, {
+        ref: 'fieldComponent',
+        containerStyle: [formStyles.fieldContainer, formStyles.horizontalContainer, this.props.containerStyle],
+
+        labelStyle: [formStyles.fieldText, this.props.labelStyle],
+        switchStyle: [{ marginTop: 7, position: 'absolute', right: 10 }, this.props.switchStyle],
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 14
+        }
+      }));
+    }
+  }]);
+  return SwitchField;
+}(_react2.default.Component);
+
+var formStyles = StyleSheet.create({
+  fieldContainer: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#C8C7CC',
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    height: 45
+  },
+  horizontalContainer: {
+    flexDirection: 'row',
+
+    justifyContent: 'flex-start'
+  }
+
+});

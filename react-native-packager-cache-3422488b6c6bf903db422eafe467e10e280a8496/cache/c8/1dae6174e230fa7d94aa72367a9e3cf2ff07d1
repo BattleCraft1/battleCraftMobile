@@ -1,0 +1,28 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.loading = undefined;
+
+var _createReducer;
+
+var _createReducer2 = require('../lib/createReducer');
+
+var _createReducer3 = babelHelpers.interopRequireDefault(_createReducer2);
+
+var _loading = require('../types/loading');
+
+var types = babelHelpers.interopRequireWildcard(_loading);
+var loading = exports.loading = (0, _createReducer3.default)({}, (_createReducer = {}, babelHelpers.defineProperty(_createReducer, types.START_LOADING, function (state, action) {
+    var loading = void 0;
+    loading = {
+        dataFetched: false,
+        message: action.message
+    };
+    return loading;
+}), babelHelpers.defineProperty(_createReducer, types.STOP_LOADING, function (state, action) {
+    var loading = void 0;
+    loading = {
+        dataFetched: true
+    };
+    return loading;
+}), _createReducer));

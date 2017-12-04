@@ -1,0 +1,11 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _expo = require("expo");
+
+var _getDatesDifferenceInDays = require("./getDatesDifferenceInDays");
+
+var _getDatesDifferenceInDays2 = babelHelpers.interopRequireDefault(_getDatesDifferenceInDays);
+
+exports.default = function (token) {};

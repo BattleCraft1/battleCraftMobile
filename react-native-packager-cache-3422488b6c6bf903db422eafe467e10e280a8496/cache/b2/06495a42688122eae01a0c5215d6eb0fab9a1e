@@ -1,0 +1,68 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _reactNative = require('react-native');
+
+var _BaseColours = require('../../main/consts/BaseColours');
+
+var _BaseColours2 = babelHelpers.interopRequireDefault(_BaseColours);
+
+var styles = _reactNative.StyleSheet.create({
+    background: {
+        flex: 1,
+        backgroundColor: '#000'
+    },
+    stretch: {
+        flexDirection: 'column',
+        alignItems: 'stretch'
+    },
+    center: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    textStyle: {
+        fontFamily: 'arial',
+        textShadowColor: '#000000',
+        textShadowOffset: { width: -1, height: -1 },
+        color: '#fff'
+    },
+    borderStyle: {
+        borderTopColor: _BaseColours2.default.border.top,
+        borderRightColor: _BaseColours2.default.border.right,
+        borderBottomColor: _BaseColours2.default.border.bottom,
+        borderLeftColor: _BaseColours2.default.border.left
+    },
+    contentStyle: {
+        flex: 1,
+        padding: 5,
+        marginTop: 1,
+        justifyContent: 'center',
+        borderColor: _BaseColours2.default.background.darkBrown,
+        borderWidth: 5,
+        backgroundColor: _BaseColours2.default.background.mediumBrown
+    },
+    bigWhiteStyle: {
+        fontFamily: 'arial',
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 20
+    },
+    smallWhiteStyle: {
+        fontFamily: 'arial',
+        color: '#fff',
+        fontSize: 17
+    },
+    verySmallWhiteStyle: {
+        fontFamily: 'arial',
+        color: '#fff',
+        fontSize: 15
+    },
+    buttonsPanelStyle: {
+        padding: 3,
+        flexDirection: 'row',
+        backgroundColor: _BaseColours2.default.background.mediumBrown
+    }
+});
+
+exports.default = styles;

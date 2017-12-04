@@ -1,0 +1,66 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactNative = require('react-native');
+
+var BORDER_RADIUS = 13;
+var BACKGROUND_COLOR = 'white';
+var BORDER_COLOR = '#d5d5d5';
+var TITLE_FONT_SIZE = 13;
+var TITLE_COLOR = '#8f8f8f';
+var BUTTON_FONT_WEIGHT = 'normal';
+var BUTTON_FONT_COLOR = '#007ff9';
+var BUTTON_FONT_SIZE = 20;
+
+exports.default = _reactNative.StyleSheet.create({
+  contentContainer: {
+    justifyContent: 'flex-end',
+    margin: 10
+  },
+  datepickerContainer: {
+    backgroundColor: BACKGROUND_COLOR,
+    borderRadius: BORDER_RADIUS,
+    marginBottom: 8,
+    overflow: 'hidden'
+  },
+  titleContainer: {
+    borderBottomColor: BORDER_COLOR,
+    borderBottomWidth: _reactNative.StyleSheet.hairlineWidth,
+    padding: 14,
+    backgroundColor: 'transparent'
+  },
+  title: {
+    textAlign: 'center',
+    color: TITLE_COLOR,
+    fontSize: TITLE_FONT_SIZE
+  },
+  confirmButton: {
+    borderColor: BORDER_COLOR,
+    borderTopWidth: _reactNative.StyleSheet.hairlineWidth,
+    backgroundColor: 'transparent',
+    height: 57,
+    justifyContent: 'center'
+  },
+  confirmText: {
+    textAlign: 'center',
+    color: BUTTON_FONT_COLOR,
+    fontSize: BUTTON_FONT_SIZE,
+    fontWeight: BUTTON_FONT_WEIGHT,
+    backgroundColor: 'transparent'
+  },
+  cancelButton: {
+    backgroundColor: BACKGROUND_COLOR,
+    borderRadius: BORDER_RADIUS,
+    height: 57,
+    justifyContent: 'center'
+  },
+  cancelText: {
+    padding: 10,
+    textAlign: 'center',
+    color: BUTTON_FONT_COLOR,
+    fontSize: BUTTON_FONT_SIZE,
+    fontWeight: '600',
+    backgroundColor: 'transparent'
+  }
+});

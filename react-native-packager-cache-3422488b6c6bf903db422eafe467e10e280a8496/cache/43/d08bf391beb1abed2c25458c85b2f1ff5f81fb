@@ -1,0 +1,126 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = undefined;
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/App/components/entityPanel/tournament/tabs/table/OrganizersTable.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _UserTableRow = require('./row/UserTableRow');
+
+var _UserTableRow2 = babelHelpers.interopRequireDefault(_UserTableRow);
+
+var _EmptyUserTableRow = require('./row/EmptyUserTableRow');
+
+var _EmptyUserTableRow2 = babelHelpers.interopRequireDefault(_EmptyUserTableRow);
+
+var OrganizersTable = function (_React$Component) {
+    babelHelpers.inherits(OrganizersTable, _React$Component);
+
+    function OrganizersTable() {
+        babelHelpers.classCallCheck(this, OrganizersTable);
+        return babelHelpers.possibleConstructorReturn(this, (OrganizersTable.__proto__ || Object.getPrototypeOf(OrganizersTable)).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(OrganizersTable, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            if (this.props.shouldActualizeRelatedEntities === true) {
+                this.props.shouldActualizeRelatedEntitiesCallBack();
+                this.actualizeRelatedEntityObjects(this.props.relatedEntity.relatedEntities);
+            }
+        }
+    }, {
+        key: 'actualizeRelatedEntityObjects',
+        value: function actualizeRelatedEntityObjects(relatedEntities) {
+            console.log("praticipants");
+            var organizers = this.props.value;
+            var relatedEntitiesNames = organizers.map(function (entity) {
+                return entity.name;
+            });
+            relatedEntities.forEach(function (elementName) {
+                if (relatedEntitiesNames.indexOf(elementName) === -1) {
+                    organizers.push({
+                        name: elementName,
+                        accepted: false
+                    });
+                }
+            });
+            relatedEntitiesNames.forEach(function (elementName) {
+                if (relatedEntities.indexOf(elementName) === -1) {
+                    var organizerToDelete = organizers.find(function (element) {
+                        return element.name === elementName;
+                    });
+                    organizers.splice(organizers.indexOf(organizerToDelete), 1);
+                }
+            });
+            this.props.changeEntity(this.props.fieldName, organizers);
+        }
+    }, {
+        key: 'createTableRows',
+        value: function createTableRows() {
+            var _this2 = this;
+
+            if (this.props.value.length === 0) {
+                return _react2.default.createElement(_EmptyUserTableRow2.default, {
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 46
+                    }
+                });
+            } else {
+                return this.props.value.map(function (organizer) {
+                    return _react2.default.createElement(_UserTableRow2.default, { key: organizer.name,
+                        disabled: _this2.props.disabled,
+                        'delete': _this2.deleteElement.bind(_this2),
+                        accepted: organizer.accepted,
+                        name: organizer.name, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 50
+                        }
+                    });
+                });
+            }
+        }
+    }, {
+        key: 'deleteElement',
+        value: function deleteElement(name) {
+            var elements = this.props.value;
+            elements = elements.filter(function (user) {
+                return user.name !== name;
+            });
+            this.props.changeEntity(this.props.fieldName, elements);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                _reactNative.View,
+                {
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 69
+                    }
+                },
+                _react2.default.createElement(
+                    _reactNative.Text,
+                    {
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 70
+                        }
+                    },
+                    this.props.name
+                ),
+                this.createTableRows()
+            );
+        }
+    }]);
+    return OrganizersTable;
+}(_react2.default.Component);
+
+exports.default = OrganizersTable;

@@ -1,0 +1,21 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.showConfirmationDialog = showConfirmationDialog;
+exports.hideConfirmationDialog = hideConfirmationDialog;
+
+var _confirmation = require('../types/confirmation');
+
+var types = babelHelpers.interopRequireWildcard(_confirmation);
+function showConfirmationDialog(confirmation) {
+    return {
+        type: types.SHOW_CONFIRMATION_DIALOG,
+        confirmation: confirmation
+    };
+}
+
+function hideConfirmationDialog() {
+    return {
+        type: types.HIDE_CONFIRMATION_DIALOG
+    };
+}

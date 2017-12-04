@@ -9,6 +9,8 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../redux/actions';
 
 class SplashScreen extends Component {
+
+
     render() {
         return (
                 <View style={{flex: 1}}>
@@ -26,7 +28,7 @@ function mapDispatchToProps( dispatch ) {
 
 function mapStateToProps( state ) {
     return {
-        dimension: state.dimension
+        dimension: state.dimension,
     };
 }
 

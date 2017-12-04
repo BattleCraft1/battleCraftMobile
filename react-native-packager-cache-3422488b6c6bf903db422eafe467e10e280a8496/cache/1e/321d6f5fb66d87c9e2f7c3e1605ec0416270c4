@@ -1,0 +1,127 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.DatePickerField = undefined;
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/node_modules/react-native-form-generator/src/fields/DatePickerField.android.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _reactNative2 = babelHelpers.interopRequireDefault(_reactNative);
+
+var _DatePickerComponent = require('../lib/DatePickerComponent');
+
+var View = _reactNative2.default.View,
+    StyleSheet = _reactNative2.default.StyleSheet,
+    TextInput = _reactNative2.default.TextInput,
+    Text = _reactNative2.default.Text,
+    PickerIOS = _reactNative2.default.PickerIOS;
+
+var DatePickerField = exports.DatePickerField = function (_React$Component) {
+  babelHelpers.inherits(DatePickerField, _React$Component);
+
+  function DatePickerField() {
+    babelHelpers.classCallCheck(this, DatePickerField);
+    return babelHelpers.possibleConstructorReturn(this, (DatePickerField.__proto__ || Object.getPrototypeOf(DatePickerField)).apply(this, arguments));
+  }
+
+  babelHelpers.createClass(DatePickerField, [{
+    key: 'setDate',
+    value: function setDate(date) {
+      this.refs.datePickerComponent.setDate(date);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      return _react2.default.createElement(_DatePickerComponent.DatePickerComponent, babelHelpers.extends({
+        ref: 'datePickerComponent'
+      }, this.props, {
+        labelStyle: [formStyles.fieldText, this.props.labelStyle],
+        valueStyle: [formStyles.fieldValue, this.props.valueStyle],
+        valueContainerStyle: [formStyles.alignRight, formStyles.horizontalContainer, this.props.valueContainerStyle],
+        containerStyle: [formStyles.fieldContainer, formStyles.horizontalContainer, this.props.containerStyle],
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 16
+        }
+      }));
+    }
+  }]);
+  return DatePickerField;
+}(_react2.default.Component);
+
+var formStyles = StyleSheet.create({
+  form: {},
+  alignRight: {
+    marginTop: 7, position: 'absolute', right: 10
+  },
+  noBorder: {
+    borderTopWidth: 0,
+    borderBottomWidth: 0
+  },
+  separatorContainer: {
+    paddingTop: 35,
+    borderBottomColor: '#C8C7CC',
+    borderBottomWidth: 1
+
+  },
+  separator: {
+
+    paddingLeft: 10,
+    paddingRight: 10,
+    color: '#6D6D72',
+    paddingBottom: 7
+
+  },
+  fieldsWrapper: {},
+  horizontalContainer: {
+    flexDirection: 'row',
+
+    justifyContent: 'flex-start'
+  },
+  fieldContainer: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#C8C7CC',
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    height: 45
+  },
+  fieldValue: {
+    fontSize: 34 / 2,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginRight: 10,
+    paddingTop: 4,
+    justifyContent: 'center',
+
+    color: '#C7C7CC'
+  },
+  fieldText: {
+    fontSize: 34 / 2,
+    paddingLeft: 10,
+    paddingRight: 10,
+    justifyContent: 'center',
+    lineHeight: 32
+  },
+  input: {
+    paddingLeft: 10,
+    paddingRight: 10
+
+  },
+  helpTextContainer: {
+    marginTop: 9,
+    marginBottom: 25,
+    paddingLeft: 20,
+    paddingRight: 20
+
+  },
+  helpText: {
+    color: '#7a7a7a'
+  }
+});

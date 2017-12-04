@@ -1,0 +1,324 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/App/components/collectionPanel/searchPanel/tournaments/FormInputs.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _TextInput = require('../inputs/TextInput');
+
+var _TextInput2 = babelHelpers.interopRequireDefault(_TextInput);
+
+var _SelectInput = require('../inputs/SelectInput');
+
+var _SelectInput2 = babelHelpers.interopRequireDefault(_SelectInput);
+
+var _DateInput = require('../inputs/DateInput');
+
+var _DateInput2 = babelHelpers.interopRequireDefault(_DateInput);
+
+var _NumberInput = require('../inputs/NumberInput');
+
+var _NumberInput2 = babelHelpers.interopRequireDefault(_NumberInput);
+
+var _StatusInput = require('../inputs/StatusInput');
+
+var _StatusInput2 = babelHelpers.interopRequireDefault(_StatusInput);
+
+var _SelectTournamentTypeInput = require('../inputs/SelectTournamentTypeInput');
+
+var _SelectTournamentTypeInput2 = babelHelpers.interopRequireDefault(_SelectTournamentTypeInput);
+
+var _provinces = require('../../../../main/consts/provinces');
+
+var _tournamentType = require('../../../../main/consts/tournamentType');
+
+var _status = require('../../../../main/consts/status');
+
+var _serverName = require('../../../../main/consts/serverName');
+
+var _axios = require('axios');
+
+var _axios2 = babelHelpers.interopRequireDefault(_axios);
+
+var _convertArrayToObject = require('../../../../main/functions/convertArrayToObject');
+
+var _convertArrayToObject2 = babelHelpers.interopRequireDefault(_convertArrayToObject);
+
+var _index = require('../../../../redux/actions/index');
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var regeneratorRuntime = require('regenerator-runtime');
+
+var FormInputs = function (_Component) {
+    babelHelpers.inherits(FormInputs, _Component);
+
+    function FormInputs(props) {
+        babelHelpers.classCallCheck(this, FormInputs);
+
+        var _this = babelHelpers.possibleConstructorReturn(this, (FormInputs.__proto__ || Object.getPrototypeOf(FormInputs)).call(this, props));
+
+        _this.state = {
+            tournamentsGames: {},
+            status: {},
+            searchFormField: {
+                "name": {},
+                "dateOfStart": {},
+                "dateOfEnd": {},
+                "game": {},
+                "city": {},
+                "province": {},
+                "status": {},
+                "freeSlots": {},
+                "maxPlayers": {},
+                "playersNumber": {},
+                "playersOnTableCount": {}
+            }
+        };
+        return _this;
+    }
+
+    babelHelpers.createClass(FormInputs, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            var getGameOperation;
+            return regeneratorRuntime.async(function componentDidMount$(_context2) {
+                while (1) {
+                    switch (_context2.prev = _context2.next) {
+                        case 0:
+                            getGameOperation = function getGameOperation() {
+                                return regeneratorRuntime.async(function getGameOperation$(_context) {
+                                    while (1) {
+                                        switch (_context.prev = _context.next) {
+                                            case 0:
+                                                _this2.props.startLoading("Fetching games...");
+                                                _context.next = 3;
+                                                return regeneratorRuntime.awrap(_axios2.default.get(_serverName.serverName + 'get/allGames/names', {
+                                                    headers: {
+                                                        "X-Auth-Token": _this2.props.security.token
+                                                    }
+                                                }).then(function (res) {
+                                                    _this2.props.stopLoading();
+                                                    _this2.setState({ tournamentsGames: (0, _convertArrayToObject2.default)(res.data) });
+                                                }).catch(function (error) {
+                                                    _this2.props.stopLoading();
+                                                    _this2.props.showNetworkErrorMessage(error, getGameOperation);
+                                                }));
+
+                                            case 3:
+                                            case 'end':
+                                                return _context.stop();
+                                        }
+                                    }
+                                }, null, _this2);
+                            };
+
+                            _context2.next = 3;
+                            return regeneratorRuntime.awrap(getGameOperation());
+
+                        case 3:
+                        case 'end':
+                            return _context2.stop();
+                    }
+                }
+            }, null, this);
+        }
+    }, {
+        key: 'changeSearchForm',
+        value: function changeSearchForm(index, value) {
+            var searchFormFields = this.state.searchFormField;
+            searchFormFields[index] = value;
+            this.setState({ searchFormField: searchFormFields });
+        }
+    }, {
+        key: 'getTournamentStatus',
+        value: function getTournamentStatus() {
+            var tournamentStat = _status.tournamentStatus;
+            if (this.props.security.role === "ROLE_ADMIN") {
+                tournamentStat["BANNED"] = "BANNED";
+            }
+            return tournamentStat;
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this3 = this;
+
+            return _react2.default.createElement(
+                _reactNative.View,
+                {
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 86
+                    }
+                },
+                _react2.default.createElement(_TextInput2.default, {
+                    key: 'tournamentName',
+                    name: 'Tournament name:',
+                    placeholder: 'Tournament 2017',
+                    keys: ["name"],
+                    operation: ':',
+                    indexOfSearchFields: 'name',
+                    changeSearchForm: this.changeSearchForm.bind(this),
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 87
+                    }
+                }),
+                _react2.default.createElement(_SelectInput2.default, {
+                    key: 'gameGenre',
+                    name: 'Game genre:',
+                    keys: ["game", "name"],
+                    operation: ':',
+                    indexOfSearchFields: 'game',
+                    options: this.state.tournamentsGames,
+                    changeSearchForm: this.changeSearchForm.bind(this),
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 96
+                    }
+                }),
+                this.props.entityPanelDisabled && _react2.default.createElement(_StatusInput2.default, {
+                    key: 'status',
+                    options: this.getTournamentStatus(),
+                    changeSearchForm: this.changeSearchForm.bind(this),
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 107
+                    }
+                }),
+                _react2.default.createElement(_NumberInput2.default, {
+                    key: 'playerNumber',
+                    placeholder: 'Players number',
+                    name: 'Players number:',
+                    keys: ["playersNumber"],
+                    operation: '<',
+                    indexOfSearchFields: 'playersNumber',
+                    changeSearchForm: this.changeSearchForm.bind(this),
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 113
+                    }
+                }),
+                _react2.default.createElement(_NumberInput2.default, {
+                    key: 'maxPlayers',
+                    placeholder: 'Max players',
+                    name: 'Max players:',
+                    keys: ["maxPlayers"],
+                    operation: '<',
+                    indexOfSearchFields: 'maxPlayers',
+                    changeSearchForm: this.changeSearchForm.bind(this),
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 122
+                    }
+                }),
+                _react2.default.createElement(_NumberInput2.default, {
+                    key: 'freeSlots',
+                    placeholder: 'Free slots',
+                    name: 'Free slots:',
+                    keys: ["freeSlots"],
+                    operation: '>',
+                    indexOfSearchFields: 'freeSlots',
+                    changeSearchForm: this.changeSearchForm.bind(this),
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 131
+                    }
+                }),
+                _react2.default.createElement(_SelectTournamentTypeInput2.default, {
+                    key: 'tournamentType',
+                    name: 'Tournament type:',
+                    keys: ["playersOnTableCount"],
+                    operation: ':',
+                    indexOfSearchFields: 'playersOnTableCount',
+                    options: _tournamentType.type,
+                    changeSearchForm: this.changeSearchForm.bind(this),
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 140
+                    }
+                }),
+                _react2.default.createElement(_TextInput2.default, {
+                    key: 'city',
+                    name: 'City:',
+                    placeholder: 'Lublin',
+                    keys: ["address", "city"],
+                    operation: ':',
+                    indexOfSearchFields: 'city',
+                    changeSearchForm: this.changeSearchForm.bind(this),
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 149
+                    }
+                }),
+                _react2.default.createElement(_SelectInput2.default, {
+                    key: 'province',
+                    name: 'Province:',
+                    keys: ["address", "province"],
+                    operation: ':',
+                    indexOfSearchFields: 'province',
+                    options: _provinces.provinces,
+                    changeSearchForm: this.changeSearchForm.bind(this),
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 158
+                    }
+                }),
+                _react2.default.createElement(_DateInput2.default, {
+                    key: 'dateFrom',
+                    name: 'Date from:',
+                    keys: ["dateOfStart"],
+                    operation: '>',
+                    indexOfSearchFields: 'dateOfStart',
+                    changeSearchForm: this.changeSearchForm.bind(this),
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 167
+                    }
+                }),
+                _react2.default.createElement(_DateInput2.default, {
+                    key: 'dateTo',
+                    name: 'Date to:',
+                    keys: ["dateOfEnd"],
+                    operation: '<',
+                    indexOfSearchFields: 'dateOfEnd',
+                    changeSearchForm: this.changeSearchForm.bind(this),
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 175
+                    }
+                }),
+                _react2.default.createElement(_reactNative.Button, { title: 'Search', color: '#4b371b', onPress: function onPress() {
+                        return _this3.props.search(_this3.state.searchFormField);
+                    }, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 183
+                    }
+                })
+            );
+        }
+    }]);
+    return FormInputs;
+}(_react.Component);
+
+function mapDispatchToProps(dispatch) {
+    return (0, _redux.bindActionCreators)(_index.ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+    return {
+        security: state.security
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(FormInputs);

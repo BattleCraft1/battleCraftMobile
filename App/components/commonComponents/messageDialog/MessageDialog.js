@@ -48,6 +48,7 @@ class MessageDialog extends React.Component {
                 <TouchableHighlight
                     style={MainStyles.stretch}
                     onPress={() => {
+                        this.props.playSound('toggle');
                         this.props.hideMessageBox();
                         this.props.message.failedOperation();
                     }}>
@@ -62,6 +63,7 @@ class MessageDialog extends React.Component {
             operationButton=
                 <TouchableHighlight
                     onPress={() => {
+                        this.props.playSound('toggle');
                         this.props.hideMessageBox();
                     }}>
                     <Text style={MainStyles.smallWhiteStyle}>Ok</Text>

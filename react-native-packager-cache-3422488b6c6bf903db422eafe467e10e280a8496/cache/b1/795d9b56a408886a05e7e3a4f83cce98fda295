@@ -1,0 +1,82 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Separator = undefined;
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/node_modules/react-native-form-generator/src/fields/Separator.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _require = require('react-native'),
+    View = _require.View,
+    StyleSheet = _require.StyleSheet,
+    Text = _require.Text;
+
+var Separator = exports.Separator = function (_React$Component) {
+  babelHelpers.inherits(Separator, _React$Component);
+
+  function Separator() {
+    babelHelpers.classCallCheck(this, Separator);
+    return babelHelpers.possibleConstructorReturn(this, (Separator.__proto__ || Object.getPrototypeOf(Separator)).apply(this, arguments));
+  }
+
+  babelHelpers.createClass(Separator, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        View,
+        { style: [formStyles.separatorContainer, this.props.containerStyle], __source: {
+            fileName: _jsxFileName,
+            lineNumber: 8
+          }
+        },
+        this.props.label ? _react2.default.createElement(
+          Text,
+          { style: [formStyles.separator, this.props.labelStyle], __source: {
+              fileName: _jsxFileName,
+              lineNumber: 11
+            }
+          },
+          this.props.label.toUpperCase()
+        ) : null
+      );
+    }
+  }]);
+  return Separator;
+}(_react2.default.Component);
+
+Separator.propTypes = {
+  labelStyle: Text.propTypes.style,
+  containerStyle: View.propTypes.style
+};
+
+var formStyles = StyleSheet.create({
+  form: {},
+  alignRight: {
+    marginTop: 7, position: 'absolute', right: 10
+  },
+  separatorContainer: {
+    paddingTop: 35,
+    borderBottomColor: '#C8C7CC',
+    borderBottomWidth: 1
+
+  },
+  separator: {
+
+    paddingLeft: 10,
+    paddingRight: 10,
+    color: '#6D6D72',
+    paddingBottom: 7
+
+  },
+  fieldContainer: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#C8C7CC',
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    height: 45
+  }
+});

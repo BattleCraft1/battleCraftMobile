@@ -1,0 +1,18 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _compareArrays = require("./compareArrays");
+
+var _compareArrays2 = babelHelpers.interopRequireDefault(_compareArrays);
+
+exports.default = function (searchCriteria) {
+    var gameName = "";
+    if (searchCriteria.length > 0) {
+        var gameCriteria = searchCriteria.find(function (criteria) {
+            return (0, _compareArrays2.default)(criteria["keys"], ["tour", "tournament", "game", "name"]);
+        });
+        gameName = gameCriteria["value"];
+    }
+    return gameName;
+};

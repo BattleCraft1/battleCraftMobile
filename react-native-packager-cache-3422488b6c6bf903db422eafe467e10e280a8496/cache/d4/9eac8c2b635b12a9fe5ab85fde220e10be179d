@@ -1,0 +1,124 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.TimePickerField = undefined;
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/node_modules/react-native-form-generator/src/fields/TimePickerField.android.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _reactNative2 = babelHelpers.interopRequireDefault(_reactNative);
+
+var _TimePickerComponent = require('../lib/TimePickerComponent');
+
+var View = _reactNative2.default.View,
+    StyleSheet = _reactNative2.default.StyleSheet,
+    TextInput = _reactNative2.default.TextInput,
+    Text = _reactNative2.default.Text;
+
+var TimePickerField = exports.TimePickerField = function (_React$Component) {
+  babelHelpers.inherits(TimePickerField, _React$Component);
+
+  function TimePickerField() {
+    babelHelpers.classCallCheck(this, TimePickerField);
+    return babelHelpers.possibleConstructorReturn(this, (TimePickerField.__proto__ || Object.getPrototypeOf(TimePickerField)).apply(this, arguments));
+  }
+
+  babelHelpers.createClass(TimePickerField, [{
+    key: 'setTime',
+    value: function setTime(date) {
+      this.refs.datePickerComponent.setTime(date);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_TimePickerComponent.TimePickerComponent, babelHelpers.extends({}, this.props, {
+        ref: 'fieldComponent',
+        labelStyle: [formStyles.fieldText, this.props.labelStyle],
+        valueStyle: [formStyles.fieldValue, this.props.valueStyle],
+        valueContainerStyle: [formStyles.alignRight, formStyles.horizontalContainer, this.props.valueContainerStyle],
+        containerStyle: [formStyles.fieldContainer, formStyles.horizontalContainer, this.props.containerStyle],
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 18
+        }
+      }));
+    }
+  }]);
+  return TimePickerField;
+}(_react2.default.Component);
+
+var formStyles = StyleSheet.create({
+  form: {},
+  alignRight: {
+    marginTop: 7, position: 'absolute', right: 10
+  },
+  noBorder: {
+    borderTopWidth: 0,
+    borderBottomWidth: 0
+  },
+  separatorContainer: {
+    paddingTop: 35,
+    borderBottomColor: '#C8C7CC',
+    borderBottomWidth: 1
+
+  },
+  separator: {
+
+    paddingLeft: 10,
+    paddingRight: 10,
+    color: '#6D6D72',
+    paddingBottom: 7
+
+  },
+  fieldsWrapper: {},
+  horizontalContainer: {
+    flexDirection: 'row',
+
+    justifyContent: 'flex-start'
+  },
+  fieldContainer: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#C8C7CC',
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    height: 45
+  },
+  fieldValue: {
+    fontSize: 34 / 2,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginRight: 10,
+    paddingTop: 4,
+    justifyContent: 'center',
+
+    color: '#C7C7CC'
+  },
+  fieldText: {
+    fontSize: 34 / 2,
+    paddingLeft: 10,
+    paddingRight: 10,
+    justifyContent: 'center',
+    lineHeight: 32
+  },
+  input: {
+    paddingLeft: 10,
+    paddingRight: 10
+
+  },
+  helpTextContainer: {
+    marginTop: 9,
+    marginBottom: 25,
+    paddingLeft: 20,
+    paddingRight: 20
+
+  },
+  helpText: {
+    color: '#7a7a7a'
+  }
+});

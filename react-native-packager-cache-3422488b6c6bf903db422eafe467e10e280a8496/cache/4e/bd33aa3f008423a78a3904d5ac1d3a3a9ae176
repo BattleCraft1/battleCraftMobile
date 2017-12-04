@@ -1,0 +1,230 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/App/components/entityPanel/inputs/AvatarInput.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _EntityPanelInputsStyles = require('../../../Styles/CollectionPanelStyles/EntityPanelInputsStyles');
+
+var _EntityPanelInputsStyles2 = babelHelpers.interopRequireDefault(_EntityPanelInputsStyles);
+
+var _reactNative = require('react-native');
+
+var _serverName = require('../../../main/consts/serverName');
+
+var _expo = require('expo');
+
+var _expo2 = babelHelpers.interopRequireDefault(_expo);
+
+var _index = require('../../../redux/actions/index');
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var regeneratorRuntime = require('regenerator-runtime');
+
+var AvatarInput = function (_React$Component) {
+    babelHelpers.inherits(AvatarInput, _React$Component);
+
+    function AvatarInput() {
+        var _ref,
+            _this2 = this;
+
+        var _temp, _this, _ret;
+
+        babelHelpers.classCallCheck(this, AvatarInput);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = AvatarInput.__proto__ || Object.getPrototypeOf(AvatarInput)).call.apply(_ref, [this].concat(args))), _this), _this.uploadImage = function _callee() {
+            var pickerResult;
+            return regeneratorRuntime.async(function _callee$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            if (!_this.props.disabled) {
+                                _context.next = 2;
+                                break;
+                            }
+
+                            return _context.abrupt('return');
+
+                        case 2:
+                            _context.next = 4;
+                            return regeneratorRuntime.awrap(_expo.ImagePicker.launchImageLibraryAsync({
+                                allowsEditing: false
+                            }));
+
+                        case 4:
+                            pickerResult = _context.sent;
+
+
+                            _this._handleImagePicked(pickerResult);
+
+                        case 6:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, null, _this2);
+        }, _this._handleImagePicked = function _callee2(pickerResult) {
+            return regeneratorRuntime.async(function _callee2$(_context2) {
+                while (1) {
+                    switch (_context2.prev = _context2.next) {
+                        case 0:
+                            _context2.prev = 0;
+
+                            _this.props.startLoading("Uploading image...");
+
+                            if (pickerResult.cancelled) {
+                                _context2.next = 5;
+                                break;
+                            }
+
+                            _context2.next = 5;
+                            return regeneratorRuntime.awrap(_this.uploadImageAsync(pickerResult));
+
+                        case 5:
+                            _context2.next = 11;
+                            break;
+
+                        case 7:
+                            _context2.prev = 7;
+                            _context2.t0 = _context2['catch'](0);
+
+                            console.log(_context2.t0);
+                            _this.props.showFailureMessage('Upload failed');
+
+                        case 11:
+                            _context2.prev = 11;
+
+                            _this.props.stopLoading();
+                            return _context2.finish(11);
+
+                        case 14:
+                        case 'end':
+                            return _context2.stop();
+                    }
+                }
+            }, null, _this2, [[0, 7, 11, 14]]);
+        }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
+    }
+
+    babelHelpers.createClass(AvatarInput, [{
+        key: 'uploadImageAsync',
+        value: function uploadImageAsync(pickerResult) {
+            var _this3 = this;
+
+            var uri, fileType, formData, url;
+            return regeneratorRuntime.async(function uploadImageAsync$(_context3) {
+                while (1) {
+                    switch (_context3.prev = _context3.next) {
+                        case 0:
+                            uri = pickerResult.uri;
+                            fileType = uri.substr(uri.lastIndexOf(".") + 1);
+
+                            if (!(fileType === 'bmp' || fileType === 'gif' || fileType === 'jpg' || fileType === 'png')) {
+                                _context3.next = 6;
+                                break;
+                            }
+
+                            if (fileType === 'jpg') fileType = 'jpeg';
+                            _context3.next = 8;
+                            break;
+
+                        case 6:
+                            this.props.showFailureMessage("Extension: " + fileType + " is not acceptable extension as user avatar. You should try with jpg, gif, bmp or png");
+                            return _context3.abrupt('return');
+
+                        case 8:
+                            formData = new FormData();
+
+                            formData.append('avatar', { uri: uri, name: 'avatar.' + fileType, type: 'image/' + fileType });
+
+                            url = _serverName.serverName + 'upload/user/avatar?username=' + this.props.name;
+                            _context3.next = 13;
+                            return regeneratorRuntime.awrap(fetch(url, {
+                                method: 'POST',
+                                body: formData,
+                                headers: {
+                                    "X-Auth-Token": this.props.security.token,
+                                    'content-type': 'multipart/form-data'
+                                }
+                            }).then(function (res) {
+                                console.log(res);
+                                if (res["status"] !== 200) {
+                                    _this3.props.showFailureMessage('Upload failed');
+                                } else {
+                                    _this3.props.showSuccessMessage("Avatar successfully changed");
+                                }
+                            }).catch(function (error) {
+                                _this3.props.showNetworkErrorMessage(error);
+                            }));
+
+                        case 13:
+                            return _context3.abrupt('return', _context3.sent);
+
+                        case 14:
+                        case 'end':
+                            return _context3.stop();
+                    }
+                }
+            }, null, this);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                _reactNative.View,
+                { style: { alignItems: 'center', justifyContent: 'center' }, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 80
+                    }
+                },
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: _EntityPanelInputsStyles2.default.avatarContainerStyle, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 81
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.TouchableHighlight,
+                        { onPress: this.uploadImage, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 82
+                            }
+                        },
+                        _react2.default.createElement(_reactNative.Image, {
+                            style: _EntityPanelInputsStyles2.default.avatarStyle,
+                            source: { uri: _serverName.serverName + '/get/user/avatar?username=' + this.props.name + '&' + new Date().getTime() }, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 83
+                            }
+                        })
+                    )
+                )
+            );
+        }
+    }]);
+    return AvatarInput;
+}(_react2.default.Component);
+
+function mapDispatchToProps(dispatch) {
+    return (0, _redux.bindActionCreators)(_index.ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+    return {
+        message: state.message,
+        security: state.security
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AvatarInput);

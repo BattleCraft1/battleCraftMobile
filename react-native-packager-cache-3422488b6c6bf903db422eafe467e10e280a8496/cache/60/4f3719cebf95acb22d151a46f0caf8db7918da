@@ -1,0 +1,132 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.entityPanel = undefined;
+
+var _createReducer;
+
+var _createReducer2 = require('../lib/createReducer');
+
+var _createReducer3 = babelHelpers.interopRequireDefault(_createReducer2);
+
+var _entityPanel = require('../types/entityPanel');
+
+var types = babelHelpers.interopRequireWildcard(_entityPanel);
+
+var _entityPanelModes = require('../../main/consts/entityPanelModes');
+
+var _entityPanelTypes = require('../../main/consts/entityPanelTypes');
+
+var entityPanel = exports.entityPanel = (0, _createReducer3.default)({}, (_createReducer = {}, babelHelpers.defineProperty(_createReducer, types.ADD_ENTITY, function (state, action) {
+    return {
+        mode: _entityPanelModes.entityPanelModes.add,
+        entityType: action.entityType,
+        entityName: "",
+        hidden: false,
+        relatedEntity: {
+            relatedEntities: [],
+            relatedEntityType: "",
+            relatedEntityCriteria: "",
+            relatedEntityLimit: 0,
+            operationCanceled: false
+        }
+    };
+}), babelHelpers.defineProperty(_createReducer, types.EDIT_ENTITY, function (state, action) {
+    return {
+        mode: _entityPanelModes.entityPanelModes.edit,
+        entityType: action.entityType,
+        entityName: action.entityName,
+        hidden: false,
+        relatedEntity: {
+            relatedEntities: [],
+            relatedEntityType: "",
+            relatedEntityCriteria: "",
+            relatedEntityLimit: 0,
+            operationCanceled: false
+        }
+    };
+}), babelHelpers.defineProperty(_createReducer, types.GET_ENTITY, function (state, action) {
+    return {
+        mode: _entityPanelModes.entityPanelModes.get,
+        entityType: action.entityType,
+        entityName: action.entityName,
+        hidden: false,
+        relatedEntity: {
+            relatedEntities: [],
+            relatedEntityType: "",
+            relatedEntityCriteria: "",
+            relatedEntityLimit: 0,
+            operationCanceled: false
+        }
+    };
+}), babelHelpers.defineProperty(_createReducer, types.CLOSE_ENTITY_PANEL, function (state, action) {
+    return {
+        mode: _entityPanelModes.entityPanelModes.disabled,
+        entityType: _entityPanelTypes.entityPanelTypes.none,
+        entityName: "",
+        hidden: false,
+        relatedEntity: {
+            relatedEntities: [],
+            relatedEntityType: "",
+            relatedEntityCriteria: "",
+            relatedEntityLimit: 0,
+            operationCanceled: false
+        }
+    };
+}), babelHelpers.defineProperty(_createReducer, types.SHOW_ENTITY_PANEL, function (state, action) {
+    return {
+        mode: state.mode,
+        entityType: state.entityType,
+        entityName: state.entityName,
+        hidden: false,
+        relatedEntity: {
+            relatedEntities: state.relatedEntity.relatedEntities,
+            relatedEntityType: state.relatedEntity.relatedEntityType,
+            relatedEntityCriteria: state.relatedEntity.relatedEntityCriteria,
+            relatedEntityLimit: state.relatedEntity.relatedEntityLimit,
+            operationCanceled: false
+        }
+    };
+}), babelHelpers.defineProperty(_createReducer, types.SET_RELATED_ENTITY, function (state, action) {
+    return {
+        mode: state.mode,
+        entityType: state.entityType,
+        entityName: state.entityName,
+        hidden: true,
+        relatedEntity: {
+            relatedEntities: action.relatedEntities,
+            relatedEntityType: action.relatedEntityType,
+            relatedEntityCriteria: action.relatedEntityCriteria,
+            relatedEntityLimit: action.relatedEntityLimit,
+            operationCanceled: false
+        }
+    };
+}), babelHelpers.defineProperty(_createReducer, types.CANCEL_ENTITY_PANEL_OPERATION, function (state, action) {
+    return {
+        mode: state.mode,
+        entityType: state.entityType,
+        entityName: state.entityName,
+        hidden: false,
+        relatedEntity: {
+            relatedEntities: state.relatedEntity.relatedEntities,
+            relatedEntityType: state.relatedEntity.relatedEntityType,
+            relatedEntityCriteria: state.relatedEntity.relatedEntityCriteria,
+            relatedEntityLimit: state.relatedEntity.relatedEntityLimit,
+            operationCanceled: true
+        }
+    };
+}), babelHelpers.defineProperty(_createReducer, types.CHANGE_RELATED_ENTITIES, function (state, action) {
+    return {
+        mode: state.mode,
+        entityType: state.entityType,
+        entityName: state.entityName,
+        hidden: state.hidden,
+        relatedEntity: {
+            relatedEntities: action.relatedEntities,
+            relatedEntityType: state.relatedEntity.relatedEntityType,
+            relatedEntityCriteria: state.relatedEntity.relatedEntityCriteria,
+            relatedEntityLimit: state.relatedEntity.relatedEntityLimit,
+            operationCanceled: false
+        }
+    };
+}), _createReducer));

@@ -1,0 +1,19 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.dimension = undefined;
+
+var _createReducer2 = require('../lib/createReducer');
+
+var _createReducer3 = babelHelpers.interopRequireDefault(_createReducer2);
+
+var _dimension = require('../types/dimension');
+
+var types = babelHelpers.interopRequireWildcard(_dimension);
+var dimension = exports.dimension = (0, _createReducer3.default)({}, babelHelpers.defineProperty({}, types.CHANGE_DIMENSION, function (state, action) {
+    return {
+        height: action.height,
+        width: action.width,
+        orientation: action.orientation
+    };
+}));

@@ -1,0 +1,6 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var factorial = exports.factorial = function factorial(number) {
+    if (number <= 1) return 1;else return number * factorial(number - 1);
+};

@@ -1,0 +1,216 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/App/components/collectionPanel/optionPanel/OptionPanel.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _reactNativeModal = require('react-native-modal');
+
+var _reactNativeModal2 = babelHelpers.interopRequireDefault(_reactNativeModal);
+
+var _AcceptOperation = require('./operations/AcceptOperation');
+
+var _AcceptOperation2 = babelHelpers.interopRequireDefault(_AcceptOperation);
+
+var _BanOperation = require('./operations/BanOperation');
+
+var _BanOperation2 = babelHelpers.interopRequireDefault(_BanOperation);
+
+var _CancelAcceptOperation = require('./operations/CancelAcceptOperation');
+
+var _CancelAcceptOperation2 = babelHelpers.interopRequireDefault(_CancelAcceptOperation);
+
+var _DeleteOperation = require('./operations/DeleteOperation');
+
+var _DeleteOperation2 = babelHelpers.interopRequireDefault(_DeleteOperation);
+
+var _UnlockOperation = require('./operations/UnlockOperation');
+
+var _UnlockOperation2 = babelHelpers.interopRequireDefault(_UnlockOperation);
+
+var _AdvanceOperation = require('./operations/AdvanceOperation');
+
+var _AdvanceOperation2 = babelHelpers.interopRequireDefault(_AdvanceOperation);
+
+var _DegradeOperation = require('./operations/DegradeOperation');
+
+var _DegradeOperation2 = babelHelpers.interopRequireDefault(_DegradeOperation);
+
+var _AddEntityOperation = require('./operations/AddEntityOperation');
+
+var _AddEntityOperation2 = babelHelpers.interopRequireDefault(_AddEntityOperation);
+
+var _ReportOperation = require('./operations/ReportOperation');
+
+var _ReportOperation2 = babelHelpers.interopRequireDefault(_ReportOperation);
+
+var _reactRedux = require('react-redux');
+
+var _redux = require('redux');
+
+var _actions = require('../../../redux/actions');
+
+var _OptionsStyles = require('../../../Styles/CollectionPanelStyles/OptionsStyles');
+
+var _OptionsStyles2 = babelHelpers.interopRequireDefault(_OptionsStyles);
+
+var mapOfOperations = {
+    "Ban": _BanOperation2.default,
+    "Cancel": _CancelAcceptOperation2.default,
+    "Delete": _DeleteOperation2.default,
+    "Unlock": _UnlockOperation2.default,
+    "Accept": _AcceptOperation2.default,
+    "Advance": _AdvanceOperation2.default,
+    "Degrade": _DegradeOperation2.default,
+    "Add": _AddEntityOperation2.default,
+    "Report": _ReportOperation2.default
+};
+
+var OptionPanel = function (_Component) {
+    babelHelpers.inherits(OptionPanel, _Component);
+
+    function OptionPanel() {
+        babelHelpers.classCallCheck(this, OptionPanel);
+        return babelHelpers.possibleConstructorReturn(this, (OptionPanel.__proto__ || Object.getPrototypeOf(OptionPanel)).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(OptionPanel, [{
+        key: 'groupOperationsThreeInRows',
+        value: function groupOperationsThreeInRows(operations) {
+            var groupedOperations = [];
+            for (var i = 0; i < operations.length / 3; i++) {
+                var operationsGroup = [];
+                if (i * 3 < operations.length) operationsGroup.push(operations[i * 3]);
+                if (i * 3 + 1 < operations.length) operationsGroup.push(operations[i * 3 + 1]);
+                if (i * 3 + 2 < operations.length) operationsGroup.push(operations[i * 3 + 2]);
+                groupedOperations.push(_react2.default.createElement(
+                    _reactNative.View,
+                    { style: _OptionsStyles2.default.buttonRow, key: i, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 46
+                        }
+                    },
+                    operationsGroup
+                ));
+            }
+            return groupedOperations;
+        }
+    }, {
+        key: 'groupOperationsFourInRows',
+        value: function groupOperationsFourInRows(operations) {
+            var groupedOperations = [];
+            for (var i = 0; i < operations.length / 4; i++) {
+                var operationsGroup = [];
+                if (i * 4 < operations.length) operationsGroup.push(operations[i * 4]);
+                if (i * 4 + 1 < operations.length) operationsGroup.push(operations[i * 4 + 1]);
+                if (i * 4 + 2 < operations.length) operationsGroup.push(operations[i * 4 + 2]);
+                if (i * 4 + 3 < operations.length) operationsGroup.push(operations[i * 4 + 3]);
+                groupedOperations.push(_react2.default.createElement(
+                    _reactNative.View,
+                    { style: _OptionsStyles2.default.buttonRow, key: i, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 63
+                        }
+                    },
+                    operationsGroup
+                ));
+            }
+            return groupedOperations;
+        }
+    }, {
+        key: 'calculateLeftMargin',
+        value: function calculateLeftMargin(isPortrait, numberOfElements) {
+            var elementWidth = 90;
+            if (numberOfElements > 2) {
+                if (isPortrait) {
+                    var numberOfElementsInRow = 3;
+                    return (this.props.dimension.width - numberOfElementsInRow * elementWidth) / 2;
+                } else {
+                    var _numberOfElementsInRow = 4;
+                    return (this.props.dimension.width - _numberOfElementsInRow * elementWidth) / 2;
+                }
+            } else {
+                return (this.props.dimension.width - numberOfElements * elementWidth) / 2;
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            var operations = [];
+
+            this.props.possibleOperations.forEach(function (operation) {
+                var operationElement = mapOfOperations[operation];
+                if (operationElement !== undefined) operations.push(_react2.default.createElement(operationElement, {
+                    onClosePanel: _this2.props.onClosePanel.bind(_this2),
+                    collectionType: _this2.props.collectionType,
+                    key: operation
+                }, null));
+            });
+
+            var isPortrait = this.props.dimension.orientation === 'portrait';
+
+            return _react2.default.createElement(
+                _reactNativeModal2.default,
+                { isVisible: this.props.isVisible, backdropOpacity: 0.3, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 110
+                    }
+                },
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: [_OptionsStyles2.default.modal, { marginLeft: this.calculateLeftMargin(isPortrait, operations.length) }], __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 111
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.View,
+                        {
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 112
+                            }
+                        },
+                        isPortrait ? this.groupOperationsThreeInRows(operations) : this.groupOperationsFourInRows(operations)
+                    ),
+                    _react2.default.createElement(
+                        _reactNative.View,
+                        { style: _OptionsStyles2.default.button, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 115
+                            }
+                        },
+                        _react2.default.createElement(_reactNative.Button, { onPress: function onPress() {
+                                return _this2.props.onClosePanel();
+                            }, title: 'Close', color: '#4b371b', __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 115
+                            }
+                        })
+                    )
+                )
+            );
+        }
+    }]);
+    return OptionPanel;
+}(_react.Component);
+
+function mapDispatchToProps(dispatch) {
+    return (0, _redux.bindActionCreators)(_actions.ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+    return {
+        possibleOperations: state.possibleOperations,
+        dimension: state.dimension
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(OptionPanel);

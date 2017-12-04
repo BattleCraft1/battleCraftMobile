@@ -1,0 +1,146 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/App/components/entityPanel/tournament/tabs/OrganizersTab.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _ValidationErrorMessage = require('../../outputs/ValidationErrorMessage');
+
+var _ValidationErrorMessage2 = babelHelpers.interopRequireDefault(_ValidationErrorMessage);
+
+var _MainStyles = require('../../../../Styles/UniversalStyles/MainStyles');
+
+var _MainStyles2 = babelHelpers.interopRequireDefault(_MainStyles);
+
+var _EntityPanelStyle = require('../../../../Styles/CollectionPanelStyles/EntityPanelStyle');
+
+var _EntityPanelStyle2 = babelHelpers.interopRequireDefault(_EntityPanelStyle);
+
+var _index = require('../../../../redux/actions/index');
+
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
+var _OrganizersTable = require('./table/OrganizersTable');
+
+var _OrganizersTable2 = babelHelpers.interopRequireDefault(_OrganizersTable);
+
+var OrganizersTab = function (_Component) {
+    babelHelpers.inherits(OrganizersTab, _Component);
+
+    function OrganizersTab() {
+        babelHelpers.classCallCheck(this, OrganizersTab);
+        return babelHelpers.possibleConstructorReturn(this, (OrganizersTab.__proto__ || Object.getPrototypeOf(OrganizersTab)).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(OrganizersTab, [{
+        key: 'startInviteOrganizers',
+        value: function startInviteOrganizers() {
+            this.props.setOperations(["Invite"]);
+            this.props.setRelatedEntity(this.props.entity["organizers"].map(function (entity) {
+                return entity.name;
+            }), "organizers", [{
+                "keys": ["status"],
+                "operation": ":",
+                "value": ["ORGANIZER"]
+            }, {
+                "keys": ["banned"],
+                "operation": ":",
+                "value": [false]
+            }], 10);
+            this.props.navigate('Users');
+        }
+    }, {
+        key: 'calculateHeight',
+        value: function calculateHeight(inputsDisabled) {
+            var disabledInputHeight = inputsDisabled ? 35 : 0;
+            return this.props.orientation === 'portrait' ? this.props.height * 0.80 - 225 + disabledInputHeight : this.props.height * 0.77 - 185 + disabledInputHeight;
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            var height = this.calculateHeight(this.props.inputsDisabled);
+            return _react2.default.createElement(
+                _reactNative.View,
+                {
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 54
+                    }
+                },
+                _react2.default.createElement(
+                    _reactNative.ScrollView,
+                    {
+                        style: { height: height },
+                        contentContainerStyle: _EntityPanelStyle2.default.scrollView, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 55
+                        }
+                    },
+                    _react2.default.createElement(_ValidationErrorMessage2.default, { validationErrorMessage: this.props.validationErrors["organizers"], __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 58
+                        }
+                    }),
+                    _react2.default.createElement(
+                        _reactNative.View,
+                        { style: _EntityPanelStyle2.default.playerHeader, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 59
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            { style: [_MainStyles2.default.smallWhiteStyle, { fontWeight: 'bold' }], __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 59
+                                }
+                            },
+                            'Organizers'
+                        )
+                    ),
+                    _react2.default.createElement(_OrganizersTable2.default, {
+                        shouldActualizeRelatedEntities: this.props.shouldActualizeRelatedEntities,
+                        shouldActualizeRelatedEntitiesCallBack: this.props.shouldActualizeRelatedEntitiesCallBack,
+                        value: this.props.entity["organizers"],
+                        fieldName: 'organizers',
+                        disabled: this.props.inputsDisabled,
+                        changeEntity: this.props.changeEntity,
+                        relatedEntity: this.props.relatedEntity,
+                        hidden: this.props.hidden, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 60
+                        }
+                    })
+                ),
+                !this.props.inputsDisabled && _react2.default.createElement(_reactNative.Button, { title: "Invite", color: '#4b371b',
+                    onPress: function onPress() {
+                        return _this2.startInviteOrganizers();
+                    }, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 71
+                    }
+                })
+            );
+        }
+    }]);
+    return OrganizersTab;
+}(_react.Component);
+
+function mapDispatchToProps(dispatch) {
+    return (0, _redux.bindActionCreators)(_index.ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+    return {};
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(OrganizersTab);

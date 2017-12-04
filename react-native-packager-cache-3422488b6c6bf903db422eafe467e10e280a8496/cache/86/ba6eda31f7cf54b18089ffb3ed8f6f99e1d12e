@@ -1,0 +1,22 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var gameStatus = exports.gameStatus = {
+    "": "",
+    "NEW": "NEW",
+    "ACCEPTED": "ACCEPTED"
+};
+var userStatus = exports.userStatus = {
+    "": "",
+    "NEW": "NEW",
+    "ACCEPTED": "ACCEPTED",
+    "ORGANIZER": "ORGANIZER",
+    "ADMIN": "ADMIN"
+};
+var tournamentStatus = exports.tournamentStatus = {
+    "": "",
+    "NEW": "NEW",
+    "ACCEPTED": "ACCEPTED",
+    "IN_PROGRESS": "IN PROGRESS",
+    "FINISHED": "FINISHED"
+};

@@ -89,7 +89,7 @@ class Scoreboard extends Component {
                         }
                     </ScrollView>
 
-                    <View><Button title={"Close"} color={BaseColours.background.darkBrown}  onPress={() => this.props.hidePopup()}/></View>
+                    <View><Button title={"Close"} color={BaseColours.background.darkBrown}  onPress={() =>{this.props.playSound('toggle'); this.props.hidePopup()}}/></View>
                 </View>
             </Modal>
         );

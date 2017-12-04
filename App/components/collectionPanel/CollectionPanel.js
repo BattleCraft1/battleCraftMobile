@@ -198,7 +198,7 @@ class CollectionPanel extends Component {
                 {
                     getPage:this.getPage.bind(this),
                     collectionType:this.props.collectionType,
-                    onClosePanel:() => this._drawer.close(),
+                    onClosePanel:() => {this._drawer.close()},
                     changeFilterColour:(value) => this.setState({isFiltered: value})
                 },
                 null
@@ -242,12 +242,14 @@ class CollectionPanel extends Component {
                     <View style={{flex:1, marginRight: 3}}>
                         <Button title="Open page tab" color='#4b371b'
                                 onPress={()=>{
+                                    this.props.playSound('toggle');
                                     this.setState({formDrawer:'page'});
                                     this._drawer.open()}}/>
                     </View>
                     <View style={{flex:1}}>
                         <Button title="Open search tab" color={this.state.isFiltered?BaseColours.border.bottom:BaseColours.background.darkBrown}
                                 onPress={()=>{
+                                    this.props.playSound('toggle');
                                     this.setState({formDrawer:'search'});
                                     this._drawer.open()}}/>
                     </View>

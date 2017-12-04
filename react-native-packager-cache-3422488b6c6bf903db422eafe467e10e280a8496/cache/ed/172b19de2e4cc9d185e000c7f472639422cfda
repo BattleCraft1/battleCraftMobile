@@ -1,0 +1,70 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _reactNative = require("react-native");
+
+var _BaseColours = require("../../main/consts/BaseColours");
+
+var _BaseColours2 = babelHelpers.interopRequireDefault(_BaseColours);
+
+var styles = _reactNative.StyleSheet.create({
+    table: {
+        alignSelf: "stretch"
+    },
+    row: {
+        backgroundColor: _BaseColours2.default.background.lightBrown,
+        borderColor: _BaseColours2.default.border.top,
+        borderWidth: 2
+    },
+    sectionHeader: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: _BaseColours2.default.background.darkBrown,
+        borderColor: _BaseColours2.default.border.top,
+        borderWidth: 2,
+        borderTopWidth: 0,
+        paddingLeft: 10,
+        height: 50
+    },
+    icon: {
+        width: 30,
+        height: 30,
+        backgroundColor: _BaseColours2.default.misc.deepRed,
+        borderTopColor: _BaseColours2.default.border.top,
+        borderRightColor: _BaseColours2.default.border.right,
+        borderBottomColor: _BaseColours2.default.border.bottom,
+        borderLeftColor: _BaseColours2.default.border.left,
+        borderWidth: 2,
+        margin: 1,
+        alignItems: 'center'
+    },
+    iconsRow: {
+        flexDirection: 'row'
+    },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: _BaseColours2.default.misc.deepRed,
+        borderColor: _BaseColours2.default.border.top,
+        borderWidth: 3,
+        padding: 3,
+        paddingLeft: 10,
+        height: 55
+    },
+    avatar: {
+        backgroundColor: _BaseColours2.default.background.lightBrown,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderTopWidth: 2,
+        borderBottomWidth: 2,
+        borderTopColor: _BaseColours2.default.border.top,
+        borderBottomColor: _BaseColours2.default.border.top,
+        padding: 5
+    }
+});
+
+exports.default = styles;

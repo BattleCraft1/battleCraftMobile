@@ -1,0 +1,14 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.playSound = playSound;
+
+var _playSound = require('../types/playSound');
+
+var types = babelHelpers.interopRequireWildcard(_playSound);
+function playSound(name) {
+    return {
+        type: types.PLAY_SOUND,
+        name: name
+    };
+}

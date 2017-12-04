@@ -1,0 +1,154 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = '/home/jarek/battleCraftSound/battleCraftMobile/App/components/commonComponents/auth/AuthManager.js';
+
+var _expo = require('expo');
+
+var _expo2 = babelHelpers.interopRequireDefault(_expo);
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _reactRedux = require('react-redux');
+
+var _index = require('../../../redux/actions/index');
+
+var _redux = require('redux');
+
+var _getDatesDifferenceInDays = require('../../../main/functions/getDatesDifferenceInDays');
+
+var _getDatesDifferenceInDays2 = babelHelpers.interopRequireDefault(_getDatesDifferenceInDays);
+
+var _serverName = require('../../../main/consts/serverName');
+
+var _axios = require('axios');
+
+var _axios2 = babelHelpers.interopRequireDefault(_axios);
+
+var db = _expo.SQLite.openDatabase({ name: 'tokens2.db' });
+
+var AuthManager = function (_React$Component) {
+    babelHelpers.inherits(AuthManager, _React$Component);
+
+    function AuthManager() {
+        babelHelpers.classCallCheck(this, AuthManager);
+        return babelHelpers.possibleConstructorReturn(this, (AuthManager.__proto__ || Object.getPrototypeOf(AuthManager)).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(AuthManager, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            this.props.startLoading("Checking authorization data...");
+
+            db.transaction(function (tx) {
+                tx.executeSql('create table if not exists tokens2 (id integer primary key not null, token text, role text, date date);', [], function (ts, success) {
+                    return console.log(success);
+                }, function (ts, error) {
+                    console.log("error: ");
+                    console.log(error);
+                });
+
+                tx.executeSql('select * from tokens2 where id=1', [], function (ts, result) {
+                    console.log("result array: ");
+                    var rows = result.rows._array;
+                    console.log(JSON.stringify(rows));
+                    if (rows.length !== 0) {
+                        var authData = rows[0];
+                        var today = new Date();
+                        if ((0, _getDatesDifferenceInDays2.default)(new Date(authData.date), today) > 14) {
+                            _this2.refreshToken(authData.token);
+                        } else {
+                            _this2.props.setTokenAndRole(authData.token, authData.role);
+                        }
+                    }
+                }, function (ts, error) {
+                    console.log("error: ");
+                    console.log(error);
+                });
+            }, function (ts, error) {
+                console.log("error: ");
+                console.log(error);
+                _this2.props.stopLoading();
+            }, function (ts, success) {
+                return _this2.props.stopLoading();
+            });
+        }
+    }, {
+        key: 'refreshToken',
+        value: function refreshToken(token) {
+            var _this3 = this;
+
+            _axios2.default.get(_serverName.serverName + "auth/refresh", {
+                headers: {
+                    "X-Auth-Token": token
+                }
+            }).then(function (res) {
+                var date = new Date();
+                _this3.props.setTokenAndRole(res.data.token, res.data.role);
+                db.transaction(function (tx) {
+                    tx.executeSql('delete from tokens2 where id = 1', [], function (ts, success) {
+                        if (_this3.state.rememberMe) {
+                            _this3.updateTokenInDatabase(res.data.token, res.data.role, date);
+                        }
+                    }, function (ts, error) {
+                        console.log("error: ");
+                        console.log(error);
+                    });
+                });
+            }).catch(function (error) {
+                _this3.props.showNetworkErrorMessage(error);
+            });
+        }
+    }, {
+        key: 'updateTokenInDatabase',
+        value: function updateTokenInDatabase(token, role, date) {
+            var _this4 = this;
+
+            db.transaction(function (tx) {
+                _this4.updateToken(tx, token, role, date);
+            }, function (ts, error) {
+                console.log("error: ");
+                console.log(error);
+            }, function (ts, success) {
+                return console.log(success);
+            });
+        }
+    }, {
+        key: 'updateToken',
+        value: function updateToken(tx, token, role, date) {
+            tx.executeSql('update tokens2 set token = ? ,role = ? ,date = ? where id = 1;', [token, role, date], function (ts, success) {
+                return console.log(success);
+            }, function (ts, error) {
+                console.log("error: ");
+                console.log(error);
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(_reactNative.View, {
+                __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 127
+                }
+            });
+        }
+    }]);
+    return AuthManager;
+}(_react2.default.Component);
+
+function mapDispatchToProps(dispatch) {
+    return (0, _redux.bindActionCreators)(_index.ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+    return {};
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AuthManager);

@@ -80,6 +80,9 @@ const store = configureStore( {
         isShown:false,
         objectType:"",
         objectNames:[]
+    },
+    sound:{
+      name:""
     }
 } );
 
