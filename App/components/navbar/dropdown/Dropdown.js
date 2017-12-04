@@ -7,7 +7,6 @@ import {
     View,
     TouchableHighlight,
     Text,
-    ScrollView
 } from 'react-native';
 
 import DropdownStyles from '../../../Styles/NavbarStyles/DropdownStyles'
@@ -27,6 +26,7 @@ class Dropdown extends Component {
     }
 
     menuSelect(val){
+        this.props.playSound('toggle');
         this.props.clearCheckedElements();
         this.props.closeEntityPanel();
         this.props.hideDropdown();

@@ -336,6 +336,7 @@ class TournamentManagePanel extends Component {
     showNextTour(){
         let tourNumber = this.state.tourNumber+1;
         if(tourNumber<this.state.tournamentData.tours.length){
+            this.props.playSound('flip');
             this.setState({tourNumber:tourNumber});
         }
     }
@@ -343,6 +344,7 @@ class TournamentManagePanel extends Component {
     showPreviousTour(){
         let tourNumber = this.state.tourNumber-1;
         if(tourNumber>=0){
+            this.props.playSound('flip');
             this.setState({tourNumber:tourNumber});
         }
     }

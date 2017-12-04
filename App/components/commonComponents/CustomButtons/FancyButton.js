@@ -29,7 +29,7 @@ export default class FancyButton extends Component {
     render() {
         const resizeMode = 'stretch';
         return (
-            <View style={[{height:100, width:400},MainStyles.borderStyle, FancyButtonStyle.buttonWrapper]}>
+            <View style={[{flex:1},MainStyles.borderStyle, FancyButtonStyle.buttonWrapper]}>
                 <View style={FancyButtonStyle.buttonBackground}>
                     <Image style={{flex: 1, resizeMode,}} source={this.props.colour==='red'?BGred:BGbrow}/>
                 </View>
