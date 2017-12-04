@@ -173,7 +173,7 @@ class Panel extends Component {
                     height:this.props.dimension.height,
                     orientation:this.props.dimension.orientation,
                     entity:this.state.entity,
-                    inputsDisabled: this.props.mode === 'get',
+                    inputsDisabled: this.props.mode === 'get' || !this.state.entity.canCurrentUserEdit,
                     changeEntity: this.changeEntity.bind(this),
                     validationErrors: this.state.validationErrors
                 },

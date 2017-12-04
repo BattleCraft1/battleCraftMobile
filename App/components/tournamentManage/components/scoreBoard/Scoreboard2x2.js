@@ -22,6 +22,7 @@ import ListColours from "battleCraftMobile/App/main/consts/ListColours"
 import { ActionCreators } from '../../../../redux/actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
 import {serverName} from "../../../../main/consts/serverName";
 
 class Scoreboard extends Component {
@@ -115,10 +116,14 @@ class Scoreboard extends Component {
     }
 }
 
+function mapDispatchToProps( dispatch ) {
+    return bindActionCreators( ActionCreators, dispatch );
+}
+
 function mapStateToProps( state ) {
     return {
         dimension: state.dimension
     };
 }
 
-export default connect( mapStateToProps)( Scoreboard );
+export default connect( mapStateToProps,mapDispatchToProps)( Scoreboard );
