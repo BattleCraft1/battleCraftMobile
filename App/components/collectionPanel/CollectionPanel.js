@@ -228,12 +228,14 @@ class CollectionPanel extends Component {
                     <View style={{flex:1, marginRight: 3}}>
                         <Button title="Open page tab" color='#4b371b'
                                 onPress={()=>{
+                                    this.props.playSound('toggle');
                                     this.setState({formDrawer:'page'});
                                     this._drawer.open()}}/>
                     </View>
                     <View style={{flex:1}}>
                         <Button title="Open search tab" color={this.state.isFiltered?BaseColours.border.bottom:BaseColours.background.darkBrown}
                                 onPress={()=>{
+                                    this.props.playSound('toggle');
                                     this.setState({formDrawer:'search'});
                                     this._drawer.open()}}/>
                     </View>

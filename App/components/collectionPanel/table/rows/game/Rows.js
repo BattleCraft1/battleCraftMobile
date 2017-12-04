@@ -81,6 +81,7 @@ class Rows extends Component{
     }
 
     editEntity(element){
+        this.props.playSound('toggle');
         this.props.editEntity("game",element.name);
     }
 
