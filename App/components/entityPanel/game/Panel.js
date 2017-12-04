@@ -215,17 +215,17 @@ class Panel extends Component {
     createButtons(){
         if(this.props.mode!=='get' && this.state.entity.canCurrentUserEdit){
             return [
-                <TouchableHighlight key="save" style={[EntityPanelStyle.button,{backgroundColor: BaseColours.misc.deepRed }]} onPress={() => this.sendEntity()}>
+                <TouchableHighlight key="save" style={[EntityPanelStyle.button,{backgroundColor: BaseColours.misc.deepRed }]} onPress={() =>{this.props.playSound('toggle'); this.sendEntity()}}>
                     <Text style={MainStyle.bigWhiteStyle}>Save</Text>
                 </TouchableHighlight>,
-                <TouchableHighlight key="close" style={[EntityPanelStyle.button,{backgroundColor: BaseColours.misc.deepRed }]} onPress={() => this.props.disable()}>
+                <TouchableHighlight key="close" style={[EntityPanelStyle.button,{backgroundColor: BaseColours.misc.deepRed }]} onPress={() =>{this.props.playSound('toggle'); this.props.disable()}}>
                     <Text style={MainStyle.bigWhiteStyle}>Close</Text>
                 </TouchableHighlight>
             ]
         }
         else{
             return [
-                <TouchableHighlight key="ok" style={[EntityPanelStyle.button,{backgroundColor: BaseColours.misc.deepRed }]} onPress={() => this.props.disable()}>
+                <TouchableHighlight key="ok" style={[EntityPanelStyle.button,{backgroundColor: BaseColours.misc.deepRed }]} onPress={() =>{this.props.playSound('toggle');this.props.disable()}}>
                     <Text style={MainStyle.bigWhiteStyle}>Ok</Text>
                 </TouchableHighlight>
             ]
