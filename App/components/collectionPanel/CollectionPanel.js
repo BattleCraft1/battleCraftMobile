@@ -184,7 +184,7 @@ class CollectionPanel extends Component {
                 {
                     getPage:this.getPage.bind(this),
                     collectionType:this.props.collectionType,
-                    onClosePanel:() => this._drawer.close(),
+                    onClosePanel:() => {this._drawer.close()},
                     changeFilterColour:(value) => this.setState({isFiltered: value})
                 },
                 null

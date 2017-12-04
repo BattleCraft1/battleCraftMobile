@@ -21,7 +21,7 @@ class InviteButton extends React.Component {
                 <Button
                     title={"Add"}
                     color='#4b371b'
-                    onPress={()=>this.invite()}/>
+                    onPress={()=>{this.props.playSound('toggle'); this.invite()}}/>
             </View>
         );
     }
