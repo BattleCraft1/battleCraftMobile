@@ -35,6 +35,7 @@ class ConfirmDialog extends React.Component {
                         <View style={MessageStyle.modalFooterButton}>
                             <TouchableHighlight
                                 onPress={() => {
+                                    this.props.playSound('toggle');
                                     this.props.confirmation.onConfirmFunction();
                                     this.props.hideConfirmationDialog();
                                 }}>
@@ -44,6 +45,7 @@ class ConfirmDialog extends React.Component {
                         <View style={MessageStyle.modalFooterButton}>
                             <TouchableHighlight
                                 onPress={() => {
+                                    this.props.playSound('toggle');
                                     this.props.hideConfirmationDialog();
                                 }}>
                                     <Text style={[MainStyles.smallWhiteStyle, MainStyles.stretch]}>Cancel</Text>

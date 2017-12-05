@@ -11,7 +11,7 @@ import StatusInput from '../inputs/StatusInput'
 import convertArrayToObject from '../../../../main/functions/convertArrayToObject'
 
 import {provinces} from "../../../../main/consts/provinces";
-import {tournamentStatus, userStatus} from "../../../../main/consts/status";
+import {userStatus} from "../../../../main/consts/status";
 
 export default class FormInputs extends Component{
     constructor(props) {

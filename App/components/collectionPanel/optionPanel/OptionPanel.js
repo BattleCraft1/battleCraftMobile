@@ -112,7 +112,7 @@ class OptionPanel extends Component {
                     <View>
                     {isPortrait? this.groupOperationsThreeInRows(operations):this.groupOperationsFourInRows(operations)}
                     </View>
-                    <View style={OptionsStyles.button}><Button onPress={() => this.props.onClosePanel()} title="Close" color="#4b371b"/></View>
+                    <View style={OptionsStyles.button}><Button onPress={() =>{this.props.playSound('toggle'); this.props.onClosePanel()}} title="Close" color="#4b371b"/></View>
                 </View>
             </Modal>
         );

@@ -54,7 +54,7 @@ export const entityPanel = createReducer( {}, {
             mode:entityPanelModes.disabled,
             entityType:entityPanelTypes.none,
             entityName:"",
-            hidden:false,
+            hidden:true,
             relatedEntity: {
                 relatedEntities: [],
                 relatedEntityType:"",
@@ -80,6 +80,7 @@ export const entityPanel = createReducer( {}, {
         };
     },
     [types.SET_RELATED_ENTITY]( state, action ) {
+        console.log("debug0");
         return {
             mode:state.mode,
             entityType:state.entityType,

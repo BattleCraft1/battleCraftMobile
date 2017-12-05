@@ -1,5 +1,5 @@
 export default (collectionType, role) => {
-    if(collectionType === "tournaments" || collectionType === "participated/tournaments"){
+    if(collectionType === "tournaments" || collectionType === "participated"){
         if(role === "ROLE_ADMIN"){
             return ["Accept","Cancel","Ban","Unlock","Delete"];
         }
@@ -13,7 +13,7 @@ export default (collectionType, role) => {
             return [];
         }
     }
-    if(collectionType === "organized/tournaments"){
+    if(collectionType === "organized"){
         if(role === "ROLE_ADMIN"){
             return ["Accept","Cancel","Ban","Unlock","Delete"];
         }

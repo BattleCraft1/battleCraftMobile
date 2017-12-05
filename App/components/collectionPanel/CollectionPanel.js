@@ -47,16 +47,26 @@ class CollectionPanel extends Component {
     }
 
     async componentDidMount() {
-        this.setState({isFiltered:false});
-        this.setPossibleOperations(this.props.collectionType);
-        this.createPageRequest(this.props.collectionType);
-        await this.setState({collectionType: this.props.collectionType});
-        await this.getPage(this.props.collectionType);
+        console.log(this.props.entityPanel.mode );
+        if (this.props.entityPanel.mode !== 'disabled') {
+            await this.setState({collectionType: this.props.collectionType});
+            this.createPageRequestForEntityPanel(this.props.entityPanel.relatedEntity.relatedEntityCriteria);
+            this.setElementsToCheckForEntityPanel(this.props.entityPanel.relatedEntity.relatedEntities);
+            await this.getPage(this.state.collectionType);
+        }
+        else{
+            this.setState({isFiltered:false});
+            this.setPossibleOperations(this.props.collectionType);
+            this.createPageRequest(this.props.collectionType);
+            await this.setState({collectionType: this.props.collectionType});
+            await this.getPage(this.props.collectionType);
+        }
     }
 
     async componentWillReceiveProps(nextProps) {
         if (nextProps.entityPanel.hidden === true &&
-            this.props.entityPanel.hidden === false) {
+            this.props.entityPanel.hidden === false &&
+            nextProps.entityPanel.mode !== 'disabled') {
             await this.setState({collectionType: nextProps.collectionType});
             this.createPageRequestForEntityPanel(nextProps.entityPanel.relatedEntity.relatedEntityCriteria);
             this.setElementsToCheckForEntityPanel(nextProps.entityPanel.relatedEntity.relatedEntities);
@@ -64,7 +74,9 @@ class CollectionPanel extends Component {
         }
         else if (nextProps.collectionType !== this.state.collectionType ||
             (nextProps.entityPanel.mode === 'disabled' &&
-                this.props.entityPanel.mode !== 'disabled')) {
+                this.props.entityPanel.mode !== 'disabled' &&
+                nextProps.entityPanel.hidden === false)) {
+            console.log("debug4");
             this.setState({isFiltered:false});
             this.createPageRequest(nextProps.collectionType);
             this.setPossibleOperations(nextProps.collectionType);
@@ -184,7 +196,7 @@ class CollectionPanel extends Component {
                 {
                     getPage:this.getPage.bind(this),
                     collectionType:this.props.collectionType,
-                    onClosePanel:() => this._drawer.close(),
+                    onClosePanel:() => {this._drawer.close()},
                     changeFilterColour:(value) => this.setState({isFiltered: value})
                 },
                 null
@@ -228,12 +240,14 @@ class CollectionPanel extends Component {
                     <View style={{flex:1, marginRight: 3}}>
                         <Button title="Open page tab" color='#4b371b'
                                 onPress={()=>{
+                                    this.props.playSound('toggle');
                                     this.setState({formDrawer:'page'});
                                     this._drawer.open()}}/>
                     </View>
                     <View style={{flex:1}}>
                         <Button title="Open search tab" color={this.state.isFiltered?BaseColours.border.bottom:BaseColours.background.darkBrown}
                                 onPress={()=>{
+                                    this.props.playSound('toggle');
                                     this.setState({formDrawer:'search'});
                                     this._drawer.open()}}/>
                     </View>

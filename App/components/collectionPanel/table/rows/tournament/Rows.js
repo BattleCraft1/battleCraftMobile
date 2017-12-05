@@ -49,6 +49,7 @@ class Rows extends Component{
     }
 
     editEntity(element){
+        this.props.playSound('toggle');
         if(this.props.entityPanel.mode!=='disabled')
             this.props.showAdditionalEntityPanel("tournament",element.name);
         else

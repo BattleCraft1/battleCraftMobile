@@ -1,7 +1,5 @@
 import React from 'react';
 import OperationButton from './operationButton/OperationButton'
-import {serverName} from '../../../../main/consts/serverName';
-import axios from 'axios';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';

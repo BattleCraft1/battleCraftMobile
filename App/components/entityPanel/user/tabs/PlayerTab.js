@@ -112,24 +112,23 @@ class PlayerTab extends Component{
                     </View>
 
                     <View style={InputStyles.inputCard}>
+                        <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Points:</Text></View>
+                        <NumberOutput
+                            value={this.props.entity["points"]}/>
+                    </View>
+
+                    <View style={InputStyles.inputCard}>
+                        <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Battles Count:</Text></View>
+                        <NumberOutput
+                            value={this.props.entity["numberOfBattles"]}/>
+                    </View>
+
+                    <View style={InputStyles.inputCard}>
                         <View style={EntityPanelStyle.playerHeader}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Finished tournaments</Text></View>
                         <TournamentsTableOutput
                             value={this.props.entity["finishedParticipatedTournaments"]}
                         />
                     </View>
-
-                    <View style={InputStyles.inputCard}>
-                        <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Points:</Text></View>
-                    <NumberOutput
-                        value={this.props.entity["points"]}/>
-                    </View>
-
-                    <View style={InputStyles.inputCard}>
-                        <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Battles Count:</Text></View>
-                    <NumberOutput
-                        value={this.props.entity["numberOfBattles"]}/>
-                    </View>
-
                 </ScrollView>
                 {!this.props.inputsDisabled &&
                 <Button title={"ADD TOURNAMENT"} color='#4b371b'

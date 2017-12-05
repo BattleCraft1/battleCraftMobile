@@ -26,6 +26,7 @@ class Rows extends Component{
     }
 
     showUser(name){
+        this.props.playSound('toggle');
         this.props.getEntity("user",name);
     }
 

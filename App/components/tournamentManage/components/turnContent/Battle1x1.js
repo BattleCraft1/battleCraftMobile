@@ -26,6 +26,7 @@ class Battle extends Component {
 
     showBattlePopup(){
         if(!this.props.disabled){
+            this.props.playSound('toggle');
             this.props.showBattlePopup(Object.assign({tourNumber: this.props.tourNumber,tableNumber: this.props.battleData.tableNumber},
                 this.props.battleData))
         }

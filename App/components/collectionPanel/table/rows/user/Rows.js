@@ -50,6 +50,7 @@ class Rows extends Component{
     }
 
     editEntity(element){
+        this.props.playSound('toggle');
         if(this.props.entityPanel.mode!=='disabled'){
             this.props.showAdditionalEntityPanel("user",element.name);
         }
@@ -75,7 +76,7 @@ class Rows extends Component{
                 <View style={[TableStyles.sectionHeader]}>
                     <TouchableHighlight
                         style={{flex:1}}
-                        onPress={() => this.editEntity(rowData)}>
+                        onPress={() =>{this.editEntity(rowData)}}>
                         <Text numberOfLines={1} style={[MainStyles.smallWhiteStyle, {fontSize: 20}]}> {rowData.name}</Text>
                     </TouchableHighlight>
                     <Checkbox element = {rowData} checked = {rowData.checked}/>
@@ -85,7 +86,7 @@ class Rows extends Component{
                     <View style={{flexDirection:'row'}}>
                         <TouchableHighlight
                             style={TableStyles.avatar}
-                            onPress={() => this.editEntity(rowData)}>
+                            onPress={() =>{ this.editEntity(rowData)}}>
                             <Image
                                 style={{width: 60, height: 60}}
                                 source={{uri:`${serverName}/get/user/avatar?username=${rowData.name}&${new Date().getTime()}`}} />

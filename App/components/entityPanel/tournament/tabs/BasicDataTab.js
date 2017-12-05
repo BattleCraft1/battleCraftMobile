@@ -143,7 +143,7 @@ class BasicDataTab extends Component{
                             fieldName="playersOnTableCount"
                             changeEntity={this.props.changeEntity}
                             options={type}
-                            disabled = {this.props.inputsDisabled}/>
+                            disabled = {this.props.inputsDisabled || this.props.mode === 'edit'}/>
                         <ValidationErrorMessage
                             validationErrorMessage={this.props.validationErrors["playersOnTableCount"]}/>
                     </View>

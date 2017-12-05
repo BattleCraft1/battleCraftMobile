@@ -16,8 +16,8 @@ import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 const rowTypeMap = {
     "tournaments":TournamentsRows,
-    "participated/tournaments":TournamentsRows,
-    "organized/tournaments":TournamentsRows,
+    "participated":TournamentsRows,
+    "organized":TournamentsRows,
     "games":GamesRows,
     "ranking":RankingRows,
     "users":UsersRows
@@ -30,6 +30,7 @@ class CollectionList extends Component {
     }
 
     previousPage(event){
+        this.props.playSound('flip');
         console.log("previous page");
         let pageRequest=this.props.pageRequest;
         if(pageRequest.pageRequest.page-1>=0){
@@ -40,6 +41,7 @@ class CollectionList extends Component {
     }
 
     nextPage(event){
+        this.props.playSound('flip');
         console.log("next page");
         let pageRequest=this.props.pageRequest;
         if(pageRequest.pageRequest.page+1<this.props.page.totalPages){

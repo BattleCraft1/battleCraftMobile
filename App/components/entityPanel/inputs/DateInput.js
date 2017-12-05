@@ -34,12 +34,14 @@ export default class DateInput extends React.Component{
     }
 
     onTimeChange(value){
+        if(this.props.disabled) return;
         this.setState({ isTimePickerVisible: false });
         let dateString = new Date(this.state.dateValue+"T"+dateFormat(value,"HH:MM"));
         this.props.changeEntity(this.props.fieldName,dateString)
     }
 
     onDateChange(value){
+        if(this.props.disabled) return;
         this.setState({ isDatePickerVisible: false });
         let dateString = new Date(dateFormat(value,"yyyy-mm-dd")+"T"+this.state.timeValue);
         this.props.changeEntity(this.props.fieldName,dateString)
@@ -63,6 +65,7 @@ export default class DateInput extends React.Component{
                     minimumDate={new Date()}
                     isVisible={this.state.isDatePickerVisible}
                     onConfirm={this.onDateChange.bind(this)}
+                    enabled={!this.props.disabled}
                     onCancel={() => this.setState({ isDatePickerVisible: false })}
                 />
                 <DateTimePicker
@@ -72,6 +75,7 @@ export default class DateInput extends React.Component{
                     minimumDate={new Date()}
                     isVisible={this.state.isTimePickerVisible}
                     onConfirm={this.onTimeChange.bind(this)}
+                    enabled={!this.props.disabled}
                     onCancel={() => this.setState({ isTimePickerVisible: false })}
                 />
             </View>

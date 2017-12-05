@@ -22,6 +22,7 @@ import ListColours from "battleCraftMobile/App/main/consts/ListColours"
 import { ActionCreators } from '../../../../redux/actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
 import {serverName} from "../../../../main/consts/serverName";
 
 class Scoreboard extends Component {
@@ -108,11 +109,15 @@ class Scoreboard extends Component {
                         }
                     </ScrollView>
 
-                    <View><Button title={"Close"} color={BaseColours.background.darkBrown}  onPress={() => this.props.hidePopup()}/></View>
+                    <View><Button title={"Close"} color={BaseColours.background.darkBrown}  onPress={() =>{this.props.playSound('toggle'); this.props.hidePopup()}}/></View>
                 </View>
             </Modal>
         );
     }
+}
+
+function mapDispatchToProps( dispatch ) {
+    return bindActionCreators( ActionCreators, dispatch );
 }
 
 function mapStateToProps( state ) {
@@ -121,4 +126,4 @@ function mapStateToProps( state ) {
     };
 }
 
-export default connect( mapStateToProps)( Scoreboard );
+export default connect( mapStateToProps,mapDispatchToProps)( Scoreboard );
