@@ -11,10 +11,10 @@ export default class Navigator extends Component {
             return <CollectionPanel collectionType={"tournaments"}/>;
         }
         else if(this.props.navigValue === 'Played'){
-            return <CollectionPanel collectionType={"participated/tournaments"}/>;
+            return <CollectionPanel collectionType={"participated"}/>;
         }
         else if(this.props.navigValue === 'Organized'){
-            return <CollectionPanel collectionType={"organized/tournaments"}/>;
+            return <CollectionPanel collectionType={"organized"}/>;
         }
         else if(this.props.navigValue === 'Games'){
             return <CollectionPanel collectionType={"games"}/>;

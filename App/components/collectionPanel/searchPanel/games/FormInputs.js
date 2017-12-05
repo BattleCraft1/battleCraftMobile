@@ -9,7 +9,7 @@ import NumberInput from '../inputs/NumberInput'
 import StatusInput from '../inputs/StatusInput'
 import DateInput from '../inputs/DateInput'
 
-import {gameStatus, tournamentStatus} from '../../../../main/consts/status'
+import {gameStatus} from '../../../../main/consts/status'
 
 export default class FormInputs extends Component{
     constructor(props) {

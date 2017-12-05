@@ -73,22 +73,16 @@ class OrganizerTab extends Component{
                     </View>
 
                     <View style={InputStyles.inputCard}>
-                        <View style={EntityPanelStyle.playerHeader}><Text style={[MainStyle.smallWhiteStyle, {fontWeight:'bold'}]}>Finished  participated tournaments</Text></View>
+                        <View style={EntityPanelStyle.playerHeader}><Text style={[MainStyle.smallWhiteStyle, {fontWeight:'bold'}]}>Created games</Text></View>
                         <TournamentsTableOutput
-                            value={this.props.entity["finishedParticipatedTournaments"]}/>
+                            inputsDisabled={true}
+                            value={this.props.entity["createdGames"]}/>
                     </View>
 
                     <View style={InputStyles.inputCard}>
                         <View style={EntityPanelStyle.playerHeader}><Text style={[MainStyle.smallWhiteStyle, {fontWeight:'bold'}]}>Finished organized tournaments</Text></View>
                         <TournamentsTableOutput
                             value={this.props.entity["finishedOrganizedTournaments"]}/>
-                    </View>
-
-                    <View style={InputStyles.inputCard}>
-                        <View style={EntityPanelStyle.playerHeader}><Text style={[MainStyle.smallWhiteStyle, {fontWeight:'bold'}]}>Created games</Text></View>
-                        <TournamentsTableOutput
-                            inputsDisabled={true}
-                            value={this.props.entity["createdGames"]}/>
                     </View>
                 </ScrollView>
                 {!this.props.inputsDisabled &&

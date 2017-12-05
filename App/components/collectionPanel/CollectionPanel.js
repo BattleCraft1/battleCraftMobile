@@ -49,14 +49,12 @@ class CollectionPanel extends Component {
     async componentDidMount() {
         console.log(this.props.entityPanel.mode );
         if (this.props.entityPanel.mode !== 'disabled') {
-            console.log("debug1");
             await this.setState({collectionType: this.props.collectionType});
             this.createPageRequestForEntityPanel(this.props.entityPanel.relatedEntity.relatedEntityCriteria);
             this.setElementsToCheckForEntityPanel(this.props.entityPanel.relatedEntity.relatedEntities);
             await this.getPage(this.state.collectionType);
         }
         else{
-            console.log("debug2");
             this.setState({isFiltered:false});
             this.setPossibleOperations(this.props.collectionType);
             this.createPageRequest(this.props.collectionType);

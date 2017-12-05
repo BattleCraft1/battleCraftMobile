@@ -232,7 +232,7 @@ class Panel extends Component {
                             this.setValidationErrors(error.response.data);
                         }
                     });
-            }
+            };
 
             sendEntityOperation();
         }
