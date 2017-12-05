@@ -62,6 +62,8 @@ class SearchPanel extends React.Component{
     }
 
     createSearchFormInputs(){
+        console.log("collection type: ");
+        console.log(this.props.collectionType);
         return React.createElement(
             searchFormInputsTypeMap[this.props.collectionType],
             {

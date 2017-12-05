@@ -39,6 +39,8 @@ class FormInputs extends Component{
     }
 
     async componentDidMount(){
+        console.log("game name:");
+        console.log(this.state.gameName);
         let getGameOperation = async () => {
             this.props.startLoading("Fetching games names...");
             await axios.get(serverName + `get/allGames/names`,
@@ -49,7 +51,7 @@ class FormInputs extends Component{
                 })
                 .then(res => {
                     this.props.stopLoading();
-                    this.setState({tournamentsGames: convertArrayToObject(res.data)});
+                    this.setState({tournamentsGames: convertArrayToObjectWithoutEmptyField(res.data)});
                 })
                 .catch(error => {
                     this.props.stopLoading();

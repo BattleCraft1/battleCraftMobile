@@ -20,6 +20,10 @@ import axios from 'axios'
 
 import convertArrayToObject from '../../../../main/functions/convertArrayToObject'
 
+import {connect} from "react-redux";
+import {ActionCreators} from "../../../../redux/actions";
+import {bindActionCreators} from "redux";
+
 class FormInputs extends Component{
     constructor(props) {
         super(props);
@@ -180,3 +184,15 @@ class FormInputs extends Component{
         </View>);
     }
 }
+
+
+function mapDispatchToProps( dispatch ) {
+    return bindActionCreators( ActionCreators, dispatch );
+}
+
+function mapStateToProps( state ) {
+    return {
+    };
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( FormInputs );
