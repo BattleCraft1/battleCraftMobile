@@ -120,7 +120,7 @@ class AccountPanel extends Component {
             )
         }
 
-        if(this.state.accountData.role === 'ROLE_ORGANIZER' || this.state.accountData.role === 'ROLE_PLAYER'){
+        if(this.state.accountData.role === 'ROLE_ORGANIZER' || this.state.accountData.role === 'ROLE_ACCEPTED'){
             buttons.push(
                 <View style={[DetailsStyle.buttonWrapper]} key="playedTournaments" >
                     <TouchableHighlight style={[DetailsStyle.button, MainStyles.borderStyle]} onPress={()=>{this.props.navigate('Played')}}>

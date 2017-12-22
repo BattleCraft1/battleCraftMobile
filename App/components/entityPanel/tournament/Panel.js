@@ -60,7 +60,7 @@ class Panel extends Component {
                 "nameChange": "",
                 "tablesCount": 0,
                 "playersOnTableCount": 2,
-                "toursCount":0,
+                "turnsCount":0,
                 "game": "Warhammer",
                 "dateOfStart": tomorrow,
                 "dateOfEnd":dayAfterTomorrow,
@@ -79,7 +79,7 @@ class Panel extends Component {
                 "nameChange": "",
                 "tablesCount": "",
                 "playersOnTableCount":"",
-                "toursCount":"",
+                "turnsCount":"",
                 "maxPlayers": "",
                 "game": "",
                 "dateOfStart": "",
@@ -218,12 +218,20 @@ class Panel extends Component {
         delete entityToSend["canCurrentUserEdit"];
         let validationErrors = validateTournament(entityToSend);
         if(checkIfObjectIsNotEmpty(validationErrors)){
+
+            let tournamentType = entityToSend.playersOnTableCount === 4?"group":"duel";
+            if(tournamentType === "duel"){
+                entityToSend.participants = entityToSend.participants.map(
+                    participantArray => participantArray[0]
+                );
+            }
+
             console.log("output entity:");
             console.log(entityToSend);
 
             let sendEntityOperation = () => {
                 this.props.startLoading("Sending data...");
-                axios.post(serverName + this.props.mode + '/' + this.props.type, entityToSend,
+                axios.post(serverName + this.props.mode + '/'+tournamentType+'/'+this.props.type, entityToSend,
                     {
                         headers: {
                             "X-Auth-Token": this.props.security.token

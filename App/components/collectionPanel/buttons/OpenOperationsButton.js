@@ -14,7 +14,7 @@ class OpenOperationsButton extends React.Component {
         return (
             <View style={{flex:1, marginRight: 3}}>
                 <Button title={"Options"} color='#4b371b'
-                        onPress={()=>{this.props.playSound('toggle'); this.props.action.bind(this)}}/>
+                        onPress={()=>{this.props.playSound('toggle'); this.props.action()}}/>
             </View>
         );
     }

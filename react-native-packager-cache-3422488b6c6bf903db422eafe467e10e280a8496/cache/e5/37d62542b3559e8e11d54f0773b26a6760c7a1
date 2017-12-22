@@ -1,7 +1,0 @@
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var kindOfSort = exports.kindOfSort = {
-    "ASC": 'ascending',
-    "DESC": 'descending'
-};

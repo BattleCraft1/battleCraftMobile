@@ -1,8 +1,0 @@
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var type = exports.type = {
-    "": "",
-    "Duel": "Duel",
-    "Group": "Group"
-};

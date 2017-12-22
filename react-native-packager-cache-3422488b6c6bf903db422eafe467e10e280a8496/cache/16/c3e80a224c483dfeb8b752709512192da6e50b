@@ -1,4 +1,0 @@
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var serverName = exports.serverName = "http://10.0.2.2:8080/";
