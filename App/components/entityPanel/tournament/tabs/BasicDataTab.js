@@ -149,14 +149,14 @@ class BasicDataTab extends Component{
                     </View>
 
                     <View style={InputStyles.inputCard}>
-                        <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Tours count:</Text></View>
+                        <View style={InputStyles.inputText}><Text style={[MainStyles.smallWhiteStyle, {fontWeight:'bold'}]}>Turns count:</Text></View>
                         <NumberInput
-                            value={this.props.entity["toursCount"]}
-                            fieldName="toursCount"
+                            value={this.props.entity["turnsCount"]}
+                            fieldName="turnsCount"
                             changeEntity={this.props.changeEntity}
                             disabled = {this.props.inputsDisabled}/>
                         <ValidationErrorMessage
-                            validationErrorMessage={this.props.validationErrors["toursCount"]}/>
+                            validationErrorMessage={this.props.validationErrors["turnsCount"]}/>
                     </View>
 
                     <View style={InputStyles.inputCard}>
@@ -191,12 +191,17 @@ class BasicDataTab extends Component{
                     </View>
 
                 </ScrollView>
-                <Button title={"Progress"} color='#4b371b'
-                        disabled={this.props.mode==='add'}
-                        onPress={()=>{
-                            this.props.navigate('Progress/'+this.props.entity["name"]);
-                            this.props.disable();
-                        }}/>
+                {
+                    this.props.entity.canCurrentUserEdit ||
+                    this.props.entity.status === 'IN_PROGRESS' ||
+                    this.props.entity.status === 'FINISHED' &&
+                    <Button title={"Progress"} color='#4b371b'
+                            disabled={this.props.mode==='add'}
+                            onPress={()=>{
+                                this.props.navigate('Progress/'+this.props.entity["name"]);
+                                this.props.disable();
+                            }}/>
+                }
             </View>
         );
     }

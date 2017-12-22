@@ -73,10 +73,9 @@ class CollectionPanel extends Component {
             await this.getPage(this.state.collectionType);
         }
         else if (nextProps.collectionType !== this.state.collectionType ||
-            (nextProps.entityPanel.mode === 'disabled' &&
-                this.props.entityPanel.mode !== 'disabled' &&
-                nextProps.entityPanel.hidden === false)) {
-            console.log("debug4");
+            (nextProps.entityPanel.hidden === false &&
+                this.props.entityPanel.hidden === true &&
+                this.props.entityPanel.mode !== 'disabled')) {
             this.setState({isFiltered:false});
             this.createPageRequest(nextProps.collectionType);
             this.setPossibleOperations(nextProps.collectionType);

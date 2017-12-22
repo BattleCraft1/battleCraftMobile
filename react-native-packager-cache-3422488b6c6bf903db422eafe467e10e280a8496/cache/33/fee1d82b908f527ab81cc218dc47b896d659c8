@@ -1,4 +1,0 @@
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var SET_OPERATIONS = exports.SET_OPERATIONS = 'SET_OPERATIONS';

@@ -32,7 +32,7 @@ export default class DuelPlayerList extends Component {
                 <ListView
                     horizontal={true}
                     dataSource={this.state.dataSource.cloneWithRows(this.props.playersWithoutBattles)}
-                    renderRow={(item) => <TouchableHighlight onPress={()=>{this.props.playSound('toggle');this.props.changePlayerData(item)}}>
+                    renderRow={(item) => <TouchableHighlight onPress={()=>{this.props.changePlayerData(item)}}>
                         <View style={{alignItems:'center',justifyContent:'center',margin:3}}>
                             <View style={BattleInspectorStyle.avatarContainerStyle}>
                                 <Image style={BattleInspectorStyle.avatarInList} source={this.generateURL(item)}/>
@@ -47,7 +47,7 @@ export default class DuelPlayerList extends Component {
                 />
                     <View style={[BattleInspectorStyle.buttonStyle, MainStyles.borderStyle]}>
                         <View style={{flex:1}}>
-                            <Button title={"Close"} color={BaseColours.misc.deepRed} onPress={()=>{this.props.playSound('toggle'); this.props.hideList.bind(this)}}/>
+                            <Button title={"Close"} color={BaseColours.misc.deepRed} onPress={()=>{this.props.hideList(this)}}/>
                         </View>
                     </View>
                 </View>

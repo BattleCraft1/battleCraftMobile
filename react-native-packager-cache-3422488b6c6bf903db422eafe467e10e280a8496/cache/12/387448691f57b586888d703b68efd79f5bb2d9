@@ -1,4 +1,0 @@
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var SHOW_REPORT_PANEL = exports.SHOW_REPORT_PANEL = 'SHOW_REPORT_PANEL';

@@ -99,7 +99,7 @@ class PagePanel extends Component {
 
         if(validationErrors.length>0)
         {
-            this.props.showFailMessageBox(validationErrors.join('\r\n'));
+            this.props.showFailureMessage(validationErrors.join('\r\n'));
             this.props.onClosePanel();
         }
         else

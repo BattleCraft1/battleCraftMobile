@@ -32,7 +32,7 @@ export default class GroupPlayerList extends Component {
                     <ListView
                         horizontal={true}
                         dataSource={this.state.dataSource.cloneWithRows(this.props.playersWithoutBattles)}
-                        renderRow={(players) => <TouchableHighlight onPress={()=>{this.props.playSound('toggle');this.props.changePlayersData(players)}}>
+                        renderRow={(players) => <TouchableHighlight onPress={()=>{this.props.changePlayersData(players)}}>
                             <View style={{alignItems:'center',justifyContent:'center',margin:5}}>
                                 <View style={BattleInspectorStyle.avatarContainerStyle}>
                                     <Image style={BattleInspectorStyle.avatarInList} source={this.generateURL(players[0])}/>
@@ -53,7 +53,7 @@ export default class GroupPlayerList extends Component {
                     />
                     <View style={[BattleInspectorStyle.buttonStyle, MainStyles.borderStyle]}>
                         <View style={{flex:1}}>
-                            <Button title={"Close"} color={BaseColours.misc.deepRed} onPress={()=>{this.props.playSound('toggle'); this.props.hideList.bind(this)}}/>
+                            <Button title={"Close"} color={BaseColours.misc.deepRed} onPress={()=>{this.props.hideList(this)}}/>
                         </View>
                     </View>
                 </View>

@@ -1,4 +1,0 @@
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var CHANGE_DIMENSION = exports.CHANGE_DIMENSION = 'CHANGE_DIMENSION';

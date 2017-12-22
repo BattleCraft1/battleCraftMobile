@@ -1,4 +1,0 @@
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var SET_TOKEN_AND_ROLE = exports.SET_TOKEN_AND_ROLE = 'SET_TOKEN_AND_ROLE';
